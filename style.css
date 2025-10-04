@@ -11,30 +11,114 @@ body {
   clear: both;
 }
 
-
 #header {
   height: 53px;
   width: 100%;
-  border-bottom: 1px solid #bdbbbb; 
+  border-bottom: 1px solid #bdbbbb;
 }
 
-.header-logo{
-    height: 52px;
-    width: 58px;
-    float: left;
+.header-logo {
+  height: 52px;
+  width: 58px;
+  float: left;
 }
-.header-logo img{
-    height: 80%;
-    width: 90%;
-    margin-top: 5px ;
-    margin-left: 3px;
+.header-logo img {
+  height: 80%;
+  width: 90%;
+  margin-top: 5px;
+  margin-left: 3px;
 }
-.header-name{
-    float: left;
-    margin-left: 10px;
-    height: 52px;
-    
+.header-name {
+  float: left;
+  margin-left: 10px;
+  height: 52px;
+  width: 260px;
 }
-.header-name h3{ 
-    line-height: 15px;
+.header-name h3 {
+  line-height: 15px;
+}
+.header-menu {
+  float: left;
+  width: 780px;
+  height: 52px;
+}
+.header-menu ul {
+  width: 750px;
+  height: 100%;
+}
+.header-menu ul li {
+  float: left;
+  margin-left: 50px;
+  list-style: none;
+}
+.header-menu a {
+  text-decoration: none;
+  color: #686868;
+  font-weight: bold;
+}
+.button-dangnhap-header {
+  height: 52px;
+  width: 145px;
+  float: left;
+}
+.button-dangnhap-header input {
+  margin-top: 8px;
+  margin-left: 20px;
+  height: 36px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 12pt;
+  font-weight: 600;
+}
+
+#content {
+  height: 1000px;
+  width: 100%;
+}
+
+#footer {
+  height: 53px;
+  width: 100%;
+  border-top: 1px solid #bdbbbb;
+}
+.footer-logo {
+  height: 52px;
+  width: 58px;
+  float: left;
+}
+.footer-logo img {
+  height: 80%;
+  width: 90%;
+  margin-top: 5px;
+  margin-left: 3px;
+}
+.footer-name {
+  float: left;
+  margin-left: 10px;
+  height: 52px;
+  width: 550px;
+}
+.footer-name h5 {
+  line-height: 12px;
+}
+.button-dangnhap-footer {
+  height: 52px;
+  width: 145px;
+  float: right;
+  margin-right: 80px;
+}
+.button-dangnhap-footer input {
+  margin-top: 8px;
+  margin-left: 20px;
+  height: 36px;
+  width: 120px;
+  border-radius:15px;
+  border-color: #686868;
+  background-color: white;
+  color: black;
+  font-size: 12pt;
+  font-weight: 600;
 }
