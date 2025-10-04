@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: tahoma;
+  padding-top: 0px;
+}
+.clear {
+  clear: both;
+}
+
+
+#header {
+  height: 53px;
+  width: 100%;
+  border-bottom: 1px solid #bdbbbb; 
+}
+
+.header-logo{
+    height: 52px;
+    width: 58px;
+    float: left;
+}
+.header-logo img{
+    height: 80%;
+    width: 90%;
+    margin-top: 5px ;
+    margin-left: 3px;
+}
+.header-name{
+    float: left;
+    margin-left: 10px;
+    height: 52px;
+    
+}
+.header-name h3{ 
+    line-height: 15px;
+}
