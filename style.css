@@ -10,7 +10,14 @@ body {
 .clear {
   clear: both;
 }
-
+/* Khi header được fixed */
+#header.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+}
+/*  */
 #header {
   height: 53px;
   width: 100%;
@@ -75,7 +82,7 @@ body {
 }
 
 #content {
-  height: 2000px;
+  height: 4300px;
   width: 100%;
 }
 .truongtieuhoctuonglai {
@@ -276,6 +283,361 @@ body {
 
 .box ul li {
   margin-bottom: 6px;
+}
+
+.doingugiaovien {
+  width: 90%;
+  height: 560px;
+  background-color: rgb(248, 248, 248);
+  margin: 0 3%;
+  margin-top: 30px;
+  border-radius: 15px;
+  padding: 15px 30px;
+}
+
+.doingugiaovien-top {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.doingugiaovien-top h1 {
+  margin-bottom: 10px;
+}
+
+.doingugiaovien-top p {
+  color: #555;
+  line-height: 1.5;
+}
+
+.doingugiaovien-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.doingugiaovien-bottom-left {
+  flex: 1;
+  width: 360px;
+}
+
+.doingugiaovien-bottom-left-label label {
+  display: inline-block;
+  background-color: #e6e6e6;
+  color: #111;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.doingugiaovien-bottom-left-text h4 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.doingugiaovien-bottom-left-text p {
+  color: #555;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.doingugiaovien-bottom-left-list ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.doingugiaovien-bottom-left-list li {
+  margin-bottom: 8px;
+  color: #000000;
+  font-size: 15px;
+}
+
+.vetruongchungtoi-bottom-right {
+  flex: 1;
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.vetruongchungtoi-bottom-right img {
+  width: 100%;
+  height: 68%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.cosovatchat {
+  width: 90%;
+  height: 500px;
+  background-color: rgb(245, 245, 245);
+  margin: 0 3%;
+  margin-top: 30px;
+  border-radius: 15px;
+  padding: 15px 30px;
+}
+.cosovatchat-top {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.cosovatchat-top h1 {
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.cosovatchat-top p {
+  color: #555;
+  line-height: 1;
+}
+
+.cosovatchat-bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cosovatchat-bottom-left {
+  flex: 1;
+  max-width: 48%;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.cosovatchat-bottom-left img {
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.cosovatchat-bottom-right {
+  flex: 1;
+  max-width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  margin-right: 68px;
+}
+
+.cosovatchat-bottom-right-thing {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: -15px;
+}
+
+.cosovatchat-bottom-right-thing-icon i {
+  font-size: 24px;
+  color: #000;
+  margin-top: 25px;
+}
+
+.cosovatchat-bottom-right-thing-text h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: -10px;
+}
+
+.cosovatchat-bottom-right-thing-text p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.2;
+}
+
+.thanhtichnoibat {
+  text-align: center;
+  width: 90%;
+  height: 580px;
+  background-color: rgb(251, 251, 251);
+  margin: 0 3%;
+  margin-top: 30px;
+  border-radius: 15px;
+  padding: 15px 30px;
+}
+
+.thanhtichnoibat-top h1 {
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.thanhtichnoibat-top p {
+  color: #555;
+  line-height: 1;
+}
+
+.thanhtichnoibat-middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 0;
+  flex-wrap: wrap;
+}
+
+.thanhtichnoibat-middle-item {
+  flex: 1;
+  min-width: 200px;
+}
+
+.thanhtichnoibat-middle-item h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.thanhtichnoibat-middle-item p {
+  font-size: 15px;
+  color: #555;
+}
+
+.thanhtichnoibat-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 68px;
+  flex-wrap: wrap;
+}
+
+.thanhtichnoibat-bottom-box {
+  background-color: #fff;
+  border: 1px solid #b9b9b9;
+  border-radius: 15px;
+  padding: 25px 20px;
+  width: 250px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.thanhtichnoibat-bottom-box i {
+  font-size: 28px;
+  color: #111;
+  margin-bottom: 15px;
+}
+
+.thanhtichnoibat-bottom-box h4 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.thanhtichnoibat-bottom-box p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.thanhtichnoibat-bottom-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.lienhechungtoi {
+  width: 90%;
+  height: 680px;
+  background-color: rgb(251, 251, 251);
+  margin: 0 3%;
+  margin-top: 30px;
+  border-radius: 15px;
+  padding: 15px 60px;
+}
+
+.lienhechungtoi-top {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.lienhechungtoi-top p {
+  color: #555;
+  margin-top: 10px;
+}
+
+.lienhechungtoi-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.lienhechungtoi-left {
+  flex: 1;
+}
+
+.lienhechungtoi-left h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.lienhechungtoi-left p {
+  margin: 4px 0;
+  color: #333;
+}
+
+.lienhechungtoi-left ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.lienhechungtoi-right {
+  flex: 1;
+}
+
+.lienhechungtoi-right form {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px 25px;
+}
+
+.lienhechungtoi-right h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.lienhechungtoi-right p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.lienhechungtoi-right label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.lienhechungtoi-right input,
+.lienhechungtoi-right textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.lienhechungtoi-right textarea {
+  border-radius: 15px;
+}
+
+.lienhechungtoi-right button {
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 12px 0;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.lienhechungtoi-right button:hover {
+  background-color: #333;
 }
 
 #footer {
