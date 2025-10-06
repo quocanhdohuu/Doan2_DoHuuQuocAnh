@@ -20,7 +20,7 @@ body {
 /*  */
 #header {
   height: 53px;
-  width: 100%;
+  width: 1280px;
   border-bottom: 1px solid #bdbbbb;
 }
 
@@ -689,4 +689,3 @@ body {
 .button-dangnhap-footer input:hover {
   background-color: rgb(242, 242, 242);
 }
-
