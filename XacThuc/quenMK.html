@@ -1,15 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lấy lại mật khẩu - Trường mầm non hướng dương</title>
-    <!-- Link tới file CSS -->
-    <link rel="stylesheet" href="quenMK.css">
+
+    <link rel="stylesheet" type="text/css" href="quenMK.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="quenMK.js"></script>
+
+    <title>Trường Tiểu học tương lai</title>
 </head>
 
 <body>
+    <div class="login-container">
+        <div class="login-box">
+            <h3>Hệ thống Quản lý trường Tiểu học</h3>
+            <p class="subtitle">Lấy lại mật khẩu</p>
 
+            <form>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Nhập email">
+
+                <p class="note">Thông tin lấy lại mật khẩu sẽ được gửi về Email*</p>
+
+                <button type="submit" class="btn-login">Gửi Email Xác Thực</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

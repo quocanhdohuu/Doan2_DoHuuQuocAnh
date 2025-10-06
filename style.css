@@ -80,6 +80,9 @@ body {
   font-size: 12pt;
   font-weight: 600;
 }
+.button-dangnhap-header input:hover {
+  background-color: rgb(32, 32, 32);
+}
 
 #content {
   height: 4300px;
@@ -683,3 +686,7 @@ body {
   font-size: 12pt;
   font-weight: 600;
 }
+.button-dangnhap-footer input:hover {
+  background-color: rgb(242, 242, 242);
+}
+

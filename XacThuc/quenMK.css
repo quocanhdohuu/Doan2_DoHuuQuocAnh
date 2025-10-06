@@ -1,0 +1,88 @@
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.login-box {
+    width: 400px; 
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    padding: 40px 35px;
+    text-align: center;
+}
+
+.login-box h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.login-box .subtitle {
+    font-size: 14px;
+    color: #8c8c8c;
+    margin-bottom: 30px;
+}
+
+.login-box label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 6px;
+}
+
+.login-box input[type="email"] {
+    width: 375px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background-color: #f7f7f8;
+    font-size: 14px;
+    margin-bottom: 8px;
+    transition: border 0.2s ease, background 0.2s ease;
+}
+
+.login-box input[type="email"]:focus {
+    border: 1px solid #ccc;
+    background: #fff;
+    outline: none;
+}
+
+.note {
+    font-size: 13px;
+    color: #ff7070;
+    text-align: left;
+    margin-top: 4px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.btn-login {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-login:hover {
+    background: #333;
+}
+
+.login-box input,
+.login-box button {
+    font-family: inherit;
+}

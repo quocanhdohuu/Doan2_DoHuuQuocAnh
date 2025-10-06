@@ -1,91 +1,103 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+.dangnhap {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #ffffff;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.dangnhap-container {
+  width: 370px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  padding: 35px 40px;
+}
+
+.dangnhap-top {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.dangnhap-top h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.dangnhap-top p {
+  font-size: 14px;
+  color: #777;
   margin: 0;
 }
 
-.login-container {
-  text-align: center;
-  width: 350px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  width: 80px;
-  height: 80px;
-  background: orange;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 20px;
-}
-
-.logo img {
-  width: 40px;
-  height: 40px;
-}
-
-h2 {
-  margin: 0 0 20px;
-  font-size: 14pt;
-  font-weight: bold;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #f7931e;
-}
-
-.forgot-password {
+.dangnhap-form label {
   display: block;
-  text-align: left;
-  margin-bottom: 20px;
-  font-size: 13px;
-  color: #007bff;
-  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #000;
 }
 
-.forgot-password:hover {
+.dangnhap-form input,
+.dangnhap-form select {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.dangnhap-form input {
+  width: 344.5px;
+}
+.dangnhap-form select {
+  width: 370px;
+}
+
+
+
+.dangnhap-form input:focus,
+.dangnhap-form select:focus {
+  background-color: #fff;
+  border-color: #999;
+}
+
+.quenmatkhau {
+  display: inline-block;
+  font-size: 13px;
+  color: #f05a5a;
+  text-decoration: none;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.quenmatkhau:hover {
   text-decoration: underline;
 }
 
-.btn-login {
+.dangnhap-button {
   width: 100%;
-  padding: 12px;
-  background: #f7931e;
+  background-color: #000;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
   border: none;
   border-radius: 8px;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 10px 0;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
-.btn-login:hover {
-  background: #e67e00;
+.dangnhap-button:hover {
+  background-color: #333;
+}
+
+.dangnhap-form label:not(:first-of-type) {
+  margin-top: 12px;
 }
