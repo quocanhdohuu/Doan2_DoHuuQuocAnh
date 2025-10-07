@@ -4,12 +4,23 @@ document.addEventListener("DOMContentLoaded", function () {
   button.addEventListener("click", function () {
     const role = document.getElementById("vaitro").value;
 
+    let basePath = window.location.origin; // http://127.0.0.1:5500
+    let projectRoot = "/Doan2_DoHuuQuocAnh"; // tên repo
+
+    if (
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "localhost"
+    ) {
+      // Khi chạy local (Live Server)
+      projectRoot = "";
+    }
+
     if (role === "admin") {
-      window.location.href = "/Admin/admin.html";
+      window.location.href = `${basePath}${projectRoot}/Admin/admin.html`;
     } else if (role === "giaovien") {
-      window.location.href = "/Giaovien/giaovien.html";
+      window.location.href = `${basePath}${projectRoot}/Giaovien/giaovien.html`;
     } else if (role === "phuhuynh") {
-      window.location.href = "/Phuhuynh/phuhuynh.html";
+      window.location.href = `${basePath}${projectRoot}/Phuhuynh/phuhuynh.html`;
     }
   });
 });
