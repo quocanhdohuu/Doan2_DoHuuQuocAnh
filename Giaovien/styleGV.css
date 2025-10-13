@@ -1,0 +1,76 @@
+.body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+/* ------------thanh thông tin---------------- */
+#Thanhthongtin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    color: black;
+    border-bottom: 2px solid #ccc;
+}
+#Thanhthongtin img{
+    height: 45px;
+    width: 45px;
+    object-fit: contain;
+}
+#Thanhthongtin button{
+    height: 35px;
+    width: 120px;
+    border-radius: 7px;
+    font-weight: bold;
+   
+}
+#Thanhthongtin button img{
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+}
+#ThongTin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 0.2;
+}
+#ThongTin h5,h4 {
+ display: flex;
+}
+#ThongTin h5 {
+  opacity: 0.9;
+}
+/* ------------------------------------------------------*/
+
+/* ---------------thanh menu-------------------------- */
+#menu{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: gray;
+    padding: 5px 0;
+    border-radius: 30px;
+}
+#menu button{
+    background-color: transparent;
+    border: none;
+    border-radius: 70px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 33%;
+    height: 95%;
+}
+#menu button:hover{
+    background-color: #ddd;
+    transition: 0.3s;
+}
+
+/*-----------------------------------------------------*/
