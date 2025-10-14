@@ -38,8 +38,10 @@
     gap: 8px;
     line-height: 0.2;
 }
-#ThongTin h5,h4 {
- display: flex;
+#ThongTin h4,
+#ThongTin h5 {
+  margin: 0;
+  line-height: 1.2;
 }
 #ThongTin h5 {
   opacity: 0.9;
@@ -52,7 +54,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: gray;
+    background-color: rgb(213, 211, 211);
     padding: 5px 0;
     border-radius: 30px;
 }
@@ -69,8 +71,88 @@
     height: 95%;
 }
 #menu button:hover{
-    background-color: #ddd;
+    background-color: white;
     transition: 0.3s;
 }
 
+/*-----------------------------------------------------*/
+/* ---------------Tong Quan-------------------------- */
+#TongQuan{
+    margin: 20px;
+    background-color: white;
+}
+/* ---------------thong so-------------------------- */
+#thongSo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 130px;
+    border: none;
+    padding: 0px 0px;
+}
+#tongHS , #coMat, #vangMat, #diMuon, #choChamDiem{
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+    width: 18%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 100%;
+    width: 19%;
+    margin-left: 0px;
+}
+#tongHS img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 130px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#vangMat img, #diMuon img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 165px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#choChamDiem img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 120px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#coMat img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 115px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#tongHS h4, #coMat h4, #vangMat h4, #diMuon h4, #choChamDiem h4{
+    margin-left: 15px;
+    padding: 0px;
+     margin-right: 130px;
+     display: flex;
+     width: 100%;
+}
+#tongHS p, #vangMat p, #diMuon p, #choChamDiem p{
+    color: gray;
+    margin-left: 0px;
+    margin-right: 130px;
+}
+#coMat p{
+    margin-left: 0px;
+    color: gray;
+    margin-right: 170px;
+}
+#tongHS h2, #coMat h2, #vangMat h2, #diMuon h2, #choChamDiem h2{
+    margin-left: 0px;
+    color: black;
+    font-style: bold;
+     margin-right: 210px;
+}
 /*-----------------------------------------------------*/
