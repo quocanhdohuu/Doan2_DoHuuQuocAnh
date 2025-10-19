@@ -1,0 +1,168 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+}
+
+.navbar {
+  background: white;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-weight: 500;
+  color: #1d4ed8;
+}
+
+.logo span {
+  color: black;
+  font-size: 16pt;
+  margin-left: 5px;
+}
+
+.logout-btn {
+  width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* khoảng cách giữa icon và chữ */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #ddd;
+}
+
+.menu {
+  background: #ececec;
+  display: flex;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid #ddd;
+  margin: 10px 23px;
+  border-radius: 12px;
+}
+
+.menu-btn {
+  background: #ececec;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15pt;
+  transition: 0.2s;
+  width: 200px;
+}
+
+.menu-btn.active {
+  background: #ffffff;
+}
+
+.content {
+  padding: 24px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* Tổng quan cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.card .number {
+  font-size: 28px;
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.recent {
+  background: white;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+/* Học sinh table */
+.student-header {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.student-actions input,
+select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.add-btn {
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.student-table th,
+.student-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #16a34a;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}

@@ -1,19 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href=".css" />
+    <link rel="stylesheet" type="text/css" href="admin.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="jquery-3.7.1.min.js"></script>
-    <script src=".js"></script>
+    <script src="admin.js" defer></script>
 
     <title>Trường Tiểu học tương lai</title>
 </head>
+
 <body>
-    
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-school"></i>
+            <span>Hệ thống quản lý trường tiểu học</span>
+        </div>
+        <button class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i>Đăng xuất</button>
+    </header>
+
+    <nav class="menu">
+        <button class="menu-btn active" data-target="overview">Tổng quan</button>
+        <button class="menu-btn" data-target="student">Học sinh</button>
+        <button class="menu-btn" data-target="class">Lớp học</button>
+        <button class="menu-btn" data-target="teacher">Giáo viên</button>
+        <button class="menu-btn" data-target="event">Sự kiện</button>
+        <button class="menu-btn" data-target="report">Báo cáo</button>
+    </nav>
+
+    <main class="content">
+        <!-- Tổng quan -->
+        <section id="overview" class="page active">
+            <div class="cards">
+                <div class="card blue">
+                    <h3>Tổng học sinh</h3>
+                    <p class="number">1247</p>
+                    <span>+12 so với tháng trước</span>
+                </div>
+                <div class="card green">
+                    <h3>Giáo viên</h3>
+                    <p class="number">54</p>
+                    <span>+2 so với tháng trước</span>
+                </div>
+                <div class="card purple">
+                    <h3>Lớp học</h3>
+                    <p class="number">32</p>
+                    <span>Không thay đổi</span>
+                </div>
+                <div class="card orange">
+                    <h3>Chuyên cần hôm nay</h3>
+                    <p class="number">1185</p>
+                    <span>95.2% có mặt</span>
+                </div>
+            </div>
+
+            <div class="recent">
+                <h3>Hoạt động gần đây</h3>
+                <ul>
+                    <li>Lớp 3A có 3 học sinh vắng mặt</li>
+                    <li>GV Nguyễn Thị B đã cập nhật điểm lớp 5C</li>
+                    <li>Thêm mới học sinh Trần Văn D vào lớp 1B</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Học sinh -->
+        <section id="student" class="page">
+            <div class="student-header">
+                <h3>Quản lý học sinh</h3>
+                <div class="student-actions">
+                    <input type="text" placeholder="Tìm kiếm học sinh hoặc phụ huynh...">
+                    <select>
+                        <option>Tất cả các lớp</option>
+                        <option>1A</option>
+                        <option>2E</option>
+                    </select>
+                    <button class="add-btn">+ Thêm học sinh</button>
+                </div>
+            </div>
+
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>Lớp</th>
+                        <th>Ngày sinh</th>
+                        <th>Phụ huynh</th>
+                        <th>SĐT</th>
+                        <th>Địa chỉ</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nguyễn Văn A</td>
+                        <td>1A</td>
+                        <td>15/3/2012</td>
+                        <td>Nguyễn Thị B</td>
+                        <td>0123456789</td>
+                        <td>Hà Nội</td>
+                        <td><span class="status active">Đang học</span></td>
+                        <td><button><i class="fa-solid fa-pen-to-square"></i></button> <button><i
+                                    class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Đỗ Hữu Q</td>
+                        <td>1A</td>
+                        <td>18/3/2012</td>
+                        <td>Nguyễn Văn T</td>
+                        <td>0123456789</td>
+                        <td>Hà Nội</td>
+                        <td><span class="status active">Đang học</span></td>
+                        <td><button><i class="fa-solid fa-pen-to-square"></i></button> <button><i
+                                    class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Các section khác -->
+        <section id="class" class="page">
+            <h3>Quản lý lớp học (đang cập nhật)</h3>
+        </section>
+        <section id="teacher" class="page">
+            <h3>Quản lý giáo viên (đang cập nhật)</h3>
+        </section>
+        <section id="event" class="page">
+            <h3>Quản lý sự kiện (đang cập nhật)</h3>
+        </section>
+        <section id="report" class="page">
+            <h3>Báo cáo thống kê (đang cập nhật)</h3>
+        </section>
+    </main>
+
 </body>
+
 </html>
