@@ -16,7 +16,7 @@
             </div>
         </div>
         <div id="Thoat">
-            <button >
+            <button id="btnLogout">
                 <img src="/img/logout (1).png" alt="">
                 Đăng xuất
             </button>
@@ -24,7 +24,7 @@
     </div>
 <!----------------- Mennu ------------------->
     <div id="menu">
-        <button id="btnTongQuan">Tổng quan</button>
+        <button id="btnTongQuan" style="background-color: white;">Tổng quan</button>
         <button id="btnDieDanh">Điểm danh</button>
         <button id="btnSucKhoe">Sức khỏe</button>
         <button id="btnDiemSo">Điểm số</button>
@@ -69,8 +69,53 @@
                 <p>Bài thi cần chấm</p>
             </div>
         </div>
-        <div id="LopDay"></div>
-        <div id="HoatDong"></div>
+        <div id="LopDay">
+            <h3>Các lớp đang dạy</h3>
+            <h3  style="color: gray;">Danh sách lớp và thông tin tổng quan</h3>
+            <div class="LOP"id="Lop1">
+                <h3 style="display: flex;justify-content: space-between;margin-right: 10px;"><span>6A</span><span style="background-color: black;color:white;border-radius: 15px;padding: 5px;">Chủ nhiệm</span></h3>
+                <p style="color: gray;">TMôn: Toán</p>
+                <p style="color: gray;">Sĩ số 32</p>
+                <h4><button>Điểm danh</button><button>Nhập điểm</button></h4>
+            </div>
+            <div class="LOP"id="Lop2">
+                <h3>6B</h3>
+                <p style="color: gray;">TMôn: Toán</p>
+                <p style="color: gray;">Sĩ số 32</p>
+                <h4><button>Điểm danh</button><button>Nhập điểm</button></h4>
+            </div>
+            <div class="LOP"id="Lop3">
+                <h3>7A</h3>
+                <p style="color: gray;">TMôn: Toán</p>
+                <p style="color: gray;">Sĩ số 32</p>
+                <h4><button>Điểm danh</button><button>Nhập điểm</button></h4>
+            </div>
+        </div>
+        <div id="HoatDong">
+            <h3>Hoạt động gần đây</h3>
+            <h3 style="color: gray;">Công việc và thông báo mới nhất</h3>
+            <div class="HOATDONGGAN" id="HD1">
+                <h3 style="display: flex;justify-content: space-between;margin-right: 10px;margin-bottom: 0px;">
+                    <span>Điểm danh lớp 6A</span>
+                    <span style="background-color: black;color:white;border-radius: 15px;padding: 5px;">Điểm danh</span>
+                </H3>
+                <span style="color: gray;">20 phút trước</span>
+            </div>
+            <div class="HOATDONGGAN" id="HD2">
+                <h3 style="display: flex;justify-content: space-between;margin-right: 10px;margin-bottom: 0px;">
+                    <span>Phụ huynh Nguyễn Thị B gửi tin nhắn về học sinh Nguyễn Văn A</span>
+                    <span style="background-color: white;color:black;border-radius: 15px;padding: 5px;">Tin nhắn</span>
+                </H3>
+                <span style="color: gray;">1 giờ trước</span>
+            </div>
+            <div class="HOATDONGGAN" id="HD3">
+                <h3 style="display: flex;justify-content: space-between;margin-right: 10px;margin-bottom: 0px;">
+                    <span>Cập nhật điểm kiểm tra 15 phút lớp 7A</span>
+                    <span style="background-color: gray;color:black;border-radius: 15px;padding: 5px;">Điểm danh</span>
+                </H3>
+                <span style="color: gray;">2 giờ trước</span>
+            </div>
+        </div>
     </div>
 <!-----------------Diem Danh------------------->
     <div id="DieDanh"></div>
@@ -80,5 +125,7 @@
     <div id="DiemSo"></div>
 
     <div id="LienLac"></div>
+
+    <script src="jvGV.js"></script>
 </body>
 </html>
