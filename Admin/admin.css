@@ -42,6 +42,10 @@ body {
 .logout-btn:hover {
   background-color: #ddd;
 }
+.logout-btn a {
+  text-decoration: none;
+  color: #000;
+}
 
 .menu {
   background: #ececec;
