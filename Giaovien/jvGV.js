@@ -1,9 +1,12 @@
 const btnTONGQUAN = document.querySelector('#btnTongQuan');
 const btnDiemDanh=document.querySelector('#btnDieDanh');
-const btnSucKhoe=document.querySelector('#btnSucKhoe');
+const btnSucKhoe=document.querySelector('#btnSucKhoe',);
 const btnDiemSo=document.querySelector('#btnDiemSo');
 const btnLienLac=document.querySelector('#btnLienLac');
 const btnDangXuat=document.querySelector('#btnLogout');
+const btnPhuDD=document.querySelectorAll('.btnDiemdanh'); 
+const btnPhuND=document.querySelectorAll('.btnNhapDiem');
+
 
 function an(nutbam){
     btnDiemDanh.style.backgroundColor='transparent';
@@ -29,9 +32,21 @@ btnDiemDanh.addEventListener('click',function(){
     an(btnDiemDanh);
     doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac');
 });
+btnPhuDD.forEach(btn=>{
+    btn.addEventListener('click',function(){
+    an(btnDiemDanh);
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac');
+});
+});
 btnDiemSo.addEventListener('click',function(){
     an(btnDiemSo);
     doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac');
+});
+btnPhuND.forEach(btn=>{
+    btn.addEventListener('click',function(){
+        an(btnDiemSo);
+        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac');
+    })
 });
 btnLienLac.addEventListener('click',function(){
     an(btnLienLac);
