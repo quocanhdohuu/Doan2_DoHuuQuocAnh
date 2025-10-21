@@ -100,6 +100,7 @@
         <section id="student" class="page">
             <div class="student-header">
                 <h3>Quản lý học sinh</h3>
+                <span>Thêm, sửa, xóa và phân lớp học sinh</span>
                 <div class="student-actions">
                     <input type="text" placeholder="Tìm kiếm học sinh hoặc phụ huynh...">
                     <select>
@@ -107,7 +108,7 @@
                         <option>1A</option>
                         <option>2E</option>
                     </select>
-                    <button class="add-btn">+ Thêm học sinh</button>
+                    <button class="add-btn"><i class="fa-solid fa-plus"></i>Thêm học sinh</button>
                 </div>
             </div>
 
@@ -118,7 +119,7 @@
                         <th>Lớp</th>
                         <th>Ngày sinh</th>
                         <th>Phụ huynh</th>
-                        <th>SĐT</th>
+                        <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
@@ -133,19 +134,62 @@
                         <td>0123456789</td>
                         <td>Hà Nội</td>
                         <td><span class="status active">Đang học</span></td>
-                        <td><button><i class="fa-solid fa-pen-to-square"></i></button> <button><i
-                                    class="fa-solid fa-trash-can"></i></button></td>
+                        <td class="actions">
+                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Trần Thị B</td>
+                        <td>2E</td>
+                        <td>5/12/2011</td>
+                        <td>Trần Thị L</td>
+                        <td>0123456789</td>
+                        <td>Hà Nội</td>
+                        <td><span class="status active">Đang học</span></td>
+                        <td class="actions">
+                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
                     </tr>
                     <tr>
                         <td>Đỗ Hữu Q</td>
                         <td>1A</td>
-                        <td>18/3/2012</td>
+                        <td>10/8/2012</td>
                         <td>Nguyễn Văn T</td>
                         <td>0123456789</td>
                         <td>Hà Nội</td>
                         <td><span class="status active">Đang học</span></td>
-                        <td><button><i class="fa-solid fa-pen-to-square"></i></button> <button><i
-                                    class="fa-solid fa-trash-can"></i></button></td>
+                        <td class="actions">
+                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Đỗ Hữu A</td>
+                        <td>1A</td>
+                        <td>14/3/2012</td>
+                        <td>Đỗ Hữu M</td>
+                        <td>0123456789</td>
+                        <td>Hà Nội</td>
+                        <td><span class="status active">Đang học</span></td>
+                        <td class="actions">
+                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lâm Xung</td>
+                        <td>2E</td>
+                        <td>15/9/2011</td>
+                        <td>Nguyễn S</td>
+                        <td>0123456789</td>
+                        <td>Hà Nội</td>
+                        <td><span class="status active">Đang học</span></td>
+                        <td class="actions">
+                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

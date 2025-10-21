@@ -194,7 +194,7 @@ body {
 }
 
 .tag-gray {
-  background-color: #eae6e5;
+  background-color: #eae6e5de;
   color: #333;
 }
 
@@ -210,43 +210,75 @@ body {
 }
 
 /* Học sinh table */
+#student {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding-bottom: 20px;
+}
+
 .student-header {
-  background: white;
-  padding: 16px;
   border-radius: 16px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+.student-header h3 {
+  padding-left: 20px;
+}
+.student-header span {
+  padding-left: 20px;
+  margin-top: -25px;
+  font-size: 10pt;
+  font-weight: lighter;
+}
 
 .student-actions {
   display: flex;
   gap: 8px;
+  padding-top: 10px;
+  padding-left: 20px;
 }
 
 .student-actions input,
 select {
   padding: 8px 10px;
-  border: 1px solid #ddd;
+  background-color: #ececec;
+  border: none;
   border-radius: 8px;
+}
+.student-actions input {
+  width: 65%;
+}
+.student-actions select {
+  width: 15%;
+}
+.add-btn {
+  width: 15.6%;
+}
+.add-btn i {
+  margin-right: 25px;
 }
 
 .add-btn {
-  background: #1d4ed8;
+  background: black;
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 8px 12px;
   cursor: pointer;
+  font-size: 12pt;
+  font-weight: 500;
+}
+.add-btn:hover {
+  background-color: #222;
 }
 
 .student-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
+  width: 97%;
   border-radius: 12px;
   overflow: hidden;
+  border: 1px solid #ddd;
+  margin: 0 20px;
 }
 
 .student-table th,
@@ -260,6 +292,23 @@ select {
   background: #dcfce7;
   color: #16a34a;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 15px;
   font-size: 13px;
+}
+
+.actions button {
+  background: none;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 25px;
+  color: #333;
+  transition: color 0.2s ease;
+}
+.actions button i {
+  font-size: 20px;
+}
+
+.actions button:hover {
+  background-color: #ececec;
 }
