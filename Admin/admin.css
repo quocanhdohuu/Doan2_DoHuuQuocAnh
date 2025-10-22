@@ -312,3 +312,131 @@ select {
 .actions button:hover {
   background-color: #ececec;
 }
+
+
+#class {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding-bottom: 20px;
+}
+
+.class-header {
+  border-radius: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.class-header h3 {
+  padding-left: 20px;
+}
+.class-header span {
+  padding-left: 20px;
+  margin-top: -25px;
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+
+.class-actions {
+  display: flex;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.addclass-btn {
+  width: 15%;
+  height: 32px;
+  margin-left: 56%;
+}
+.addclass-btn i {
+  margin-right: 25px;
+}
+
+.addclass-btn {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 500;
+
+}
+.addclass-btn:hover {
+  background-color: #222;
+}
+.class-actions img{
+  width: 30px;
+  height: 30px;
+}
+.class-actions h4{
+  font-size: 12pt;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 38px;
+  font-weight: 500;
+}
+
+.class-table {
+  width: 97%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  margin: 0 20px;
+}
+
+.class-table th,
+.class-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.status.activeclass {
+  background: #000000;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+#teacher {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding-bottom: 20px;
+}
+
+.addteacher-btn {
+  width: 15%;
+  height: 32px;
+  margin-left: 66%;
+}
+.addteacher-btn i {
+  margin-right: 25px;
+}
+
+.addteacher-btn  {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 500;
+
+}
+.addteacher-btn:hover {
+  background-color: #222;
+}
+
+.status.activeclass1 {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #DDD;
+  padding: 6px 10px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 600;
+}
