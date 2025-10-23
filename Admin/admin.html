@@ -338,10 +338,127 @@
             </table>
         </section>
         <section id="event" class="page">
-            <h3>Quản lý sự kiện (đang cập nhật)</h3>
+            <div class="event-header">
+                <h3>Quản lý sự kiện & lịch học</h3>
+                <span>Tạo và quản lý các sự kiện, lịch thi, lịch họp</span>
+                <div class="event-actions">
+                    <img src="../img/hocsinh.png" alt="">
+                    <h4>Tổng: 3 sự kiện</h4>
+                    <img src="../img/giaovien.png" alt="">
+                    <h4>Sắp tới: 2</h4>
+                    <button class="addevent-btn"><i class="fa-solid fa-plus"></i>Thêm sự kiện</button>
+                </div>
+            </div>
+
+            <div class="event-list">
+
+                <!-- SỰ KIỆN 1 -->
+                <div class="listevent gray">
+                    <div class="event-content">
+                        <div class="eventlist-header">
+                            <h3>Ngày hội thể thao</h3>
+                            <span class="tag blue">Học thuật</span>
+                            <span class="status ended">Đã kết thúc</span>
+                        </div>
+                        <p>Ngày hội thể thao toàn trường</p>
+                        <div class="eventlist-footer">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>9/10/2025</span>
+                            <i class="fa-regular fa-clock"></i>
+                            <span>08:00</span>
+                        </div>
+                    </div>
+                    <div class="eventlist-actions">
+                        <button><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <!-- SỰ KIỆN 2 -->
+                <div class="listevent blue">
+                    <div class="event-content">
+                        <div class="eventlist-header">
+                            <h3>Kiểm tra giữa kỳ môn Toán</h3>
+                            <span class="tag red">Kiểm tra</span>
+                            <span class="status upcoming">Sắp tới</span>
+                        </div>
+                        <p>Kiểm tra 45 phút cho các lớp khối 5</p>
+                        <div class="eventlist-footer">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>15/10/2025</span>
+                            <i class="fa-regular fa-clock"></i>
+                            <span>08:00</span>
+                        </div>
+                    </div>
+                    <div class="eventlist-actions">
+                        <button><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+                <!-- SỰ KIỆN 3 -->
+                <div class="listevent blue">
+                    <div class="event-content">
+                        <div class="eventlist-header">
+                            <h3>Họp phụ huynh cuối kỳ</h3>
+                            <span class="tag purple">Họp</span>
+                            <span class="status upcoming">Sắp tới</span>
+                        </div>
+                        <p>Họp báo cáo kết quả học tập học kỳ 1</p>
+                        <div class="eventlist-footer">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>20/12/2025</span>
+                            <i class="fa-regular fa-clock"></i>
+                            <span>18:00</span>
+                        </div>
+                    </div>
+                    <div class="eventlist-actions">
+                        <button><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+
+            </div>
         </section>
         <section id="report" class="page">
-            <h3>Báo cáo thống kê (đang cập nhật)</h3>
+            <div id="report-top">
+                <div class="report-top-header">
+                    <h3>Báo cáo tổng hợp</h3>
+                    <span>Chọn lớp và thời gian để tạo báo cáo</span>
+                </div>
+
+                <div class="report-filters">
+                    <div class="filter-group">
+                        <label for="report-filters-class">Lớp</label>
+                        <select id="report-filters-class">
+                            <option>Tất cả các lớp</option>
+                            <option>1A</option>
+                            <option>1B</option>
+                            <option>2E</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="from-date">Từ ngày</label>
+                        <input type="date" id="from-date" value="2025-08-01">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="to-date">Đến ngày</label>
+                        <input type="date" id="to-date" value="2025-09-01">
+                    </div>
+
+                    <div class="filter-buttons">
+                        <button class="btn-pdf">
+                            <i class="fa-regular fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="btn-excel">
+                            <i class="fa-solid fa-download"></i> Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
 
