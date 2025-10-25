@@ -177,3 +177,17 @@ body {
 .dot.green { background-color: #00a36c; }
 .dot.blue { background-color: #007bff; }
 .dot.purple { background-color: #8a5cf6; }
+/* Nhận xét giáo viên */
+.Nhanxetgv {
+    background: white;
+    border-radius: 12px;
+    margin: 0 20px 20px 20px;
+    padding: 12px 10px;
+}
+.card h3, .card p {
+    margin: 5px 0 0 0 ;
+}
+.Nhanxetgv small{
+    color: #777;
+    margin-left: 10px;
+}
