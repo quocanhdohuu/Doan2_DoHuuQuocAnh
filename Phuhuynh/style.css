@@ -182,12 +182,227 @@ body {
     background: white;
     border-radius: 12px;
     margin: 0 20px 20px 20px;
-    padding: 12px 10px;
+    padding: 20px 30px;
+    border: 1px solid #eee;
 }
-.card h3, .card p {
-    margin: 5px 0 0 0 ;
+.Nhanxetgv h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
 }
-.Nhanxetgv small{
+.Nhanxetgv p {
+    margin: 5px 0 5px 0;
+    font-size: 15px;
+}
+.Nhanxetgv small {
     color: #777;
-    margin-left: 10px;
+    font-size: 13px;
 }
+/* Update sự kiện */
+.Update-sk {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0 20px 20px 20px;
+}
+
+.Update-sk h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.Update-sk p {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0 15px 0 ;
+}
+
+/* --- Mỗi sự kiện --- */
+.Update-sk div {
+    position: relative;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+
+/* Màu nền cho từng loại sự kiện */
+.sk-1 {
+    background: #eaf1ff;
+}
+
+.sk-2 {
+    background: #eafbea; 
+}
+
+.sk-3 {
+    background: #f5eaff; 
+}
+
+/* --- Nội dung chính --- */
+.Update-sk div p {
+    font-weight: 500;
+    font-size: 15px;
+    color: #111;
+    margin: 0;
+    margin-bottom: 6px;
+}
+
+/* --- Dòng ngày tháng --- */
+.Update-sk div small {
+    color: #666;
+    font-size: 13px;
+}
+/* --- Nhãn loại sự kiện--- */
+.Loai {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    font-size: 13px;
+    border: 1px solid #888;
+    padding: 2px 10px;
+    margin: 13px 13px;
+    border-radius: 20px;
+    color: #111;
+    background-color: transparent;
+    font-weight: 500;
+}
+/* --- Tổng thể khối thao tác --- */
+.Toigian {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0 20px 20px 20px;
+}
+.Toigian h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+/* --- Lưới các lựa chọn --- */
+.Luachon {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+}
+/* --- Ô chức năng --- */
+.Luachon-chucnang {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px 10px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+/* --- Biểu tượng --- */
+.Luachon-chucnang .icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+/* --- Tên chức năng --- */
+.Luachon-chucnang p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+    margin: 0;
+}
+/* --- Hiệu ứng hover --- */
+.Luachon-chucnang:hover {
+    background: #f8f9fa;
+    border-color: #bdbdbd;
+    transform: translateY(-2px);
+}
+/* --- Màu biểu tượng --- */
+.icon.green {
+    color: #2e7d32; /* xanh lá */
+}
+.icon.blue {
+    color: #1565c0; /* xanh dương */
+}
+/* --- Ẩn phần chưa chọn --- */
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+/* NỘI DUNG HỒ SƠ */
+.khu-vuc-ho-so {
+  padding: 25px 30px;
+}
+.tieu-de-ho-so {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.nut-cap-nhat {
+  background: #f3f4f6;
+  border: 1px solid #ddd;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.nut-cap-nhat:hover {
+  background: #e5e7eb;
+}
+
+/* BỐ CỤC LƯỚI */
+.luoi-thong-tin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.the-thong-tin {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  text-align: right;
+}
+.the-thong-tin h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.the-thong-tin p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+/* NHÃN, GHI CHÚ */
+.nhan-nhe {
+  background: #f3f4f6;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.lop {
+  background: #111;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.nhom-mau {
+  background: #ffebee;
+  color: #e53935;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.ghi-chu {
+  margin-top: 10px;
+  background: #fff8e1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+}
+

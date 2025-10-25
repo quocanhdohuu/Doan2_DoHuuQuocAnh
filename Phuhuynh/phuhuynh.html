@@ -21,14 +21,15 @@
 
     <!-- MENU -->
     <nav class="menu">
-        <button class="active">Tổng quan</button>
-        <button>Hồ sơ</button>
-        <button>Điểm danh</button>
-        <button>Sức khỏe</button>
-        <button>Học tập</button>
+        <button class="active" data-target="tongquan">Tổng quan</button>
+        <button data-target="hoso">Hồ sơ</button>
+        <button data-target="diemdanh">Điểm danh</button>
+        <button data-target="suckhoe">Sức khỏe</button>
+        <button data-target="hoctap">Học tập</button>
     </nav>
 
-    <!-- TÓM TẮT HÔM NAY -->
+    <section id="tongquan" class="tab-content active">
+        <!-- TÓM TẮT HÔM NAY -->
     <section class="card">
         <h3>Tóm tắt hôm nay</h3>
         <p>Tình hình học tập và sức khỏe của con hôm nay</p>
@@ -56,7 +57,7 @@
             </div>
         </div>
     </section>
-
+ 
     <section class="info-grid">
     <div class="info-card">
         <h3>Thông tin học sinh</h3>
@@ -74,13 +75,126 @@
             <li><span class="dot purple"></span> Cập nhật phiếu điểm tháng 12 <br><small>3 ngày trước</small></li>
         </ul>
     </div>
+    </section>
     <!-- Nhận xét giáo viên -->
     <div class="Nhanxetgv">   
         <h3>Nhận xét từ giáo viên</h3>    
-        <p>Cập nhật phiếu điểm tháng 12 </p><br>
+        <p>Cập nhật phiếu điểm tháng 12</p>
         <small>3 ngày trước</small>
     </div>
-</section>
+    <section class="Update-sk">   
+        <h3>Sự kiện sắp tới</h3>    
+        <p>Các sự kiện và lịch quan trọng</p>
+        <div class="sk-1">
+            <p>Kiểm tra giữa kì môn toán</p><span class="Loai">Kiểm tra</span>
+            <small>Thứ 2, 25/12/2024</small>
+        </div>
+        <div class="sk-2">
+            <p>Họp phụ huynh cuối kỳ</p><span class="Loai">Họp</span>
+            <small>Thứ 6, 29/12/2024</small>
+        </div>
+        <div class="sk-3">
+            <p>Nghỉ tết dương lịch</p><span class="Loai">Nghỉ lễ</span>
+            <small>01/01/2025</small>
+        </div>
+    </section>
+    <!-- Thao tác nhanh -->
+    <section class="Toigian">
+        <h3>Thao tác nhanh</h3>
+        <div class="Luachon">
+            <div class="Luachon-chucnang">
+                <div class="icon green">✔</div>
+                <p>Xem điểm danh</p>
+            </div>
+            <div class="Luachon-chucnang">
+                <div class="icon green">♡</div>
+                <p>Sức khỏe</p>
+            </div>
+            <div class="Luachon-chucnang">
+                <div class="icon green">📘</div>
+                <p>Xem điểm</p>
+            </div>
+            <div class="Luachon-chucnang">
+                <div class="icon blue">💬</div>
+                <p>Liên hệ GV</p>
+            </div>
+        </div>
+    </section>
+    </section>
+    <section id="hoso" class="tab-content">
+    <!-- NỘI DUNG HỒ SƠ -->
+    <section class="khu-vuc-ho-so">
+    <div class="tieu-de-ho-so">
+      <div>
+        <h2>Hồ sơ học sinh</h2>
+        <p>Thông tin chi tiết về học sinh</p>
+      </div>
+      <button class="nut-cap-nhat">👤 Cập nhật thông tin</button>
+    </div>
+
+    <div class="luoi-ho-so">
+
+      <!-- Thông tin cơ bản -->
+        <div class="the-thong-tin">
+            <h3>👤 Thông tin cơ bản</h3>
+            <div class="dong-thong-tin"><span class="nhan">Họ và tên:</span><span class="gia-tri">Nguyễn Văn A</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Mã học sinh:</span><span class="gia-tri the-nho">HS001</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Ngày sinh:</span><span class="gia-tri">15/3/2012</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Lớp:</span><span class="gia-tri the-lop">6A</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Ngày nhập học:</span><span class="gia-tri">1/9/2023</span></div>
+        </div>
+
+        <!-- Thông tin liên hệ -->
+        <div class="the-thong-tin">
+            <h3>📞 Thông tin liên hệ</h3>
+            <div class="dong-thong-tin">
+                <span class="nhan">🏠 Địa chỉ:</span>
+                <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
+            </div>
+            <div class="dong-thong-tin"><span class="nhan">Phụ huynh:</span><span class="gia-tri">Nguyễn Thị Mẹ</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Số điện thoại:</span><span class="gia-tri">0987654321</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Email:</span><span class="gia-tri">parent@email.com</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Liên hệ khẩn cấp:</span><span class="gia-tri">Nguyễn Văn Cha - 0123456789</span></div>
+        </div>
+
+        <!-- Thông tin học tập -->
+        <div class="the-thong-tin">
+            <h3>🎓 Thông tin học tập</h3>
+            <div class="dong-thong-tin"><span class="nhan">Lớp hiện tại:</span><span class="gia-tri the-lop">6A</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Giáo viên chủ nhiệm:</span><span class="gia-tri">Nguyễn Thị Lan</span></div>
+            <div class="dong-thong-tin"><span class="nhan">SĐT giáo viên:</span><span class="gia-tri">0123456789</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Email giáo viên:</span><span class="gia-tri">lan.nguyen@school.edu.vn</span></div>
+        </div>
+
+        <!-- Thông tin sức khỏe -->
+        <div class="the-thong-tin">
+            <h3>❤️ Thông tin sức khỏe</h3>
+            <div class="dong-thong-tin"><span class="nhan">Nhóm máu:</span><span class="gia-tri the-nho do-dam">A+</span></div>
+            <div class="dong-thong-tin"><span class="nhan">Dị ứng:</span><span class="gia-tri">Không có</span></div>
+
+            <div class="hop-luu-y">
+                <strong>Lưu ý:</strong> Thông tin sức khỏe này được cập nhật từ hồ sơ y tế học đường. 
+                Vui lòng thông báo với nhà trường khi có thay đổi.
+            </div>
+        </div>
+    </div>
+    </section>
+    </section>
+
+    <section id="diemdanh" class="tab-content">
+        <h3>Điểm danh</h3>
+        <p>Thông tin ngày đi học, nghỉ học...</p>
+    </section>
+
+    <section id="suckhoe" class="tab-content">
+        <h3>Sức khỏe</h3>
+        <p>Báo cáo sức khỏe định kỳ...</p>
+    </section>
+
+    <section id="hoctap" class="tab-content">
+        <h3>Học tập</h3>
+        <p>Kết quả học tập, điểm số, nhận xét...</p>
+    </section>
  <script src="main.js"></script>
 </body>
 </html>
