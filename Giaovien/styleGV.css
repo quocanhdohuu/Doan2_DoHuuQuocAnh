@@ -215,3 +215,94 @@
     padding-top: 10px;
     margin-top: 10px;
 }
+/*----------------------DIEM DANH---------------------*/
+/*----------------------headerDD---------------------*/
+#DieDanh{
+    height: 100%;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+/*----------------------BODyDD---------------------*/
+/*----------------------CHon Thong Tin---------------------*/
+#ChonLop{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+}
+#Lop,#chonNgay{
+    height: 20%;
+    width: 100%;
+    border-radius: 7px;
+}
+#chonLopHoc,#Ngay{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+/*----------------------Thong So Lop---------------------*/
+#TSDiemDanh{
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+    width: 100%;
+    margin-top: -70px;
+}
+#DiMuonDD, #Vang, #CoMat{
+    border-radius: 15px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 100%;
+}
+/*----------------------Danh Sach Diem Danh---------------------*/
+#DanhsachDD{
+    margin-top: 20px;
+    height: 50%;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+}
+#DanhsachDD table{
+    padding: 2px;
+    width: 100%;
+    height: 10%;
+}
+#DanhsachDD table td, th{
+    margin-left: 2px;
+    padding: 2px;
+    border-bottom: 2px solid black;
+    width: 15%;
+    justify-content: space-between;
+}
+.btnGHICHUDD{
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 100%;
+}
+#btnLuuDiemDanh{
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+#btnLuuDiemDanh i,#btnLuuDiemDanh span{
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 10pt;
+}
+.btnDDDiMuon ,.btnDDVangMat, .btnDDComat{
+    background-color: transparent;
+    cursor: pointer;
+}

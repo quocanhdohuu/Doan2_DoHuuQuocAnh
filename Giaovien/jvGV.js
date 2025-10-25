@@ -1,3 +1,4 @@
+//------------------Tong Quan--------------------
 const btnTONGQUAN = document.querySelector('#btnTongQuan');
 const btnDiemDanh=document.querySelector('#btnDieDanh');
 const btnSucKhoe=document.querySelector('#btnSucKhoe',);
@@ -7,7 +8,7 @@ const btnDangXuat=document.querySelector('#btnLogout');
 const btnPhuDD=document.querySelectorAll('.btnDiemdanh'); 
 const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 
-
+//HAm an menu
 function an(nutbam){
     btnDiemDanh.style.backgroundColor='transparent';
     btnDiemSo.style.backgroundColor='transparent';
@@ -16,6 +17,7 @@ function an(nutbam){
     btnTONGQUAN.style.backgroundColor='transparent';
     nutbam.style.backgroundColor='white';
 };
+//ham doi trang
 function doi(trang1,trang2,trang3,trang4,trang5){
     document.querySelector(trang1).style.display='block';
     document.querySelector(trang2).style.display='none';
@@ -60,3 +62,4 @@ btnSucKhoe.addEventListener('click',function(){
 btnDangXuat.addEventListener('click',function(){
     window.location.href = `/index.html`;
 });
+//---------------------------------Điểm danh------------------------------------

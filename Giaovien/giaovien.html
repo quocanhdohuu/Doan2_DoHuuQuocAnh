@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giáo Viên</title>
     <link rel="stylesheet" href="/Giaovien/styleGV.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <!----------------- Thanh thông tin ------------------->
@@ -118,7 +119,146 @@
         </div>
     </div>
 <!-----------------Diem Danh------------------->
-    <div id="DieDanh" style="display: block;"></div>
+    <div id="DieDanh" style="display: block;">
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/user (1).png" alt=""><span></span>Điểm danh học sinh</h3>
+        <span style="color: gray;">Ghi nhận tình hình chuyên cần hàng ngày</span>
+        <div id="ChonLop">
+            <div id="Lop">
+                <span>Lớp học:</span>
+                <select id="chonLopHoc">
+                    <option value="6A">6A - Toán</option>
+                    <option value="6B">6B - Toán</option>
+                    <option value="7A">7A - Toán</option>
+                </select>
+            </div>
+
+            <div id="Ngay">
+                <span>Ngày điểm danh:</span>
+                <input type="date" id="chonNgay">
+            </div>
+        </div>
+
+        <div id="TSDiemDanh">
+            <div id="CoMat" style="background-color:#D8F6E0;">
+                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span style="color: green;">Có mặt</span>
+            </div>
+            <div id="Vang" style="background-color:#FFE5E5;">
+                <span style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+                <span style="color: red;">Vắng mặt</span>
+            </div>
+            <div id="DiMuonDD" style="background-color:#FFEBD2;color: orange;">
+                <span style="font-weight: bold;font-size: 60pt;">0</span><br>
+                <span style="color: orange;">Đi muộn</span>
+            </div>
+        </div>
+
+        <div id="DanhsachDD">
+            <table id="DanhSachDD">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã HS</th>
+                    <th>Họ tên</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                    <th>Thao tác</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">1</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS001</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn A</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
+                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
+                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD">-</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">2</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS002</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn B</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
+                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
+                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD">-</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">3</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS003</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn C</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
+                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
+                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD">-</span>
+                       <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">4</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS003</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn D</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
+                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
+                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD">-</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button id="btnLuuDiemDanh"> <i class="fa-solid fa-floppy-disk"></i><span>Lưu điểm danh</span></button>
+    </div>
 
     <div id="SucKhoe" style="display: block;"></div>
 
