@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển phụ huynh</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="user-info">
+            <span class="icon">😊</span>
+            <div>
+                <h3>Phụ huynh - Lê Văn C</h3>
+                <p>Học sinh: Nguyễn Văn A • Lớp 6A</p>
+            </div>
+        </div>
+        <button class="logout">Đăng xuất</button>
+    </header>
+
+    <!-- MENU -->
+    <nav class="menu">
+        <button class="active">Tổng quan</button>
+        <button>Hồ sơ</button>
+        <button>Điểm danh</button>
+        <button>Sức khỏe</button>
+        <button>Học tập</button>
+    </nav>
+
+    <!-- TÓM TẮT HÔM NAY -->
+    <section class="card">
+        <h3>Tóm tắt hôm nay</h3>
+        <p>Tình hình học tập và sức khỏe của con hôm nay</p>
+
+        <div class="summary-grid">
+            <div class="summary-item">
+                <div class="icon green">✔</div>
+                <span class="tag">Có mặt</span>
+                <p>Chuyên cần</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon green">♡</div>
+                <span class="tag">Khỏe mạnh</span>
+                <p>Sức khỏe</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon green">📘</div>
+                <span class="tag">Hoàn thành</span>
+                <p>Bữa ăn</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon blue">💬</div>
+                <span class="tag number">2</span>
+                <p>Tin nhắn mới</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-grid">
+    <div class="info-card">
+        <h3>Thông tin học sinh</h3>
+        <p><strong>Họ tên:</strong> <span>Nguyễn Văn A</span></p>
+        <p><strong>Lớp:</strong> <span class="class-badge">6A</span></p>
+        <p><strong>GVCN:</strong> <span>Nguyễn Thị Lan</span></p>
+        <p><strong>SDT giáo viên:</strong> <span>0123456789</span></p>
+    </div>
+
+    <div class="info-card">
+        <h3>Hoạt động gần đây</h3>
+        <ul>
+            <li><span class="dot green"></span> Điểm kiểm tra Toán: 8.5/10 <br><small>Hôm qua</small></li>
+            <li><span class="dot blue"></span> Tin nhắn từ giáo viên về bài tập <br><small>2 ngày trước</small></li>
+            <li><span class="dot purple"></span> Cập nhật phiếu điểm tháng 12 <br><small>3 ngày trước</small></li>
+        </ul>
+    </div>
+</section>
+ <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f8f9fb;
+    margin: 0;
+    color: #333;
+}
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-info h3 {
+    margin: 0;
+    font-size: 16px;
+}
+.user-info p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+.icon {
+    font-size: 28px;
+}
+.logout {
+    background-color: white;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+/* MENU */
+.menu {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f1f2f4;
+    padding: 4px;
+    border-radius: 20px;
+    margin: 20px;
+}
+.menu button {
+    flex: 1;
+    background: none;
+    border: none;
+    font-weight: 600;
+    color: #444;
+    padding: 5px 0px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.menu button.active {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+/* CARD TỔNG QUAN */
+.card {
+    background: white;
+    border-radius: 12px;
+    margin: 0 20px 20px 20px;
+    padding: 12px 10px;
+}
+.card h3, .card p {
+    margin: 5px 0 0 0 ;
+}
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+.summary-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    text-align: center;
+    padding: 15px;
+}
+.summary-item .icon {
+    font-size: 28px;
+    margin-bottom: 4px;
+}
+.summary-item .green {
+    color: #00a36c;
+}
+.summary-item .blue {
+    color: #007bff;
+}
+.summary-item p {
+    margin: 5px 0 0 0;
+    font-weight: 500;
+}
+.tag {
+    display: inline-block;
+    background-color: #e8f7ef;
+    color: #00a36c;
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 13px;
+    margin: 2px 0;
+}
+.number {
+    background-color: #e7f0ff;
+    color: #007bff;
+}
+/* --- THÔNG TIN HỌC SINH --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 0 20px 30px 20px;
+}
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    border: 1px solid #eee;
+}
+/* Tiêu đề */
+.info-card h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+/* --- Căn label - value hai bên --- */
+.info-card p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    margin: 10px 0;
+}
+/* In đậm nhãn (Họ tên, Lớp...) */
+.info-card p strong {
+    font-weight: 600;
+}
+/* Nút lớp (6A) dạng bo tròn nhỏ */
+.class-badge {
+    background-color: #f1f3f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 13px;
+}
+/* --- Danh sách hoạt động gần đây --- */
+.info-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.info-card ul li {
+    margin-bottom: 12px;
+    line-height: 1.5;
+    font-size: 15px;
+}
+.info-card ul li .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.info-card ul small {
+    color: #777;
+    margin-left: 18px;
+}
+/* Màu chấm */
+.dot.green { background-color: #00a36c; }
+.dot.blue { background-color: #007bff; }
+.dot.purple { background-color: #8a5cf6; }
