@@ -10,6 +10,7 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="admin.js" defer></script>
 
     <title>Trường Tiểu học tương lai</title>
@@ -421,7 +422,7 @@
             </div>
         </section>
         <section id="report" class="page">
-            <div id="report-top">
+            <div class="report-top">
                 <div class="report-top-header">
                     <h3>Báo cáo tổng hợp</h3>
                     <span>Chọn lớp và thời gian để tạo báo cáo</span>
@@ -458,7 +459,116 @@
                     </div>
                 </div>
             </div>
+            <div class="cards-baocao">
+                <div class="card-baocao tonghocsinh">
+                    <h3>Tổng học sinh</h3>
+                    <img src="..\img\tonghocsinh.png" alt="anh">
+                    <p class="number">228</p>
+                    <span>Trên tất cả lớp</span>
+                </div>
+                <div class="card-baocao chuyencanTB">
+                    <h3>Chuyên cần TB</h3>
+                    <img src="..\img\chuyencantb.png" alt="anh">
+                    <p class="number">94.4%</p>
+                    <span>+0.3 so với tháng trước</span>
+                </div>
+                <div class="card-baocao hoclucgioi">
+                    <h3>Học lực giỏi</h3>
+                    <img src="..\img\hoclucgioi.png" alt="anh">
+                    <p class="number">21.1%</p>
+                    <span>45/228 học sinh</span>
+                </div>
+                <div class="card-baocao cancaithien">
+                    <h3>Cần cải thiện</h3>
+                    <img src="..\img\cancaithien.png" alt="anh">
+                    <p class="number">5.6%</p>
+                    <span>12/228 học sinh</span>
+                </div>
+            </div>
+            <div class="chuyencan-hocluc">
+                <div class="chuyencantheolop">
+                    <h3>Chuyên cần theo lớp</h3>
+                    <span>Tình hình có mặt, vắng mặt và đi muộn</span>
+                    <div class="bieudo-chuyencantheolop">
+                        <canvas id="bieudo"></canvas>
+                    </div>
+                </div>
+                <div class="phanbohocluc">
+                    <h3>Phân bố học lực</h3>
+                    <span>Tỷ lệ học sinh theo từng mức học lực</span>
+                    <div class="bieudo-phanbohocluc">
+                        <canvas id="bieudoTron"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="xuhuongchuyencan">
+                <h3>Xu hướng chuyên cần theo tháng</h3>
+                <span>Tỷ lệ chuyên cần trung bình các tháng trong năm học</span>
+                <div class="bieudo-xuhuongchuyencan">
+                    <canvas id="bieudoThang"></canvas>
+                </div>
+            </div>
+            <div class="baocaochitiet">
+                <h3>Báo cáo chi tiết theo lớp</h3>
+                <span>Chi tiết chuyên cần và học lực từng lớp</span>
+                <div class="baocaochitiet-lops">
+                    <div class="chitietlop">
+                        <div class="lop-left">
+                            <button class="lop-btn">1A</button>
+                            <div class="lop-info">
+                                <p><b>Sĩ số: 36</b></p>
+                                <span>Có mặt: 32 | Vắng: 3 | Muộn: 1</span>
+                            </div>
+                        </div>
+                        <div class="lop-right">
+                            <h3>88.9%</h3>
+                            <span>Chuyên cần</span>
+                        </div>
+                    </div>
 
+                    <div class="chitietlop">
+                        <div class="lop-left">
+                            <button class="lop-btn">1B</button>
+                            <div class="lop-info">
+                                <p><b>Sĩ số: 36</b></p>
+                                <span>Có mặt: 30 | Vắng: 4 | Muộn: 2</span>
+                            </div>
+                        </div>
+                        <div class="lop-right">
+                            <h3>88.9%</h3>
+                            <span>Chuyên cần</span>
+                        </div>
+                    </div>
+
+                    <div class="chitietlop">
+                        <div class="lop-left">
+                            <button class="lop-btn">1C</button>
+                            <div class="lop-info">
+                                <p><b>Sĩ số: 31</b></p>
+                                <span>Có mặt: 28 | Vắng: 2 | Muộn: 1</span>
+                            </div>
+                        </div>
+                        <div class="lop-right">
+                            <h3>88.9%</h3>
+                            <span>Chuyên cần</span>
+                        </div>
+                    </div>
+
+                    <div class="chitietlop">
+                        <div class="lop-left">
+                            <button class="lop-btn">2A</button>
+                            <div class="lop-info">
+                                <p><b>Sĩ số: 32</b></p>
+                                <span>Có mặt: 32 | Vắng: 0 | Muộn: 0</span>
+                            </div>
+                        </div>
+                        <div class="lop-right">
+                            <h3>100%</h3>
+                            <span>Chuyên cần</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 

@@ -622,7 +622,7 @@ select {
 }
 
 /*Báo cáo*/
-#report-top {
+.report-top {
   border: 1px solid #ddd;
   border-radius: 15px;
   padding-bottom: 20px;
@@ -704,4 +704,204 @@ select {
 .btn-excel,
 .btn-pdf i {
   font-size: 14px;
+}
+
+/* Tổng quan cards */
+.cards-baocao {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card-baocao {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-baocao img {
+  float: right;
+  width: 38px;
+  height: 35px;
+  margin-top: -25px;
+}
+.card-baocao h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.card-baocao .number {
+  font-size: 28px;
+  margin-top: 36px;
+  margin-bottom: 0px;
+  font-weight: 680;
+}
+
+.card-baocao span {
+  font-size: 10pt;
+  font-weight: lighter;
+}
+.chuyencan-hocluc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.chuyencantheolop,
+.phanbohocluc {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chuyencantheolop {
+  float: left;
+}
+.phanbohocluc {
+  float: right;
+}
+
+.chuyencantheolop h3,
+.phanbohocluc h3 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.chuyencantheolop span,
+.phanbohocluc span {
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+.xuhuongchuyencan {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+}
+.xuhuongchuyencan h3 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.xuhuongchuyencan span {
+  font-size: 10pt;
+  font-weight: lighter;
+}
+.baocaochitiet {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 20px;
+}
+.baocaochitiet h3 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.baocaochitiet span {
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+.baocaochitiet-lops {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Segoe UI", sans-serif;
+  margin-top: 10px;
+}
+
+.chitietlop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 12px 18px;
+  background: #fff;
+}
+
+.lop-left {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.lop-btn {
+  border: 1px solid #ddd;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.lop-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #232323;
+}
+.lop-info span {
+  margin: 0;
+  font-size: 14px;
+  color: #808080;
+}
+
+.lop-right {
+  text-align: left;
+  margin-right: 30px;
+}
+
+.lop-right h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #222;
+}
+
+.lop-right span {
+  font-size: 13px;
+  color: #555;
+}
+
+.bieudo-chuyencantheolop {
+  width: 90%;
+  max-width: 700px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+.bieudo-phanbohocluc {
+  width: 90%;
+  max-width: 700px;
+  height: 250px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+.bieudo-phanbohocluc canvas {
+  margin-left: 120px;
+}
+.bieudo-xuhuongchuyencan {
+  width: 96%;
+  max-width: 1200px;
+  height: 350px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
+.bieudo-xuhuongchuyencan canvas {
+  margin-left: 200px;
 }
