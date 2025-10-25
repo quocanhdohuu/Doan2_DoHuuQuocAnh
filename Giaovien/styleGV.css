@@ -1,0 +1,308 @@
+.body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+/* ------------thanh thông tin---------------- */
+#Thanhthongtin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    color: black;
+    border-bottom: 2px solid #ccc;
+}
+#Thanhthongtin img{
+    height: 45px;
+    width: 45px;
+    object-fit: contain;
+}
+#Thanhthongtin button{
+    height: 35px;
+    width: 120px;
+    border-radius: 7px;
+    font-weight: bold;
+   
+}
+#Thanhthongtin button img{
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+}
+#ThongTin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 0.2;
+}
+#ThongTin h4,
+#ThongTin h5 {
+  margin: 0;
+  line-height: 1.2;
+}
+#ThongTin h5 {
+  opacity: 0.9;
+}
+/* ------------------------------------------------------*/
+
+/* ---------------thanh menu-------------------------- */
+#menu{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(213, 211, 211);
+    padding: 5px 0;
+    border-radius: 30px;
+}
+#menu button{
+    background-color: transparent;
+    border: none;
+    border-radius: 70px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 33%;
+    height: 95%;
+}
+#menu button:hover{
+    background-color: white;
+    transition: 0.3s;
+}
+
+/*-----------------------------------------------------*/
+/* ---------------Tong Quan-------------------------- */
+#TongQuan{
+    margin: 20px;
+    background-color: white;
+}
+/* ---------------thong so-------------------------- */
+#thongSo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 130px;
+    border: none;
+    padding: 0px 0px;
+}
+#tongHS , #coMat, #vangMat, #diMuon, #choChamDiem{
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+    width: 18%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 100%;
+    width: 19%;
+    margin-left: 0px;
+}
+#tongHS img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 130px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#vangMat img, #diMuon img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 165px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#choChamDiem img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 120px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#coMat img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 115px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#tongHS h4, #coMat h4, #vangMat h4, #diMuon h4, #choChamDiem h4{
+    margin-left: 15px;
+    padding: 0px;
+     margin-right: 130px;
+     display: flex;
+     width: 100%;
+}
+#tongHS p, #vangMat p, #diMuon p, #choChamDiem p{
+    color: gray;
+    margin-left: 0px;
+    margin-right: 130px;
+}
+#coMat p{
+    margin-left: 0px;
+    color: gray;
+    margin-right: 170px;
+}
+#tongHS h2, #coMat h2, #vangMat h2, #diMuon h2, #choChamDiem h2{
+    margin-left: 0px;
+    color: black;
+    font-style: bold;
+     margin-right: 210px;
+}
+/*----------------------Lop day---------------------*/
+#LopDay{
+    height: 40%;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 50px;
+}
+#LopDay h3{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+}
+.LOP{
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 60%;
+    width: 30.5%;
+    margin-top: 15px;
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-right: 15px;
+    float: left;
+}
+.LOP button{
+    border: 0.5px solid gray;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px ;
+    background-color: white;
+    height: 18%;
+    width: 20%;
+    margin-right: 20px;
+    cursor: pointer;
+}
+/*----------------------Hoat Dong---------------------*/
+#HoatDong{
+    height: 40%;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 50px;
+}
+#HoatDong h3,#HoatDong p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+}
+.HOATDONGGAN{
+    height: 20%;
+    width: 98%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+/*----------------------DIEM DANH---------------------*/
+/*----------------------headerDD---------------------*/
+#DieDanh{
+    height: 100%;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+/*----------------------BODyDD---------------------*/
+/*----------------------CHon Thong Tin---------------------*/
+#ChonLop{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+}
+#Lop,#chonNgay{
+    height: 20%;
+    width: 100%;
+    border-radius: 7px;
+}
+#chonLopHoc,#Ngay{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+/*----------------------Thong So Lop---------------------*/
+#TSDiemDanh{
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+    width: 100%;
+    margin-top: -70px;
+}
+#DiMuonDD, #Vang, #CoMat{
+    border-radius: 15px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 100%;
+}
+/*----------------------Danh Sach Diem Danh---------------------*/
+#DanhsachDD{
+    margin-top: 20px;
+    height: 50%;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+}
+#DanhsachDD table{
+    padding: 2px;
+    width: 100%;
+    height: 10%;
+}
+#DanhsachDD table td, th{
+    margin-left: 2px;
+    padding: 2px;
+    border-bottom: 2px solid black;
+    width: 15%;
+    justify-content: space-between;
+}
+.btnGHICHUDD{
+    background-color: transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 100%;
+}
+#btnLuuDiemDanh{
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+#btnLuuDiemDanh i,#btnLuuDiemDanh span{
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 10pt;
+}
+.btnDDDiMuon ,.btnDDVangMat, .btnDDComat{
+    background-color: transparent;
+    cursor: pointer;
+}
