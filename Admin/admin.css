@@ -869,3 +869,109 @@ select {
   font-size: 13px;
   color: #555;
 }
+
+.chuyencantheolop-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.chuyencantheolop-table thead {
+  background: #f8f9fa;
+}
+
+.chuyencantheolop-table th {
+  padding: 10px;
+  font-weight: 600;
+}
+
+.chuyencantheolop-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.chuyencantheolop-table tr:hover {
+  background: #f9f9f9;
+}
+
+.comat {
+  color: #28a745;
+}
+
+.vang {
+  color: #dc3545;
+}
+
+.muon {
+  color: #f39c12;
+}
+
+.phanbohocluc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.phanbohocluc-table thead {
+  background: #f8f9fa;
+}
+
+.phanbohocluc-table th {
+  padding: 10px;
+  font-weight: 600;
+}
+
+.phanbohocluc-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+}
+
+.gioi td {
+  color: #28a745;
+}
+
+.kha td {
+  color: #4285f4;
+}
+
+.trungbinh td {
+  color: #f39c12;
+}
+
+.yeu td {
+  color: #dc3545;
+}
+
+.phanbohocluc-table tr:hover {
+  background: #f9f9f9;
+}
+
+.xuhuongchuyencan-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.xuhuongchuyencan-table thead {
+  background: #f8f9fa;
+}
+
+.xuhuongchuyencan-table th {
+  padding: 10px;
+  font-weight: 600;
+}
+
+.xuhuongchuyencan-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+}
+
+.xuhuongchuyencan-table td:nth-child(2) {
+  color: #4285f4;
+}
+
+.xuhuongchuyencan-table tr:hover {
+  background: #f9f9f9;
+}
