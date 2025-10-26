@@ -334,75 +334,135 @@ body {
 }
 /* NỘI DUNG HỒ SƠ */
 .khu-vuc-ho-so {
-  padding: 25px 30px;
+    background-color: #fff;
+    border-radius: 12px; /* Thay đổi thành 12px để khớp với phong cách của bạn */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: none; /* Đảm bảo chiếm toàn bộ màn hình */
+    box-sizing: border-box;
+    margin: 20px; /* Thêm margin để khớp với bố cục */
 }
+
 .tieu-de-ho-so {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
+
+.tieu-de-ho-so h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.tieu-de-ho-so p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
 .nut-cap-nhat {
-  background: #f3f4f6;
-  border: 1px solid #ddd;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px; /* Thay đổi thành 6px để khớp phong cách */
+    cursor: pointer;
+    font-size: 14px;
 }
+
 .nut-cap-nhat:hover {
-  background: #e5e7eb;
+    background-color: #0056b3;
 }
 
-/* BỐ CỤC LƯỚI */
-.luoi-thong-tin {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+.luoi-ho-so {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Đặt cố định 2 cột để khớp với ảnh */
+    gap: 20px;
+    width: 100%;
 }
+
 .the-thong-tin {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  text-align: right;
+    background-color: #f9f9f9;
+    border: 1px solid #eee; /* Thay đổi thành #eee để khớp phong cách */
+    border-radius: 12px; /* Thay đổi thành 12px để khớp phong cách */
+    padding: 20px 30px; /* Thay đổi padding để khớp với ảnh */
+    width: 100%;
+    box-sizing: border-box;
 }
+
 .the-thong-tin h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-.the-thong-tin p {
-  margin: 6px 0;
-  line-height: 1.4;
+    margin: 0 0 20px; /* Thay đổi margin để khớp với ảnh */
+    font-size: 18px;
+    font-weight: 600; /* Thêm font-weight để khớp */
+    color: #333;
 }
 
-/* NHÃN, GHI CHÚ */
-.nhan-nhe {
-  background: #f3f4f6;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 13px;
-}
-.lop {
-  background: #111;
-  color: #fff;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 13px;
-}
-.nhom-mau {
-  background: #ffebee;
-  color: #e53935;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-weight: bold;
-}
-.ghi-chu {
-  margin-top: 10px;
-  background: #fff8e1;
-  padding: 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #555;
+.dong-thong-tin {
+    display: flex;
+    justify-content: space-between; /* Thay đổi thành space-between để khớp với ảnh */
+    align-items: center;
+    font-size: 15px; /* Thêm font-size để khớp */
+    margin: 10px 0; /* Thay đổi margin để khớp */
 }
 
+.nhan {
+    font-weight: 600; /* Thay đổi thành 600 để khớp với strong trong mã của bạn */
+    width: auto; /* Xóa width cố định, để tự điều chỉnh */
+    color: #444;
+}
+
+.gia-tri {
+    color: #333;
+    flex-grow: 1;
+}
+
+.the-nho {
+    font-size: 13px; /* Thay đổi thành 13px để khớp */
+    color: #666;
+}
+
+.the-lop {
+    background-color: #f1f3f5; /* Thay đổi màu nền để khớp */
+    border: 1px solid #ccc; /* Thêm viền để khớp */
+    border-radius: 8px; /* Thay đổi radius để khớp */
+    padding: 3px 8px;
+    font-size: 13px; /* Thay đổi font-size để khớp */
+}
+
+.do-dam {
+    color: #dc3545;
+}
+
+.hop-luu-y {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    color: #856404;
+}
+
+.hop-luu-y strong {
+    color: #856404;
+}
+
+/* --- Các lớp bổ sung từ mã của bạn --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 0 20px 30px 20px;
+}
+
+.class-badge {
+    background-color: #f1f3f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 13px;
+}
