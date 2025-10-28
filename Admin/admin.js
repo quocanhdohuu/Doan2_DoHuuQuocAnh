@@ -14,3 +14,24 @@ buttons.forEach((btn) => {
     });
   });
 });
+
+// Xử lý hiện form thêm học sinh
+const addBtn = document.querySelector(".add-btn");
+const modal = document.getElementById("studentModal");
+const overlay = document.getElementById("overlay");
+const closeBtn = document.getElementById("closeBtn");
+
+addBtn.addEventListener("click", () => {
+  modal.style.display = "block";
+  overlay.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+  overlay.style.display = "none";
+});
+
+overlay.addEventListener("click", () => {
+  modal.style.display = "none";
+  overlay.style.display = "none";
+});
