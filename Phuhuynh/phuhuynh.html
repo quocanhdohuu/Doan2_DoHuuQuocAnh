@@ -1,200 +1,328 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bảng điều khiển phụ huynh</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="user-info">
-            <span class="icon">😊</span>
-            <div>
-                <h3>Phụ huynh - Lê Văn C</h3>
-                <p>Học sinh: Nguyễn Văn A • Lớp 6A</p>
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bảng điều khiển phụ huynh</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- HEADER -->
+        <header class="header">
+            <div class="user-info">
+                <span class="icon">😊</span>
+                <div>
+                    <h3>Phụ huynh - Lê Văn C</h3>
+                    <p>Học sinh: Nguyễn Văn A • Lớp 6A</p>
+                </div>
             </div>
-        </div>
-        <button class="logout">Đăng xuất</button>
-    </header>
+            <button class="logout">Đăng xuất</button>
+        </header>
 
-    <!-- MENU -->
-    <nav class="menu">
-        <button class="active" data-target="tongquan">Tổng quan</button>
-        <button data-target="hoso">Hồ sơ</button>
-        <button data-target="diemdanh">Điểm danh</button>
-        <button data-target="suckhoe">Sức khỏe</button>
-        <button data-target="hoctap">Học tập</button>
-    </nav>
+        <!-- MENU -->
+        <nav class="menu">
+            <button class="active" data-target="tongquan">Tổng quan</button>
+            <button data-target="hoso">Hồ sơ</button>
+            <button data-target="diemdanh">Điểm danh</button>
+            <button data-target="suckhoe">Sức khỏe</button>
+            <button data-target="hoctap">Học tập</button>
+        </nav>
 
-    <section id="tongquan" class="tab-content active">
-        <!-- TÓM TẮT HÔM NAY -->
-    <section class="card">
-        <h3>Tóm tắt hôm nay</h3>
-        <p>Tình hình học tập và sức khỏe của con hôm nay</p>
+        <section id="tongquan" class="tab-content active">
+            <!-- TÓM TẮT HÔM NAY -->
+        <section class="card">
+            <h3>Tóm tắt hôm nay</h3>
+            <p>Tình hình học tập và sức khỏe của con hôm nay</p>
 
-        <div class="summary-grid">
-            <div class="summary-item">
-                <div class="icon green">✔</div>
-                <span class="tag">Có mặt</span>
-                <p>Chuyên cần</p>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="icon green">✔</div>
+                    <span class="tag">Có mặt</span>
+                    <p>Chuyên cần</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon green">♡</div>
+                    <span class="tag">Khỏe mạnh</span>
+                    <p>Sức khỏe</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon green">📘</div>
+                    <span class="tag">Hoàn thành</span>
+                    <p>Bữa ăn</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon blue">💬</div>
+                    <span class="tag number">2</span>
+                    <p>Tin nhắn mới</p>
+                </div>
             </div>
-            <div class="summary-item">
-                <div class="icon green">♡</div>
-                <span class="tag">Khỏe mạnh</span>
-                <p>Sức khỏe</p>
-            </div>
-            <div class="summary-item">
-                <div class="icon green">📘</div>
-                <span class="tag">Hoàn thành</span>
-                <p>Bữa ăn</p>
-            </div>
-            <div class="summary-item">
-                <div class="icon blue">💬</div>
-                <span class="tag number">2</span>
-                <p>Tin nhắn mới</p>
-            </div>
-        </div>
-    </section>
- 
-    <section class="info-grid">
-    <div class="info-card">
-        <h3>Thông tin học sinh</h3>
-        <p><strong>Họ tên:</strong> <span>Nguyễn Văn A</span></p>
-        <p><strong>Lớp:</strong> <span class="class-badge">6A</span></p>
-        <p><strong>GVCN:</strong> <span>Nguyễn Thị Lan</span></p>
-        <p><strong>SDT giáo viên:</strong> <span>0123456789</span></p>
-    </div>
-
-    <div class="info-card">
-        <h3>Hoạt động gần đây</h3>
-        <ul>
-            <li><span class="dot green"></span> Điểm kiểm tra Toán: 8.5/10 <br><small>Hôm qua</small></li>
-            <li><span class="dot blue"></span> Tin nhắn từ giáo viên về bài tập <br><small>2 ngày trước</small></li>
-            <li><span class="dot purple"></span> Cập nhật phiếu điểm tháng 12 <br><small>3 ngày trước</small></li>
-        </ul>
-    </div>
-    </section>
-    <!-- Nhận xét giáo viên -->
-    <div class="Nhanxetgv">   
-        <h3>Nhận xét từ giáo viên</h3>    
-        <p>Cập nhật phiếu điểm tháng 12</p>
-        <small>3 ngày trước</small>
-    </div>
-    <section class="Update-sk">   
-        <h3>Sự kiện sắp tới</h3>    
-        <p>Các sự kiện và lịch quan trọng</p>
-        <div class="sk-1">
-            <p>Kiểm tra giữa kì môn toán</p><span class="Loai">Kiểm tra</span>
-            <small>Thứ 2, 25/12/2024</small>
-        </div>
-        <div class="sk-2">
-            <p>Họp phụ huynh cuối kỳ</p><span class="Loai">Họp</span>
-            <small>Thứ 6, 29/12/2024</small>
-        </div>
-        <div class="sk-3">
-            <p>Nghỉ tết dương lịch</p><span class="Loai">Nghỉ lễ</span>
-            <small>01/01/2025</small>
-        </div>
-    </section>
-    <!-- Thao tác nhanh -->
-    <section class="Toigian">
-        <h3>Thao tác nhanh</h3>
-        <div class="Luachon">
-            <div class="Luachon-chucnang">
-                <div class="icon green">✔</div>
-                <p>Xem điểm danh</p>
-            </div>
-            <div class="Luachon-chucnang">
-                <div class="icon green">♡</div>
-                <p>Sức khỏe</p>
-            </div>
-            <div class="Luachon-chucnang">
-                <div class="icon green">📘</div>
-                <p>Xem điểm</p>
-            </div>
-            <div class="Luachon-chucnang">
-                <div class="icon blue">💬</div>
-                <p>Liên hệ GV</p>
-            </div>
-        </div>
-    </section>
-    </section>
-    <section id="hoso" class="tab-content">
-    <!-- NỘI DUNG HỒ SƠ -->
-    <section class="khu-vuc-ho-so">
-    <div class="tieu-de-ho-so">
-      <div>
-        <h2>Hồ sơ học sinh</h2>
-        <p>Thông tin chi tiết về học sinh</p>
-      </div>
-      <button class="nut-cap-nhat">👤 Cập nhật thông tin</button>
-    </div>
-
-    <div class="luoi-ho-so">
-
-      <!-- Thông tin cơ bản -->
-        <div class="the-thong-tin">
-            <h3>👤 Thông tin cơ bản</h3>
-            <div class="dong-thong-tin"><span class="nhan">Họ và tên:</span><span class="gia-tri">Nguyễn Văn A</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Mã học sinh:</span><span class="gia-tri the-nho">HS001</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Ngày sinh:</span><span class="gia-tri">15/3/2012</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Lớp:</span><span class="gia-tri the-lop">6A</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Ngày nhập học:</span><span class="gia-tri">1/9/2023</span></div>
+        </section>
+    
+        <section class="info-grid">
+        <div class="info-card">
+            <h3>Thông tin học sinh</h3>
+            <p><strong>Họ tên:</strong> <span>Nguyễn Văn A</span></p>
+            <p><strong>Lớp:</strong> <span class="class-badge">6A</span></p>
+            <p><strong>GVCN:</strong> <span>Nguyễn Thị Lan</span></p>
+            <p><strong>SDT giáo viên:</strong> <span>0123456789</span></p>
         </div>
 
-        <!-- Thông tin liên hệ -->
-        <div class="the-thong-tin">
-            <h3>📞 Thông tin liên hệ</h3>
-            <div class="dong-thong-tin">
-                <span class="nhan">🏠 Địa chỉ:</span>
-                <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
+        <div class="info-card">
+            <h3>Hoạt động gần đây</h3>
+            <ul>
+                <li><span class="dot green"></span> Điểm kiểm tra Toán: 8.5/10 <br><small>Hôm qua</small></li>
+                <li><span class="dot blue"></span> Tin nhắn từ giáo viên về bài tập <br><small>2 ngày trước</small></li>
+                <li><span class="dot purple"></span> Cập nhật phiếu điểm tháng 12 <br><small>3 ngày trước</small></li>
+            </ul>
+        </div>
+        </section>
+        <!-- Nhận xét giáo viên -->
+        <div class="Nhanxetgv">   
+            <h3>Nhận xét từ giáo viên</h3>    
+            <p>Cập nhật phiếu điểm tháng 12</p>
+            <small>3 ngày trước</small>
+        </div>
+        <section class="Update-sk">   
+            <h3>Sự kiện sắp tới</h3>    
+            <p>Các sự kiện và lịch quan trọng</p>
+            <div class="sk-1">
+                <p>Kiểm tra giữa kì môn toán</p><span class="Loai">Kiểm tra</span>
+                <small>Thứ 2, 25/12/2024</small>
             </div>
-            <div class="dong-thong-tin"><span class="nhan">Phụ huynh:</span><span class="gia-tri">Nguyễn Thị Mẹ</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Số điện thoại:</span><span class="gia-tri">0987654321</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Email:</span><span class="gia-tri">parent@email.com</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Liên hệ khẩn cấp:</span><span class="gia-tri">Nguyễn Văn Cha - 0123456789</span></div>
+            <div class="sk-2">
+                <p>Họp phụ huynh cuối kỳ</p><span class="Loai">Họp</span>
+                <small>Thứ 6, 29/12/2024</small>
+            </div>
+            <div class="sk-3">
+                <p>Nghỉ tết dương lịch</p><span class="Loai">Nghỉ lễ</span>
+                <small>01/01/2025</small>
+            </div>
+        </section>
+        <!-- Thao tác nhanh -->
+        <section class="Toigian">
+            <h3>Thao tác nhanh</h3>
+            <div class="Luachon">
+                <div class="Luachon-chucnang">
+                    <div class="icon green">✔</div>
+                    <p>Xem điểm danh</p>
+                </div>
+                <div class="Luachon-chucnang">
+                    <div class="icon green">♡</div>
+                    <p>Sức khỏe</p>
+                </div>
+                <div class="Luachon-chucnang">
+                    <div class="icon green">📘</div>
+                    <p>Xem điểm</p>
+                </div>
+                <div class="Luachon-chucnang">
+                    <div class="icon blue">💬</div>
+                    <p>Liên hệ GV</p>
+                </div>
+            </div>
+        </section>
+        </section>
+        <section id="hoso" class="tab-content">
+        <!-- NỘI DUNG HỒ SƠ -->
+        <section class="khu-vuc-ho-so">
+        <div class="tieu-de-ho-so">
+        <div>
+            <h2>Hồ sơ học sinh</h2>
+            <p>Thông tin chi tiết về học sinh</p>
+        </div>
+        <button class="nut-cap-nhat">👤 Cập nhật thông tin</button>
         </div>
 
-        <!-- Thông tin học tập -->
-        <div class="the-thong-tin">
-            <h3>🎓 Thông tin học tập</h3>
-            <div class="dong-thong-tin"><span class="nhan">Lớp hiện tại:</span><span class="gia-tri the-lop">6A</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Giáo viên chủ nhiệm:</span><span class="gia-tri">Nguyễn Thị Lan</span></div>
-            <div class="dong-thong-tin"><span class="nhan">SĐT giáo viên:</span><span class="gia-tri">0123456789</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Email giáo viên:</span><span class="gia-tri">lan.nguyen@school.edu.vn</span></div>
-        </div>
+        <div class="luoi-ho-so">
 
-        <!-- Thông tin sức khỏe -->
-        <div class="the-thong-tin">
-            <h3>❤️ Thông tin sức khỏe</h3>
-            <div class="dong-thong-tin"><span class="nhan">Nhóm máu:</span><span class="gia-tri the-nho do-dam">A+</span></div>
-            <div class="dong-thong-tin"><span class="nhan">Dị ứng:</span><span class="gia-tri">Không có</span></div>
+        <!-- Thông tin cơ bản -->
+            <div class="the-thong-tin">
+                <h3>👤 Thông tin cơ bản</h3>
+                <div class="dong-thong-tin"><span class="nhan">Họ và tên:</span><span class="gia-tri">Nguyễn Văn A</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Mã học sinh:</span><span class="gia-tri the-nho">HS001</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Ngày sinh:</span><span class="gia-tri">15/3/2012</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Lớp:</span><span class="gia-tri the-lop">6A</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Ngày nhập học:</span><span class="gia-tri">1/9/2023</span></div>
+            </div>
 
-            <div class="hop-luu-y">
-                <strong>Lưu ý:</strong> Thông tin sức khỏe này được cập nhật từ hồ sơ y tế học đường. 
-                Vui lòng thông báo với nhà trường khi có thay đổi.
+            <!-- Thông tin liên hệ -->
+            <div class="the-thong-tin">
+                <h3>📞 Thông tin liên hệ</h3>
+                <div class="dong-thong-tin">
+                    <span class="nhan">🏠 Địa chỉ:</span>
+                    <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
+                </div>
+                <div class="dong-thong-tin"><span class="nhan">Phụ huynh:</span><span class="gia-tri">Nguyễn Thị Mẹ</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Số điện thoại:</span><span class="gia-tri">0987654321</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Email:</span><span class="gia-tri">parent@email.com</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Liên hệ khẩn cấp:</span><span class="gia-tri">Nguyễn Văn Cha - 0123456789</span></div>
+            </div>
+
+            <!-- Thông tin học tập -->
+            <div class="the-thong-tin">
+                <h3>🎓 Thông tin học tập</h3>
+                <div class="dong-thong-tin"><span class="nhan">Lớp hiện tại:</span><span class="gia-tri the-lop">6A</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Giáo viên chủ nhiệm:</span><span class="gia-tri">Nguyễn Thị Lan</span></div>
+                <div class="dong-thong-tin"><span class="nhan">SĐT giáo viên:</span><span class="gia-tri">0123456789</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Email giáo viên:</span><span class="gia-tri">lan.nguyen@school.edu.vn</span></div>
+            </div>
+
+            <!-- Thông tin sức khỏe -->
+            <div class="the-thong-tin">
+                <h3>❤️ Thông tin sức khỏe</h3>
+                <div class="dong-thong-tin"><span class="nhan">Nhóm máu:</span><span class="gia-tri the-nho do-dam">A+</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Dị ứng:</span><span class="gia-tri">Không có</span></div>
+
+                <div class="hop-luu-y">
+                    <strong>Lưu ý:</strong> Thông tin sức khỏe này được cập nhật từ hồ sơ y tế học đường. 
+                    Vui lòng thông báo với nhà trường khi có thay đổi.
+                </div>
             </div>
         </div>
-    </div>
-    </section>
-    </section>
+        <!-- Danh bạ khẩn cấp -->
+        <div class="the-thong-tin danh-ba">
+            <h3>📞 Danh bạ khẩn cấp</h3>
+            <p class="mo-ta">Các số điện thoại liên hệ trong trường hợp khẩn cấp</p>
 
-    <section id="diemdanh" class="tab-content">
-        <h3>Điểm danh</h3>
-        <p>Thông tin ngày đi học, nghỉ học...</p>
-    </section>
+            <div class="luoi-danh-ba">
+                <div class="o-lien-he">
+                    <div class="bieu-tuong xanhduong">📞</div>
+                    <div class="noi-dung">
+                        <strong>Văn phòng nhà trường</strong>
+                        <p>(024) 1234 5678</p>
+                    </div>
+                </div>
 
-    <section id="suckhoe" class="tab-content">
-        <h3>Sức khỏe</h3>
-        <p>Báo cáo sức khỏe định kỳ...</p>
-    </section>
+                <div class="o-lien-he">
+                    <div class="bieu-tuong xanhla">📱</div>
+                    <div class="noi-dung">
+                        <strong>Y tế học đường</strong>
+                        <p>(024) 1234 5679</p>
+                    </div>
+                </div>
 
-    <section id="hoctap" class="tab-content">
-        <h3>Học tập</h3>
-        <p>Kết quả học tập, điểm số, nhận xét...</p>
-    </section>
- <script src="main.js"></script>
-</body>
-</html>
+                <div class="o-lien-he">
+                    <div class="bieu-tuong tim">☎️</div>
+                    <div class="noi-dung">
+                        <strong>Giáo viên chủ nhiệm</strong>
+                        <p>0123456789</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        </section>
+
+        <section id="diemdanh" class="tab-content">
+        <h2>📋 Lịch sử điểm danh</h2>
+        <p>Theo dõi tình hình chuyên cần của con</p>
+
+        <!-- Thống kê tháng -->
+        <div class="thong-ke-thang">
+            <div class="o-thong-ke xanh-nhat">
+            <span class="so">15</span>
+            <p>Tổng ngày học</p>
+            </div>
+            <div class="o-thong-ke xanh">
+            <span class="so">12</span>
+            <p>Có mặt</p>
+            </div>
+            <div class="o-thong-ke do-nhat">
+            <span class="so">1</span>
+            <p>Vắng mặt</p>
+            </div>
+            <div class="o-thong-ke cam-nhat">
+            <span class="so">2</span>
+            <p>Đi muộn</p>
+            </div>
+            <div class="o-thong-ke tim-nhat">
+            <span class="so">80.0%</span>
+            <p>Tỷ lệ có mặt</p>
+            </div>
+        </div>
+
+        <!-- Nội dung chính -->
+        <div class="luoi-diem-danh">
+            <!-- Lịch tháng -->
+            <div class="lich-diem-danh">
+            <h3>Lịch điểm danh</h3>
+            <p>Nhấn vào ngày để xem chi tiết</p>
+            <div class="khung-lich">
+                <table>
+                <thead>
+                    <tr>
+                    <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                    <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+                    <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+                    <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+                    <tr><td>27</td><td>28</td><td class="chon">29</td><td>30</td><td>31</td><td></td><td></td></tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+
+            <!-- Chi tiết điểm danh -->
+            <div class="chi-tiet-diem-danh">
+            <h3>Chi tiết điểm danh</h3>
+            <p>Danh sách điểm danh theo ngày</p>
+
+            <div class="danh-sach-ngay">
+                <div class="dong-ngay">
+                <div class="thong-tin">
+                    <strong>Thứ Hai, 23/12/2024</strong>
+                    <p>Đi học đầy đủ</p>
+                </div>
+                <span class="trang-thai co-mat">Có mặt</span>
+                </div>
+
+                <div class="dong-ngay">
+                <div class="thong-tin">
+                    <strong>Chủ Nhật, 22/12/2024</strong>
+                    <p>Không có lớp</p>
+                </div>
+                <span class="trang-thai nghi">Nghỉ</span>
+                </div>
+
+                <div class="dong-ngay">
+                <div class="thong-tin">
+                    <strong>Thứ Bảy, 21/12/2024</strong>
+                    <p>Đi muộn 10 phút</p>
+                </div>
+                <span class="trang-thai di-muon">Đi muộn</span>
+                </div>
+
+                <div class="dong-ngay">
+                <div class="thong-tin">
+                    <strong>Thứ Sáu, 20/12/2024</strong>
+                    <p>Đi học bình thường</p>
+                </div>
+                <span class="trang-thai co-mat">Có mặt</span>
+                </div>
+
+                <div class="dong-ngay">
+                <div class="thong-tin">
+                    <strong>Thứ Năm, 19/12/2024</strong>
+                    <p>Ốm xin nghỉ</p>
+                </div>
+                <span class="trang-thai vang-mat">Vắng mặt</span>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <section id="suckhoe" class="tab-content">
+            <h3>Sức khỏe</h3>
+            <p>Báo cáo sức khỏe định kỳ...</p>
+        </section>
+
+        <section id="hoctap" class="tab-content">
+            <h3>Học tập</h3>
+            <p>Kết quả học tập, điểm số, nhận xét...</p>
+        </section>
+    <script src="main.js"></script>
+    </body>
+    </html>

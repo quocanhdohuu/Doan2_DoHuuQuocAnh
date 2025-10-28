@@ -466,3 +466,242 @@ body {
     padding: 3px 8px;
     font-size: 13px;
 }
+/* ----- DANH BẠ KHẨN CẤP ----- */
+.danh-ba {
+    margin-top: 20px;
+}
+
+.danh-ba h3 {
+    margin-bottom: 5px;
+}
+
+.danh-ba .mo-ta {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.luoi-danh-ba {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+}
+
+.o-lien-he {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.o-lien-he:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.bieu-tuong {
+    font-size: 20px;
+    margin-right: 12px;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bieu-tuong.xanhduong {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+}
+
+.bieu-tuong.xanhla {
+    background-color: #e6f4ea;
+    color: #0f9d58;
+}
+
+.bieu-tuong.tim {
+    background-color: #f3e8ff;
+    color: #a142f4;
+}
+
+.noi-dung strong {
+    font-size: 15px;
+    display: block;
+}
+
+.noi-dung p {
+    color: #555;
+    font-size: 14px;
+    margin-top: 4px;
+}
+/* ===== PHẦN ĐIỂM DANH ===== */
+#diemdanh {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#diemdanh h2 {
+  margin-bottom: 5px;
+}
+
+#diemdanh p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* --- Thống kê tháng --- */
+.thong-ke-thang {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.o-thong-ke {
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+.o-thong-ke .so {
+  font-size: 24px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.o-thong-ke.xanh-nhat { background: #e8f0fe; color: #1a73e8; }
+.o-thong-ke.xanh { background: #e6f4ea; color: #0f9d58; }
+.o-thong-ke.do-nhat { background: #fdecea; color: #d93025; }
+.o-thong-ke.cam-nhat { background: #fef3e6; color: #f9ab00; }
+.o-thong-ke.tim-nhat { background: #f3e8fd; color: #9334e6; }
+
+/* --- Lưới chính --- */
+.luoi-diem-danh {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* --- Lịch điểm danh --- */
+.lich-diem-danh {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.lich-diem-danh h3 {
+  margin-bottom: 5px;
+}
+
+.khung-lich table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.khung-lich th {
+  color: #666;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.khung-lich td {
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.khung-lich td:hover {
+  background: #f1f3f4;
+}
+
+.khung-lich td.chon {
+  background: #1a73e8;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --- Chi tiết điểm danh --- */
+.chi-tiet-diem-danh {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.chi-tiet-diem-danh h3 {
+  margin-bottom: 5px;
+}
+
+.danh-sach-ngay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.dong-ngay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: background 0.2s ease;
+}
+
+.dong-ngay:hover {
+  background: #f9fafb;
+}
+
+.dong-ngay .thong-tin strong {
+  display: block;
+  font-size: 14px;
+}
+
+.dong-ngay .thong-tin p {
+  font-size: 13px;
+  color: #666;
+}
+
+.trang-thai {
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.trang-thai.co-mat {
+  background: #e6f4ea;
+  color: #0f9d58;
+}
+
+.trang-thai.vang-mat {
+  background: #fdecea;
+  color: #d93025;
+}
+
+.trang-thai.di-muon {
+  background: #fef3e6;
+  color: #f9ab00;
+}
+
+.trang-thai.nghi {
+  background: #f1f3f4;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .luoi-diem-danh {
+    grid-template-columns: 1fr;
+  }
+}
