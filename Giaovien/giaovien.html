@@ -263,6 +263,81 @@
     <div id="SucKhoe" style="display: none;">
         <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/heart.png" alt=""><span></span>Quản lý sức khỏe và dinh dưỡng</h3>
         <span style="color: gray;">Ghi chú tình hình sức khỏe và chế độ ăn học sinh</span>
+        <div id="ChonLopSK">
+            <div id="LopSK">
+                <span>Lớp học:</span>
+                <select id="chonLopHocSK">
+                    <option value="6A">6A - Toán</option>
+                    <option value="6B">6B - Toán</option>
+                    <option value="7A">7A - Toán</option>
+                </select>
+            </div>
+
+            <div id="NgaySK">
+                <span>Ngày điểm danh:</span>
+                <input type="date" id="chonNgaySK">
+            </div>
+            <button id="ThemGhichuSK"><i class="fa-solid fa-plus"></i>Thêm ghi chú</button>
+        </div>
+
+        <div id="TSSucKhoe">
+            <div id="TQSucKhoe" style="background-color: #F5F9FF;">
+                <span style="font-weight: bold;font-size: 60pt;color: blue;">0</span><br>
+                <span style="color: blue;">Có mặt</span>
+            </div>
+            <div id="KhoeManhSK" style="background-color:#D8F6E0;">
+                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span style="color: green;">Có mặt</span>
+            </div>
+            <div id="ChuYSK" style="background-color:#FFE5E5;">
+                <span style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+                <span style="color: red;">Vắng mặt</span>
+            </div>
+            <div id="AnDuSK" style="background-color:#FFEBD2;color: orange;">
+                <span style="font-weight: bold;font-size: 60pt;">0</span><br>
+                <span style="color: orange;">Đi muộn</span>
+            </div>
+        </div>
+
+        <div id="DanhsachSK">
+            <table id="DanhSachSK">
+                <tr>
+                    <th>Học Sinh</th>
+                    <th>Tình trạng sức khỏe</th>
+                    <th>Ghi chú sức khỏe</th>
+                    <th>Chế độ ăn</th>
+                    <th>Ghi chú dinh dưỡng</th>
+                    <th>Bữa ăn</th>
+                    <th>Thao tác</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="HSSK">Nguyễn Văn A</span><br>
+                         <span id="MaHSSK" style="color: gray;">HS001</span>
+                    </td>
+                    <td>
+                        <span id="TinhtrangSK" style="background-color:#D8F6E0 ;color: green;border-radius: 7px;padding: 3px 3px;">Khỏe mạnh</span>
+                    </td>
+                    <td>
+                        <span id="GhichuSK">Ăn tốt, khỏe mạnh</span>
+                    </td>
+                    <td>
+                        <span id="CheDoAnSK" style="background-color:#D8F6E0 ;color: green;border-radius: 7px;padding: 3px 3px;">Bình thường</span>
+                    </td>
+                    <td>
+                        <span id="DinhDuongSK">Đủ chất sơ, đạm, sắt và protein</span>
+                    </td>
+                    <td>
+                        <span id="BuaAnSK" style="background-color:black;color: white;border-radius: 7px;padding: 3px 3px;">Đã Xong</span>
+                    </td>
+                    <td>
+                        <button class="btnGHICHUDD" ><i class="fa-solid fa-edit"></i></button>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
     </div>
 
     <div id="DiemSo" style="display: none;"></div>
