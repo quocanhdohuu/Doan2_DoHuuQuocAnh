@@ -258,7 +258,7 @@
     text-align: center;
     width: 30%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: 100%;
+    height: 80%;
 }
 /*----------------------Danh Sach Diem Danh---------------------*/
 #DanhsachDD{
@@ -359,7 +359,7 @@
     text-align: center;
     width: 23%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: 100%;
+    height: 80%;
 }
 /*----------------------Danh Sach Suc Khoe---------------------*/
 #DanhsachSK{
@@ -376,6 +376,79 @@
     height: 10%;
 }
 #DanhsachSK table td, th{
+    margin-left: 2px;
+    padding: 2px;
+    border-bottom: 2px solid black;
+    width: 15%;
+    justify-content: space-between;
+}
+/*----------------------Điểm số---------------------*/
+/*----------------------headerDS---------------------*/
+#DiemSo{
+    height: 100%;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+/*----------------------BodySK---------------------*/   
+/*----------------------CHon Thong Tin SK---------------------*/
+#ChonLopDS{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    height: 20%;
+}
+#LopDS,#MonhocDS{
+    height: 20%;
+    width: 100%;
+    border-radius: 7px;
+}
+#chonLopHocDS,#chonMonHocDS{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+#btnXuatEDS, #btnPhieuDiemDS, #btnNhapDiemDS{
+    height: 20%;
+    width: 30%;
+    border-radius: 7px;
+    margin-top: 18px;
+    cursor: pointer;
+}
+/*----------------------Thong So DS---------------------*/
+#TSDiemSo{
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+    width: 100%;
+    margin-top: -70px;
+}
+#YeuDS, #TBDS, #KhaDS, #GioiDS,#DTBDS,#TQDS{
+    border-radius: 15px;
+    text-align: center;
+    width: 16%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 80%;
+}
+/*----------------------Danh Sach Điểm Số---------------------*/
+#DanhsachDS{
+    margin-top: 20px;
+    height: 50%;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+}
+#DanhsachDS table{
+    padding: 2px;
+    width: 100%;
+    height: 10%;
+}
+#DanhsachDS table td, th{
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;

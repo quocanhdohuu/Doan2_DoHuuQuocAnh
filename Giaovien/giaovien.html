@@ -17,8 +17,8 @@
             </div>
         </div>
         <div id="Thoat">
-            <button id="btnLogout">
-                <img src="/img/logout (1).png" alt="">
+            <button id="btnLogout" style="background-color: white;cursor: pointer;">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 Đăng xuất
             </button>
         </div>
@@ -259,7 +259,7 @@
         </div>
         <button id="btnLuuDiemDanh"> <i class="fa-solid fa-floppy-disk"></i><span>Lưu điểm danh</span></button>
     </div>
-
+<!-----------------SỨC KHỎE------------------->
     <div id="SucKhoe" style="display: none;">
         <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/heart.png" alt=""><span></span>Quản lý sức khỏe và dinh dưỡng</h3>
         <span style="color: gray;">Ghi chú tình hình sức khỏe và chế độ ăn học sinh</span>
@@ -267,9 +267,9 @@
             <div id="LopSK">
                 <span>Lớp học:</span>
                 <select id="chonLopHocSK">
-                    <option value="6A">6A - Toán</option>
-                    <option value="6B">6B - Toán</option>
-                    <option value="7A">7A - Toán</option>
+                    <option value="6A">6A</option>
+                    <option value="6B">6B </option>
+                    <option value="7A">7A</option>
                 </select>
             </div>
 
@@ -340,7 +340,101 @@
     </div>
     </div>
 
-    <div id="DiemSo" style="display: none;"></div>
+    <div id="DiemSo" style="display: none;">
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/open-book.png" alt=""><span></span>Quản lý điểm số</h3>
+        <span style="color: gray;">Nhập điểm, nhận xét và tạo phiếu điểm học sinh</span>
+
+        <div id="ChonLopDS">
+            <div id="LopDS">
+                <span>Lớp học:</span>
+                <select id="chonLopHocDS">
+                    <option value="6A">6A </option>
+                    <option value="6B">6B </option>
+                    <option value="7A">7A </option>
+                </select>
+            </div>
+
+            <div id="MonhocDS">
+                <span>Môn học:</span>
+                <select id="chonMonHocDS">
+                    <option value="Toan">Toán</option>
+                    <option value="Van">Văn</option>
+                    <option value="Anh">Anh</option>
+                    <option value="Ly">Lý</option>
+                    <option value="Hoa">Hóa</option>
+                    <option value="Sinh">Sinh</option>
+                    <option value="Su">Sử</option>
+                    <option value="Dia">Địa</option>
+                </select>
+            </div>
+
+            <button id="btnNhapDiemDS" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Nhập điểm</button>
+            <button id="btnPhieuDiemDS" style="background-color: white;color: black;"><i class="fa-solid fa-file-lines"></i>Phiếu điểm</button>
+            <button id="btnXuatEDS" style="background-color: white;color: black;"><i class="fa-solid fa-download"></i>Xuất Excel</button>
+        </div>
+
+         <div id="TSDiemSo">
+            <div id="TQDS" style="background-color: #F5F9FF;">
+                <span style="font-weight: bold;font-size: 60pt;color: blue;">0</span><br>
+                <span style="color: blue;">Tổng điểm</span>
+            </div>
+            <div id="DTBDS" style="background-color:#D8F6E0;">
+                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span style="color: green;">ĐTB</span>
+            </div>
+            <div id="GioiDS" style="background-color:#D8F6E0;">
+                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span style="color: green;">Giỏi (≥8)</span>
+            </div>
+            <div id="KhaDS" style="background-color: #F5F9FF;">
+                <span style="font-weight: bold;font-size: 60pt;color: blue;">0</span><br>
+                <span style="color: blue;">Khá (6.5-8)</span>
+            </div>
+            <div id="TBDS" style="background-color:#FFEBD2;">
+                <span style="font-weight: bold;font-size: 60pt;color: orange;">0</span><br>
+                <span style="color: orange;">TB (5-6.5)</span>
+            </div>
+            <div id="YeuDS" style="background-color:#FFEBD2;">
+               <span style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+                <span style="color: red;">Yếu (0-4.9)</span>
+            </div>
+        </div>
+
+        <div id="DanhsachDS">
+            <table id="DanhSachDS">
+                <tr>
+                    <th>Học Sinh</th>
+                    <th>Loại điểm</th>
+                    <th>Điểm số</th>
+                    <th>Nhận xét</th>
+                    <th>Ngày</th>
+                    <th>Thao tác</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="HSDS">Nguyễn Văn A</span><br>
+                        <span id="MaHSDS" style="color: gray;">HS001</span>
+                    </td>
+                    <td>
+                        <span id="LoaiDiemDS" style="background-color:#D8F6E0 ;color: green;border-radius: 7px;padding: 3px 3px;">15 phút</span>
+                    </td>
+                    <td>
+                        <span id="DiemDS" style="color: green;">8.5/10</span>
+                    </td>
+                    <td>
+                        <span id="NhanXetDS">Làm bài tốt</span>
+                    </td>
+                    <td>
+                        <span id="NgayDS">20/12/2024</span>
+                    </td>
+                    <td>
+                        <button class="btnSuaDS" ><i class="fa-solid fa-edit"></i></button>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
 
     <div id="LienLac" style="display: none;"></div>
 
