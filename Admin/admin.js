@@ -35,3 +35,25 @@ overlay.addEventListener("click", () => {
   modal.style.display = "none";
   overlay.style.display = "none";
 });
+
+// Xử lý hiện form cập nhật thông tin học sinh
+const modalUpdate = document.getElementById("studentModalUpdate");
+const closeBtnUpdate = document.getElementById("closeBtnUpdate");
+const editButtons = document.querySelectorAll(".edit");
+
+editButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    modalUpdate.style.display = "block"; // Hiện form
+    overlay.style.display = "block";
+  });
+});
+
+closeBtnUpdate.addEventListener("click", () => {
+  modalUpdate.style.display = "none";
+  overlay.style.display = "none";
+});
+
+overlay.addEventListener("click", () => {
+  modalUpdate.style.display = "none";
+  overlay.style.display = "none";
+});

@@ -1094,3 +1094,18 @@ select {
 .submit-btn:hover {
   background-color: #222;
 }
+
+.submitUpdate-btn {
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submitUpdate-btn:hover {
+  background-color: #222;
+}
