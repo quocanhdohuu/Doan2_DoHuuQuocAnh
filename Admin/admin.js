@@ -62,21 +62,21 @@ overlay.addEventListener("click", () => {
 const addClassBtn = document.querySelector(".addclass-btn");
 const classModal = document.getElementById("classModal");
 const closeClassBtn = document.getElementById("closeClassBtn");
-const overplayclass = document.getElementById("overplayclass");
+const overlayclass = document.getElementById("overlayclass");
 
 addClassBtn.addEventListener("click", () => {
   classModal.style.display = "block";
-  overplayclass.style.display = "block";
+  overlayclass.style.display = "block";
 });
 
 closeClassBtn.addEventListener("click", () => {
   classModal.style.display = "none";
-  overplayclass.style.display = "none";
+  overlayclass.style.display = "none";
 });
 
-overplayclass.addEventListener("click", () => {
+overlayclass.addEventListener("click", () => {
   classModal.style.display = "none";
-  overplayclass.style.display = "none";
+  overlayclass.style.display = "none";
 });
 
 // Xử lý hiện form cập nhật thông tin lớp học
@@ -87,16 +87,58 @@ const editclassBtn = document.querySelectorAll(".editClass");
 editclassBtn.forEach((button) => {
   button.addEventListener("click", () => {
     classModalUpdate.style.display = "block";
-    overplayclass.style.display = "block";
+    overlayclass.style.display = "block";
   });
 });
 
 closeClassBtnUpdate.addEventListener("click", () => {
   classModalUpdate.style.display = "none";
-  overplayclass.style.display = "none";
+  overlayclass.style.display = "none";
 });
 
-overplayclass.addEventListener("click", () => {
+overlayclass.addEventListener("click", () => {
   classModalUpdate.style.display = "none";
-  overplayclass.style.display = "none";
+  overlayclass.style.display = "none";
+});
+
+// Xử lý hiện form thêm giáo viên
+const addTeacherBtn = document.querySelector(".addteacher-btn");
+const teacherModal = document.getElementById("teacherModal");
+const closeTeacherBtn = document.getElementById("closeTeacherBtn");
+const overlayteacher = document.getElementById("overlayteacher");
+
+addTeacherBtn.addEventListener("click", () => {
+  teacherModal.style.display = "block";
+  overlayteacher.style.display = "block";
+});
+
+closeTeacherBtn.addEventListener("click", () => {
+  teacherModal.style.display = "none";
+  overlayteacher.style.display = "none";
+});
+
+overlayteacher.addEventListener("click", () => {
+  teacherModal.style.display = "none";
+  overlayteacher.style.display = "none";
+});
+// Xử lý hiện form sửa thông tin giáo viên
+const teacherModalUpdate = document.getElementById("teacherModalUpdate");
+const closeTeacherBtnUpdate = document.getElementById("closeTeacherBtnUpdate");
+const editteacherBtn = document.querySelectorAll(".editTeacher");
+
+editteacherBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    teacherModalUpdate.style.display = "block";
+    overlayteacher.style.display = "block";
+  });
+});
+
+closeTeacherBtnUpdate.addEventListener("click", () => {
+  teacherModalUpdate.style.display = "none";
+  overlayteacher.style.display = "none";
+});
+
+overlayteacher.addEventListener("click", () => {
+  teacherModalUpdate.style.display = "none";
+  overlayteacher.style.display = "none";
 });

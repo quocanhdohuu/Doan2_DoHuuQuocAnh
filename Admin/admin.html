@@ -367,7 +367,7 @@
                 </tbody>
             </table>
         </section>
-        <div class="overplayclass" id="overplayclass"></div>
+        <div class="overlayclass" id="overlayclass"></div>
         <div class="modal" id="classModal">
             <div class="modal-header">
                 <h2>Tạo lớp mới</h2>
@@ -472,6 +472,121 @@
                     <button class="addteacher-btn"><i class="fa-solid fa-plus"></i>Thêm giáo viên</button>
                 </div>
             </div>
+            <div id="overlayteacher" class="overlayteacher"></div>
+
+            <!-- Modal thêm giáo viên -->
+            <div class="modal" id="teacherModal">
+                <div class="modal-header">
+                    <h2>Thêm giáo viên mới</h2>
+                    <span class="close-btn" id="closeTeacherBtn">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin giáo viên và phân công lớp.</p>
+
+                <form class="teacher-form">
+                    <div class="form-group">
+                        <label>Họ tên</label>
+                        <input type="text" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Môn dạy</label>
+                        <select>
+                            <option>Chọn môn dạy</option>
+                            <option>Toán</option>
+                            <option>Ngữ văn</option>
+                            <option>Tiếng Anh</option>
+                            <option>Lịch sử</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Lớp dạy</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox"> 1A</label>
+                            <label><input type="checkbox"> 1B</label>
+                            <label><input type="checkbox"> 1C</label>
+                            <label><input type="checkbox"> 1D</label>
+                            <label><input type="checkbox"> 2A</label>
+                            <label><input type="checkbox"> 2B</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chủ nhiệm</label>
+                        <input id="checkbox-chunhiem" type="checkbox">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitTeacher-btn">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal" id="teacherModalUpdate">
+                <div class="modal-header">
+                    <h2>Sửa thông tin giáo viên</h2>
+                    <span class="close-btn" id="closeTeacherBtnUpdate">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin giáo viên và phân công lớp.</p>
+
+                <form class="teacher-form">
+                    <div class="form-group">
+                        <label>Họ tên</label>
+                        <input type="text" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Môn dạy</label>
+                        <select>
+                            <option>Chọn môn dạy</option>
+                            <option>Toán</option>
+                            <option>Ngữ văn</option>
+                            <option>Tiếng Anh</option>
+                            <option>Lịch sử</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Lớp dạy</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox"> 1A</label>
+                            <label><input type="checkbox"> 1B</label>
+                            <label><input type="checkbox"> 1C</label>
+                            <label><input type="checkbox"> 1D</label>
+                            <label><input type="checkbox"> 2A</label>
+                            <label><input type="checkbox"> 2B</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Chủ nhiệm</label>
+                        <input id="checkbox-chunhiem" type="checkbox">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitTeacherUpdate-btn">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
             <table class="class-table">
                 <thead>
                     <tr>
@@ -495,7 +610,7 @@
                         <td><span class="status activeclass">1A</span></td>
                         <td><span class="status activeclass">Hoạt động</span></td>
                         <td class="actions">
-                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
@@ -511,7 +626,7 @@
                         <td><span class="status activeclass">1B</span></td>
                         <td><span class="status activeclass">Hoạt động</span></td>
                         <td class="actions">
-                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
@@ -524,7 +639,7 @@
                         <td><span class="status activeclass">2A</span></td>
                         <td><span class="status activeclass">Hoạt động</span></td>
                         <td class="actions">
-                            <button class="edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
