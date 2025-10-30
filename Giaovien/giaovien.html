@@ -435,8 +435,146 @@
             </table>
         </div>
     </div>
+<!-----------------Liên lạc------------------->
+    <div id="LienLac" style="display: none;">
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
+        <span style="color: gray;">Gửi tin nhắn và thông báo tới phụ huynh học sinh</span>
+        </h3>
+        <!-----------------Menu Liên lạc------------------->
+        <div id="MenuLL">
+            <button id="btnHopThuDenLL" style="background-color: white;"><i class="fa-solid fa-inbox"></i>Hộp thư đến</button>
+            <button id="btnTinNhanDiLL" ><i class="fa-solid fa-paper-plane"></i>Tin nhắn đã gửi</button>
+            <button id="btnDanhBaLL" ><i class="fa-solid fa-pen-to-square"></i>Danh bạ</button>
+        </div>
+        <!-----------------Chọn đối tượng------------------->
+        <div id="ChonLopLL">
+            <div id="LopLL">
+                <span>Lớp học:</span>
+                <select id="chonLopHocLL">
+                    <option value="6A">6A </option>
+                    <option value="6B">6B </option>
+                    <option value="7A">7A </option>
+                </select>
+            </div>
 
-    <div id="LienLac" style="display: none;"></div>
+            <div id="TimKiemLL">
+                <span>Tìm kiếm:</span>
+                <div id="nhapTimKiemLL" style="border: 1px solid; border-radius: 10px;display: flex;align-items: center;padding: 0;">
+                    <i class="fa fa-search"></i>
+                    <input type="text"  placeholder="Nhập tên học sinh hoặc phụ huynh" style="margin: 0; width: 100%;width: 100%;;border: none;">
+                </div>
+                
+            </div>
+
+            <button id="btnSoanTinLL" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Soạn tin</button>
+        </div>
+
+         <!-----------------Hộp thư đến------------------->
+         <div id="HopThuDenLL" style="display: block;">
+            <span style="font-size: large;font-weight: bold;">Tin nhắn đến</span>
+
+            <div class="TinDenLL" id="TNdenLL.1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+                <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                    <div> Nguyễn Thị B 
+                      <span style="background-color: black;padding: 3px;color: white;border-radius: 10px;">Mới</span> 
+                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Nguyễn văn A</span>
+                    </div> 
+                    <button style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
+                </span>
+                <p style="font-size: 13pt;font-weight: bold;">Hỏi về bài tập về nhà</p>
+                <p style="font-size: 13pt;">Thầy ơi, con em hôm nay về không có ghi bài tập gì. Xin thầy cho biết bài tập môn Toán hôm nay ạ.</p>
+                <span style="font-size: 13pt;">08:30:00 23/12/2024</span>
+            </div>
+
+            <div class="TinDenLL" id="TNdenLL.2" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+                <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                    <div>Trần Văn D
+                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Trần Thị C</span>
+                    </div> 
+                    <button style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
+                </span>
+                <p style="font-size: 13pt;font-weight: bold;">Xin phép nghỉ học</p>
+                <p style="font-size: 13pt;">Thầy ơi, con em bị sốt nên hôm nay xin phép nghỉ học. Em sẽ học bù vào ngày mai ạ.</p>
+                <span style="font-size: 13pt;">07:15:00 23/12/2024</span>
+            </div>
+         </div>
+
+          <!-----------------Hộp thư gửi------------------->
+         <div id="DaGuiLL" style="display: none;">
+            <span style="font-size: large;font-weight: bold;">Tin nhắn đã gửi</span>
+
+            <div class="TinGuiLL" id="TNGuiLL.1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+                <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                    <div> Gửi đến: Lê Thị F
+                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Lê Văn E</span>
+                    </div> 
+                </span>
+                <p style="font-size: 13pt;font-weight: bold;">Thông báo kết quả kiểm tra</p>
+                <p style="font-size: 13pt;">Chào phụ huynh, con em đã làm bài kiểm tra Toán rất tốt, đạt điểm 9.0. Mong phụ huynh tiếp tục động viên con.</p>
+                <span style="font-size: 13pt;">16:45:00 22/12/2024</span>
+            </div>
+         </div>
+
+          <!-----------------Danh bạ------------------->
+         <div id="DanhBaLL" style="display: none;">
+            <div id="DabaLL" style="display: block;">
+            <span style="font-size: large;font-weight: bold;">Tin nhắn đến</span>
+
+            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+                <div>
+                    <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
+                    <div> Nguyễn Thị B
+                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
+                    </div> 
+                    </span>
+                    <p style="font-size: 13pt;">Học sinh: Nguyễn Văn A</p>
+                    <span style="font-size: 13pt;"><i class="fa-solid fa-phone"></i>0123456789
+                     <i class="fa-solid fa-envelope"></i> nguyenthib@email.com</span>
+                </div>
+                <div>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;">Chuyên cần</button>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"></i>Điểm số</button>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+            <div class="DBaLL" id="DanhBaLL.2" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+                <div>
+                    <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
+                    <div> Nguyễn Thị B
+                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
+                    </div> 
+                    </span>
+                    <p style="font-size: 13pt;">Học sinh: Nguyễn Văn A</p>
+                    <span style="font-size: 13pt;"><i class="fa-solid fa-phone"></i>0123456789
+                     <i class="fa-solid fa-envelope"></i> nguyenthib@email.com</span>
+                </div>
+                <div>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;">Chuyên cần</button>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"></i>Điểm số</button>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div> 
+            </div>
+            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+                <div>
+                    <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
+                    <div> Nguyễn Thị B
+                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
+                    </div> 
+                    </span>
+                    <p style="font-size: 13pt;">Học sinh: Nguyễn Văn A</p>
+                    <span style="font-size: 13pt;"><i class="fa-solid fa-phone"></i>0123456789
+                     <i class="fa-solid fa-envelope"></i> nguyenthib@email.com</span>
+                </div>
+                <div>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;">Chuyên cần</button>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"></i>Điểm số</button>
+                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+
+         </div>
+    </div>
 
     <script src="jvGV.js"></script>
 </body>

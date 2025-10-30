@@ -280,6 +280,7 @@
     border-bottom: 2px solid black;
     width: 15%;
     justify-content: space-between;
+    text-align: center;
 }
 .btnGHICHUDD{
     background-color: transparent;
@@ -381,6 +382,7 @@
     border-bottom: 2px solid black;
     width: 15%;
     justify-content: space-between;
+    text-align: center;
 }
 /*----------------------Điểm số---------------------*/
 /*----------------------headerDS---------------------*/
@@ -454,4 +456,68 @@
     border-bottom: 2px solid black;
     width: 15%;
     justify-content: space-between;
+    text-align: center;
+}
+/*----------------------Liên lạc---------------------*/
+/*----------------------headerLL---------------------*/
+#LienLac{
+    height: 100%;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+/*----------------------BodyLL---------------------*/   
+/*----------------------Menu LL---------------------*/
+#MenuLL{
+    background-color: rgb(213, 211, 211);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    height: 5%;
+    margin-top: 20px;
+    padding: 3px 3px;
+}
+#MenuLL button{
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 33%;
+    height: 95%;
+}
+/*----------------------CHon Thong Tin Liên lạc---------------------*/
+#ChonLopLL{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    height: 5%;
+}
+#LopLL,#TimKiemLL{
+    height: 90%;
+    width: 100%;
+    border-radius: 7px;
+}
+#chonLopHocLL,#nhapTimKiemLL{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+#btnSoanTinLL{
+    height: 90%;
+    width: 30%;
+    border-radius: 7px;
+    margin-top: 18px;
+    cursor: pointer;
+}
+/*----------------------Hộp thư đến Liên lạc---------------------*/
+#HopThuDenLL, #DaGuiLL, #DanhBaLL{
+    height: 50%;
+    width: 100%;
+    margin-top: 40px;
 }

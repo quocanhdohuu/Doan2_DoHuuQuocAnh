@@ -62,4 +62,34 @@ btnSucKhoe.addEventListener('click',function(){
 btnDangXuat.addEventListener('click',function(){
     window.location.href = `/index.html`;
 });
-//---------------------------------Điểm danh------------------------------------
+//---------------------------------Liên lạc------------------------------------
+const btnHopThuDenLL = document.querySelector('#btnHopThuDenLL');
+const btnTinnhandiLL=document.querySelector('#btnTinNhanDiLL');
+const btnDanhBaLL=document.querySelector('#btnDanhBaLL',);
+//HAm an menuLL
+function anLL(nutbam){
+    btnHopThuDenLL.style.backgroundColor='transparent';
+    btnTinnhandiLL.style.backgroundColor='transparent';
+    btnDanhBaLL.style.backgroundColor='transparent';
+    nutbam.style.backgroundColor='white';
+};
+function doiLL(trang1,trang2,trang3){
+    document.querySelector(trang1).style.display='block';
+    document.querySelector(trang2).style.display='none';
+    document.querySelector(trang3).style.display='none';
+    document.querySelector(trang4).style.display='none';
+    document.querySelector(trang5).style.display='none';
+
+}
+btnHopThuDenLL.addEventListener('click',function(){
+    anLL(btnHopThuDenLL);
+    doiLL('#HopThuDenLL','#DaGuiLL','#DanhBaLL');
+});
+btnTinnhandiLL.addEventListener('click',function(){
+    anLL(btnTinnhandiLL); 
+    doiLL('#DaGuiLL','#HopThuDenLL','#DanhBaLL');
+});
+btnDanhBaLL.addEventListener('click',function(){
+    anLL(btnDanhBaLL);
+    doiLL('#DanhBaLL','#HopThuDenLL','#DaGuiLL');
+});
