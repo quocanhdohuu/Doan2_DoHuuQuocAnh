@@ -1109,3 +1109,46 @@ select {
 .submitUpdate-btn:hover {
   background-color: #222;
 }
+
+.overplayclass {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index: 10;
+}
+
+.class-form {
+  margin-top: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.submitClass-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.submitClass-btn:hover {
+  background: #333;
+}
+
+.submitClassUpdate-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.submitClassUpdate-btn:hover {
+  background: #333;
+}
