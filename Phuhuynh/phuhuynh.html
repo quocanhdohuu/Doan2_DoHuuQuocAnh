@@ -213,105 +213,73 @@
         </section>
 
         <section id="diemdanh" class="tab-content">
-        <h2>📋 Lịch sử điểm danh</h2>
-        <p>Theo dõi tình hình chuyên cần của con</p>
-
-        <!-- Thống kê tháng -->
-        <div class="thong-ke-thang">
-            <div class="o-thong-ke xanh-nhat">
-            <span class="so">15</span>
-            <p>Tổng ngày học</p>
-            </div>
-            <div class="o-thong-ke xanh">
-            <span class="so">12</span>
-            <p>Có mặt</p>
-            </div>
-            <div class="o-thong-ke do-nhat">
-            <span class="so">1</span>
-            <p>Vắng mặt</p>
-            </div>
-            <div class="o-thong-ke cam-nhat">
-            <span class="so">2</span>
-            <p>Đi muộn</p>
-            </div>
-            <div class="o-thong-ke tim-nhat">
-            <span class="so">80.0%</span>
-            <p>Tỷ lệ có mặt</p>
-            </div>
-        </div>
-
-        <!-- Nội dung chính -->
-        <div class="luoi-diem-danh">
-            <!-- Lịch tháng -->
-            <div class="lich-diem-danh">
-            <h3>Lịch điểm danh</h3>
-            <p>Nhấn vào ngày để xem chi tiết</p>
-            <div class="khung-lich">
-                <table>
-                <thead>
-                    <tr>
-                    <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-                    <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-                    <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
-                    <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
-                    <tr><td>27</td><td>28</td><td class="chon">29</td><td>30</td><td>31</td><td></td><td></td></tr>
-                </tbody>
-                </table>
-            </div>
-            </div>
-
-            <!-- Chi tiết điểm danh -->
-            <div class="chi-tiet-diem-danh">
-            <h3>Chi tiết điểm danh</h3>
-            <p>Danh sách điểm danh theo ngày</p>
-
-            <div class="danh-sach-ngay">
-                <div class="dong-ngay">
-                <div class="thong-tin">
-                    <strong>Thứ Hai, 23/12/2024</strong>
-                    <p>Đi học đầy đủ</p>
+        <div class="khung-diem-danh">
+                <div class="cot-trai">
+                <div class="hop-lich">
+                    <h3>Lịch điểm danh</h3>
+                    <p>Nhấn vào ngày để xem chi tiết</p>
+                    <div class="lich">
+                    <div class="tieu-de-lich">
+                        <button>&lt;</button>
+                        <span>October 2025</span>
+                        <button>&gt;</button>
+                    </div>
+                    <div class="ngay">
+                        <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                        <div class="mo">28</div><div>29</div><div>30</div><div>1</div><div>2</div><div>3</div><div>4</div>
+                        <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div>
+                        <div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+                        <div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+                        <div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div class="chon">31</div><div>1</div>
+                    </div>
+                    </div>
                 </div>
-                <span class="trang-thai co-mat">Có mặt</span>
                 </div>
 
-                <div class="dong-ngay">
-                <div class="thong-tin">
-                    <strong>Chủ Nhật, 22/12/2024</strong>
-                    <p>Không có lớp</p>
-                </div>
-                <span class="trang-thai nghi">Nghỉ</span>
+                <div class="cot-phai">
+                <div class="hop-chi-tiet">
+                    <h3>Chi tiết điểm danh</h3>
+                    <p>Danh sách điểm danh theo ngày</p>
+                    <div class="ds-ngay">
+                    <div class="muc">
+                        <span>✅ Thứ Hai, 23/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>✅ Chủ Nhật, 22/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>⚠️ Thứ Bảy, 21/12/2024</span>
+                        <div class="ghi-chu">Đến muộn 10 phút do kẹt xe</div>
+                        <span class="trang-thai di-muon">Đi muộn</span>
+                    </div>
+                    <div class="muc">
+                        <span>✅ Thứ Sáu, 20/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>❌ Thứ Năm, 19/12/2024</span>
+                        <div class="ghi-chu">Ốm sốt</div>
+                        <span class="trang-thai vang-mat">Vắng mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>✅ Thứ Tư, 18/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    </div>
                 </div>
 
-                <div class="dong-ngay">
-                <div class="thong-tin">
-                    <strong>Thứ Bảy, 21/12/2024</strong>
-                    <p>Đi muộn 10 phút</p>
+                <div class="hop-chi-tiet-ngay">
+                    <h4>📅 Chi tiết ngày 31/10/2025</h4>
+                    <div class="no-data">
+                    <div class="icon">📆</div>
+                    <p>Không có dữ liệu điểm danh cho ngày này</p>
+                    <span>Có thể là ngày nghỉ hoặc chưa được cập nhật</span>
+                    </div>
                 </div>
-                <span class="trang-thai di-muon">Đi muộn</span>
-                </div>
-
-                <div class="dong-ngay">
-                <div class="thong-tin">
-                    <strong>Thứ Sáu, 20/12/2024</strong>
-                    <p>Đi học bình thường</p>
-                </div>
-                <span class="trang-thai co-mat">Có mặt</span>
-                </div>
-
-                <div class="dong-ngay">
-                <div class="thong-tin">
-                    <strong>Thứ Năm, 19/12/2024</strong>
-                    <p>Ốm xin nghỉ</p>
-                </div>
-                <span class="trang-thai vang-mat">Vắng mặt</span>
                 </div>
             </div>
-            </div>
-        </div>
         </section>
 
         <section id="suckhoe" class="tab-content">

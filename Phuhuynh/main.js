@@ -29,3 +29,11 @@ buttons.forEach(button => {
     }
   });
 });
+// phần điểm danh
+document.querySelectorAll(".ngay div").forEach(ngay => {
+  ngay.addEventListener("click", () => {
+    document.querySelectorAll(".ngay div").forEach(n => n.classList.remove("chon"));
+    ngay.classList.add("chon");
+    document.querySelector(".hop-chi-tiet-ngay h4").innerHTML = `📅 Chi tiết ngày ${ngay.innerText}/10/2025`;
+  });
+});
