@@ -142,3 +142,45 @@ overlayteacher.addEventListener("click", () => {
   teacherModalUpdate.style.display = "none";
   overlayteacher.style.display = "none";
 });
+
+// Xử lý hiện form thêm sự kiện
+const addEventBtn = document.querySelector(".addevent-btn");
+const eventModal = document.getElementById("eventModal");
+const closeEventBtn = document.getElementById("closeEventBtn");
+const overlayevent = document.getElementById("overlayevent");
+
+addEventBtn.addEventListener("click", () => {
+  eventModal.style.display = "block";
+  overlayevent.style.display = "block";
+});
+closeEventBtn.addEventListener("click", () => {
+  eventModal.style.display = "none";
+  overlayevent.style.display = "none";
+});
+
+overlayevent.addEventListener("click", () => {
+  eventModal.style.display = "none";
+  overlayevent.style.display = "none";
+});
+
+// Xử lý hiện form cập nhật thông tin sự kiện
+const eventModalUpdate = document.getElementById("eventModalUpdate");
+const closeEventBtnUpdate = document.getElementById("closeEventBtnUpdate");
+const editEventBtn = document.querySelectorAll(".editEvent");
+
+editEventBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    eventModalUpdate.style.display = "block";
+    overlayevent.style.display = "block";
+  });
+});
+
+closeEventBtnUpdate.addEventListener("click", () => {
+  eventModalUpdate.style.display = "none";
+  overlayevent.style.display = "none";
+});
+
+overlayevent.addEventListener("click", () => {
+  eventModalUpdate.style.display = "none";
+  overlayevent.style.display = "none";
+});

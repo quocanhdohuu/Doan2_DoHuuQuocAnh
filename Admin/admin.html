@@ -658,7 +658,85 @@
                     <button class="addevent-btn"><i class="fa-solid fa-plus"></i>Thêm sự kiện</button>
                 </div>
             </div>
+            <div id="overlayevent" class="overlayevent"></div>
+            <div class="modal" id="eventModal">
+                <div class="modal-header">
+                    <h2>Thêm sự kiện mới</h2>
+                    <span class="close-btn" id="closeEventBtn">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
 
+                <form class="event-form">
+                    <div class="form-group">
+                        <label for="event-name">Tên</label>
+                        <input type="text" id="event-name" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Mô tả</label>
+                        <textarea id="event-description" rows="3" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Ngày</label>
+                        <input type="text" id="event-date" placeholder="dd/mm/yyyy">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-time">Giờ</label>
+                        <input type="text" id="event-time" placeholder="--:-- --">
+                    </div>
+                    <div class="form-group">
+                        <label>Loại</label>
+                        <div class="event-type">
+                            <div><input type="radio" name="type"> <span>Học thuật</span></div>
+                            <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
+                            <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
+                            <div><input type="radio" name="type"> <span>Họp</span></div>
+                            <div><input type="radio" name="type"> <span>Khác</span></div>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="addEvent-btn">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal" id="eventModalUpdate">
+                <div class="modal-header">
+                    <h2>Sửa sự kiện</h2>
+                    <span class="close-btn" id="closeEventBtnUpdate">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
+
+                <form class="event-form">
+                    <div class="form-group">
+                        <label for="event-name">Tên</label>
+                        <input type="text" id="event-name" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Mô tả</label>
+                        <textarea id="event-description" rows="3" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Ngày</label>
+                        <input type="text" id="event-date" placeholder="dd/mm/yyyy">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-time">Giờ</label>
+                        <input type="text" id="event-time" placeholder="--:-- --">
+                    </div>
+                    <div class="form-group">
+                        <label>Loại</label>
+                        <div class="event-type">
+                            <div><input type="radio" name="type"> <span>Học thuật</span></div>
+                            <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
+                            <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
+                            <div><input type="radio" name="type"> <span>Họp</span></div>
+                            <div><input type="radio" name="type"> <span>Khác</span></div>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="addEventUpdate-btn">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
             <div class="event-list">
 
                 <!-- SỰ KIỆN 1 -->
@@ -678,7 +756,7 @@
                         </div>
                     </div>
                     <div class="eventlist-actions">
-                        <button><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button><i class="fa-regular fa-trash-can"></i></button>
                     </div>
                 </div>
@@ -700,7 +778,7 @@
                         </div>
                     </div>
                     <div class="eventlist-actions">
-                        <button><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button><i class="fa-regular fa-trash-can"></i></button>
                     </div>
                 </div>
@@ -722,11 +800,10 @@
                         </div>
                     </div>
                     <div class="eventlist-actions">
-                        <button><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
                         <button><i class="fa-regular fa-trash-can"></i></button>
                     </div>
                 </div>
-
             </div>
         </section>
         <section id="report" class="page">
