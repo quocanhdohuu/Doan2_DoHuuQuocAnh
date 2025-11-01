@@ -218,7 +218,7 @@
 /*----------------------DIEM DANH---------------------*/
 /*----------------------headerDD---------------------*/
 #DieDanh{
-    height: 100%;
+    overflow: auto;
     width: 97%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -226,6 +226,7 @@
     padding-left: 20px;
     padding-top: 10px;
     padding-right: 20px;
+    padding-bottom: 20px;
 }
 /*----------------------BODyDD---------------------*/
 /*----------------------CHon Thong Tin DD---------------------*/
@@ -263,7 +264,7 @@
 /*----------------------Danh Sach Diem Danh---------------------*/
 #DanhsachDD{
     margin-top: 20px;
-    height: 50%;
+    overflow: auto;
     width: 100%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -311,7 +312,7 @@
 /*----------------------Suc Khoe---------------------*/
 /*----------------------headerSK---------------------*/
 #SucKhoe{
-    height: 100%;
+    overflow: auto;
     width: 97%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -319,6 +320,7 @@
     padding-left: 20px;
     padding-top: 10px;
     padding-right: 20px;
+    padding-bottom: 20px;
 }
 /*----------------------BodySK---------------------*/   
 /*----------------------CHon Thong Tin SK---------------------*/
@@ -365,7 +367,7 @@
 /*----------------------Danh Sach Suc Khoe---------------------*/
 #DanhsachSK{
     margin-top: 20px;
-    height: 50%;
+    overflow: auto;
     width: 100%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -384,10 +386,102 @@
     justify-content: space-between;
     text-align: center;
 }
+.TinhtrangSK{
+    background-color:#D8F6E0 ;color: green;border-radius: 7px;padding: 3px 3px;
+}
+.TinhtrangSK2{
+    background-color:#FFEBD2  ;color: orange;border-radius: 7px;padding: 3px 3px;
+}
+.TinhtrangSK3{
+    background-color:#FFE5E5  ;color: red;border-radius: 7px;padding: 3px 3px;
+}
+.TinhtrangSK4{
+    background-color:#F5F9FF ;color: blue;border-radius: 7px;padding: 3px 3px;
+}
+.CheDoAnSK{
+    background-color:#D8F6E0 ;color: green;border-radius: 7px;padding: 3px 3px;
+}
+.CheDoAnSK2{
+    background-color:#FFEBD2 ;color: orange;border-radius: 7px;padding: 3px 3px;
+}
+.CheDoAnSK3{
+    background-color:#FFE5E5 ;color: red;border-radius: 7px;padding: 3px 3px;
+}
+.BuaAnSKXong{
+   background-color:black;color: white;border-radius: 7px;padding: 3px 3px;
+}
+.BuaAnSKCXong{
+   background-color:red;color: white;border-radius: 7px;padding: 3px 3px;
+}
+/*----------------------btnThem ghi chú---------------------*/
+#CuaSoThemGhiChuSK{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    width: 40%;
+    font-size: 12pt;
+}
+#CuaSoThemGhiChuSK > div {
+    margin-top: 15px;
+}
+#CuaSoThemGhiChuSK > div >span {
+    font-weight: bold;
+}
+#chonHocSinhGhiChuSK,#GhichuveTTSK,#GhichuveĐSK{
+    border-radius: 7px;
+}
+#CuaSoThemGhiChuSK input[type="radio"]{
+    transform: scale(1.5);
+    margin-left: 100px;
+}
+#GhichuveĐSK{
+    margin-left: 18px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+#GhichuveTTSK{
+    margin-left: 35px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+#chonHocSinhGhiChuSK{
+    margin-left: 35px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+#CuaSoThemGhiChuSK input[type="checkbox"]{
+    margin-left: 50px;
+}
+#btncuasoTGCSK{
+    margin-top: 20px;
+    height: 40px;
+    width: 25%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;  
+
+}
 /*----------------------Điểm số---------------------*/
 /*----------------------headerDS---------------------*/
 #DiemSo{
-    height: 100%;
+    overflow: auto;
     width: 97%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -395,6 +489,7 @@
     padding-left: 20px;
     padding-top: 10px;
     padding-right: 20px;
+    padding-bottom: 20px;
 }
 /*----------------------BodySK---------------------*/   
 /*----------------------CHon Thong Tin SK---------------------*/
