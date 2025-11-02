@@ -534,7 +534,7 @@
 /*----------------------Danh Sach Điểm Số---------------------*/
 #DanhsachDS{
     margin-top: 20px;
-    height: 50%;
+     overflow: auto;
     width: 100%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -552,6 +552,77 @@
     width: 15%;
     justify-content: space-between;
     text-align: center;
+}
+/*----------------------btn nhập điểm---------------------*/
+#CuaSoNĐS{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    width: 30%;
+    font-size: 12pt;
+}
+#CuaSoNĐS > div {
+    margin-top: 15px;
+}
+#CuaSoNĐS > div >span {
+    font-weight: bold;
+}
+#chonHocSinhGhiChuDS{
+    margin-left: 25px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+#CuaSoNĐS input[type="radio"]{
+    transform: scale(1.5);
+    margin-left: 30px;
+}
+#btncuasoTGCDS{
+    margin-top: 20px;
+    height:40px;
+    width:30%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;  
+
+}
+#txtDiemSODS{
+    margin-left: 35px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+#NhanxetblDS{
+    margin-left: 30px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+.LoaiDiemDS{
+    background-color:#F5F9FF ;color: blue;border-radius: 7px;padding: 3px 3px;
+}
+.LoaiDiemDS2{
+    background-color:#D8F6E0 ;color: green;border-radius: 7px;padding: 3px 3px;
+}
+.LoaiDiemDS3{
+    background-color:#FFEBD2 ;color: orange;border-radius: 7px;padding: 3px 3px;
+}
+.LoaiDiemDS4{
+    background-color:#F3E1FF ;color: purple;border-radius: 7px;padding: 3px 3px;
 }
 /*----------------------Liên lạc---------------------*/
 /*----------------------headerLL---------------------*/

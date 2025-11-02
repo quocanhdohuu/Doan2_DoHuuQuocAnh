@@ -102,18 +102,19 @@ btnThoatCuaSoTGCSK.addEventListener('click',function(){
     document.querySelector('#CuaSoThemGhiChuSK').style.display='none';
 });
 btntheGCCSSK.addEventListener('click',function(){
-    alert('Thêm ghi chú sức khỏe thành công!');
-    document.querySelector('#CuaSoThemGhiChuSK').style.display='none';
-    if(document.getElementById('chonHocSinhGhiChuSK').value===""){
-        alert('Vui lòng chọn học sinh!');
-        return;
-    }else{
-        themghichuvaobang();
-    }
-    
+        themghichuvaobangSK();
+         document.querySelector('#CuaSoThemGhiChuSK').style.display='none'
+        resetFormNhapDiemSK();
 });
 
-function themghichuvaobang(){
+function resetFormNhapDiemSK() {
+
+    document.getElementById('chonHocSinhGhiChuSK').selectedIndex = 0;
+    document.getElementById('GhichuveTTSK').value= '';
+    document.getElementById('GhichuveĐSK').value= '';
+    document.getElementById("ckbuaanSK").checked= false;
+}
+function themghichuvaobangSK(){
     let table=document.getElementById('DanhSachSK');
     let row=table.insertRow(-1);
 
@@ -159,4 +160,81 @@ function themghichuvaobang(){
     ? `<span class="BuaAnSKXong">Đã Xong</span>`
     : `<span class="BuaAnSKCXong">Chưa xong</span>`;
     cell7.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
+}
+//---------------------------------Điểm số------------------------------------
+const btnThemDiemSo=document.querySelector('#btnNhapDiemDS');
+const btnThoatCuaSoTGCDS=document.querySelector('#btbThoatcsoGCDS');
+const btntheGCCDS=document.querySelector('#btncuasoTGCDS');
+
+btnThoatCuaSoTGCDS.addEventListener('click',function(){
+    document.querySelector('#CuaSoNĐS').style.display='none';
+});
+btnThemDiemSo.addEventListener('click',function(){
+    document.querySelector('#CuaSoNĐS').style.display='block';
+});
+btntheGCCDS.addEventListener('click',function(){
+    let diemso=document.getElementById('txtDiemSODS').value;
+    diemso=parseFloat(diemso);
+    if(diemso<0 || diemso>10){
+        alert("Điểm số không hợp lệ! Vui lòng nhập lại điểm số từ 0 đến 10.");
+        return;
+    }
+    if( document.getElementById('txtDiemSODS').value===""){
+        alert("Vui lòng nhập điểm số!");
+        return;
+    }else{
+        themghichuvaobangDS();
+        document.querySelector('#CuaSoNĐS').style.display='none'
+        resetFormNhapDiemDS();
+    }
+        
+});
+
+function resetFormNhapDiemDS() {
+    document.getElementById('chonHocSinhGhiChuDS').selectedIndex = 0; 
+    document.getElementById('txtDiemSODS').value = ''; 
+    document.getElementById('NhanxetblDS').value = ''; 
+}
+function themghichuvaobangDS(){
+    let table=document.getElementById('DanhSachDS');
+    let row=table.insertRow(-1);
+
+    let cell1=row.insertCell(0);
+    let cell2=row.insertCell(1);
+    let cell3=row.insertCell(2);
+    let cell4=row.insertCell(3);
+    let cell5=row.insertCell(4);
+    let cell6=row.insertCell(5);
+
+    let tenHS = document.getElementById('chonHocSinhGhiChuDS').value;
+    let LoaiDiem = document.querySelector('input[name="LD"]:checked')?.value || "";
+    let Diemso = document.getElementById('txtDiemSODS').value;
+    let Nhanxet= document.getElementById('NhanxetblDS').value;
+    let now = new Date();
+    let Ngay = now.toLocaleDateString('vi-VN');
+    let cda="";
+    if(LoaiDiem==="Miệng"){
+        cda=`<span class="LoaiDiemDS">${LoaiDiem}</span>`;
+    }else if(LoaiDiem==="15 phút"){
+        cda=`<span class="LoaiDiemDS2">${LoaiDiem}</span>`;
+    }else if(LoaiDiem==="1 tiết"){
+        cda=`<span class="LoaiDiemDS3">${LoaiDiem}</span>`;
+    }else if(LoaiDiem==="Học kỳ"){
+        cda=`<span class="LoaiDiemDS4">${LoaiDiem}</span>`;
+    }
+    
+    let diem=parseFloat(Diemso);
+    if(diem>=8){
+        Diemso=`<span style="color:green">${Diemso}/10</span>`;
+    }else if(diem>=7&&diem<8){
+        Diemso=`<span style="color:blue">${Diemso}/10</span>`;
+    }else if(diem<7){
+        Diemso=`<span style="color:orange">${Diemso}/10</span>`;
+    }
+    cell1.innerHTML =`<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
+    cell2.innerHTML = cda;
+    cell3.innerHTML = Diemso;
+    cell4.innerHTML = Nhanxet;
+    cell5.innerHTML = Ngay;
+    cell6.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
 }
