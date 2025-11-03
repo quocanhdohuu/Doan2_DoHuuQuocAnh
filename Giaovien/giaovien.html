@@ -140,15 +140,15 @@
 
         <div id="TSDiemDanh">
             <div id="CoMatDD" style="background-color:#D8F6E0;">
-                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span id="slgcomatDD" style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
                 <span style="color: green;">Có mặt</span>
             </div>
             <div id="Vang" style="background-color:#FFE5E5;">
-                <span style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+                <span id="slgvangDD" style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
                 <span style="color: red;">Vắng mặt</span>
             </div>
             <div id="DiMuonDD" style="background-color:#FFEBD2;color: orange;">
-                <span style="font-weight: bold;font-size: 60pt;">0</span><br>
+                <span id="slgdimuonDD" style="font-weight: bold;font-size: 60pt;">0</span><br>
                 <span style="color: orange;">Đi muộn</span>
             </div>
         </div>
@@ -174,15 +174,15 @@
                         <span id="TenHS">Nguyễn Văn A</span>
                     </td>
                     <td>
-                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
-                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
-                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
                         <span id="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD">-</span>
+                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
@@ -197,15 +197,15 @@
                         <span id="TenHS">Nguyễn Văn B</span>
                     </td>
                     <td>
-                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
-                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
-                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
                         <span id="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD">-</span>
+                       <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
@@ -220,15 +220,15 @@
                         <span id="TenHS">Nguyễn Văn C</span>
                     </td>
                     <td>
-                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
-                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
-                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
                         <span id="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD">-</span>
+                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                        <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
@@ -243,21 +243,30 @@
                         <span id="TenHS">Nguyễn Văn D</span>
                     </td>
                     <td>
-                        <button class="btnDDComat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/checked.png" alt=""></button>
-                        <button class="btnDDVangMat" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/delete-button.png" alt=""></button>
-                        <button class="btnDDDiMuon" style="height:5%;width: 15%;border-radius: 5px;"><img style="height: 100%;width: 100%;" src="/img/clock (1).png" alt=""></button>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
                         <span id="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD">-</span>
+                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
             </table>
         </div>
         <button id="btnLuuDiemDanh"> <i class="fa-solid fa-floppy-disk"></i><span>Lưu điểm danh</span></button>
+
+        <div id="CuaSoGCDD" >
+            <button id="btbThoatcsoGCDD" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 2px;">Ghi chú cho học sinh</h3>
+            <span style="color: gray;">Thêm ghi chú về lý do vắng mặt hoặc đi muộn</span>
+            <div><span>Ghi chú</span> 
+            <textarea style="resize: none;  " id="GhichuDD" placeholder="Ghi chú về tình trạng điểm danh..."></textarea></div>
+            <button id="btnluuGCDD"><i class="fa-solid fa-floppy-disk"></i>Thêm Ghi Chú</button>
+        </div>
     </div>
 <!-----------------SỨC KHỎE------------------->
     <div id="SucKhoe" style="display: none;">

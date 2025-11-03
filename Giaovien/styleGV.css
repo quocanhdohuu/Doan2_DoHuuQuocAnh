@@ -308,7 +308,50 @@
     background-color: transparent;
     cursor: pointer;
 }
+/*----------------------btn ghi chú điểm danh---------------------*/
+#CuaSoGCDD{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    width: 30%;
+    font-size: 12pt;
+}
+#CuaSoGCDD > div {
+    margin-top: 15px;
+}
+#CuaSoGCDD  > div >span {
+    font-weight: bold;
+}
+#btnluuGCDD{
+    margin-top: 20px;
+    height: 40px;
+    width: 35%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;  
 
+}
+#GhichuDD{
+    margin-top: 10px;
+    height: 100px;
+    width: 100%;
+    border-radius: 7px;
+    resize: none;
+}
 /*----------------------Suc Khoe---------------------*/
 /*----------------------headerSK---------------------*/
 #SucKhoe{

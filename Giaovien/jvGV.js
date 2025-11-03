@@ -238,3 +238,181 @@ function themghichuvaobangDS(){
     cell5.innerHTML = Ngay;
     cell6.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
 }
+//---------------------------------Điểm danh------------------------------------
+const btnghichuDD=document.querySelectorAll('.btnGHICHUDD');
+const btnluuGCDD = document.querySelector('#btnluuGCDD');
+const btncomatDsDD=document.querySelectorAll('.btnDDComat');
+const btnVangmatDsDD=document.querySelectorAll('.btnDDVangMat');
+const btnDiMuonDsDD=document.querySelectorAll('.btnDDDiMuon');
+const TScomatDD=document.querySelector('#slgcomatDD');
+const TSvangDD=document.querySelector('#slgvangDD');
+const TSdimuonDD=document.querySelector('#slgdimuonDD');
+const btnLUUDIEMDANHDD=document.querySelector('#btnLuuDiemDanh')
+
+
+ let soComat = 0;
+ let soVangmat = 0;
+ let soDimuon = 0;
+
+let currentRow = null;
+
+btnLUUDIEMDANHDD.addEventListener('click',function(){
+    alert("Đã lưu điểm danh");
+});
+btncomatDsDD.forEach(btn => {
+  btn.addEventListener('click', function() {
+    let row = this.closest('tr'); 
+    let span = row.cells[4].querySelector('span');
+    span.innerHTML = '<i class="fa-solid fa-circle-check"></i>Có mặt';
+    span.style.color='green';
+    span.style.backgroundColor='#D8F6E0';
+    span.style.padding='2px 6px';
+    span.style.borderRadius='10px';    
+
+    let btnVangmatDsDD = row.querySelector('.btnDDVangMat');
+    let btnDiMuonDsDD = row.querySelector('.btnDDDiMuon');
+    let btncomatDsDD = row.querySelector('.btnDDComat');
+
+    btnVangmatDsDD.style.backgroundColor='transparent';
+    btnVangmatDsDD.style.color='black';
+    btnDiMuonDsDD.style.backgroundColor='transparent';
+    btnDiMuonDsDD.style.color='black';
+    btncomatDsDD.style.backgroundColor='green';
+    btncomatDsDD.style.color='white';
+
+     
+   
+     let trangthaiCu = row.getAttribute('data-trangthai'); 
+
+   
+    if (trangthaiCu !== 'comat') {
+      if (trangthaiCu === 'vang' && soVangmat > 0) {
+        soVangmat -= 1;
+      }
+      if (trangthaiCu === 'dimuon' && soDimuon > 0) {
+        soDimuon -= 1;
+      }
+      soComat += 1;
+    }
+
+    
+    row.setAttribute('data-trangthai', 'comat');
+
+   
+    TScomatDD.innerText = soComat;
+    TSvangDD.innerText = soVangmat;
+    TSdimuonDD.innerText = soDimuon;
+
+})});
+
+btnDiMuonDsDD.forEach(btn => {
+  btn.addEventListener('click', function() {
+    let row = this.closest('tr'); 
+    let span = row.cells[4].querySelector('span');
+    span.innerHTML = '<i class="fa-solid fa-clock"></i>Đi muộn';
+    span.style.color='orange';
+    span.style.backgroundColor='#FFF4E5';
+    span.style.padding='2px 6px';
+    span.style.borderRadius='10px';
+
+    let btnVangmatDsDD = row.querySelector('.btnDDVangMat');
+    let btnDiMuonDsDD = row.querySelector('.btnDDDiMuon');
+    let btncomatDsDD = row.querySelector('.btnDDComat');
+
+    btnVangmatDsDD.style.backgroundColor='transparent';
+    btnVangmatDsDD.style.color='black';
+    btncomatDsDD.style.backgroundColor='transparent';
+    btncomatDsDD.style.color='black';
+    btnDiMuonDsDD.style.backgroundColor='orange';
+    btnDiMuonDsDD.style.color='white';
+
+    
+    
+     let trangthaiCu = row.getAttribute('data-trangthai'); 
+
+   
+    if (trangthaiCu !== 'dimuon') {
+      if (trangthaiCu === 'vang' && soVangmat > 0) {
+        soVangmat -= 1;
+      }
+      if (trangthaiCu === 'comat' && soComat > 0) {
+        soComat -= 1;
+      }
+      soDimuon += 1;
+    }
+
+    
+    row.setAttribute('data-trangthai', 'dimuon');
+
+   
+    TScomatDD.innerText = soComat;
+    TSvangDD.innerText = soVangmat;
+    TSdimuonDD.innerText = soDimuon;
+
+})})
+
+btnVangmatDsDD.forEach(btn => {
+  btn.addEventListener('click', function() {
+    let row = this.closest('tr'); 
+    let span = row.cells[4].querySelector('span');
+    span.innerHTML = '<i class="fa-solid fa-clock"></i>Vắng mặt';
+    span.style.color='red';
+    span.style.backgroundColor='#FFE5E5';
+    span.style.padding='2px 6px';
+    span.style.borderRadius='10px';
+
+    let btnVangmatDsDD = row.querySelector('.btnDDVangMat');
+    let btnDiMuonDsDD = row.querySelector('.btnDDDiMuon');
+    let btncomatDsDD = row.querySelector('.btnDDComat');
+
+    btnVangmatDsDD.style.backgroundColor='red';
+    btnVangmatDsDD.style.color='white';
+    btncomatDsDD.style.backgroundColor='transparent';
+    btncomatDsDD.style.color='black';
+    btnDiMuonDsDD.style.backgroundColor='transparent';
+    btnDiMuonDsDD.style.color='black';
+
+   
+    
+    let trangthaiCu = row.getAttribute('data-trangthai'); 
+
+   
+    if (trangthaiCu !== 'vang') {
+      if (trangthaiCu === 'coma' && soComat > 0) {
+        soComat -= 1;
+      }
+      if (trangthaiCu === 'dimuon' && soDimuon > 0) {
+        soDimuon -= 1;
+      }
+      soVangmat += 1;
+    }
+
+    
+    row.setAttribute('data-trangthai', 'vang');
+
+   
+    TScomatDD.innerText = soComat;
+    TSvangDD.innerText = soVangmat;
+    TSdimuonDD.innerText = soDimuon;
+
+})})
+btnghichuDD.forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelector('#CuaSoGCDD').style.display = 'block';
+    currentRow = this.closest('tr'); 
+  });
+});
+btnluuGCDD.addEventListener('click',function(){
+    lughichu();
+    document.querySelector('#CuaSoGCDD').style.display='none';
+});
+function lughichu() {
+  if (!currentRow) return;
+
+  let ghichu = document.getElementById('GhichuDD').value;
+  let span = currentRow.cells[5].querySelector('span');
+  span.innerHTML = ghichu;
+
+  document.getElementById('GhichuDD').value = "";
+  currentRow = null;
+}
