@@ -50,9 +50,7 @@ body {
 .menu {
   background: #ececec;
   display: flex;
-  gap: 8px;
   padding: 6px 8px;
-  border-bottom: 1px solid #ddd;
   margin: 0px 23px;
   border-radius: 12px;
 }
@@ -66,7 +64,7 @@ body {
   font-weight: 500;
   font-size: 15pt;
   transition: 0.2s;
-  width: 200px;
+  width: 16.6%;
 }
 
 .menu-btn.active {
