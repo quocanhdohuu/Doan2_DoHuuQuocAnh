@@ -941,3 +941,249 @@ body {
 .xanhduong { color: #2563eb; }
 .tim { color: #a855f7; }
 .cam { color: #f97316; }
+/* ==== KẾT QUẢ HỌC TẬP ==== */
+.khu-vuc-hoc-tap {
+    padding: 30px 40px;
+    background: #f9fafc;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+}
+
+/* Tiêu đề chính */
+.tieu-de-hoc-tap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.tieu-de-hoc-tap h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.tieu-de-hoc-tap p {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* Nút tải + chọn học kỳ */
+.hanh-dong-hoc-tap {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.chon-hoc-ky {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: white;
+    font-size: 14px;
+    color: #374151;
+}
+
+.tai-phieu {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.tai-phieu:hover {
+    background: #1e40af;
+}
+
+/* Tổng kết học kỳ */
+.tieu-de-nho {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tieu-de-nho i {
+    color: #fbbf24;
+}
+
+/* Các box tổng kết */
+.tong-ket {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.tong-ket .box {
+    flex: 1;
+    min-width: 150px;
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+
+.tong-ket .box h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.tong-ket .box p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Màu pastel nhẹ */
+.xanhnhat { background: #ebf3ff; color: #2563eb; }
+.xanhla { background: #eafaf0; color: #16a34a; }
+.tim { background: #f5ebff; color: #9333ea; }
+.vang { background: #fff8e1; color: #f59e0b; }
+.vangnhat { background: #fffde9; color: #ca8a04; }
+.hong { background: #fff0f7; color: #db2777; }
+.xanhduong { background: #e0f2fe; color: #0284c7; }
+
+.tong-ket .box .nhan {
+    background: rgba(250, 204, 21, 0.25);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #92400e;
+}
+
+/* Tabs */
+.vung-tabs {
+    margin-bottom: 25px;
+}
+
+.tab-mon {
+    display: inline-flex;
+    gap: 10px;
+    background: #fff;
+    padding: 6px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.tab-mon button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #374151;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.tab-mon button.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Môn học */
+.mon-hoc {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Tiêu đề môn */
+.tieu-de-mon {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.ten-mon {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ten-mon h3 {
+    font-size: 18px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ten-mon p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.diem-tb {
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.diem-tb span {
+    display: block;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+/* Bảng điểm */
+.bang-diem {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.bang-diem .cot {
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+}
+
+.bang-diem .cot p {
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.bang-diem .cot span {
+    color: #374151;
+    font-size: 14px;
+}
+
+/* Nhận xét */
+.nhan-xet {
+    background: #f9fafc;
+    border-radius: 10px;
+    padding: 15px;
+
+}
+
+.nhan-xet h4 {
+    color: #2563eb;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.nhan-xet p {
+    color: #374151;
+    font-size: 15px;
+}
