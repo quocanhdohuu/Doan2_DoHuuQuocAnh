@@ -95,6 +95,16 @@ btnDanhBaLL.addEventListener('click',function(){
 const btnThemGhiChuSK=document.querySelector('#ThemGhichuSK');
 const btnThoatCuaSoTGCSK=document.querySelector('#btbThoatcsoGCSK');
 const btntheGCCSSK=document.querySelector('#btncuasoTGCSK');
+const TSTongGCSK=document.querySelector('#slgTBYQSK');
+const TSKhoemanhSK=document.querySelector('#slgKMTQSK');
+const TSChuYSK=document.querySelector('#slgCYTQSK');
+const TSAnDuSK=document.querySelector('#slgADTQSK');
+
+let tongghichu=1;
+let khoemanh=1;
+let chuy=0;
+let andu=0
+
 btnThemGhiChuSK.addEventListener('click',function(){
     document.querySelector('#CuaSoThemGhiChuSK').style.display='block';
 });
@@ -144,14 +154,29 @@ function themghichuvaobangSK(){
      let ttsk="";
     if(tinhTrangSK==="Khỏe mạnh"){
         ttsk=`<span class="TinhtrangSK">${tinhTrangSK}</span>`;
+        khoemanh+=1;
+        TSKhoemanhSK.innerText=khoemanh;
     }else if(tinhTrangSK==="Ốm"){
         ttsk=`<span class="TinhtrangSK2">${tinhTrangSK}</span>`;
+        chuy+=1;
+        TSChuYSK.innerText=chuy;
     }else if(tinhTrangSK==="Chấn Thương"){
         ttsk=`<span class="TinhtrangSK3">${tinhTrangSK}</span>`;
+        chuy+=1;
+        TSChuYSK.innerText=chuy;
     }else if(tinhTrangSK==="Đang dùng thuốc"){
         ttsk=`<span class="TinhtrangSK4">${tinhTrangSK}</span>`;
+        chuy+=1;
+        TSChuYSK.innerText=chuy;
     }
-    cell1.innerHTML =`<span">${tenHS}</span><br><span style="color: gray;">HS001</span>`;
+
+   
+    if (buaAn) {
+  andu += 1;
+  TSAnDuSK.innerText = andu;
+}
+
+    cell1.innerHTML =`<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
     cell2.innerHTML = ttsk;
     cell3.innerHTML = ghiChuSK;
     cell4.innerHTML = cda;
@@ -160,6 +185,9 @@ function themghichuvaobangSK(){
     ? `<span class="BuaAnSKXong">Đã Xong</span>`
     : `<span class="BuaAnSKCXong">Chưa xong</span>`;
     cell7.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
+
+    tongghichu+=1;
+    TSTongGCSK.innerText=tongghichu;
 }
 //---------------------------------Điểm số------------------------------------
 const btnThemDiemSo=document.querySelector('#btnNhapDiemDS');
@@ -355,7 +383,7 @@ btnVangmatDsDD.forEach(btn => {
   btn.addEventListener('click', function() {
     let row = this.closest('tr'); 
     let span = row.cells[4].querySelector('span');
-    span.innerHTML = '<i class="fa-solid fa-clock"></i>Vắng mặt';
+    span.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>Vắng mặt';
     span.style.color='red';
     span.style.backgroundColor='#FFE5E5';
     span.style.padding='2px 6px';
