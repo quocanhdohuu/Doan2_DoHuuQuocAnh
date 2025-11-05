@@ -337,7 +337,7 @@
                         <span id="DinhDuongSK">Đủ chất sơ, đạm, sắt và protein</span>
                     </td>
                     <td>
-                        <span class="BuaAnSK">Đã Xong</span>
+                        <span class="BuaAnSKXong">Đã Xong</span>
                     </td>
                     <td>
                         <button class="btnGHICHUSK" ><i class="fa-solid fa-edit"></i></button>
@@ -419,27 +419,27 @@
 
          <div id="TSDiemSo">
             <div id="TQDS" style="background-color: #F5F9FF;">
-                <span style="font-weight: bold;font-size: 60pt;color: blue;">0</span><br>
+                <span id="TongdiemTSDS" style="font-weight: bold;font-size: 60pt;color: blue;">1</span><br>
                 <span style="color: blue;">Tổng điểm</span>
             </div>
             <div id="DTBDS" style="background-color:#D8F6E0;">
-                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span id="DiemTBTSDS" style="font-weight: bold;font-size: 60pt;color: green;">8.5</span><br>
                 <span style="color: green;">ĐTB</span>
             </div>
             <div id="GioiDS" style="background-color:#D8F6E0;">
-                <span style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span id="GioiTSDS" style="font-weight: bold;font-size: 60pt;color: green;">1</span><br>
                 <span style="color: green;">Giỏi (≥8)</span>
             </div>
             <div id="KhaDS" style="background-color: #F5F9FF;">
-                <span style="font-weight: bold;font-size: 60pt;color: blue;">0</span><br>
+                <span id="KhaTSDS" style="font-weight: bold;font-size: 60pt;color: blue;">0</span><br>
                 <span style="color: blue;">Khá (6.5-8)</span>
             </div>
             <div id="TBDS" style="background-color:#FFEBD2;">
-                <span style="font-weight: bold;font-size: 60pt;color: orange;">0</span><br>
+                <span id="TrungBinhTSDS" style="font-weight: bold;font-size: 60pt;color: orange;">0</span><br>
                 <span style="color: orange;">TB (5-6.5)</span>
             </div>
             <div id="YeuDS" style="background-color:#FFEBD2;">
-               <span style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+               <span id="YeuTSDS" style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
                 <span style="color: red;">Yếu (0-4.9)</span>
             </div>
         </div>
@@ -513,6 +513,23 @@
     </div>
 <!-----------------Liên lạc------------------->
     <div id="LienLac" style="display: none;">
+         <div id="CuaSoSoanTinLL">
+            <button id="btbThoatCSSTLL" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 2px;">Soạn tin nhắn</h3>
+            <span style="color: gray;">Gửi tin nhắn hoặc thông báo tới phụ huynh</span>
+            <div style="justify-content: space-between;"> <span>Phụ huynh</span> 
+                <select id="chonPHSTLL">
+                    <option value="Nguyễn Thị B-Nguyễn Văn A">Nguyễn Thị B-Nguyễn Văn A</option>
+                    <option value="Nguyễn Văn B-Nguyễn Thị D">Nguyễn Văn B-Nguyễn Thị D </option>
+                    <option value="Nguyễn Văn C-Nguyễn Văn F">Nguyễn Văn C-Nguyễn Văn F</option>
+                </select> 
+            </div>
+
+             <div><span>Tiêu đề</span><input type="text" id="txttieudeSTLL" placeholder="Nhập tiêu đề tin nhắn"></div>
+
+              <div><span>Nội dung</span><textarea style="resize: none;  " id="TXTNDSTLL" placeholder="Nhập nội dung tin nhắn"></textarea></div>
+             <button id="btnCSSTLL"><i class="fa-solid fa-paper-plane"></i>Gửi tin nhắn</button>
+        </div>
         <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
         <span style="color: gray;">Gửi tin nhắn và thông báo tới phụ huynh học sinh</span>
         </h3>
@@ -555,7 +572,7 @@
                       <span style="background-color: black;padding: 3px;color: white;border-radius: 10px;">Mới</span> 
                       <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Nguyễn văn A</span>
                     </div> 
-                    <button style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
+                    <button class="btnSTHTD" style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
                 </span>
                 <p style="font-size: 13pt;font-weight: bold;">Hỏi về bài tập về nhà</p>
                 <p style="font-size: 13pt;">Thầy ơi, con em hôm nay về không có ghi bài tập gì. Xin thầy cho biết bài tập môn Toán hôm nay ạ.</p>
@@ -567,7 +584,7 @@
                     <div>Trần Văn D
                       <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Trần Thị C</span>
                     </div> 
-                    <button style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
+                    <button class="btnSTHTD" style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
                 </span>
                 <p style="font-size: 13pt;font-weight: bold;">Xin phép nghỉ học</p>
                 <p style="font-size: 13pt;">Thầy ơi, con em bị sốt nên hôm nay xin phép nghỉ học. Em sẽ học bù vào ngày mai ạ.</p>
@@ -650,6 +667,8 @@
             </div>
 
          </div>
+
+        
     </div>
 
     <script src="jvGV.js"></script>

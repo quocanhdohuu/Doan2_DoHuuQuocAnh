@@ -193,6 +193,22 @@ function themghichuvaobangSK(){
 const btnThemDiemSo=document.querySelector('#btnNhapDiemDS');
 const btnThoatCuaSoTGCDS=document.querySelector('#btbThoatcsoGCDS');
 const btntheGCCDS=document.querySelector('#btncuasoTGCDS');
+const TongDiemTSDS=document.querySelector('#TongdiemTSDS');
+const DTBTSDS=document.querySelector('#DiemTBTSDS');
+const GioiTSDS=document.querySelector('#GioiTSDS');
+const KhaTSDS=document.querySelector('#KhaTSDS');
+const TrungBinhTSDS=document.querySelector('#TrungBinhTSDS');
+const YeuTSDS=document.querySelector('#YeuTSDS');
+
+let tdds=parseFloat(TongDiemTSDS.innerText);
+let diemtbds=parseFloat(DTBTSDS.innerText)
+let Gioids=parseFloat(GioiTSDS.innerText)
+let Khads=parseFloat(KhaTSDS.innerText)
+let Yeuds=parseFloat(YeuTSDS.innerText)
+let Trungbinhds=parseFloat(TrungBinhTSDS.innerText)
+
+
+
 
 btnThoatCuaSoTGCDS.addEventListener('click',function(){
     document.querySelector('#CuaSoNĐS').style.display='none';
@@ -254,17 +270,34 @@ function themghichuvaobangDS(){
     let diem=parseFloat(Diemso);
     if(diem>=8){
         Diemso=`<span style="color:green">${Diemso}/10</span>`;
-    }else if(diem>=7&&diem<8){
+        Gioids+=1;
+    }else if(diem>=6.5&&diem<8){
         Diemso=`<span style="color:blue">${Diemso}/10</span>`;
-    }else if(diem<7){
+        Khads+=1;
+    }else if(diem<6.5&&diem>=5){
         Diemso=`<span style="color:orange">${Diemso}/10</span>`;
+        Trungbinhds+=1;
+    }else if(diem<5){
+        Diemso=`<span style="color:red">${Diemso}/10</span>`;
+        Yeuds+=1;
     }
+   
+    tdds+=1;
+    diemtbds=((diemtbds*(tdds-1)+diem)/tdds).toFixed(2);
+
     cell1.innerHTML =`<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
     cell2.innerHTML = cda;
     cell3.innerHTML = Diemso;
     cell4.innerHTML = Nhanxet;
     cell5.innerHTML = Ngay;
     cell6.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
+
+    TongDiemTSDS.innerText=tdds;
+    DTBTSDS.innerText=diemtbds;
+    GioiTSDS.innerText=Gioids;
+    KhaTSDS.innerText=Khads;
+    TrungBinhTSDS.innerText=Trungbinhds;
+    YeuTSDS.innerText=Yeuds;
 }
 //---------------------------------Điểm danh------------------------------------
 const btnghichuDD=document.querySelectorAll('.btnGHICHUDD');
@@ -444,3 +477,21 @@ function lughichu() {
   document.getElementById('GhichuDD').value = "";
   currentRow = null;
 }
+
+//---------------------------------Liên lạc------------------------------------
+const btntlSTLL=document.querySelectorAll('.btnSTHTD');
+const btnThoatCSSTLL=document.querySelector('#btbThoatCSSTLL');
+const btnSTLL=document.querySelector('#btnSoanTinLL');
+
+btnSTLL.addEventListener('click',function(){
+    document.querySelector('#CuaSoSoanTinLL').style.display='block';
+})
+btnThoatCSSTLL.addEventListener('click',function(){
+    document.querySelector('#CuaSoSoanTinLL').style.display='none';
+});
+
+btntlSTLL.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelector('#CuaSoSoanTinLL').style.display = 'block';
+    });
+})

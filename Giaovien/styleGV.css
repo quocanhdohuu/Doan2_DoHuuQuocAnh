@@ -577,11 +577,10 @@
 /*----------------------Danh Sach Điểm Số---------------------*/
 #DanhsachDS{
     margin-top: 20px;
-     overflow: auto;
+    overflow: auto;
     width: 100%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    
 }
 #DanhsachDS table{
     padding: 2px;
@@ -650,7 +649,7 @@
     border-radius: 7px;
 }
 #NhanxetblDS{
-    margin-left: 30px;
+    margin-left: 28px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
@@ -729,4 +728,59 @@
     height: 50%;
     width: 100%;
     margin-top: 40px;
+}
+/*----------------------btn nhập điểm---------------------*/
+#CuaSoSoanTinLL{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    width: 30%;
+    font-size: 12pt;
+}
+#CuaSoSoanTinLL > div {
+    margin-top: 15px;
+}
+#CuaSoSoanTinLL > div >span {
+    font-weight: bold;
+}
+#chonPHSTLL{
+    margin-left: 10px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+#btnCSSTLL{
+    margin-top: 20px;
+    height:40px;
+    width:30%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;  
+
+}
+#txttieudeSTLL{
+    margin-left: 40px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+#TXTNDSTLL{
+    margin-left: 28px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
 }
