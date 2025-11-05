@@ -37,3 +37,31 @@ document.querySelectorAll(".ngay div").forEach(ngay => {
     document.querySelector(".hop-chi-tiet-ngay h4").innerHTML = `📅 Chi tiết ngày ${ngay.innerText}/10/2025`;
   });
 });
+//phần học tập
+const tabs = document.querySelectorAll(".tab");
+const subjects = document.querySelectorAll(".mon-hoc");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    // Cập nhật trạng thái tab
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    const tabType = tab.dataset.tab;
+
+    // Hiển thị theo loại tab
+    subjects.forEach(sub => {
+      const type = sub.dataset.type;
+      const diem = parseFloat(sub.querySelector(".diem-badge").innerText);
+
+      if (tabType === "all") {
+        sub.style.display = "block";
+      } else if (tabType === "main") {
+        sub.style.display = type === "main" ? "block" : "none";
+      } else if (tabType === "progress") {
+        // Giả lập tiến độ: chỉ hiển thị môn có điểm < 8.5
+        sub.style.display = diem < 8.5 ? "block" : "none";
+      }
+    });
+  });
+});

@@ -1075,35 +1075,35 @@ body {
 }
 
 /* ==== Tabs ==== */
-.vung-tabs { margin-bottom: 25px; }
-.tab-mon {
-    display: inline-flex;
-    background: rgb(242, 242, 242);
-    border-radius: 16px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
-    padding: 3px;
-    gap: 8px;
-}
-.tab-mon button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 16px;
-    background: transparent;
-    font-weight: 600;
-    color: #000000;
-    cursor: pointer;
-}
-.tab-mon button.active {
-    background: #ffffff;
-    color: #000000;
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
+.tab {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  background: #f1f5f9;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #2563eb;
+  color: white;
+}
 /* ==== MÔN HỌC ==== */
 .mon-hoc {
     background: #fff;
     border-radius: 16px;
     padding: 25px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
 }
 
 /* Tiêu đề môn */
@@ -1157,8 +1157,6 @@ body {
   margin-top: 2px;
   text-align: center;
 }
-
-
 /* Bảng điểm */
 .bang-diem {
     display: grid;
@@ -1195,3 +1193,45 @@ body {
     margin-bottom: 6px;
 }
 .nhan-xet p { color: #374151; font-size: 14px; }
+/*Tiến độ*/
+/* Môn học */
+.subject {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.subject-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-box {
+  background: #e5edff;
+  color: #1e40af;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.score-box.green {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Thanh tiến độ */
+.progress-bar {
+  background: #e5e7eb;
+  height: 8px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.fill {
+  background: #3b82f6;
+  height: 100%;
+  border-radius: 10px;
+}
