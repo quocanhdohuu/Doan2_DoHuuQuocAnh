@@ -1284,7 +1284,8 @@ input[type="checkbox"] {
 .event-form textarea {
   resize: none;
 }
-.event-type {
+.event-type,
+.event-typeUpdate {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 6px 25px;
@@ -1292,7 +1293,8 @@ input[type="checkbox"] {
   font-size: 14px;
   margin-right: 130px;
 }
-.event-type div {
+.event-type div,
+.event-typeUpdate div {
   gap: 6px;
 }
 .addEventUpdate-btn {
