@@ -120,15 +120,15 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form">
+                <form class="student-form" id="studentForm">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentName" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select>
+                        <select id="studentClass">
                             <option>Chọn lớp</option>
                             <option>1A</option>
                             <option>1B</option>
@@ -138,22 +138,22 @@
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="studentDOB">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentParent" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentPhone" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentAddress" placeholder="">
                     </div>
 
                     <div class="form-footer">
@@ -169,15 +169,15 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form">
+                <form class="student-form" id="studentFormUpdate">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updateName">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select>
+                        <select id="updateClass">
                             <option>Chọn lớp</option>
                             <option>1A</option>
                             <option>1B</option>
@@ -187,22 +187,22 @@
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="updateDOB">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updateParent">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updatePhone">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updateAddress">
                     </div>
 
                     <div class="form-footer">
@@ -235,7 +235,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -248,7 +248,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -261,7 +261,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -274,7 +274,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -287,7 +287,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                 </tbody>

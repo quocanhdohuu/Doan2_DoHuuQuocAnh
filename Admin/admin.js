@@ -184,3 +184,176 @@ overlayevent.addEventListener("click", () => {
   eventModalUpdate.style.display = "none";
   overlayevent.style.display = "none";
 });
+
+//thêm học sinh vào bảng dữ liệu
+// Lấy các phần tử cần thiết
+const studentForm = document.getElementById("studentForm");
+const studentTableBody = document.querySelector(".student-table tbody");
+const modalStudent = document.getElementById("studentModal");
+const overlayAddStudent = document.getElementById("overlay");
+
+studentForm.addEventListener("submit", (e) => {
+  e.preventDefault(); // Ngăn reload trang
+
+  // Lấy dữ liệu từ form
+  const name = document.getElementById("studentName").value.trim();
+  const className = document.getElementById("studentClass").value;
+  const dob = document.getElementById("studentDOB").value;
+  const parent = document.getElementById("studentParent").value.trim();
+  const phone = document.getElementById("studentPhone").value.trim();
+  const address = document.getElementById("studentAddress").value.trim();
+
+  // Kiểm tra dữ liệu cơ bản
+  if (
+    !name ||
+    className === "Chọn lớp" ||
+    !dob ||
+    !parent ||
+    !phone ||
+    !address
+  ) {
+    alert("Vui lòng nhập đầy đủ thông tin!");
+    return;
+  }
+
+  // Định dạng lại ngày sinh (YYYY-MM-DD → DD/MM/YYYY)
+  const formattedDOB = dob.split("-").reverse().join("/");
+
+  // Tạo hàng mới
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+    <td>${name}</td>
+    <td>${className}</td>
+    <td>${formattedDOB}</td>
+    <td>${parent}</td>
+    <td>${phone}</td>
+    <td>${address}</td>
+    <td><span class="status active">Đang học</span></td>
+    <td class="actions">
+        <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
+    </td>
+  `;
+
+  // Thêm hàng vào bảng
+  studentTableBody.appendChild(newRow);
+
+  // Gán lại sự kiện edit cho nút mới
+  newRow.querySelector(".editStudent").addEventListener("click", (e) => {
+    e.preventDefault();
+    overlay.style.display = "block";
+    updateModal.style.display = "block";
+    currentRow = e.target.closest("tr");
+    const cells = currentRow.querySelectorAll("td");
+
+    document.getElementById("updateName").value = cells[0].textContent;
+    document.getElementById("updateClass").value = cells[1].textContent;
+    const dobParts = cells[2].textContent.split("/");
+    const formattedDOB = `${dobParts[2]}-${dobParts[1].padStart(
+      2,
+      "0"
+    )}-${dobParts[0].padStart(2, "0")}`;
+    document.getElementById("updateDOB").value = formattedDOB;
+    document.getElementById("updateParent").value = cells[3].textContent;
+    document.getElementById("updatePhone").value = cells[4].textContent;
+    document.getElementById("updateAddress").value = cells[5].textContent;
+  });
+  // Gán sự kiện delete cho nút mới
+  newRow.querySelector(".deleteStudent").addEventListener("click", (e) => {
+    e.preventDefault();
+    const row = e.target.closest("tr");
+    const name = row.querySelector("td").textContent;
+    if (confirm(`Bạn có chắc muốn xóa học sinh "${name}" không?`)) {
+      row.remove();
+    }
+  });
+  // Reset form
+  studentForm.reset();
+
+  // Đóng modal
+  modalStudent.style.display = "none";
+  if (overlayAddStudent) overlayAddStudent.style.display = "none";
+});
+
+// --- SỬA HỌC SINH ---
+const editStudentButtons = document.querySelectorAll(".editStudent");
+const updateForm = document.getElementById("studentFormUpdate");
+const updateModal = document.getElementById("studentModalUpdate");
+
+let currentRow = null; // Biến lưu hàng đang được sửa
+
+// Khi nhấn nút ✏️
+editStudentButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    overlay.style.display = "block";
+    updateModal.style.display = "block";
+
+    // Lấy dòng hiện tại
+    currentRow = e.target.closest("tr");
+    const cells = currentRow.querySelectorAll("td");
+
+    // Gán giá trị vào form
+    document.getElementById("updateName").value = cells[0].textContent;
+    document.getElementById("updateClass").value = cells[1].textContent;
+
+    // Chuyển ngày sinh về định dạng YYYY-MM-DD
+    const dobParts = cells[2].textContent.split("/");
+    const formattedDOB = `${dobParts[2]}-${dobParts[1].padStart(
+      2,
+      "0"
+    )}-${dobParts[0].padStart(2, "0")}`;
+    document.getElementById("updateDOB").value = formattedDOB;
+
+    document.getElementById("updateParent").value = cells[3].textContent;
+    document.getElementById("updatePhone").value = cells[4].textContent;
+    document.getElementById("updateAddress").value = cells[5].textContent;
+  });
+});
+
+// Khi bấm nút “Cập nhật”
+updateForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!currentRow) return;
+
+  // Lấy dữ liệu mới
+  const name = document.getElementById("updateName").value.trim();
+  const className = document.getElementById("updateClass").value;
+  const dob = document.getElementById("updateDOB").value;
+  const parent = document.getElementById("updateParent").value.trim();
+  const phone = document.getElementById("updatePhone").value.trim();
+  const address = document.getElementById("updateAddress").value.trim();
+
+  // Định dạng lại ngày sinh
+  const formattedDOB = dob.split("-").reverse().join("/");
+
+  // Gán lại vào dòng
+  const cells = currentRow.querySelectorAll("td");
+  cells[0].textContent = name;
+  cells[1].textContent = className;
+  cells[2].textContent = formattedDOB;
+  cells[3].textContent = parent;
+  cells[4].textContent = phone;
+  cells[5].textContent = address;
+
+  // Đóng modal
+  updateModal.style.display = "none";
+  overlay.style.display = "none";
+});
+
+// --- XÓA HỌC SINH ---
+const deleteButtons = document.querySelectorAll(".deleteStudent");
+
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const row = e.target.closest("tr");
+    const name = row.querySelector("td").textContent;
+
+    if (confirm(`Bạn có chắc muốn xóa học sinh "${name}" không?`)) {
+      row.remove();
+    }
+  });
+});
