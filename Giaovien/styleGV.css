@@ -669,7 +669,7 @@
 /*----------------------Liên lạc---------------------*/
 /*----------------------headerLL---------------------*/
 #LienLac{
-    height: 100%;
+    overflow: auto;
     width: 97%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -677,6 +677,7 @@
     padding-left: 20px;
     padding-top: 10px;
     padding-right: 20px;
+    padding-bottom: 20px;
 }
 /*----------------------BodyLL---------------------*/   
 /*----------------------Menu LL---------------------*/
@@ -725,11 +726,18 @@
 }
 /*----------------------Hộp thư đến Liên lạc---------------------*/
 #HopThuDenLL, #DaGuiLL, #DanhBaLL{
-    height: 50%;
+    overflow: auto;
     width: 100%;
     margin-top: 40px;
 }
-/*----------------------btn nhập điểm---------------------*/
+.TinGuiLL{
+    display: none;
+    border: 1px solid black;
+}
+.TinDenLL,.DBaLL{
+    border: 1px solid black;
+}
+/*----------------------btn soạn tin---------------------*/
 #CuaSoSoanTinLL{
     position: absolute;
     top: 50%;

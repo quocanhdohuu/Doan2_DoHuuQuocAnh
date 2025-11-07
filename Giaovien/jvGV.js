@@ -59,13 +59,11 @@ btnSucKhoe.addEventListener('click',function(){
     doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac');
 });
 
-btnDangXuat.addEventListener('click',function(){
-    window.location.href = `/index.html`;
-});
 //---------------------------------Liên lạc------------------------------------
 const btnHopThuDenLL = document.querySelector('#btnHopThuDenLL');
 const btnTinnhandiLL=document.querySelector('#btnTinNhanDiLL');
 const btnDanhBaLL=document.querySelector('#btnDanhBaLL',);
+const btnguitincsLL=document.querySelector('#btnCSSTLL')
 //HAm an menuLL
 function anLL(nutbam){
     btnHopThuDenLL.style.backgroundColor='transparent';
@@ -90,6 +88,37 @@ btnDanhBaLL.addEventListener('click',function(){
     anLL(btnDanhBaLL);
     doiLL('#DanhBaLL','#HopThuDenLL','#DaGuiLL');
 });
+
+btnguitincsLL.addEventListener('click',function(){
+    themtindagui();
+
+});
+let sotingui=0
+function themtindagui() {
+    const phuhuynh = document.querySelector('#chonPHSTLL').value;
+  const tieude = document.querySelector('#txttieudeSTLL').value;
+  const noidung = document.querySelector('#TXTNDSTLL').value;
+  const thoigian = new Date().toLocaleString('vi-VN');
+
+  if(sotingui>=10){
+    sotingui=0;
+  }
+  let iddiv='#TNGuiLL'+(10-sotingui);
+  const tinMoi = document.querySelector(iddiv);
+
+  
+  tinMoi.querySelector('.ngNhanll').innerText = `Gửi đến: ${phuhuynh}`;
+  tinMoi.querySelector('.tieudeLL').innerText = tieude;
+  tinMoi.querySelector('.ndguiLL').innerText = noidung;
+  tinMoi.querySelector('.tgguiLL').innerText = thoigian;
+
+  
+  tinMoi.style.display = 'block';
+
+  
+  document.querySelector('#CuaSoSoanTinLL').style.display = 'none';
+  sotingui++;
+}
 
 //---------------------------------Sức khỏe------------------------------------
 const btnThemGhiChuSK=document.querySelector('#ThemGhichuSK');
@@ -173,8 +202,7 @@ function themghichuvaobangSK(){
    
     if (buaAn) {
   andu += 1;
-  TSAnDuSK.innerText = andu;
-}
+  TSAnDuSK.innerText = andu;}
 
     cell1.innerHTML =`<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
     cell2.innerHTML = ttsk;

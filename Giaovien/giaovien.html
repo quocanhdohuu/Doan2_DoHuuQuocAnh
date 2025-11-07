@@ -3,14 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giáo Viên</title>
-    <link rel="stylesheet" href="/Giaovien/styleGV.css">
+    <link rel="stylesheet" href="styleGV.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <!----------------- Thanh thông tin ------------------->
     <div id="Thanhthongtin">
         <div id="ThongTin">
-            <img src="/img/book.png" alt="logo">
+            <img src="../img/book.png" alt="logo">
             <div>
                 <h4>Giáo Viên - Trần Thị B</h4>
                 <h5>Môn Toán • Chủ nhiệm lớp 6A</h5>
@@ -18,8 +18,9 @@
         </div>
         <div id="Thoat">
             <button id="btnLogout" style="background-color: white;cursor: pointer;">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Đăng xuất
+                <a href="..\XacThuc\dangnhap.html" style="color: black;text-decoration-line: none;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                Đăng xuất</a>
             </button>
         </div>
     </div>
@@ -36,35 +37,35 @@
         <div id="ThongSo">
             <div id="TongHS">
                 <h4>Tổng học sinh
-                    <img src="/img/people.png" alt="anh">
+                    <img src="../img/people.png" alt="anh">
                 </h4>
                 <h2>50</h2>
                 <p>Trong các lớp dạy</p>
             </div>
             <div id="CoMat">
                 <h4>Có mặt hôm nay
-                    <img src="/img/checked.png" alt="anh">
+                    <img src="../img/checked.png" alt="anh">
                 </h4>
                 <h2>87</h2>
                 <p>96.7% tỷ lệ</p>
             </div>
             <div id="VangMat">
                 <h4>Vắng mặt
-                    <img src="/img/clock.png" alt="anh">
+                    <img src="../img/clock.png" alt="anh">
                 </h4>
                 <h2>3</h2>
                 <p>Học sinh nghỉ học</p>
             </div>
             <div id="DiMuon">
                 <h4>Đi muộn
-                    <img src="/img/clock.png" alt="anh">
+                    <img src="../img/clock.png" alt="anh">
                 </h4>
                 <h2>2</h2>
                 <p>Học sinh đến muộn</p>
             </div>
             <div id="ChoChamDiem">
                 <h4>Chờ chấm điểm
-                    <img src="/img/page.png" alt="anh">
+                    <img src="../img/page.png" alt="anh">
                 </h4>
                 <h2>2</h2>
                 <p>Bài thi cần chấm</p>
@@ -120,7 +121,7 @@
     </div>
 <!-----------------Diem Danh------------------->
     <div id="DieDanh" style="display: none;">
-        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/user (1).png" alt=""><span></span>Điểm danh học sinh</h3>
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="../img/user (1).png" alt=""><span></span>Điểm danh học sinh</h3>
         <span style="color: gray;">Ghi nhận tình hình chuyên cần hàng ngày</span>
         <div id="ChonLop">
             <div id="Lop">
@@ -270,7 +271,7 @@
     </div>
 <!-----------------SỨC KHỎE------------------->
     <div id="SucKhoe" style="display: none;">
-        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/heart.png" alt=""><span></span>Quản lý sức khỏe và dinh dưỡng</h3>
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="../img/heart.png" alt=""><span></span>Quản lý sức khỏe và dinh dưỡng</h3>
         <span style="color: gray;">Ghi chú tình hình sức khỏe và chế độ ăn học sinh</span>
         <div id="ChonLopSK">
             <div id="LopSK">
@@ -385,7 +386,7 @@
     
 <!------------------Điểm số------------------>
     <div id="DiemSo" style="display: none;">
-        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/open-book.png" alt=""><span></span>Quản lý điểm số</h3>
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="../img/open-book.png" alt=""><span></span>Quản lý điểm số</h3>
         <span style="color: gray;">Nhập điểm, nhận xét và tạo phiếu điểm học sinh</span>
 
         <div id="ChonLopDS">
@@ -530,7 +531,7 @@
               <div><span>Nội dung</span><textarea style="resize: none;  " id="TXTNDSTLL" placeholder="Nhập nội dung tin nhắn"></textarea></div>
              <button id="btnCSSTLL"><i class="fa-solid fa-paper-plane"></i>Gửi tin nhắn</button>
         </div>
-        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="/img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
+        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="../img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
         <span style="color: gray;">Gửi tin nhắn và thông báo tới phụ huynh học sinh</span>
         </h3>
         <!-----------------Menu Liên lạc------------------->
@@ -566,7 +567,7 @@
          <div id="HopThuDenLL" style="display: block;">
             <span style="font-size: large;font-weight: bold;">Tin nhắn đến</span>
 
-            <div class="TinDenLL" id="TNdenLL.1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+            <div class="TinDenLL" id="TNdenLL1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
                 <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
                     <div> Nguyễn Thị B 
                       <span style="background-color: black;padding: 3px;color: white;border-radius: 10px;">Mới</span> 
@@ -579,7 +580,7 @@
                 <span style="font-size: 13pt;">08:30:00 23/12/2024</span>
             </div>
 
-            <div class="TinDenLL" id="TNdenLL.2" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+            <div class="TinDenLL" id="TNdenLL2" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
                 <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
                     <div>Trần Văn D
                       <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Trần Thị C</span>
@@ -595,16 +596,98 @@
           <!-----------------Hộp thư gửi------------------->
          <div id="DaGuiLL" style="display: none;">
             <span style="font-size: large;font-weight: bold;">Tin nhắn đã gửi</span>
-
-            <div class="TinGuiLL" id="TNGuiLL.1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
-                <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
-                    <div> Gửi đến: Lê Thị F
-                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Lê Văn E</span>
-                    </div> 
+            <div class="TinGuiLL" id="TNGuiLL0" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
                 </span>
-                <p style="font-size: 13pt;font-weight: bold;">Thông báo kết quả kiểm tra</p>
-                <p style="font-size: 13pt;">Chào phụ huynh, con em đã làm bài kiểm tra Toán rất tốt, đạt điểm 9.0. Mong phụ huynh tiếp tục động viên con.</p>
-                <span style="font-size: 13pt;">16:45:00 22/12/2024</span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+            <div class="TinGuiLL" id="TNGuiLL1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+            <div class="TinGuiLL" id="TNGuiLL2" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+            <div class="TinGuiLL" id="TNGuiLL3" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+            <div class="TinGuiLL" id="TNGuiLL4" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+            <div class="TinGuiLL" id="TNGuiLL5" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+
+            <div class="TinGuiLL" id="TNGuiLL6" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+
+            <div class="TinGuiLL" id="TNGuiLL7" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+
+            <div class="TinGuiLL" id="TNGuiLL8" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+
+            <div class="TinGuiLL" id="TNGuiLL9" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
+            </div>
+
+            <div class="TinGuiLL" id="TNGuiLL10" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
+                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+                </span>
+                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
+                <p class="ndguiLL" style="font-size: 13pt;"></p>
+                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                
             </div>
          </div>
 
@@ -613,7 +696,7 @@
             <div id="DabaLL" style="display: block;">
             <span style="font-size: large;font-weight: bold;">Tin nhắn đến</span>
 
-            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
                 <div>
                     <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
                     <div> Nguyễn Thị B
@@ -631,7 +714,7 @@
                 </div>
             </div>
 
-            <div class="DBaLL" id="DanhBaLL.2" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+            <div class="DBaLL" id="DanhBaLL.2" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
                 <div>
                     <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
                     <div> Nguyễn Thị B
@@ -648,7 +731,7 @@
                     <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
                 </div> 
             </div>
-            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 33%;padding: 10px;border-radius: 7px;">
+            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
                 <div>
                     <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
                     <div> Nguyễn Thị B
