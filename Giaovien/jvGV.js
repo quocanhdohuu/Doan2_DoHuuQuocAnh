@@ -91,8 +91,13 @@ btnDanhBaLL.addEventListener('click',function(){
 
 btnguitincsLL.addEventListener('click',function(){
     themtindagui();
+    resetST();
 
 });
+function resetST() {
+    document.getElementById('txttieudeSTLL').value = ''; 
+    document.getElementById('TXTNDSTLL').value = ''; 
+}
 let sotingui=0
 function themtindagui() {
     const phuhuynh = document.querySelector('#chonPHSTLL').value;
