@@ -16,7 +16,7 @@
                     <p>Học sinh: Nguyễn Văn A • Lớp 6A</p>
                 </div>
             </div>
-            <button class="logout">Đăng xuất</button>
+            <a href="../index.html"><button class="logout">Đăng xuất</button></a>
         </header>
 
         <!-- MENU -->
@@ -129,7 +129,6 @@
             <h2>Hồ sơ học sinh</h2>
             <p>Thông tin chi tiết về học sinh</p>
         </div>
-        <button class="nut-cap-nhat">👤 Cập nhật thông tin</button>
         </div>
 
         <div class="luoi-ho-so">
@@ -148,7 +147,7 @@
             <div class="the-thong-tin">
                 <h3>📞 Thông tin liên hệ</h3>
                 <div class="dong-thong-tin">
-                    <span class="nhan">🏠 Địa chỉ:</span>
+                    <span class="nhan">Địa chỉ:</span>
                     <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
                 </div>
                 <div class="dong-thong-tin"><span class="nhan">Phụ huynh:</span><span class="gia-tri">Nguyễn Thị Mẹ</span></div>
@@ -213,6 +212,35 @@
         </section>
 
         <section id="diemdanh" class="tab-content">
+            <div style="margin: 20px;" class="khung-tong-ket">
+                    <div class="tieu-de-khung">
+                        <i class="fa-regular fa-lightbulb"></i>
+                        <h3>Thống kê tháng</h3>
+                    </div>
+
+                    <div class="tong-ket">
+                        <div class="box xanhnhat">
+                            <h3>15</h3>
+                            <p>Tổng ngày học</p>
+                        </div>
+                        <div class="box xanhla">
+                            <h3>12</h3>
+                            <p>Có mặt</p>
+                        </div>
+                        <div class="box tim">
+                            <h3>1</h3>
+                            <p>Đi muộn</p>
+                        </div>
+                        <div class="box vangnhat">
+                            <h3>2</h3>
+                            <p>Vắng mặt</p>
+                        </div>
+                        <div class="box vang">
+                            <h3>80%</h3>
+                            <p>Tỷ lệ có mặt</p>
+                        </div>
+                    </div>
+                </div>
         <div class="khung-diem-danh">
                 <div class="cot-trai">
                 <div class="hop-lich">
@@ -286,28 +314,26 @@
             <div class="khung-chinh">
                 <!-- Cột trái -->
                 <div class="cot-trai">
-                    <h2>Sức khỏe & Dinh dưỡng</h2>
-                    <p class="mota">Theo dõi tình hình sức khỏe và chế độ ăn uống của con</p>
+                <div class="hop-lich">
+                    <h3>Sức khỏe & Dinh dưỡng</h3>
+                    <p>Theo dõi tình hình sức khỏe và chế độ ăn uống của con</p>
                     <div class="lich">
-                    <h4>Chọn ngày</h4>
-                    <div class="lich-header">
+                    <div class="tieu-de-lich">
                         <button>&lt;</button>
-                        <span>November 2025</span>
+                        <span>October 2025</span>
                         <button>&gt;</button>
                     </div>
-                    <div class="hang-tuan">
-                        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
-                    </div>
-                    <div class="ngay-list">
-                        <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span class="chon">1</span><span>2</span>
-                        <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-                        <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
-                        <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-                        <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                    <div class="ngay">
+                        <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                        <div class="mo">28</div><div>29</div><div>30</div><div>1</div><div>2</div><div>3</div><div>4</div>
+                        <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div>
+                        <div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+                        <div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+                        <div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div class="chon">31</div><div>1</div>
                     </div>
                     </div>
                 </div>
-
+                </div>
                 <!-- Cột phải -->
                 <div class="cot-phai">
                     <div class="ngay-list-wrapper">
@@ -470,7 +496,7 @@
 
                     <div class="tomtat-box">
                         <div class="muc-tomtat">
-                        <span class="giatri xanhla">5/7</span>
+                        <span style="background-color: #ffffff;" class="giatri xanhla">5/7</span>
                         <p>Ngày khỏe mạnh</p>
                         </div>
                         <div class="muc-tomtat">
@@ -478,7 +504,7 @@
                         <p>Hoàn thành bữa ăn</p>
                         </div>
                         <div class="muc-tomtat">
-                        <span class="giatri tim">1.2L</span>
+                        <span style="background-color: #ffffff;"class="giatri tim">1.2L</span>
                         <p>Trung bình nước/ngày</p>
                         </div>
                         <div class="muc-tomtat">
