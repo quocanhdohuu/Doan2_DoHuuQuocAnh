@@ -284,7 +284,6 @@ function themghichuvaobangDS() {
   cell4.innerHTML = Nhanxet;
   cell5.innerHTML = Ngay;
   cell6.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
-
   TongDiemTSDS.innerText = tdds;
   DTBTSDS.innerText = diemtbds;
   GioiTSDS.innerText = Gioids;
