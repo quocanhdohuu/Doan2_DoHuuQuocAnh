@@ -1,0 +1,869 @@
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bảng điều khiển phụ huynh</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- HEADER -->
+        <header class="header">
+            <div class="user-info">
+                <span class="icon">😊</span>
+                <div>
+                    <h3>Phụ huynh - Lê Văn C</h3>
+                    <p>Học sinh: Nguyễn Văn A • Lớp 6A</p>
+                </div>
+            </div>
+            <button class="logout">Đăng xuất</button>
+        </header>
+
+        <!-- MENU -->
+        <nav class="menu">
+            <button class="active" data-target="tongquan">Tổng quan</button>
+            <button data-target="hoso">Hồ sơ</button>
+            <button data-target="diemdanh">Điểm danh</button>
+            <button data-target="suckhoe">Sức khỏe</button>
+            <button data-target="hoctap">Học tập</button>
+        </nav>
+
+        <section id="tongquan" class="tab-content active">
+            <!-- TÓM TẮT HÔM NAY -->
+        <section class="card">
+            <h3>Tóm tắt hôm nay</h3>
+            <p>Tình hình học tập và sức khỏe của con hôm nay</p>
+
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="icon green">✔</div>
+                    <span class="tag">Có mặt</span>
+                    <p>Chuyên cần</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon green">♡</div>
+                    <span class="tag">Khỏe mạnh</span>
+                    <p>Sức khỏe</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon green">📘</div>
+                    <span class="tag">Hoàn thành</span>
+                    <p>Bữa ăn</p>
+                </div>
+                <div class="summary-item">
+                    <div class="icon blue">💬</div>
+                    <span class="tag number">2</span>
+                    <p>Tin nhắn mới</p>
+                </div>
+            </div>
+        </section>
+    
+        <section class="info-grid">
+        <div class="info-card">
+            <h3>Thông tin học sinh</h3>
+            <p><strong>Họ tên:</strong> <span>Nguyễn Văn A</span></p>
+            <p><strong>Lớp:</strong> <span class="class-badge">6A</span></p>
+            <p><strong>GVCN:</strong> <span>Nguyễn Thị Lan</span></p>
+            <p><strong>SDT giáo viên:</strong> <span>0123456789</span></p>
+        </div>
+
+        <div class="info-card">
+            <h3>Hoạt động gần đây</h3>
+            <ul>
+                <li><span class="dot green"></span> Điểm kiểm tra Toán: 8.5/10 <br><small>Hôm qua</small></li>
+                <li><span class="dot blue"></span> Tin nhắn từ giáo viên về bài tập <br><small>2 ngày trước</small></li>
+                <li><span class="dot purple"></span> Cập nhật phiếu điểm tháng 12 <br><small>3 ngày trước</small></li>
+            </ul>
+        </div>
+        </section>
+        <!-- Nhận xét giáo viên -->
+        <div class="Nhanxetgv">   
+            <h3>Nhận xét từ giáo viên</h3>    
+            <p>Cập nhật phiếu điểm tháng 12</p>
+            <small>3 ngày trước</small>
+        </div>
+        <section class="Update-sk">   
+            <h3>Sự kiện sắp tới</h3>    
+            <p>Các sự kiện và lịch quan trọng</p>
+            <div class="sk-1">
+                <p>Kiểm tra giữa kì môn toán</p><span class="Loai">Kiểm tra</span>
+                <small>Thứ 2, 25/12/2024</small>
+            </div>
+            <div class="sk-2">
+                <p>Họp phụ huynh cuối kỳ</p><span class="Loai">Họp</span>
+                <small>Thứ 6, 29/12/2024</small>
+            </div>
+            <div class="sk-3">
+                <p>Nghỉ tết dương lịch</p><span class="Loai">Nghỉ lễ</span>
+                <small>01/01/2025</small>
+            </div>
+        </section>
+        <!-- Thao tác nhanh -->
+        <section class="Toigian">
+            <h3>Thao tác nhanh</h3>
+            <div class="Luachon">
+                <div class="Luachon-chucnang">
+                    <div class="icon green">✔</div>
+                    <p>Xem điểm danh</p>
+                </div>
+                <div class="Luachon-chucnang">
+                    <div class="icon green">♡</div>
+                    <p>Sức khỏe</p>
+                </div>
+                <div class="Luachon-chucnang">
+                    <div class="icon green">📘</div>
+                    <p>Xem điểm</p>
+                </div>
+                <div class="Luachon-chucnang">
+                    <div class="icon blue">💬</div>
+                    <p>Liên hệ GV</p>
+                </div>
+            </div>
+        </section>
+        </section>
+        <section id="hoso" class="tab-content">
+        <!-- NỘI DUNG HỒ SƠ -->
+        <section class="khu-vuc-ho-so">
+        <div class="tieu-de-ho-so">
+        <div>
+            <h2>Hồ sơ học sinh</h2>
+            <p>Thông tin chi tiết về học sinh</p>
+        </div>
+        <button class="nut-cap-nhat">👤 Cập nhật thông tin</button>
+        </div>
+
+        <div class="luoi-ho-so">
+
+        <!-- Thông tin cơ bản -->
+            <div class="the-thong-tin">
+                <h3>👤 Thông tin cơ bản</h3>
+                <div class="dong-thong-tin"><span class="nhan">Họ và tên:</span><span class="gia-tri">Nguyễn Văn A</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Mã học sinh:</span><span class="gia-tri the-nho">HS001</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Ngày sinh:</span><span class="gia-tri">15/3/2012</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Lớp:</span><span class="gia-tri the-lop">6A</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Ngày nhập học:</span><span class="gia-tri">1/9/2023</span></div>
+            </div>
+
+            <!-- Thông tin liên hệ -->
+            <div class="the-thong-tin">
+                <h3>📞 Thông tin liên hệ</h3>
+                <div class="dong-thong-tin">
+                    <span class="nhan">🏠 Địa chỉ:</span>
+                    <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
+                </div>
+                <div class="dong-thong-tin"><span class="nhan">Phụ huynh:</span><span class="gia-tri">Nguyễn Thị Mẹ</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Số điện thoại:</span><span class="gia-tri">0987654321</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Email:</span><span class="gia-tri">parent@email.com</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Liên hệ khẩn cấp:</span><span class="gia-tri">Nguyễn Văn Cha - 0123456789</span></div>
+            </div>
+
+            <!-- Thông tin học tập -->
+            <div class="the-thong-tin">
+                <h3>🎓 Thông tin học tập</h3>
+                <div class="dong-thong-tin"><span class="nhan">Lớp hiện tại:</span><span class="gia-tri the-lop">6A</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Giáo viên chủ nhiệm:</span><span class="gia-tri">Nguyễn Thị Lan</span></div>
+                <div class="dong-thong-tin"><span class="nhan">SĐT giáo viên:</span><span class="gia-tri">0123456789</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Email giáo viên:</span><span class="gia-tri">lan.nguyen@school.edu.vn</span></div>
+            </div>
+
+            <!-- Thông tin sức khỏe -->
+            <div class="the-thong-tin">
+                <h3>❤️ Thông tin sức khỏe</h3>
+                <div class="dong-thong-tin"><span class="nhan">Nhóm máu:</span><span class="gia-tri the-nho do-dam">A+</span></div>
+                <div class="dong-thong-tin"><span class="nhan">Dị ứng:</span><span class="gia-tri">Không có</span></div>
+
+                <div class="hop-luu-y">
+                    <strong>Lưu ý:</strong> Thông tin sức khỏe này được cập nhật từ hồ sơ y tế học đường. 
+                    Vui lòng thông báo với nhà trường khi có thay đổi.
+                </div>
+            </div>
+        </div>
+        <!-- Danh bạ khẩn cấp -->
+        <div class="the-thong-tin danh-ba">
+            <h3>📞 Danh bạ khẩn cấp</h3>
+            <p class="mo-ta">Các số điện thoại liên hệ trong trường hợp khẩn cấp</p>
+
+            <div class="luoi-danh-ba">
+                <div class="o-lien-he">
+                    <div class="bieu-tuong xanhduong">📞</div>
+                    <div class="noi-dung">
+                        <strong>Văn phòng nhà trường</strong>
+                        <p>(024) 1234 5678</p>
+                    </div>
+                </div>
+
+                <div class="o-lien-he">
+                    <div class="bieu-tuong xanhla">📱</div>
+                    <div class="noi-dung">
+                        <strong>Y tế học đường</strong>
+                        <p>(024) 1234 5679</p>
+                    </div>
+                </div>
+
+                <div class="o-lien-he">
+                    <div class="bieu-tuong tim">☎️</div>
+                    <div class="noi-dung">
+                        <strong>Giáo viên chủ nhiệm</strong>
+                        <p>0123456789</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        </section>
+
+        <section id="diemdanh" class="tab-content">
+        <div class="khung-diem-danh">
+                <div class="cot-trai">
+                <div class="hop-lich">
+                    <h3>Lịch điểm danh</h3>
+                    <p>Nhấn vào ngày để xem chi tiết</p>
+                    <div class="lich">
+                    <div class="tieu-de-lich">
+                        <button>&lt;</button>
+                        <span>October 2025</span>
+                        <button>&gt;</button>
+                    </div>
+                    <div class="ngay">
+                        <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                        <div class="mo">28</div><div>29</div><div>30</div><div>1</div><div>2</div><div>3</div><div>4</div>
+                        <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div>
+                        <div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+                        <div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+                        <div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div class="chon">31</div><div>1</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="cot-phai">
+                <div class="hop-chi-tiet">
+                    <h3>Chi tiết điểm danh</h3>
+                    <p>Danh sách điểm danh theo ngày</p>
+                    <div class="ds-ngay">
+                    <div class="muc">
+                        <span>✅ Thứ Hai, 23/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>✅ Chủ Nhật, 22/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>⚠️ Thứ Bảy, 21/12/2024</span>
+                        <div class="ghi-chu">Đến muộn 10 phút do kẹt xe</div>
+                        <span class="trang-thai di-muon">Đi muộn</span>
+                    </div>
+                    <div class="muc">
+                        <span>✅ Thứ Sáu, 20/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>❌ Thứ Năm, 19/12/2024</span>
+                        <div class="ghi-chu">Ốm sốt</div>
+                        <span class="trang-thai vang-mat">Vắng mặt</span>
+                    </div>
+                    <div class="muc">
+                        <span>✅ Thứ Tư, 18/12/2024</span>
+                        <span class="trang-thai co-mat">Có mặt</span>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="hop-chi-tiet-ngay">
+                    <h4>📅 Chi tiết ngày 31/10/2025</h4>
+                    <div class="no-data">
+                    <div class="icon">📆</div>
+                    <p>Không có dữ liệu điểm danh cho ngày này</p>
+                    <span>Có thể là ngày nghỉ hoặc chưa được cập nhật</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="suckhoe" class="tab-content">
+            <div class="khung-chinh">
+                <!-- Cột trái -->
+                <div class="cot-trai">
+                    <h2>Sức khỏe & Dinh dưỡng</h2>
+                    <p class="mota">Theo dõi tình hình sức khỏe và chế độ ăn uống của con</p>
+                    <div class="lich">
+                    <h4>Chọn ngày</h4>
+                    <div class="lich-header">
+                        <button>&lt;</button>
+                        <span>November 2025</span>
+                        <button>&gt;</button>
+                    </div>
+                    <div class="hang-tuan">
+                        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                    </div>
+                    <div class="ngay-list">
+                        <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span class="chon">1</span><span>2</span>
+                        <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+                        <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+                        <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                        <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Cột phải -->
+                <div class="cot-phai">
+                    <div class="ngay-list-wrapper">
+                    <!-- Ngày 1 -->
+                    <div class="ngay-khoi khoe-manh">
+                        <div class="tieu-de-ngay">
+                        <span>Thứ Hai, 23 tháng 12, 2024</span>
+                        <span class="trang-thai xanh">Khỏe mạnh</span>
+                        </div>
+                        <div class="muc">
+                        <h4>Tình hình sức khỏe</h4>
+                        <div class="thongtin">
+                            <div class="nhietdo">
+                            <p>Nhiệt độ</p>
+                            <span>36.5°C</span>
+                            </div>
+                            <div class="ghichu">
+                            <p>Ghi chú</p>
+                            <span>Khỏe mạnh, tinh thần tốt</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="muc">
+                        <h4>Chế độ ăn uống</h4>
+                        <div class="bua-an">
+                            <div class="bua">
+                            <div class="icon">🍎</div>
+                            <p>Bữa sáng</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon">🍽️</div>
+                            <p>Bữa trưa</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon">🍇</div>
+                            <p>Bữa phụ</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon nuocuong"></div>
+                            <p>Nước uống</p>
+                            <span class="lit">1.2L</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="ghichu-an">
+                        <p>Ghi chú dinh dưỡng</p>
+                        <span>Ăn uống đầy đủ, không kén ăn</span>
+                        </div>
+                    </div>
+
+                    <!-- Ngày 2 -->
+                    <div class="ngay-khoi can-chu-y">
+                        <div class="tieu-de-ngay">
+                        <span>Chủ Nhật, 22 tháng 12, 2024</span>
+                        <span class="trang-thai vang">Cần chú ý</span>
+                        </div>
+                        <div class="muc">
+                        <h4>Tình hình sức khỏe</h4>
+                        <div class="thongtin">
+                            <div class="nhietdo">
+                            <p>Nhiệt độ</p>
+                            <span>37.1°C</span>
+                            </div>
+                            <div class="ghichu">
+                            <p>Ghi chú</p>
+                            <span>Hơi mệt, cần theo dõi</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="muc">
+                        <h4>Chế độ ăn uống</h4>
+                        <div class="bua-an">
+                            <div class="bua">
+                            <div class="icon">🍎</div>
+                            <p>Bữa sáng</p>
+                            <span class="motphan">Một phần</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon">🍽️</div>
+                            <p>Bữa trưa</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon">🍇</div>
+                            <p>Bữa phụ</p>
+                            <span class="thieu">Không ăn</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon nuocuong"></div>
+                            <p>Nước uống</p>
+                            <span class="lit">0.8L</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="ghichu-an">
+                        <p>Ghi chú dinh dưỡng</p>
+                        <span>Ăn ít vào buổi sáng, cần khuyến khích</span>
+                        </div>
+                    </div>
+
+                    <!-- Ngày 3 -->
+                    <div class="ngay-khoi khoe-manh">
+                        <div class="tieu-de-ngay">
+                        <span>Thứ Bảy, 21 tháng 12, 2024</span>
+                        <span class="trang-thai xanh">Khỏe mạnh</span>
+                        </div>
+                        <div class="muc">
+                        <h4>Tình hình sức khỏe</h4>
+                        <div class="thongtin">
+                            <div class="nhietdo">
+                            <p>Nhiệt độ</p>
+                            <span>36.3°C</span>
+                            </div>
+                            <div class="ghichu">
+                            <p>Ghi chú</p>
+                            <span>Khỏe mạnh, năng động</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="muc">
+                        <h4>Chế độ ăn uống</h4>
+                        <div class="bua-an">
+                            <div class="bua">
+                            <div class="icon">🍎</div>
+                            <p>Bữa sáng</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon">🍽️</div>
+                            <p>Bữa trưa</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon">🍇</div>
+                            <p>Bữa phụ</p>
+                            <span class="daydu">Đầy đủ</span>
+                            </div>
+                            <div class="bua">
+                            <div class="icon nuocuong"></div>
+                            <p>Nước uống</p>
+                            <span class="lit">1.5L</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="ghichu-an">
+                        <p>Ghi chú dinh dưỡng</p>
+                        <span>Ăn uống tốt, uống đủ nước</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+               
+                </div>
+                <div class="tomtat-tuan">
+                    <h3>Tóm tắt tuần này</h3>
+                    <p class="phu-de">Thống kê sức khỏe và dinh dưỡng 7 ngày gần đây</p>
+
+                    <div class="tomtat-box">
+                        <div class="muc-tomtat">
+                        <span class="giatri xanhla">5/7</span>
+                        <p>Ngày khỏe mạnh</p>
+                        </div>
+                        <div class="muc-tomtat">
+                        <span class="giatri xanhduong">85%</span>
+                        <p>Hoàn thành bữa ăn</p>
+                        </div>
+                        <div class="muc-tomtat">
+                        <span class="giatri tim">1.2L</span>
+                        <p>Trung bình nước/ngày</p>
+                        </div>
+                        <div class="muc-tomtat">
+                        <span class="giatri cam">36.4°C</span>
+                        <p>Nhiệt độ trung bình</p>
+                        </div>
+                    </div>
+                    </div>
+        </section>
+
+        <section id="hoctap" class="tab-content">
+            <div class="khu-vuc-hoc-tap">
+
+                <!-- Tiêu đề -->
+                <div class="tieu-de-hoc-tap">
+                    <div>
+                        <h2>Kết quả học tập</h2>
+                        <p>Theo dõi điểm số và nhận xét của giáo viên</p>
+                    </div>
+                    <div class="hanh-dong-hoc-tap">
+                        <select class="chon-hoc-ky">
+                            <option>Học kỳ 1 - 2024</option>
+                            <option>Học kỳ 2 - 2024</option>
+                        </select>
+                        <button class="tai-phieu">
+                            <i class="fa-solid fa-download"></i> Tải phiếu điểm
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KHUNG TỔNG KẾT HỌC KỲ -->
+                <div class="khung-tong-ket">
+                    <div class="tieu-de-khung">
+                        <i class="fa-regular fa-lightbulb"></i>
+                        <h3>Tổng kết học kỳ</h3>
+                    </div>
+
+                    <div class="tong-ket">
+                        <div class="box xanhnhat">
+                            <h3>8.5</h3>
+                            <p>Điểm trung bình</p>
+                        </div>
+                        <div class="box xanhla">
+                            <h3>#5</h3>
+                            <p>Xếp hạng lớp</p>
+                        </div>
+                        <div class="box tim">
+                            <h3>32</h3>
+                            <p>Tổng sĩ số</p>
+                        </div>
+                        <div class="box vang">
+                            <span class="nhan">Tốt</span>
+                            <p>Hạnh kiểm</p>
+                        </div>
+                        <div class="box vangnhat">
+                            <span class="nhan">Tốt</span>
+                            <p>Học lực</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" data-tab="all">Tất cả môn học</button>
+                    <button class="tab" data-tab="main">Môn chính</button>
+                    <button class="tab" data-tab="progress">Tiến độ</button>
+                </div>
+
+                <!-- Môn học -->
+                <section class="tatcamonhoc">
+                <div class="mon-hoc">
+                    <div class="tieu-de-mon">
+                        <div class="ten-mon">
+                            <i class="icon-book">📘</i>
+                            <h3>Toán</h3>
+                            <p>Giáo viên: Nguyễn Thị Lan</p>
+                        </div>
+                        <div class="diem-tb">
+                            <div class="diem-badge">8.6</div>
+                            <div class="diem-label">Điểm TB</div>
+                        </div>
+                        </div>
+                    <div class="bang-diem">
+                        <div class="cot xanhnhat">
+                            <p>Miệng</p>
+                            <span>8.5 - 9.0 - 7.5 - 8.0</span>
+                        </div>
+                        <div class="cot xanhla">
+                            <p>15 phút</p>
+                            <span>8.0 - 8.5 - 9.0</span>
+                        </div>
+                        <div class="cot xanhduong">
+                            <p>1 tiết</p>
+                            <span>8.5 - 9.0</span>
+                        </div>
+                        <div class="cot tim">
+                            <p>Giữa kỳ</p>
+                            <span>8.8</span>
+                        </div>
+                        <div class="cot vang">
+                            <p>Cuối kỳ</p>
+                            <span>9.2</span>
+                        </div>
+                        <div class="cot hong">
+                            <p>Trung bình</p>
+                            <span>8.6</span>
+                        </div>
+                    </div>
+
+                    <div class="nhan-xet">
+                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <p>Em có năng khiếu toán học tốt, cần phát huy thêm.</p>
+                    </div>
+                </div>
+                <div class="mon-hoc">
+                    <div class="tieu-de-mon">
+                        <div class="ten-mon">
+                            <i class="icon-book">📘</i>
+                            <h3>Ngữ Văn</h3>
+                            <p>Giáo viên: Trần Văn Minh</p>
+                        </div>
+                        <div class="diem-tb">
+                            <div class="diem-badge">8.2</div>
+                            <div class="diem-label">Điểm TB</div>
+                        </div>
+                        </div>
+                    <div class="bang-diem">
+                        <div class="cot xanhnhat">
+                            <p>Miệng</p>
+                            <span>8.0 - 8.5 - 7.8 - 8.2</span>
+                        </div>
+                        <div class="cot xanhla">
+                            <p>15 phút</p>
+                            <span>7.5 - 8.0 - 8.5</span>
+                        </div>
+                        <div class="cot xanhduong">
+                            <p>1 tiết</p>
+                            <span>8.0 - 8.3</span>
+                        </div>
+                        <div class="cot tim">
+                            <p>Giữa kỳ</p>
+                            <span>8.1</span>
+                        </div>
+                        <div class="cot vang">
+                            <p>Cuối kỳ</p>
+                            <span>8.5</span>
+                        </div>
+                        <div class="cot hong">
+                            <p>Trung bình</p>
+                            <span>8.2</span>
+                        </div>
+                    </div>
+
+                    <div class="nhan-xet">
+                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <p>Em có khả năng diễn đạt tốt, cần đọc thêm nhiều sách.</p>
+                    </div>
+                </div>
+
+                <div class="mon-hoc">
+                    <div class="tieu-de-mon">
+                        <div class="ten-mon">
+                            <i class="icon-book">📘</i>
+                            <h3>Tiếng Anh</h3>
+                            <p>Giáo viên: Sarah Johnson</p>
+                        </div>
+                        <div class="diem-tb">
+                            <div class="diem-badge">9.1</div>
+                            <div class="diem-label">Điểm TB</div>
+                        </div>
+                        </div>
+                    <div class="bang-diem">
+                        <div class="cot xanhnhat">
+                            <p>Miệng</p>
+                            <span>9.0 - 8.5 - 9.2 - 8.8</span>
+                        </div>
+                        <div class="cot xanhla">
+                            <p>15 phút</p>
+                            <span>9.0 - 9.5 - 8.8</span>
+                        </div>
+                        <div class="cot xanhduong">
+                            <p>1 tiết</p>
+                            <span>9.2 - 9.0</span>
+                        </div>
+                        <div class="cot tim">
+                            <p>Giữa kỳ</p>
+                            <span>9.1</span>
+                        </div>
+                        <div class="cot vang">
+                            <p>Cuối kỳ</p>
+                            <span>9.3</span>
+                        </div>
+                        <div class="cot hong">
+                            <p>Trung bình</p>
+                            <span>9.1</span>
+                        </div>
+                    </div>
+
+                    <div class="nhan-xet">
+                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <p>Excellent pronunciation and vocabulary. Keep up the good work!</p>
+                    </div>
+                </div>
+                 <div class="mon-hoc">
+                    <div class="tieu-de-mon">
+                        <div class="ten-mon">
+                            <i class="icon-book">📘</i>
+                            <h3>Khoa học tự nhiên</h3>
+                            <p>Giáo viên: Lê Thị Hoa</p>
+                        </div>
+                        <div class="diem-tb">
+                            <div class="diem-badge">8.4</div>
+                            <div class="diem-label">Điểm TB</div>
+                        </div>
+                        </div>
+                    <div class="bang-diem">
+                        <div class="cot xanhnhat">
+                            <p>Miệng</p>
+                            <span>8.2 - 8.0 - 8.5 - 8.3</span>
+                        </div>
+                        <div class="cot xanhla">
+                            <p>15 phút</p>
+                            <span>8.0 - 8.5 - 8.2</span>
+                        </div>
+                        <div class="cot xanhduong">
+                            <p>1 tiết</p>
+                            <span>8.3 - 8.6</span>
+                        </div>
+                        <div class="cot tim">
+                            <p>Giữa kỳ</p>
+                            <span>8.2</span>
+                        </div>
+                        <div class="cot vang">
+                            <p>Cuối kỳ</p>
+                            <span>8.7</span>
+                        </div>
+                        <div class="cot hong">
+                            <p>Trung bình</p>
+                            <span>8.4</span>
+                        </div>
+                    </div>
+
+                    <div class="nhan-xet">
+                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <p>Em tỏ ra hứng thú với các thí nghiệm khoa học.</p>
+                    </div>
+                </div>
+            </div>
+            </section>
+            <section class="monchinh">
+                <h3>Tổng quan môn học</h3>
+            <div class="subjects" id="subject-list">
+                <!-- Môn Toán -->
+                <div class="subject" data-type="main">
+                    <div class="subject-header">
+                    <h3>📘 Toán</h3>
+                    <span class="score-box">8.6</span>
+                    </div>
+                    <p>Điểm trung bình: <strong>8.6</strong></p>
+                    <div class="progress-bar">
+                    <div class="fill" style="width: 86%"></div>
+                    </div>
+                </div>
+
+                <!-- Môn Ngữ Văn -->
+                <div class="subject" data-type="main">
+                    <div class="subject-header">
+                    <h3>📗 Ngữ Văn</h3>
+                    <span class="score-box">8.2</span>
+                    </div>
+                    <p>Điểm trung bình: <strong>8.2</strong></p>
+                    <div class="progress-bar">
+                    <div class="fill" style="width: 82%"></div>
+                    </div>
+                </div>
+
+                <!-- Môn Tiếng Anh -->
+                <div class="subject" data-type="main">
+                    <div class="subject-header">
+                    <h3>📙 Tiếng Anh</h3>
+                    <span class="score-box green">9.1</span>
+                    </div>
+                    <p>Điểm trung bình: <strong>9.1</strong></p>
+                    <div class="progress-bar">
+                    <div class="fill" style="width: 91%"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </section>
+            <section class="tiendo">
+                <div class="vung-chua">
+                    <!-- Tiêu đề biểu đồ -->
+                    <div class="tieu-de-bieu-do">
+                    <svg class="bieu-tuong-thong-ke" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    Biểu đồ tiến độ học tập
+                    </div>
+                    <p class="mo-ta-phu">Sự phát triển điểm số qua các kỳ thi</p>
+
+                    <!-- Môn Toán -->
+                    <div class="mon-hoc">
+                    <div class="ten-mon-va-xu-huong">
+                        <span class="ten-mon">Toán</span>
+                        <div class="xu-huong">
+                        <svg class="mui-ten-tang" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                        </svg>
+                        Xu hướng: Tăng
+                        </div>
+                    </div>
+                    <div class="thanh-tien-do-nen">
+                        <div class="thanh-tien-do" style="width: 92%;"></div>
+                    </div>
+                    <div class="nhan-diem">
+                        <span class="diem-giua-ky">Giữa kỳ: 8.8</span>
+                        <span class="diem-cuoi-ky">Cuối kỳ: 9.2</span>
+                    </div>
+                    </div>
+
+                    <!-- Môn Ngữ Văn -->
+                    <div class="mon-hoc">
+                    <div class="ten-mon-va-xu-huong">
+                        <span class="ten-mon">Ngữ Văn</span>
+                        <div class="xu-huong">
+                        <svg class="mui-ten-tang" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                        </svg>
+                        Xu hướng: Tăng
+                        </div>
+                    </div>
+                    <div class="thanh-tien-do-nen">
+                        <div class="thanh-tien-do" style="width: 85%;"></div>
+                    </div>
+                    <div class="nhan-diem">
+                        <span class="diem-giua-ky">Giữa kỳ: 8.1</span>
+                        <span class="diem-cuoi-ky">Cuối kỳ: 8.5</span>
+                    </div>
+                    </div>
+
+                    <!-- Môn Tiếng Anh -->
+                    <div class="mon-hoc">
+                    <div class="ten-mon-va-xu-huong">
+                        <span class="ten-mon">Tiếng Anh</span>
+                        <div class="xu-huong">
+                        <svg class="mui-ten-tang" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                        </svg>
+                        Xu hướng: Tăng
+                        </div>
+                    </div>
+                    <div class="thanh-tien-do-nen">
+                        <div class="thanh-tien-do" style="width: 93%;"></div>
+                    </div>
+                    <div class="nhan-diem">
+                        <span class="diem-giua-ky">Giữa kỳ: 9.1</span>
+                        <span class="diem-cuoi-ky">Cuối kỳ: 9.3</span>
+                    </div>
+                    </div>
+
+                    <!-- Môn Khoa học tự nhiên -->
+                    <div class="mon-hoc">
+                    <div class="ten-mon-va-xu-huong">
+                        <span class="ten-mon">Khoa học tự nhiên</span>
+                        <div class="xu-huong">
+                        <svg class="mui-ten-tang" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                        </svg>
+                        Xu hướng: Tăng
+                        </div>
+                    </div>
+                    <div class="thanh-tien-do-nen">
+                        <div class="thanh-tien-do" style="width: 87%;"></div>
+                    </div>
+                    <div class="nhan-diem">
+                        <span class="diem-giua-ky">Giữa kỳ: 8.2</span>
+                        <span class="diem-cuoi-ky">Cuối kỳ: 8.7</span>
+                    </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+    <script src="main.js"></script>
+    </body>
+    </html>
