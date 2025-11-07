@@ -60,7 +60,7 @@ btnSucKhoe.addEventListener('click',function(){
 });
 
 btnDangXuat.addEventListener('click',function(){
-    window.location.href = `index.html`;
+    window.location.href = `${basePath}${projectRoot}/Admin/index.html`;
 });
 //---------------------------------Liên lạc------------------------------------
 const btnHopThuDenLL = document.querySelector('#btnHopThuDenLL');
