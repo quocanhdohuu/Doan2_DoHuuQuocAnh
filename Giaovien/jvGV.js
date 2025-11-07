@@ -59,9 +59,6 @@ btnSucKhoe.addEventListener('click',function(){
     doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac');
 });
 
-btnDangXuat.addEventListener('click',function(){
-    window.location.href = `${basePath}${projectRoot}/Admin/index.html`;
-});
 //---------------------------------Liên lạc------------------------------------
 const btnHopThuDenLL = document.querySelector('#btnHopThuDenLL');
 const btnTinnhandiLL=document.querySelector('#btnTinNhanDiLL');
