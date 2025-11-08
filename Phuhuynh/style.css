@@ -505,9 +505,6 @@ body {
   gap: 20px;
 }
 /* ----- Lịch ----- */
-.hop-lich h3,p{
-    margin: 8px;
-}
 .lich {
   background: #fff;
   border-radius: 10px;
@@ -717,6 +714,10 @@ body {
     padding: 12px 8px;
 }
 .bua .icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+.bua i {
     font-size: 24px;
     margin-bottom: 6px;
 }
