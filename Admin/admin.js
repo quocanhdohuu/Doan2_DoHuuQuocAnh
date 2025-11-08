@@ -357,3 +357,214 @@ deleteButtons.forEach((button) => {
     }
   });
 });
+
+//Xử lý Thêm, sửa, xoá QL sự kiện
+const eventForm = document.getElementById("eventForm");
+const eventFormUpdate = document.getElementById("eventFormUpdate");
+const eventList = document.querySelector(".event-list");
+
+let editIndex = null;
+
+function getEvents() {
+  return JSON.parse(localStorage.getItem("events")) || [];
+}
+
+function saveEvents(events) {
+  localStorage.setItem("events", JSON.stringify(events));
+}
+
+function getTagColor(type) {
+  switch (type) {
+    case "Học thuật":
+      return "blue";
+    case "Kiểm tra":
+      return "red";
+    case "Họp":
+      return "purple";
+    case "Nghỉ lễ":
+      return "green";
+    default:
+      return "gray";
+  }
+}
+
+// ------------------ HÀM XỬ LÝ NGÀY ------------------
+function toISODateString(dateStr) {
+  if (!dateStr) return null;
+  dateStr = dateStr.trim();
+
+  if (dateStr.includes("/")) {
+    const [d, m, y] = dateStr.split("/");
+    return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
+  }
+
+  if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) return dateStr;
+
+  const parsed = new Date(dateStr);
+  if (!isNaN(parsed)) {
+    const y = parsed.getFullYear();
+    const m = String(parsed.getMonth() + 1).padStart(2, "0");
+    const d = String(parsed.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+
+  return null;
+}
+
+function getEventStatus(dateStr) {
+  const iso = toISODateString(dateStr);
+  if (!iso) return { class: "upcoming", text: "Sắp tới" };
+
+  const eventDate = new Date(iso + "T00:00:00");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (eventDate < today) {
+    return { class: "ended", text: "Đã kết thúc" };
+  } else {
+    return { class: "upcoming", text: "Sắp tới" };
+  }
+}
+
+function getTagEvent(dateStr) {
+  const status = getEventStatus(dateStr);
+  switch (status.text) {
+    case "Đã kết thúc":
+      return "gray";
+    case "Sắp tới":
+      return "blue";
+  }
+}
+
+function renderEvents() {
+  const events = getEvents();
+  eventList.innerHTML = "";
+
+  events.forEach((ev, index) => {
+    const div = document.createElement("div");
+    div.classList.add(`listevent`, `${getTagEvent(ev.date)}`);
+
+    const status = getEventStatus(ev.date);
+
+    div.innerHTML = `
+      <div class="event-content">
+        <div class="eventlist-header">
+          <h3>${ev.name}</h3>
+          <span class="tag ${getTagColor(ev.type)}">${ev.type}</span>
+          <span class="status ${status.class}">${status.text}</span>
+        </div>
+        <p>${ev.desc}</p>
+        <div class="eventlist-footer">
+          <i class="fa-regular fa-calendar"></i>
+          <span>${ev.date}</span>
+          <i class="fa-regular fa-clock"></i>
+          <span>${ev.time}</span>
+        </div>
+      </div>
+      <div class="eventlist-actions">
+        <button class="edit editEvent" data-index="${index}">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+        <button class="delete deleteEvent" data-index="${index}">
+          <i class="fa-regular fa-trash-can"></i>
+        </button>
+      </div>
+    `;
+    eventList.appendChild(div);
+  });
+
+  attachEventButtons();
+}
+
+eventForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("event-name").value.trim();
+  const desc = document.getElementById("event-description").value.trim();
+  const date = document.getElementById("event-date").value.trim();
+  const time = document.getElementById("event-time").value.trim();
+  const typeInput = document.querySelector(
+    "#eventModal input[name='type']:checked"
+  );
+  const type = typeInput ? typeInput.nextElementSibling.textContent : "Khác";
+
+  if (!name || !date || !time) {
+    alert("Vui lòng nhập đầy đủ thông tin!");
+    return;
+  }
+
+  const events = getEvents();
+  events.push({ name, desc, date, time, type });
+  saveEvents(events);
+
+  renderEvents();
+  eventForm.reset();
+
+  document.getElementById("eventModal").style.display = "none";
+  document.getElementById("overlayevent").style.display = "none";
+});
+
+function attachEventButtons() {
+  document.querySelectorAll(".editEvent").forEach((btn) => {
+    btn.onclick = () => {
+      const index = parseInt(btn.dataset.index);
+      const events = getEvents();
+      const ev = events[index];
+      editIndex = index;
+
+      document.getElementById("event-nameUpdate").value = ev.name;
+      document.getElementById("event-descriptionUpdate").value = ev.desc;
+      document.getElementById("event-dateUpdate").value = ev.date;
+      document.getElementById("event-timeUpdate").value = ev.time;
+
+      document
+        .querySelectorAll("#eventModalUpdate input[name='type']")
+        .forEach((input) => {
+          input.checked = input.nextElementSibling.textContent === ev.type;
+        });
+
+      document.getElementById("eventModalUpdate").style.display = "block";
+      document.getElementById("overlayevent").style.display = "block";
+    };
+  });
+
+  document.querySelectorAll(".deleteEvent").forEach((btn) => {
+    btn.onclick = () => {
+      const index = parseInt(btn.dataset.index);
+      const events = getEvents();
+      if (confirm("Bạn có chắc muốn xoá sự kiện này không?")) {
+        events.splice(index, 1);
+        saveEvents(events);
+        renderEvents();
+      }
+    };
+  });
+}
+
+eventFormUpdate.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (editIndex === null) return; // Không có sự kiện nào đang sửa
+
+  const name = document.getElementById("event-nameUpdate").value.trim();
+  const desc = document.getElementById("event-descriptionUpdate").value.trim();
+  const date = document.getElementById("event-dateUpdate").value.trim();
+  const time = document.getElementById("event-timeUpdate").value.trim();
+  const typeInput = document.querySelector(
+    "#eventModalUpdate input[name='type']:checked"
+  );
+  const type = typeInput ? typeInput.nextElementSibling.textContent : "Khác";
+
+  const events = getEvents();
+  events[editIndex] = { name, desc, date, time, type }; // cập nhật đúng index
+  saveEvents(events);
+
+  renderEvents();
+  eventFormUpdate.reset();
+  editIndex = null;
+
+  document.getElementById("eventModalUpdate").style.display = "none";
+  document.getElementById("overlayevent").style.display = "none";
+});
+
+document.addEventListener("DOMContentLoaded", renderEvents);

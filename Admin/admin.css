@@ -563,6 +563,18 @@ select {
   border: 1px solid #ddd;
   width: 25px;
 }
+.tag.green {
+  background: #f3e5f5;
+  color: #19ce6a;
+  border: 1px solid #ddd;
+  width: 43px;
+}
+.tag.gray {
+  background: #f3e5f5;
+  color: #262626;
+  border: 1px solid #ddd;
+  width: 26px;
+}
 
 .status {
   font-size: 9pt;
