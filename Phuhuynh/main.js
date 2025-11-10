@@ -37,69 +37,51 @@ document.querySelectorAll(".ngay div").forEach(ngay => {
     document.querySelector(".hop-chi-tiet-ngay h4").innerHTML = `📅 Chi tiết ngày ${ngay.innerText}/10/2025`;
   });
 });
-// Phần học tập: sửa tabs để điều khiển các phần tử .subject
-const tabs = document.querySelectorAll('.tab');
-// Danh sách subject nhỏ ở cuối phần Học tập (class .subject)
-const subjects = document.querySelectorAll('.subject');
+// --- Lấy các phần tử cần thao tác ---
+const tabs = document.querySelectorAll('.tab'); // 3 nút tab
+const sectionAll = document.querySelector('.tatcamonhoc'); // phần "Tất cả môn học"
+const sectionMain = document.querySelector('.monchinh');   // phần "Môn chính"
+const sectionProgress = document.querySelector('.tiendo'); // phần "Tiến độ"
 
-function updateSubjectVisibility(tabType) {
-  subjects.forEach(sub => {
-    const type = sub.dataset.type || '';
-    // score có thể nằm trong .score-box hoặc .diem-badge (dự phòng)
-    const scoreEl = sub.querySelector('.score-box') || sub.querySelector('.diem-badge');
-    const score = scoreEl ? parseFloat(scoreEl.innerText) : NaN;
+// --- Hàm cập nhật hiển thị theo tab ---
+function showSection(tabType) {
+  // 1️⃣ Ẩn tất cả các phần trước
+  sectionAll.style.display = 'none';
+  sectionMain.style.display = 'none';
+  sectionProgress.style.display = 'none';
 
-    if (tabType === 'all') {
-      sub.style.display = 'block';
-    } else if (tabType === 'main') {
-      sub.style.display = (type === 'main') ? 'block' : 'none';
-    } else if (tabType === 'progress') {
-      // Hiển thị môn có điểm trung bình < 8.5 (nếu không có score thì ẩn)
-      sub.style.display = (!isNaN(score) && score < 8.5) ? 'block' : 'none';
+  // 2️⃣ Hiện phần tương ứng với tab đang chọn
+  if (tabType === 'all') {
+    sectionAll.style.display = 'block';
+  } else if (tabType === 'main') {
+    sectionMain.style.display = 'block';
+  } else if (tabType === 'progress') {
+    sectionProgress.style.display = 'block';
+  }
+
+  // 3️⃣ Cập nhật trạng thái active của tab
+  tabs.forEach(tab => {
+    if (tab.dataset.tab === tabType) {
+      tab.classList.add('active');
     } else {
-      sub.style.display = 'block';
+      tab.classList.remove('active');
     }
   });
 }
+
+// --- Gắn sự kiện click cho từng tab ---
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const tabType = tab.dataset.tab;
-    updateSubjectVisibility(tabType);
+    const tabType = tab.dataset.tab; // Lấy loại tab (all / main / progress)
+    showSection(tabType);            // Cập nhật hiển thị
   });
 });
-// Khởi tạo trạng thái hiển thị dựa trên tab active (nếu có)
+
+// --- Khi tải trang, tự kích hoạt tab đang active ban đầu ---
 const activeTab = document.querySelector('.tab.active');
-if (activeTab) updateSubjectVisibility(activeTab.dataset.tab);
-// --- Hiển thị/ẩn 3 phần chính trong khu vực Học tập ---
-const sectionAll = document.querySelector('.tatcamonhoc');
-const sectionMain = document.querySelector('.monchinh');
-const sectionProgress = document.querySelector('.tiendo');
-function updateTabSections(tabType) {
-  // Nếu các section không tồn tại, không làm gì
-  if (!sectionAll && !sectionMain && !sectionProgress) return;
-  // Mặc định ẩn cả 3
-  if (sectionAll) sectionAll.style.display = 'none';
-  if (sectionMain) sectionMain.style.display = 'none';
-  if (sectionProgress) sectionProgress.style.display = 'none';
-  if (tabType === 'all') {
-    if (sectionAll) sectionAll.style.display = 'block';
-  } else if (tabType === 'main') {
-    if (sectionMain) sectionMain.style.display = 'block';
-  } else if (tabType === 'progress') {
-    if (sectionProgress) sectionProgress.style.display = 'block';
-  } else {
-    // fallback: show all
-    if (sectionAll) sectionAll.style.display = 'block';
-  }
+if (activeTab) {
+  showSection(activeTab.dataset.tab);
+} else {
+  // Nếu chưa có tab active, mặc định là "Tất cả môn học"
+  showSection('all');
 }
-// Kết hợp: khi thay đổi tab, cập nhật cả subject list và các section lớn
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const tabType = tab.dataset.tab;
-    updateTabSections(tabType);
-  });
-});
-// Khởi tạo hiển thị section lớn theo tab active
-if (activeTab) updateTabSections(activeTab.dataset.tab);
