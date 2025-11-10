@@ -756,7 +756,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTeachers();
 });
 
-// xử lý QL học sinh
+// Xử lý Quản lý học sinh
 document.addEventListener("DOMContentLoaded", () => {
   // -------------------- STORAGE HELPERS --------------------
   const getClasses = () => JSON.parse(localStorage.getItem("classes") || "[]");
@@ -768,6 +768,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // -------------------- TOAST --------------------
   function showToast(type = "success", message = "") {
     const container = document.getElementById("toastContainer");
+    if (!container) return;
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.textContent = message;
@@ -781,13 +782,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------- CẬP NHẬT SELECT LỚP --------------------
-  function updateStudentClassSelect() {
-    const selects = [
+  function updateClassSelectOptions() {
+    const selectFilters = document.querySelector(".student-actions select");
+    const formSelects = [
       document.getElementById("studentClass"),
       document.getElementById("updateClass"),
     ];
     const classes = getClasses();
-    selects.forEach((sel) => {
+
+    // Load dropdown lọc
+    if (selectFilters) {
+      selectFilters.innerHTML = `<option value="">Tất cả các lớp</option>`;
+      classes.forEach((c) => {
+        const opt = document.createElement("option");
+        opt.value = c.name;
+        opt.textContent = c.name;
+        selectFilters.appendChild(opt);
+      });
+    }
+
+    // Load dropdown trong form
+    formSelects.forEach((sel) => {
       if (!sel) return;
       sel.innerHTML = `<option value="">Chọn lớp</option>`;
       classes.forEach((c) => {
@@ -799,13 +814,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // -------------------- FORMAT NGÀY --------------------
+  function formatDate(dateStr) {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    if (isNaN(d)) return dateStr;
+    return `${d.getDate().toString().padStart(2, "0")}/${(d.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}/${d.getFullYear()}`;
+  }
+
   // -------------------- HIỂN THỊ DANH SÁCH HỌC SINH --------------------
-  function renderStudents() {
+  function renderStudents(filterClass = "", keyword = "") {
     const tbody = document.querySelector(".student-table tbody");
     const students = getStudents();
     tbody.innerHTML = "";
 
-    students.forEach((s, index) => {
+    let filtered = students;
+
+    // Lọc theo lớp
+    if (filterClass) {
+      filtered = filtered.filter((s) => s.class === filterClass);
+    }
+
+    // Lọc theo từ khóa tìm kiếm
+    if (keyword) {
+      const lower = keyword.toLowerCase();
+      filtered = filtered.filter(
+        (s) =>
+          s.name.toLowerCase().includes(lower) ||
+          s.parent.toLowerCase().includes(lower)
+      );
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;">Không có học sinh nào!</td></tr>`;
+      return;
+    }
+
+    filtered.forEach((s, index) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${s.name}</td>
@@ -828,21 +875,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // -------------------- FORMAT NGÀY --------------------
-  function formatDate(dateStr) {
-    if (!dateStr) return "";
-    const d = new Date(dateStr);
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-  }
-
-  // -------------------- XỬ LÝ FORM THÊM --------------------
+  // -------------------- FORM THÊM --------------------
   const addBtn = document.querySelector(".add-btn");
   const overlay = document.getElementById("overlay");
   const modal = document.getElementById("studentModal");
   const closeBtn = document.getElementById("closeBtn");
 
   addBtn.onclick = () => {
-    updateStudentClassSelect();
+    updateClassSelectOptions();
     modal.style.display = "block";
     overlay.style.display = "block";
     document.getElementById("studentForm").reset();
@@ -863,23 +903,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const phone = document.getElementById("studentPhone").value.trim();
     const address = document.getElementById("studentAddress").value.trim();
 
-    // Validate trống
     if (!name || !cls || !dob || !parent || !phone || !address) {
       showToast("warning", "Vui lòng nhập đầy đủ thông tin học sinh!");
       return;
     }
 
-    // Validate trùng tên trong cùng lớp
     const students = getStudents();
-    const isDuplicate = students.some(
-      (s) => s.name.toLowerCase() === name.toLowerCase() && s.class === cls
-    );
-    if (isDuplicate) {
-      showToast("error", `Học sinh "${name}" đã tồn tại trong lớp ${cls}!`);
+    // Kiểm tra trùng tên trong cùng lớp
+    if (students.some((s) => s.name === name && s.class === cls)) {
+      showToast("error", "Học sinh này đã tồn tại trong lớp!");
       return;
     }
 
-    // Lưu
     students.push({ name, class: cls, dob, parent, phone, address });
     setStudents(students);
 
@@ -889,7 +924,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast("success", "Thêm học sinh thành công!");
   };
 
-  // -------------------- XỬ LÝ FORM SỬA --------------------
+  // -------------------- FORM SỬA + XOÁ --------------------
   const updateModal = document.getElementById("studentModalUpdate");
   const closeUpdateBtn = document.getElementById("closeBtnUpdate");
   closeUpdateBtn.onclick = () => {
@@ -906,7 +941,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (editBtn) {
       const index = editBtn.dataset.index;
       const s = students[index];
-      updateStudentClassSelect();
+      updateClassSelectOptions();
 
       document.getElementById("updateName").value = s.name;
       document.getElementById("updateClass").value = s.class;
@@ -929,7 +964,6 @@ document.addEventListener("DOMContentLoaded", () => {
           .getElementById("updateAddress")
           .value.trim();
 
-        // Validate trống
         if (
           !newName ||
           !newClass ||
@@ -942,22 +976,16 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Validate trùng (ngoại trừ chính học sinh đang sửa)
-        const isDuplicate = students.some(
-          (st, i) =>
-            i !== Number(index) &&
-            st.name.toLowerCase() === newName.toLowerCase() &&
-            st.class === newClass
-        );
-        if (isDuplicate) {
-          showToast(
-            "error",
-            `Học sinh "${newName}" đã tồn tại trong lớp ${newClass}!`
-          );
+        // Kiểm tra trùng tên trong cùng lớp
+        if (
+          students.some(
+            (s, i) => i !== +index && s.name === newName && s.class === newClass
+          )
+        ) {
+          showToast("error", "Học sinh này đã tồn tại trong lớp!");
           return;
         }
 
-        // Cập nhật
         students[index] = {
           name: newName,
           class: newClass,
@@ -987,7 +1015,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // -------------------- TÌM KIẾM VÀ LỌC LỚP --------------------
+  const searchInput = document.querySelector(".student-actions input");
+  const classSelect = document.querySelector(".student-actions select");
+
+  if (searchInput && classSelect) {
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.trim();
+      const cls = classSelect.value;
+      renderStudents(cls, keyword);
+    });
+
+    classSelect.addEventListener("change", () => {
+      const keyword = searchInput.value.trim();
+      const cls = classSelect.value;
+      renderStudents(cls, keyword);
+    });
+  }
+
   // -------------------- KHỞI TẠO --------------------
-  updateStudentClassSelect();
+  updateClassSelectOptions();
   renderStudents();
 });
