@@ -29,7 +29,7 @@ buttons.forEach(button => {
     }
   });
 });
-// phần điểm danh
+// Phần điểm danh — lịch tương tác
 document.querySelectorAll(".ngay div").forEach(ngay => {
   ngay.addEventListener("click", () => {
     document.querySelectorAll(".ngay div").forEach(n => n.classList.remove("chon"));
@@ -37,51 +37,60 @@ document.querySelectorAll(".ngay div").forEach(ngay => {
     document.querySelector(".hop-chi-tiet-ngay h4").innerHTML = `📅 Chi tiết ngày ${ngay.innerText}/10/2025`;
   });
 });
-// --- Lấy các phần tử cần thao tác ---
-const tabs = document.querySelectorAll('.tab'); // 3 nút tab
-const sectionAll = document.querySelector('.tatcamonhoc'); // phần "Tất cả môn học"
-const sectionMain = document.querySelector('.monchinh');   // phần "Môn chính"
-const sectionProgress = document.querySelector('.tiendo'); // phần "Tiến độ"
 
-// --- Hàm cập nhật hiển thị theo tab ---
-function showSection(tabType) {
-  // 1️⃣ Ẩn tất cả các phần trước
-  sectionAll.style.display = 'none';
-  sectionMain.style.display = 'none';
-  sectionProgress.style.display = 'none';
-
-  // 2️⃣ Hiện phần tương ứng với tab đang chọn
-  if (tabType === 'all') {
-    sectionAll.style.display = 'block';
-  } else if (tabType === 'main') {
-    sectionMain.style.display = 'block';
-  } else if (tabType === 'progress') {
-    sectionProgress.style.display = 'block';
-  }
-
-  // 3️⃣ Cập nhật trạng thái active của tab
-  tabs.forEach(tab => {
-    if (tab.dataset.tab === tabType) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
-  });
-}
-
-// --- Gắn sự kiện click cho từng tab ---
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const tabType = tab.dataset.tab; // Lấy loại tab (all / main / progress)
-    showSection(tabType);            // Cập nhật hiển thị
+// Phần thao tác nhanh (.Toigian) — điều hướng đến các mục menu
+document.querySelectorAll('.Luachon-chucnang').forEach((item, index) => {
+  item.addEventListener('click', () => {
+    const menuItems = ['diemdanh', 'suckhoe', 'hoctap', 'hoso'];
+    const target = menuItems[index] || 'tongquan';
+    
+    // click menu button tương ứng
+    const btn = document.querySelector(`.menu button[data-target="${target}"]`);
+    if (btn) btn.click();
   });
 });
 
-// --- Khi tải trang, tự kích hoạt tab đang active ban đầu ---
-const activeTab = document.querySelector('.tab.active');
-if (activeTab) {
-  showSection(activeTab.dataset.tab);
-} else {
-  // Nếu chưa có tab active, mặc định là "Tất cả môn học"
-  showSection('all');
-}
+// Phần học tập — Quản lý tabs + sections
+(function(){
+  const tabs = document.querySelectorAll('.tab');
+  const sectionAll = document.querySelector('.tatcamonhoc');
+  const sectionMain = document.querySelector('.monchinh');
+  const sectionProgress = document.querySelector('.tiendo');
+
+  function showSection(tabType) {
+    // Ẩn tất cả sections
+    if (sectionAll) sectionAll.style.display = 'none';
+    if (sectionMain) sectionMain.style.display = 'none';
+    if (sectionProgress) sectionProgress.style.display = 'none';
+
+    // Hiện section tương ứng
+    if (tabType === 'all' && sectionAll) sectionAll.style.display = 'block';
+    else if (tabType === 'main' && sectionMain) sectionMain.style.display = 'block';
+    else if (tabType === 'progress' && sectionProgress) sectionProgress.style.display = 'block';
+
+    // Cập nhật trạng thái active của tabs
+    tabs.forEach(tab => {
+      if (tab.dataset.tab === tabType) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+  }
+
+  // Gắn sự kiện cho từng tab
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabType = tab.dataset.tab;
+      showSection(tabType);
+    });
+  });
+
+  // Khởi tạo: hiện tab active hoặc "all" mặc định
+  const activeTab = document.querySelector('.tab.active');
+  if (activeTab) {
+    showSection(activeTab.dataset.tab);
+  } else {
+    showSection('all');
+  }
+})();
