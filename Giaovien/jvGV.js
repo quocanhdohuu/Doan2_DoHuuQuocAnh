@@ -127,36 +127,77 @@ function themtindagui() {
 
 //---------------------------------Sức khỏe------------------------------------
 const btnThemGhiChuSK=document.querySelector('#ThemGhichuSK');
-const btnThoatCuaSoTGCSK=document.querySelector('#btbThoatcsoGCSK');
+const btnThoatCuaSoTGCSK=document.querySelectorAll('#btbThoatcsoGCSK');
 const btntheGCCSSK=document.querySelector('#btncuasoTGCSK');
 const TSTongGCSK=document.querySelector('#slgTBYQSK');
 const TSKhoemanhSK=document.querySelector('#slgKMTQSK');
 const TSChuYSK=document.querySelector('#slgCYTQSK');
 const TSAnDuSK=document.querySelector('#slgADTQSK');
+const btnsuaghichusk=document.querySelectorAll('.btnGHICHUSK');
 
 let tongghichu=1;
 let khoemanh=1;
 let chuy=0;
 let andu=0
 
+btnsuaghichusk.forEach(btn=> {
+    btn.addEventListener('click',function(){
+        document.querySelector('#CuaSoSUAGhiChuSK').style.display='block';
+        suaghichu(this);
+})});
 btnThemGhiChuSK.addEventListener('click',function(){
     document.querySelector('#CuaSoThemGhiChuSK').style.display='block';
 });
-btnThoatCuaSoTGCSK.addEventListener('click',function(){
+btnThoatCuaSoTGCSK.forEach(btn=>{
+btn.addEventListener('click',function(){
     document.querySelector('#CuaSoThemGhiChuSK').style.display='none';
-});
+    document.querySelector('#CuaSoSUAGhiChuSK').style.display='none';
+    resetFormNhapDiemSK();
+})});
 btntheGCCSSK.addEventListener('click',function(){
         themghichuvaobangSK();
          document.querySelector('#CuaSoThemGhiChuSK').style.display='none'
         resetFormNhapDiemSK();
 });
+function suaghichu(button){
+    let row = button.closest('tr'); 
+    document.getElementById('GhichuveĐSKSUA').value = row.cells[4].querySelector('span').innerText;
+    document.getElementById('GhichuveTTSKSUA').value = row.cells[2].querySelector('span').innerText;
+    
+    let tenhs=row.cells[0].querySelector('span').innerText;
+    document.getElementById('chonHocSinhGhiChuSKSUA').value =tenhs ;
 
+    let buaAnStatus = row.cells[5].querySelector('span').innerText;
+    document.getElementById("ckbuaanSKSUA").checked = (buaAnStatus === "Đã Xong");
+
+    let tinhTrangSK = row.cells[1].querySelector('span').innerText;
+    let tinhTrangRadios = document.getElementsByName('suckhoeSUA');
+    for (let i = 0; i < tinhTrangRadios.length; i++) {
+        if (tinhTrangRadios[i].value === tinhTrangSK) {
+            tinhTrangRadios[i].checked = true;
+            break;
+        }
+    }
+    let chedoan = row.cells[3].querySelector('span').innerText;
+    let chedoanRadios = document.getElementsByName('BuaANSUA');
+    for (let i = 0; i < chedoanRadios.length; i++) {
+        if (chedoanRadios[i].value === chedoan) {
+            chedoanRadios[i].checked = true;
+            break;
+        }
+    }
+}
 function resetFormNhapDiemSK() {
 
     document.getElementById('chonHocSinhGhiChuSK').selectedIndex = 0;
     document.getElementById('GhichuveTTSK').value= '';
     document.getElementById('GhichuveĐSK').value= '';
     document.getElementById("ckbuaanSK").checked= false;
+     document.getElementById('chonHocSinhGhiChuSKSUA').selectedIndex = 0;
+    document.getElementById('GhichuveTTSKSUA').value= '';
+    document.getElementById('GhichuveĐSKSUA').value= '';
+    document.getElementById("ckbuaanSKSUA").checked= false;
+    
 }
 function themghichuvaobangSK(){
     let table=document.getElementById('DanhSachSK');
@@ -209,18 +250,21 @@ function themghichuvaobangSK(){
   andu += 1;
   TSAnDuSK.innerText = andu;}
 
-    cell1.innerHTML =`<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
+    cell1.innerHTML =`<span>${tenHS}</span>`;
     cell2.innerHTML = ttsk;
-    cell3.innerHTML = ghiChuSK;
+    cell3.innerHTML = `<span>${ghiChuSK}</span>`; 
     cell4.innerHTML = cda;
-    cell5.innerHTML = ghiChuDD;
+    cell5.innerHTML = `<span>${ghiChuDD}</span>`;
     cell6.innerHTML = buaAn
     ? `<span class="BuaAnSKXong">Đã Xong</span>`
     : `<span class="BuaAnSKCXong">Chưa xong</span>`;
     cell7.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
 
+    
+
     tongghichu+=1;
     TSTongGCSK.innerText=tongghichu;
+
 }
 //---------------------------------Điểm số------------------------------------
 const btnThemDiemSo=document.querySelector('#btnNhapDiemDS');

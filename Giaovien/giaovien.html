@@ -323,7 +323,6 @@
                 <tr>
                     <td>
                         <span id="HSSK">Nguyễn Văn A</span><br>
-                        <span id="MaHSSK" style="color: gray;">HS001</span>
                     </td>
                     <td>
                         <span class="TinhtrangSK" >Khỏe mạnh</span>
@@ -380,6 +379,41 @@
 
             <div><span>Bữa ăn</span> <input type="checkbox" id="ckbuaanSK"><span>Đã hoàn thành bữa ăn</span></div>
             <button id="btncuasoTGCSK"><i class="fa-solid fa-floppy-disk"></i>Thêm Ghi Chú</button>
+
+        </div>
+
+        <div id="CuaSoSUAGhiChuSK">
+            <button id="btbThoatcsoGCSK" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 2px;">Thêm ghi chú sức khỏe & dinh dưỡng</h3>
+            <span style="color: gray;">Ghi chú tình hình sức khỏe và chế độ ăn của học sinh</span>
+
+            <div style="justify-content: space-between;"> <span>Học sinh</span> 
+                <select id="chonHocSinhGhiChuSKSUA">
+                    <option value="Nguyễn Văn A">Nguyễn Văn A</option>
+                    <option value="Nguyễn Văn B">Nguyễn Văn B </option>
+                    <option value="Nguyễn Văn C">Nguyễn Văn C</option>
+                </select> 
+            </div>
+
+            <div style="display: flex;;">
+                <div><input type="radio" checked name="suckhoeSUA" value="Khỏe mạnh" id="rdbtnKhoeManhSUA"><span>Khỏe mạnh</span></div>
+                 <div><input type="radio" name="suckhoeSUA"  value="Ốm" id="rdbtnOmSUA"><span>Ốm</span></div></div>
+
+            <div style="display: flex;;">
+                <div><input type="radio" name="suckhoeSUA" value="Chấn Thương" id="rdbtnChanThuongSUA"><span>Chấn Thương</span> </div>
+                <div><input type="radio" name="suckhoeSUA" value="Đang dùng thuốc" id="rdbtnDangDungThuocSUA"><span>Đang dùng thuốc</span></div></div>
+
+            <div><span>Sức khỏe</span> <textarea style="resize: none;  " id="GhichuveTTSKSUA" placeholder="Ghi chú về tình trạng sức khỏe"></textarea></div>
+
+            <div  style="display: flex;;"><div><input checked type="radio" value="Bình thường" name="BuaAN" id="rdbtnBinhThuongSUA"><span>Bình thường</span> </div>
+                <div><input type="radio" name="BuaANSUA" value="Dị Ứng" id="rdbtnDiUngSUA"><span>Dị Ứng</span></div>
+                <div><input type="radio" name="BuaANSUA" value="Chế độ ăn đặc biệt" id="rdbtnCĐBSUA"><span>Chế độ ăn đặc biệt</span></div>
+            </div>
+
+            <div><span>Dinh dưỡng</span><textarea style="resize: none;  " id="GhichuveĐSKSUA" placeholder="Ghi chú về chế độ ăn ,dị ứng"></textarea></div>
+
+            <div><span>Bữa ăn</span> <input type="checkbox" id="ckbuaanSKSUA"><span>Đã hoàn thành bữa ăn</span></div>
+            <button id="btncuasoTGCSKSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật</button>
 
         </div>
     </div>

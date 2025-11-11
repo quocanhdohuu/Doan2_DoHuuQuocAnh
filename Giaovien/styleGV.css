@@ -457,7 +457,7 @@
    background-color:red;color: white;border-radius: 7px;padding: 3px 3px;
 }
 /*----------------------btnThem ghi chú---------------------*/
-#CuaSoThemGhiChuSK{
+#CuaSoThemGhiChuSK, #CuaSoSUAGhiChuSK {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -471,41 +471,50 @@
     width: 40%;
     font-size: 12pt;
 }
-#CuaSoThemGhiChuSK > div {
+
+#CuaSoThemGhiChuSK > div,
+#CuaSoSUAGhiChuSK > div {
     margin-top: 15px;
 }
-#CuaSoThemGhiChuSK > div >span {
+
+#CuaSoThemGhiChuSK > div > span,
+#CuaSoSUAGhiChuSK > div > span {
     font-weight: bold;
 }
-#chonHocSinhGhiChuSK,#GhichuveTTSK,#GhichuveĐSK{
-    border-radius: 7px;
-}
-#CuaSoThemGhiChuSK input[type="radio"]{
+
+#CuaSoThemGhiChuSK input[type="radio"],
+#CuaSoSUAGhiChuSK input[type="radio"] {
     transform: scale(1.5);
     margin-left: 100px;
 }
-#GhichuveĐSK{
+
+#GhichuveĐSK, #GhichuveĐSKSUA {
     margin-left: 18px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
 }
-#GhichuveTTSK{
+
+#GhichuveTTSK, #GhichuveTTSKSUA {
     margin-left: 35px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
 }
-#chonHocSinhGhiChuSK{
+
+#chonHocSinhGhiChuSK,#chonHocSinhGhiChuSKSUA {
     margin-left: 35px;
     height: 30px;
     width: 80%;
     border-radius: 7px;
 }
-#CuaSoThemGhiChuSK input[type="checkbox"]{
+
+#CuaSoThemGhiChuSK input[type="checkbox"],
+#CuaSoSUAGhiChuSK input[type="checkbox"] {
     margin-left: 50px;
 }
-#btncuasoTGCSK{
+
+#btncuasoTGCSK, #btncuasoTGCSKSUA {
     margin-top: 20px;
     height: 40px;
     width: 25%;
@@ -518,8 +527,7 @@
     justify-content: space-between;
     align-items: center;
     padding-left: 20px;
-    padding-right: 20px;  
-
+    padding-right: 20px;
 }
 /*----------------------Điểm số---------------------*/
 /*----------------------headerDS---------------------*/
