@@ -311,6 +311,86 @@ select {
   background-color: #ececec;
 }
 
+/*/Ql lịch học/*/
+#schedule {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding-bottom: 20px;
+}
+
+.schedule-header {
+  border-radius: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.schedule-header h3 {
+  padding-left: 20px;
+}
+.schedule-header span {
+  padding-left: 20px;
+  margin-top: -25px;
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+.schedule-actions {
+  display: flex;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+.schedule-actions h5 {
+  margin-top: 3px;
+  margin-right: 5px;
+  font-size: 12pt;
+  font-weight: 500;
+  width: 6.8%;
+}
+
+.schedule-actions img {
+  margin-left: 30px;
+  width: 30px;
+  height: 30px;
+}
+.schedule-actions h4 {
+  margin-top: 3px;
+  font-size: 12pt;
+  font-weight: 500;
+  width: 10%;
+}
+
+.addschedule-btn {
+  width: 15%;
+  height: 32px;
+  margin-left: 45%;
+}
+.addschedule-btn i {
+  margin-right: 25px;
+}
+
+.addschedule-btn {
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12pt;
+  font-weight: 500;
+}
+.addschedule-btn:hover {
+  background-color: #222;
+}
+
+.schedule-actions select {
+  padding: 8px 10px;
+  background-color: #ececec;
+  border: none;
+  border-radius: 8px;
+  width: 15%;
+  height: 30px;
+}
+
 #class {
   border: 1px solid #ddd;
   border-radius: 15px;
