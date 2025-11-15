@@ -320,6 +320,7 @@ const KhaTSDS=document.querySelector('#KhaTSDS');
 const TrungBinhTSDS=document.querySelector('#TrungBinhTSDS');
 const YeuTSDS=document.querySelector('#YeuTSDS');
 const btnSuadiemDS=document.querySelectorAll('.btnSuaDS');
+const btnsuadiemDS=document.querySelector('#btncuasoTGCDSSUA');
 
 let tdds=parseFloat(TongDiemTSDS.innerText);
 let diemtbds=parseFloat(DTBTSDS.innerText)
@@ -328,7 +329,39 @@ let Khads=parseFloat(KhaTSDS.innerText)
 let Yeuds=parseFloat(YeuTSDS.innerText)
 let Trungbinhds=parseFloat(TrungBinhTSDS.innerText)
 
+btnsuadiemDS.addEventListener('click',function(){
+    const row = document.querySelector('#DanhSachDS tr.selected');
+    if (!row) return;
 
+    
+    row.cells[0].querySelector('span').innerText =
+        document.getElementById('chonHocSinhGhiChuDSSUA').value;
+
+   
+    const loaidiemRadios = document.getElementsByName('LDSUA');
+    for (let i = 0; i < loaidiemRadios.length; i++) {
+        if (loaidiemRadios[i].checked) {
+            const ld = loaidiemRadios[i].value;
+
+            let className = "LoaiDiemDS"; 
+            if (ld === "15 phút") className = "LoaiDiemDS2";
+            else if (ld === "1 tiết") className = "LoaiDiemDS3";
+            else if (ld === "Học kỳ") className = "LoaiDiemDS4";
+
+            row.cells[1].innerHTML = `<span class="${className}">${ld}</span>`;
+        }
+    }
+
+   
+    row.cells[2].querySelector('span').innerText =
+        document.getElementById('txtDiemSODSSUA').value + "/10";
+
+   
+    row.cells[3].querySelector('span').innerText =
+        document.getElementById('NhanxetblDSSUA').value;
+
+    document.querySelector('#CuaSoNĐSSUA').style.display = 'none';
+});
 function suaghichuDS(button) {
     document.querySelector('#CuaSoNĐSSUA').style.display = 'block';
     const row = button.closest('tr');
