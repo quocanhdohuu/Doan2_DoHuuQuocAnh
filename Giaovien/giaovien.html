@@ -238,10 +238,79 @@
                         <span id="STTDIemDanh">4</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS003</span>
+                        <span id="MaHS">HS004</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn D</span>
+                        <span id="TenHS">Nguyễn Văn V</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">5</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS005</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn T</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">6</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS006</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn F</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
+                    </td>
+                    <td>
+                        <span id="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="STTDIemDanh">7</span>
+                    </td>
+                    <td>
+                        <span id="MaHS">HS007</span>
+                    </td>
+                    <td>
+                        <span id="TenHS">Nguyễn Văn G</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
@@ -492,7 +561,6 @@
                 <tr>
                     <td>
                         <span id="HSDS">Nguyễn Văn A</span><br>
-                        <span id="MaHSDS" style="color: gray;">HS001</span>
                     </td>
                     <td>
                         <span class="LoaiDiemDS2">15 phút</span>
@@ -544,6 +612,38 @@
 
               <div><span>Nhận xét</span><textarea style="resize: none;  " id="NhanxetblDS" placeholder="Nhận xét về bài làm..."></textarea></div>
              <button id="btncuasoTGCDS"><i class="fa-solid fa-floppy-disk"></i>Lưu điểm</button>
+        </div>
+
+        <div id="CuaSoNĐSSUA">
+            <button id="btbThoatcsoGCDSSUA" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
+            <h3 style="margin-bottom: 2px;">Nhập điểm mới</h3>
+            <span style="color: gray;">Nhập điểm và nhận xét cho học sinh môn Toán</span>
+            <div style="justify-content: space-between;"> <span>Học sinh</span> 
+                <select id="chonHocSinhGhiChuDSSUA">
+                    <option value="Nguyễn Văn A">Nguyễn Văn A</option>
+                    <option value="Nguyễn Văn B">Nguyễn Văn B </option>
+                    <option value="Nguyễn Văn C">Nguyễn Văn C</option>
+                </select> 
+            </div>
+            
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <span style="width: 100px;">Loại điểm</span>
+    
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div><input type="radio" checked name="LDSUA" value="Miệng" id="rdbtnMiengSUA"><span>Miệng</span></div>
+                    <div><input type="radio" name="LDSUA"  value="15 phút" id="rdbtn15SUA"><span>15 phút</span></div>  
+                </div>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                   
+                    <div><input type="radio" name="LDSUA" value="1 tiết" id="rdbtn1tietSUA"><span>1 tiết</span></div>
+                    <div><input type="radio" name="LDSUA" value="Học kỳ" id="rdbtnHocKySUA"><span>Học kỳ</span></div>
+                </div>
+            </div>
+
+             <div><span>Điểm số</span><input type="number" min="0" max="10" step="0.1" id="txtDiemSODSSUA" placeholder="Nhập điểm (0-10)"></div>
+
+              <div><span>Nhận xét</span><textarea style="resize: none;  " id="NhanxetblDSSUA" placeholder="Nhận xét về bài làm..."></textarea></div>
+             <button style="width:40%;" id="btncuasoTGCDSSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật điểm</button>
         </div>
     </div>
 <!-----------------Liên lạc------------------->

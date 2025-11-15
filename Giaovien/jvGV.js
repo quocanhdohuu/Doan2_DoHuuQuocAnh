@@ -311,6 +311,7 @@ function themghichuvaobangSK(){
 //---------------------------------Điểm số------------------------------------
 const btnThemDiemSo=document.querySelector('#btnNhapDiemDS');
 const btnThoatCuaSoTGCDS=document.querySelector('#btbThoatcsoGCDS');
+const btnThoatCuaSoTGCDSSUA=document.querySelector('#btbThoatcsoGCDSSUA');
 const btntheGCCDS=document.querySelector('#btncuasoTGCDS');
 const TongDiemTSDS=document.querySelector('#TongdiemTSDS');
 const DTBTSDS=document.querySelector('#DiemTBTSDS');
@@ -318,6 +319,7 @@ const GioiTSDS=document.querySelector('#GioiTSDS');
 const KhaTSDS=document.querySelector('#KhaTSDS');
 const TrungBinhTSDS=document.querySelector('#TrungBinhTSDS');
 const YeuTSDS=document.querySelector('#YeuTSDS');
+const btnSuadiemDS=document.querySelectorAll('.btnSuaDS');
 
 let tdds=parseFloat(TongDiemTSDS.innerText);
 let diemtbds=parseFloat(DTBTSDS.innerText)
@@ -327,10 +329,37 @@ let Yeuds=parseFloat(YeuTSDS.innerText)
 let Trungbinhds=parseFloat(TrungBinhTSDS.innerText)
 
 
+function suaghichuDS(button) {
+    document.querySelector('#CuaSoNĐSSUA').style.display = 'block';
+    const row = button.closest('tr');
+    
+    document.querySelectorAll('#DanhSachDS tr').forEach(tr => tr.classList.remove('selected'));
+    
+    row.classList.add('selected');
 
+    document.getElementById('chonHocSinhGhiChuDSSUA').value = row.cells[0].querySelector('span').innerText;
+    document.getElementById('txtDiemSODSSUA').value =parseFloat(row.cells[2].querySelector('span').innerText) ;
+    document.getElementById('NhanxetblDSSUA').value = row.cells[3].querySelector('span').innerText;
 
+    const loaidiem = row.cells[1].querySelector('span').innerText;
+    const loaidiemRadios = document.getElementsByName('LDSUA');
+    for (let i = 0; i < loaidiemRadios.length; i++) {
+        loaidiemRadios[i].checked = (loaidiemRadios[i].value === loaidiem);
+    }
+
+}
+
+document.getElementById('DanhSachDS').addEventListener('click', function (e) {
+    const btn = e.target.closest('.btnSuaDS');
+    if (btn) {
+        suaghichuDS(btn);
+    }
+});
 btnThoatCuaSoTGCDS.addEventListener('click',function(){
     document.querySelector('#CuaSoNĐS').style.display='none';
+});
+btnThoatCuaSoTGCDSSUA.addEventListener('click',function(){
+    document.querySelector('#CuaSoNĐSSUA').style.display='none';
 });
 btnThemDiemSo.addEventListener('click',function(){
     document.querySelector('#CuaSoNĐS').style.display='block';
@@ -404,12 +433,12 @@ function themghichuvaobangDS(){
     tdds+=1;
     diemtbds=((diemtbds*(tdds-1)+diem)/tdds).toFixed(2);
 
-    cell1.innerHTML =`<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
+    cell1.innerHTML =`<span>${tenHS}</span>`;
     cell2.innerHTML = cda;
     cell3.innerHTML = Diemso;
-    cell4.innerHTML = Nhanxet;
+    cell4.innerHTML = `<span>${Nhanxet}</span>`;
     cell5.innerHTML = Ngay;
-    cell6.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
+    cell6.innerHTML = `<button class="btnSuaDS"><i class="fa-solid fa-edit"></i></button>`;
 
     TongDiemTSDS.innerText=tdds;
     DTBTSDS.innerText=diemtbds;
