@@ -390,6 +390,101 @@ select {
   width: 15%;
   height: 30px;
 }
+.schedule-table {
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 96%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  padding-right: 5px;
+}
+
+.schedule-table thead th {
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.schedule-table td {
+  border-bottom: 1px solid #f1f1f1;
+  padding: 12px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.schedule-table small {
+  font-size: 12px;
+  color: #7b7b7b;
+}
+
+.schedule-table td:empty::before {
+  content: "-";
+  color: #c5c5c5;
+}
+
+.schedule-lesson {
+  width: 90%;
+  border-radius: 8px;
+  background: #e9f2ff;
+  border: 1px solid #d3e4ff;
+  padding: 10px 14px;
+  text-align: left;
+  position: relative;
+}
+
+.schedule-lesson strong {
+  font-size: 15px;
+}
+
+.schedule-teacher {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.schedule-room {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #d7e7ff;
+  color: #0050b3;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.schedule-table-actions {
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  display: flex;
+  gap: 1px;
+}
+
+.schedule-table-actions button {
+  border: none;
+  padding: 3px 6px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.schedule-table-actions .editschedule {
+  color: #0a66c2;
+}
+
+.schedule-table-actions .deleteschedule {
+  color: #d0342c;
+}
+
+.schedule-table-actions button:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
 
 #class {
   border: 1px solid #ddd;
