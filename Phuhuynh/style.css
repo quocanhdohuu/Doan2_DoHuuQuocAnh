@@ -632,116 +632,189 @@ body {
     margin-bottom: 40px;
 }
 /* ====== CỘT PHẢI ====== */
+/* Container */
 .cot-phai {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  padding: 16px;
+  margin: 0 auto;
 }
+
+/* Danh sách ngày */
 .ngay-list-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+
+/* Khối ngày */
 .ngay-khoi {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    padding: 24px;
-    border: 1px solid #eee;
-}
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}   
+/* Tiêu đề ngày */
 .tieu-de-ngay {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
 }
-.tieu-de-ngay span {
-    font-weight: 600;
-    font-size: 16px;
-    color: #111;
+
+.tieu-de-ngay span:first-child {
+  font-weight: 600;
+  color: #1e293b;
 }
+
 .trang-thai {
-    font-size: 13px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
-.trang-thai.xanh { background: #dcfce7; color: #15803d; }
-.trang-thai.vang { background: #fef9c3; color: #854d0e; }
+
+.trang-thai.xanh {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.trang-thai.vang {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+/* Mục (sức khỏe, ăn uống) */
+.muc {
+  margin-bottom: 16px;
+}
+
 .muc h4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1e293b;
 }
+
+/* Thông tin sức khỏe */
 .thongtin {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    font-size: 14px;
-    padding: 16px;
-    background: #f8fafc;
-    border-radius: 12px;
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 0.875rem;
 }
-.thongtin p {
-    color: #666;
-    margin-bottom: 4px;
+
+.nhietdo, .ghichu {
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 8px;
 }
-.thongtin span {
-    color: #111;
-    font-weight: 500;
-    display: block;
+
+.nhietdo p, .ghichu p {
+  color: #64748b;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
 }
+
+.nhietdo span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+.ghichu span {
+  color: #059669;
+  font-weight: 500;
+}
+
+/* Bữa ăn */
 .bua-an {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  text-align: center;
+  font-size: 0.75rem;
 }
+
 .bua {
-    background: #f8fafc;
-    border-radius: 12px;
-    flex: 1;
-    text-align: center;
-    padding: 12px 8px;
+  background: #f8fafc;
+  padding: 10px 6px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
+
+.bua.nuoc {
+  background: #dbeafe;
+}
+
 .bua .icon {
-    font-size: 24px;
-    margin-bottom: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
 }
-.bua i {
-    font-size: 24px;
-    margin-bottom: 6px;
+
+/* Icon theo bữa */
+.bua:nth-child(1) .icon { background: #fed7aa; color: #ea580c; } /* Bữa sáng */
+.bua:nth-child(2) .icon { background: #bfdbfe; color: #2563eb; } /* Bữa trưa */
+.bua:nth-child(3) .icon { background: #e9d5ff; color: #9333ea; } /* Bữa phụ */
+.bua.nuoc .icon { background: #3b82f6; color: white; }
+
+/* Trạng thái bữa ăn */
+.daydu, .motphan, .thieu, .lit {
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 999px;
 }
-.bua p {
-    margin: 0 0 4px;
-    font-weight: 500;
-    font-size: 13px;
-    color: #666;
+
+.daydu {
+  background: #ecfdf5;
+  color: #059669;
 }
-.daydu { color: #16a34a; font-weight: 600; }
-.motphan { color: #ca8a04; font-weight: 600; }
-.thieu { color: #dc2626; font-weight: 600; }
-.lit { color: #3b82f6; font-weight: 600; }
+
+.motphan {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.thieu {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.lit {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* Ghi chú dinh dưỡng */
 .ghichu-an {
-    margin-top: 12px;
-    background: #f8fafc;
-    border-radius: 8px;
-    padding: 10px 12px;
+  background: #eff6ff;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.875rem;
 }
+
 .ghichu-an p {
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 4px;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 4px;
+}
+
+.ghichu-an span {
+  color: #1e40af;
+  font-size: 0.8rem;
 }
 /* ====== TÓM TẮT TUẦN ====== */
 .tomtat-tuan {
