@@ -143,6 +143,49 @@ overlayteacher.addEventListener("click", () => {
   overlayteacher.style.display = "none";
 });
 
+// Xử lý hiện form thêm lịch học
+const addscheduleBtn = document.querySelector(".addschedule-btn");
+const scheduleModal = document.getElementById("scheduleModal");
+const closeScheduleBtn = document.getElementById("closeScheduleBtn");
+const overlaySchedule = document.getElementById("overlaySchedule");
+
+addscheduleBtn.addEventListener("click", () => {
+  scheduleModal.style.display = "block";
+  overlaySchedule.style.display = "block";
+});
+closeScheduleBtn.addEventListener("click", () => {
+  scheduleModal.style.display = "none";
+  overlaySchedule.style.display = "none";
+});
+
+overlaySchedule.addEventListener("click", () => {
+  scheduleModal.style.display = "none";
+  overlaySchedule.style.display = "none";
+});
+// Xử lý hiện form sửa lịch học
+const scheduleModalUpdate = document.getElementById("scheduleModalUpdate");
+const closeScheduleBtnUpdate = document.getElementById(
+  "closeScheduleBtnUpdate"
+);
+const editschedule = document.querySelectorAll(".editschedule");
+
+editschedule.forEach((button) => {
+  button.addEventListener("click", () => {
+    scheduleModalUpdate.style.display = "block";
+    overlaySchedule.style.display = "block";
+  });
+});
+
+closeScheduleBtnUpdate.addEventListener("click", () => {
+  scheduleModalUpdate.style.display = "none";
+  overlaySchedule.style.display = "none";
+});
+
+overlaySchedule.addEventListener("click", () => {
+  scheduleModalUpdate.style.display = "none";
+  overlaySchedule.style.display = "none";
+});
+
 // Xử lý hiện form thêm sự kiện
 const addEventBtn = document.querySelector(".addevent-btn");
 const eventModal = document.getElementById("eventModal");

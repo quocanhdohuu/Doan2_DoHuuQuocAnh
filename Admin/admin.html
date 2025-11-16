@@ -664,6 +664,132 @@
                     <button class="addschedule-btn"><i class="fa-solid fa-plus"></i>Thêm tiết học</button>
                 </div>
             </div>
+            <div id="overlaySchedule" class="overlaySchedule"></div>
+
+            <div class="modal" id="scheduleModal">
+                <div class="modal-header">
+                    <h2>Thêm tiết học mới</h2>
+                    <span class="close-btn" id="closeScheduleBtn">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
+
+                <form class="schedule-form" id="scheduleForm">
+                    <div class="form-group">
+                        <label>Lớp</label>
+                        <select id="schedule-Class">
+                            <option>Lớp 1A</option>
+                            <option>Lớp 1B</option>
+                            <option>Lớp 2A</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Thứ</label>
+                        <select id="schedule-dayofweek">
+                            <option>Thứ 2</option>
+                            <option>Thứ 3</option>
+                            <option>Thứ 4</option>
+                            <option>Thứ 5</option>
+                            <option>Thứ 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tiết</label>
+                        <select id="schedule-lesson">
+                            <option>Tiết 1 (07:00 - 07:35)</option>
+                            <option>Tiết 2 (07:40 - 08:15)</option>
+                            <option>Tiết 3 (08:20 - 08:55)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Môn học</label>
+                        <select id="schedule-subject">
+                            <option>Chọn môn học</option>
+                            <option>Toán</option>
+                            <option>Ngữ Văn</option>
+                            <option>Tiếng Anh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giáo viên</label>
+                        <input id="schedule-addteacher" type="text" placeholder="Nhập tên giáo viên">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input id="schedule-addroom" type="text" placeholder="Ví dụ: P101">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitSchedule-btn">Thêm tiết học</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal" id="scheduleModalUpdate">
+                <div class="modal-header">
+                    <h2>Sửa tiết học</h2>
+                    <span class="close-btn" id="closeScheduleBtnUpdate">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
+
+                <form class="schedule-form" id="scheduleFormUpdate">
+                    <div class="form-group">
+                        <label>Lớp</label>
+                        <select id="schedule-ClassUpdate">
+                            <option>Lớp 1A</option>
+                            <option>Lớp 1B</option>
+                            <option>Lớp 2A</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Thứ</label>
+                        <select id="schedule-dayofweekUpdate">
+                            <option>Thứ 2</option>
+                            <option>Thứ 3</option>
+                            <option>Thứ 4</option>
+                            <option>Thứ 5</option>
+                            <option>Thứ 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tiết</label>
+                        <select id="schedule-lessonUpdate">
+                            <option>Tiết 1 (07:00 - 07:35)</option>
+                            <option>Tiết 2 (07:40 - 08:15)</option>
+                            <option>Tiết 3 (08:20 - 08:55)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Môn học</label>
+                        <select id="schedule-subjectUpdate">
+                            <option>Chọn môn học</option>
+                            <option>Toán</option>
+                            <option>Ngữ Văn</option>
+                            <option>Tiếng Anh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giáo viên</label>
+                        <input id="schedule-teacherUpdate" type="text" placeholder="Nhập tên giáo viên">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input id="schedule-roomUpdate" type="text" placeholder="Ví dụ: P101">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitScheduleUpdate-btn">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
             <table class="schedule-table">
                 <thead>
                     <tr>
