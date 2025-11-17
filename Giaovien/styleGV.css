@@ -228,6 +228,9 @@
     padding-right: 20px;
     padding-bottom: 20px;
 }
+#anhdd img{
+    width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------BODyDD---------------------*/
 /*----------------------CHon Thong Tin DD---------------------*/
 #ChonLop{
@@ -957,6 +960,16 @@
     padding-top: 10px;
     margin-top: 10px;
 }
+/*----------------------Danh Sach Diem Danh---------------------*/
+#DanhsachDD{
+    overflow: auto;
+    
+}
+#DanhsachDD table{
+    overflow-x: auto;   /* Cho phép cuộn ngang */
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; /* Đặt chiều rộng tối thiểu cho bảng */
+}
 }
 
 /* Mobile (<= 767px) */
@@ -1179,5 +1192,20 @@
     padding-left: 20px;
     padding-top: 10px;
     margin-top: 10px;
+}
+/*----------------------Danh Sach Diem Danh---------------------*/
+#DanhsachDD{
+    overflow: auto;
+    
+}
+#DanhsachDD table{
+    overflow-x: auto;   /* Cho phép cuộn ngang */
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; /* Đặt chiều rộng tối thiểu cho bảng */
+}
+#anhdd img{
+     width: 30px;
+    height: 30px;
+    margin-right: 12px;
 }
 }
