@@ -492,12 +492,15 @@ const TSdimuonDD=document.querySelector('#slgdimuonDD');
 const btnLUUDIEMDANHDD=document.querySelector('#btnLuuDiemDanh')
 
 
+
  let soComat = 0;
  let soVangmat = 0;
  let soDimuon = 0;
 
 let currentRow = null;
-
+document.getElementById('btbThoatcsoGCDD').addEventListener('click', function (e) {
+    document.querySelector('#CuaSoGCDD').style.display = 'none';
+});
 btnLUUDIEMDANHDD.addEventListener('click',function(){
     alert("Đã lưu điểm danh");
 });

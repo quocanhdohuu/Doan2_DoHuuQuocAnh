@@ -355,6 +355,9 @@
     border-radius: 7px;
     resize: none;
 }
+#anhSK img{
+     width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------Suc Khoe---------------------*/
 /*----------------------headerSK---------------------*/
 #SucKhoe{
@@ -966,10 +969,47 @@
     
 }
 #DanhsachDD table{
-    overflow-x: auto;   /* Cho phép cuộn ngang */
+    overflow-x: auto;   
     -webkit-overflow-scrolling: touch;
-    min-width: 900px; /* Đặt chiều rộng tối thiểu cho bảng */
+    min-width: 900px; 
 }
+#CuaSoGCDD{
+    width: 60%;
+}
+/*----------------------Suc khoe--------------------*/
+#DanhsachSK{
+    overflow: auto;
+    
+}
+#DanhsachSK table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#anhSK img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#ThemGhichuSK{
+    height: 29px;
+    width: 50%;
+    border-radius: 7px;
+    margin-top: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 9pt;
+}
+#TSSucKhoe >div span{
+    font-size: 10pt;
+}
+
+#CuaSoThemGhiChuSK, #CuaSoSUAGhiChuSK {
+   font-size: 9pt;
+    width: 80%;
+}
+
 }
 
 /* Mobile (<= 767px) */
@@ -1140,22 +1180,6 @@
     padding-bottom: 20px;
     padding-right: 10px;
 }
-#LopDay h3{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    color: black;
-}
-.LOP{
-    border-radius: 15px ;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    height: 60%;
-    width: 90%;
-    margin-top: 15px;
-    padding-left: 20px;
-    padding-top: 10px;
-    margin-right: 15px;
-    float: left;
-}
 .LOP button{
     border: 0.5px solid gray;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -1199,13 +1223,114 @@
     
 }
 #DanhsachDD table{
-    overflow-x: auto;   /* Cho phép cuộn ngang */
+    overflow-x: auto;   
     -webkit-overflow-scrolling: touch;
-    min-width: 900px; /* Đặt chiều rộng tối thiểu cho bảng */
+    min-width: 900px; 
 }
 #anhdd img{
      width: 30px;
     height: 30px;
     margin-right: 12px;
+}
+/*----------------------btn ghi chú điểm danh---------------------*/
+#CuaSoGCDD{
+    width: 80%;
+}
+#DanhsachDD table button{
+    margin-left: 5px;
+    align-items: center;
+    text-align: center;
+    padding: 5px 5px;
+}
+/*----------------------Suc khoe--------------------*/
+#DanhsachSK{
+    overflow: auto;
+    
+}
+#DanhsachSK table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#anhSK img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#ThemGhichuSK{
+    height: 29px;
+    width: 50%;
+    border-radius: 7px;
+    margin-top: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 9pt;
+}
+#TSSucKhoe >div span{
+    font-size: 10pt;
+}
+
+#CuaSoThemGhiChuSK, #CuaSoSUAGhiChuSK {
+   font-size: 9pt;
+    width: 80%;
+}
+
+#CuaSoThemGhiChuSK > div,
+#CuaSoSUAGhiChuSK > div {
+    margin-top: 5px;
+}
+
+#CuaSoThemGhiChuSK > div > span,
+#CuaSoSUAGhiChuSK > div > span {
+    font-weight: bold;
+}
+
+#CuaSoThemGhiChuSK input[type="radio"],
+#CuaSoSUAGhiChuSK input[type="radio"] {
+    transform: scale(1.5);
+    margin-left: 20px;
+}
+
+#GhichuveĐSK, #GhichuveĐSKSUA {
+    margin-left: 18px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+
+#GhichuveTTSK, #GhichuveTTSKSUA {
+    margin-left: 15px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+
+#chonHocSinhGhiChuSK,#chonHocSinhGhiChuSKSUA {
+    margin-left: 15px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+
+#CuaSoThemGhiChuSK input[type="checkbox"],
+#CuaSoSUAGhiChuSK input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+#btncuasoTGCSK, #btncuasoTGCSKSUA {
+    margin-top: 20px;
+    height: 40px;
+    width: 55%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 }
