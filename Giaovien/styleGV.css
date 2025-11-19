@@ -1190,6 +1190,9 @@
     margin-right: 20px;
     cursor: pointer;
 }
+.LOP{
+    width: 90%;
+}
 /*----------------------Hoat Dong---------------------*/
 #HoatDong{
     display: flex;
@@ -1333,4 +1336,5 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
 }
