@@ -549,7 +549,7 @@
     padding-bottom: 20px;
 }
 /*----------------------BodySK---------------------*/   
-/*----------------------CHon Thong Tin SK---------------------*/
+/*----------------------CHon Thong Tin ds---------------------*/
 #ChonLopDS{
     margin-top: 20px;
     display: flex;
@@ -572,6 +572,9 @@
     border-radius: 7px;
     margin-top: 18px;
     cursor: pointer;
+}
+#YeuTSDS, #TrungBinhTSDS, #KhaTSDS, #GioiTSDS,#DiemTBTSDS,#TongdiemTSDS{
+    font-weight: bold;font-size: 60pt;
 }
 /*----------------------Thong So DS---------------------*/
 #TSDiemSo{
@@ -608,6 +611,11 @@
     width: 15%;
     justify-content: space-between;
     text-align: center;
+}
+#anhds img{
+   width: 1.5%;
+   width: 1.5%;
+   margin-right: 20px;
 }
 /*----------------------btn nhập điểm---------------------*/
 #CuaSoNĐS,#CuaSoNĐSSUA {
@@ -1221,11 +1229,29 @@
     margin-top: 10px;
 }
 /*----------------------Danh Sach Diem Danh---------------------*/
+#ChonLop{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#TSDiemDanh{
+    margin-top: 20px;
+}
+#ChonLop {
+    margin-bottom: 20px;
+}
+#ChonLop select{
+   height: 30px;
+}
+#ChonLop  input{
+    height: 30px;
+}
 #DanhsachDD{
     overflow: auto;
     
 }
 #DanhsachDD table{
+    overflow-y: auto;
     overflow-x: auto;   
     -webkit-overflow-scrolling: touch;
     min-width: 900px; 
@@ -1269,6 +1295,40 @@
     color: white;
     cursor: pointer;
     font-size: 9pt;
+}
+#ChonLopSK{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#ChonLopSK {
+    margin-bottom: 20px;
+}
+#ChonLopSK select{
+   height: 30px;
+}
+#ChonLopSK  input{
+    height: 30px;
+}
+#ChonLopSK button{
+   width: 30%;
+    height: 40px;
+}
+#TSSucKhoe{
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: space-between;
+    gap: 10px;            
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+}
+#TSSucKhoe> div {
+    border-radius: 15px;
+    text-align: center;
+    width: calc(50% - 10px);  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 0;
 }
 #TSSucKhoe >div span{
     font-size: 10pt;
@@ -1336,5 +1396,79 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+/*----------------------Điểm số---------------------*/
+#anhds img{
+   width: 30px;
+    height: 25px;
+   margin-right: 20px;
+}
+/*----------------------CHon Thong Tin DS---------------------*/
+#LopDS,#MonhocDS{
+    height: 20%;
+    width: 50%;
+    border-radius: 7px;
+}
+#chonLopHocDS,#chonMonHocDS{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+#btnXuatEDS, #btnPhieuDiemDS, #btnNhapDiemDS{
+    height: 20%;
+    width: 30%;
+    border-radius: 7px;
+    margin-top: 18px;
+    cursor: pointer;
+    font-size: 8pt;
+}
+/*----------------------Thong So DS---------------------*/
+#ChonLopDS{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#ChonLopDS div{
+    height: 30px;
+    margin-bottom: 20px;
+}
+#ChonLopDS button{
+   width: 30%;
+    height: 40px;
+}
+#TSDiemSo{
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: space-between;
+    gap: 10px;            
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+}
 
+#TSDiemSo > div {
+    border-radius: 15px;
+    text-align: center;
+    width: calc(50% - 10px);  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 0;
+}
+#TSDiemSo > div span:first-of-type {
+    font-size: 35pt;       
+    font-weight: bold;
+}
+
+#TSDiemSo > div span:last-of-type {
+    font-size: 10pt;      
+    font-weight: 500;
+}
+/*----------------------DSđiểm---------------------*/
+#DanhSachDS{
+    overflow: auto;
+    
+}
+#DanhSachDS table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
 }
