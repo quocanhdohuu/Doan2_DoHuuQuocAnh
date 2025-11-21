@@ -1222,3 +1222,618 @@ body {
   color: #28a745;
   font-weight: 500;
 }
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet: 768px and below */
+@media (max-width: 768px) {
+  /* Header */
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .user-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Menu */
+  .menu {
+    flex-wrap: wrap;
+    margin: 15px;
+  }
+
+  .menu button {
+    flex: 1 1 48%;
+    padding: 8px 5px;
+    font-size: 13px;
+  }
+
+  /* Card & Grid */
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    margin: 0 15px 20px;
+  }
+
+  .luoi-ho-so {
+    grid-template-columns: 1fr;
+  }
+
+  /* Điểm danh */
+  .khung-diem-danh {
+    flex-direction: column;
+    margin: 15px;
+  }
+
+  .cot-trai, .cot-phai {
+    flex: 1 1 100%;
+  }
+
+  /* Sức khỏe */
+  .khung-chinh {
+    flex-direction: column;
+    width: 100%;
+    margin: 15px auto;
+  }
+
+  .cot-trai {
+    flex: 1 1 100%;
+  }
+
+  .cot-phai {
+    flex: 1 1 100%;
+    padding: 0;
+  }
+
+  .ngay-list-wrapper {
+    gap: 15px;
+  }
+
+  .ngay-khoi {
+    padding: 12px;
+  }
+
+  .bua-an {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .bua {
+    padding: 8px 4px;
+    font-size: 0.7rem;
+  }
+
+  .thongtin {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Học tập */
+  .tieu-de-hoc-tap {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .hanh-dong-hoc-tap {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .chon-hoc-ky, .tai-phieu {
+    width: 100%;
+  }
+
+  .tong-ket {
+    gap: 10px;
+  }
+
+  .tong-ket .box {
+    min-width: 120px;
+    padding: 12px 10px;
+  }
+
+  .tong-ket .box h3 {
+    font-size: 18px;
+  }
+
+  .tong-ket .box p {
+    font-size: 12px;
+  }
+
+  .tabs {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .tab {
+    flex: 1 1 auto;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .mon-hoc {
+    padding: 15px;
+  }
+
+  .bang-diem {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .bang-diem .cot {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  /* Thao tác nhanh */
+  .Luachon {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .Luachon-chucnang {
+    padding: 15px 8px;
+  }
+
+  .Luachon-chucnang .icon {
+    font-size: 20px;
+  }
+
+  .Luachon-chucnang p {
+    font-size: 13px;
+  }
+
+  /* Toàn cục margin/padding */
+  .card, .Nhanxetgv, .Update-sk, .Toigian, .khu-vuc-ho-so {
+    margin: 0 15px 15px 15px;
+  }
+
+  .tatcamonhoc, .monchinh, .tiendo {
+    margin: 0 15px 15px;
+  }
+
+  .vung-chua {
+    margin: 15px;
+  }
+
+  .tomtat-tuan {
+    margin: 15px;
+    padding: 15px;
+  }
+}
+
+/* Mobile: 480px and below */
+@media (max-width: 480px) {
+  /* Font sizes */
+  body {
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .user-info h3 {
+    font-size: 14px;
+  }
+
+  .user-info p {
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  /* Menu */
+  .menu {
+    flex-direction: column;
+    margin: 10px;
+    padding: 0;
+  }
+
+  .menu button {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  /* Card */
+  .card {
+    padding: 10px;
+    margin: 0 10px 10px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 12px;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .summary-item {
+    padding: 12px;
+  }
+
+  .summary-item .icon {
+    font-size: 24px;
+  }
+
+  /* Info */
+  .info-grid {
+    margin: 0 10px 15px;
+  }
+
+  .info-card {
+    padding: 15px;
+  }
+
+  .info-card h3 {
+    font-size: 16px;
+  }
+
+  .info-card p {
+    font-size: 13px;
+  }
+
+  .dong-thong-tin {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  /* Điểm danh */
+  .khung-diem-danh {
+    margin: 10px;
+    gap: 15px;
+  }
+
+  .ngay {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .ngay div {
+    padding: 3px 0;
+    font-size: 11px;
+  }
+
+  .muc {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .muc .ghi-chu {
+    font-size: 12px;
+  }
+
+  .trang-thai {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  /* Sức khỏe */
+  .khung-chinh {
+    margin: 10px auto;
+    width: 100%;
+  }
+
+  .cot-trai, .cot-phai {
+    padding: 15px;
+  }
+
+  .hop-lich h3 {
+    font-size: 14px;
+  }
+
+  .ngay-khoi {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .tieu-de-ngay {
+    font-size: 0.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .tieu-de-ngay span:first-child {
+    font-size: 13px;
+  }
+
+  .muc h4 {
+    font-size: 13px;
+  }
+
+  .thongtin {
+    gap: 8px;
+  }
+
+  .nhietdo, .ghichu {
+    padding: 8px;
+  }
+
+  .bua-an {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .bua {
+    padding: 6px;
+    font-size: 0.65rem;
+  }
+
+  .bua .icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .ghichu-an {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Tóm tắt */
+  .tomtat-tuan {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .tomtat-tuan h3 {
+    font-size: 16px;
+  }
+
+  .tomtat-tuan .phu-de {
+    font-size: 12px;
+  }
+
+  .tomtat-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .muc-tomtat {
+    flex: 1;
+    width: 100%;
+  }
+
+  .giatri {
+    font-size: 20px;
+  }
+
+  .muc-tomtat p {
+    font-size: 12px;
+  }
+
+  /* Học tập */
+  .khu-vuc-hoc-tap {
+    padding: 10px;
+  }
+
+  .tieu-de-hoc-tap h2 {
+    font-size: 18px;
+  }
+
+  .tieu-de-hoc-tap p {
+    font-size: 12px;
+  }
+
+  .khung-tong-ket {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .tieu-de-khung h3 {
+    font-size: 14px;
+  }
+
+  .tong-ket {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tong-ket .box {
+    min-width: 100%;
+    padding: 12px;
+  }
+
+  .tong-ket .box h3 {
+    font-size: 18px;
+  }
+
+  .tong-ket .box p {
+    font-size: 12px;
+  }
+
+  .tabs {
+    margin-bottom: 15px;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .tab {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .mon-hoc {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .tieu-de-mon {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ten-mon h3 {
+    font-size: 16px;
+  }
+
+  .ten-mon p {
+    font-size: 12px;
+  }
+
+  .diem-tb {
+    position: static;
+    margin-top: 10px;
+    flex-direction: row;
+  }
+
+  .diem-badge {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+
+  .bang-diem {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .bang-diem .cot {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .nhan-xet {
+    padding: 10px;
+  }
+
+  .nhan-xet h4 {
+    font-size: 13px;
+  }
+
+  .nhan-xet p {
+    font-size: 12px;
+  }
+
+  .subject {
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+
+  .subject-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .subject-header h3 {
+    font-size: 14px;
+  }
+
+  .score-box {
+    align-self: flex-start;
+    font-size: 12px;
+  }
+
+  .subject p {
+    font-size: 12px;
+  }
+
+  /* Thao tác nhanh */
+  .Toigian {
+    margin: 0 10px 10px;
+    padding: 15px;
+  }
+
+  .Toigian h3 {
+    font-size: 16px;
+  }
+
+  .Luachon {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .Luachon-chucnang {
+    padding: 12px;
+  }
+
+  .Luachon-chucnang .icon {
+    font-size: 18px;
+  }
+
+  .Luachon-chucnang p {
+    font-size: 12px;
+  }
+
+  /* Hồ sơ */
+  .khu-vuc-ho-so {
+    margin: 0 10px 10px;
+    padding: 15px;
+  }
+
+  .tieu-de-ho-so h2 {
+    font-size: 18px;
+  }
+
+  .luoi-ho-so {
+    gap: 15px;
+  }
+
+  .the-thong-tin {
+    padding: 15px;
+  }
+
+  .the-thong-tin h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  /* Tiến độ biểu đồ */
+  .vung-chua {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .tieu-de-bieu-do {
+    font-size: 1rem;
+    gap: 6px;
+  }
+
+  .ten-mon-va-xu-huong {
+    font-size: 0.9rem;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+
+  .xu-huong {
+    font-size: 0.8rem;
+  }
+
+  .nhan-diem {
+    font-size: 0.75rem;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Toàn cục margin */
+  .card, .Nhanxetgv, .Update-sk, .tatcamonhoc, .monchinh, .tiendo {
+    margin: 0 10px 10px;
+  }
+
+  .Nhanxetgv, .Update-sk {
+    padding: 15px;
+  }
+}
