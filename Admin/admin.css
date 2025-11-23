@@ -407,6 +407,7 @@ select {
   padding: 12px;
   text-align: center;
   font-weight: bold;
+  width: 16.67%;
 }
 
 .schedule-table td {
@@ -414,6 +415,7 @@ select {
   padding: 12px;
   vertical-align: middle;
   text-align: center;
+  width: 16.67%;
 }
 
 .schedule-table small {

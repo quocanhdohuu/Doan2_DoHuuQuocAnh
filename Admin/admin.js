@@ -1080,3 +1080,452 @@ document.addEventListener("DOMContentLoaded", () => {
   updateClassSelectOptions();
   renderStudents();
 });
+
+// xử lý QL lịch học
+// schedule.js — rewritten to match your HTML exactly
+document.addEventListener("DOMContentLoaded", () => {
+  // ---------- Helpers for localStorage ----------
+  const getClasses = () => JSON.parse(localStorage.getItem("classes") || "[]");
+  const getTeachers = () =>
+    JSON.parse(localStorage.getItem("teachers") || "[]");
+  const getSchedule = () =>
+    JSON.parse(localStorage.getItem("schedule") || "{}");
+  const setSchedule = (s) =>
+    localStorage.setItem("schedule", JSON.stringify(s));
+
+  // ---------- Normalizers ----------
+  function normalizeClassName(raw) {
+    // Accept either "Lớp 1A" or "1A" if some data used different format.
+    if (!raw) return "";
+    return raw.replace(/\s*Lớp\s*/i, "").trim(); // store internal as "1A"
+  }
+  function normalizeLesson(raw) {
+    // From "Tiết 1 (07:00 - 07:35)" => "Tiết 1"
+    if (!raw) return "";
+    const parts = raw.split(" ");
+    return parts.length >= 2 ? parts[0] + " " + parts[1] : raw;
+  }
+
+  // ---------- DOM refs (match your HTML) ----------
+  const headerClassSelect = document.querySelector(
+    "#schedule .schedule-actions select"
+  );
+  const totalLessonsEl = document.querySelector(".schedule-header h4");
+  const addBtn = document.querySelector(".addschedule-btn");
+  const modalAdd = document.getElementById("scheduleModal");
+  const modalUpdate = document.getElementById("scheduleModalUpdate");
+  const overlay = document.getElementById("overlaySchedule");
+
+  // Add form fields
+  const fld_add_class = document.getElementById("schedule-Class");
+  const fld_add_day = document.getElementById("schedule-dayofweek");
+  const fld_add_lesson = document.getElementById("schedule-lesson");
+  const fld_add_subject = document.getElementById("schedule-subject");
+  const fld_add_teacher = document.getElementById("schedule-addteacher");
+  const fld_add_room = document.getElementById("schedule-addroom");
+  const formAdd = document.getElementById("scheduleForm");
+
+  // Update form fields
+  const fld_up_class = document.getElementById("schedule-ClassUpdate");
+  const fld_up_day = document.getElementById("schedule-dayofweekUpdate");
+  const fld_up_lesson = document.getElementById("schedule-lessonUpdate");
+  const fld_up_subject = document.getElementById("schedule-subjectUpdate");
+  const fld_up_teacher = document.getElementById("schedule-teacherUpdate");
+  const fld_up_room = document.getElementById("schedule-roomUpdate");
+  const formUpdate = document.getElementById("scheduleFormUpdate");
+
+  // Table rows (we will write into these cells)
+  const tableRows = document.querySelectorAll(".schedule-table tbody tr");
+
+  // ---------- Utility: populate class selects (normalizing to "1A" format) ----------
+  function populateClassSelects() {
+    const classes = getClasses().map((c) =>
+      (typeof c === "string" ? c : c.name || "")
+        .replace(/\s*Lớp\s*/i, "")
+        .trim()
+    );
+    // header select (first select in schedule-actions)
+    if (headerClassSelect) {
+      headerClassSelect.innerHTML = `<option value="">Tất cả các lớp</option>`;
+      classes.forEach(
+        (c) =>
+          (headerClassSelect.innerHTML += `<option value="${c}">${c}</option>`)
+      );
+    }
+    // add/update modal selects
+    if (fld_add_class) {
+      fld_add_class.innerHTML = "";
+      classes.forEach(
+        (c) => (fld_add_class.innerHTML += `<option value="${c}">${c}</option>`)
+      );
+    }
+    if (fld_up_class) {
+      fld_up_class.innerHTML = "";
+      classes.forEach(
+        (c) => (fld_up_class.innerHTML += `<option value="${c}">${c}</option>`)
+      );
+    }
+  }
+
+  // ---------- Render schedule (for selected class or all) ----------
+  function clearTableCells() {
+    tableRows.forEach((row, rowIndex) => {
+      const cells = row.querySelectorAll("td");
+      // cells[0] is "Tiết / time"; days are cells[1..5]
+      for (let j = 1; j <= 5; j++) cells[j].innerHTML = "";
+    });
+  }
+
+  function renderSchedule() {
+    clearTableCells();
+    const schedule = getSchedule();
+    const selectedClass = headerClassSelect ? headerClassSelect.value : "";
+
+    // if selectedClass empty => don't display anything (we keep table empty) OR we can choose to display first class
+    if (!selectedClass) {
+      updateTotalLessons();
+      return;
+    }
+
+    const list = schedule[selectedClass] || [];
+    // put each item into appropriate cell (row = lessonIndex, col = dayIndex+1)
+    list.forEach((item, idx) => {
+      const lessonText = normalizeLesson(item.lesson);
+      // lesson like "Tiết 1" => index 0
+      const lessonIndex = parseInt(lessonText.replace("Tiết ", "")) - 1;
+      // day like "Thứ 2" => index 1 for Thứ 2 -> dayIndex = 1? we want col 1 = Thứ2
+      const dayIndex = parseInt(item.day.replace("Thứ ", "")) - 1; // 0..4
+      if (isNaN(lessonIndex) || isNaN(dayIndex)) return;
+      const row = tableRows[lessonIndex];
+      if (!row) return;
+      const cell = row.querySelectorAll("td")[dayIndex];
+      if (!cell) return;
+
+      // create inner HTML
+      cell.innerHTML = `
+        <div class="schedule-lesson">
+          <strong>${item.subject}</strong>
+          <div class="schedule-teacher">${item.teacher}</div>
+          <span class="badge schedule-room">${item.room}</span>
+          <div class="schedule-table-actions">
+            <button class="editschedule" data-index="${idx}"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="deleteschedule" data-index="${idx}"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        </div>
+      `;
+    });
+
+    updateTotalLessons();
+  }
+
+  // ---------- Total lessons update ----------
+  function updateTotalLessons() {
+    const schedule = getSchedule();
+    const selectedClass = headerClassSelect ? headerClassSelect.value : "";
+    const total = selectedClass ? (schedule[selectedClass] || []).length : 0;
+    if (totalLessonsEl) totalLessonsEl.textContent = `${total} tiết/tuần`;
+  }
+
+  // ---------- Duplicate check ----------
+  // We standardize both saved items and input using normalizeLesson and normalizeClassName
+  function isDuplicate(clsRaw, day, lessonRaw, ignoreIndex = -1) {
+    const cls = normalizeClassName(clsRaw);
+    const lesson = normalizeLesson(lessonRaw);
+    const schedule = getSchedule();
+    if (!schedule[cls]) return false;
+    return schedule[cls].some((it, idx) => {
+      return (
+        idx !== ignoreIndex &&
+        it.day === day &&
+        normalizeLesson(it.lesson) === lesson
+      );
+    });
+  }
+  // ---------- Teacher Busy Check ----------
+  function isTeacherBusy(
+    teacherName,
+    day,
+    lesson,
+    ignoreClass = "",
+    ignoreIndex = -1
+  ) {
+    const schedule = getSchedule();
+
+    for (let cls in schedule) {
+      const list = schedule[cls];
+
+      for (let i = 0; i < list.length; i++) {
+        const item = list[i];
+
+        if (i === ignoreIndex && cls === ignoreClass) continue;
+
+        if (
+          item.teacher === teacherName &&
+          item.day === day &&
+          normalizeLesson(item.lesson) === normalizeLesson(lesson)
+        ) {
+          return true; // teacher is teaching somewhere else this period
+        }
+      }
+    }
+
+    return false;
+  }
+
+  // ---------- Add new lesson ----------
+  formAdd &&
+    formAdd.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const rawClass = fld_add_class ? fld_add_class.value : "";
+      const cls = normalizeClassName(rawClass);
+      const day = fld_add_day ? fld_add_day.value : "";
+      const lesson = fld_add_lesson
+        ? normalizeLesson(fld_add_lesson.value)
+        : "";
+      const subject = fld_add_subject ? fld_add_subject.value : "";
+      const teacher = fld_add_teacher ? fld_add_teacher.value.trim() : "";
+      const room = fld_add_room ? fld_add_room.value.trim() : "";
+
+      if (!cls || !day || !lesson || !subject || !teacher || !room) {
+        alert("Vui lòng nhập đầy đủ thông tin!");
+        return;
+      }
+
+      if (isDuplicate(cls, day, lesson)) {
+        alert("Tiết học này đã tồn tại cho lớp này (cùng thứ & cùng tiết).");
+        return;
+      }
+      if (isTeacherBusy(teacher, day, lesson)) {
+        alert("Giáo viên này đang dạy lớp khác trong cùng tiết này!");
+        return;
+      }
+
+      const schedule = getSchedule();
+      if (!schedule[cls]) schedule[cls] = [];
+      schedule[cls].push({
+        day,
+        lesson,
+        subject,
+        teacher,
+        room,
+      });
+      setSchedule(schedule);
+
+      // close modal + refresh
+      modalAdd.style.display = "none";
+      overlay.style.display = "none";
+      formAdd.reset();
+      renderSchedule();
+    });
+
+  // ---------- Table click: edit / delete ----------
+  document.querySelector(".schedule-table").addEventListener("click", (e) => {
+    const editBtn = e.target.closest(".editschedule");
+    const deleteBtn = e.target.closest(".deleteschedule");
+    const selectedClass = headerClassSelect ? headerClassSelect.value : "";
+    if (!selectedClass) return;
+
+    const schedule = getSchedule();
+    if (editBtn) {
+      const idx = Number(editBtn.dataset.index);
+      const item = schedule[selectedClass][idx];
+      if (!item) return;
+
+      // Pre-fill update modal (ensure lesson normalized)
+      fld_up_class.value = selectedClass;
+      fld_up_day.value = item.day;
+      fld_up_lesson.value = item.lesson; // lesson shown as "Tiết X"
+      fld_up_subject.value = item.subject;
+      fld_up_teacher.value = item.teacher;
+      fld_up_room.value = item.room;
+
+      // Save index on formUpdate element for ignoreIndex
+      formUpdate.dataset.editIndex = idx;
+
+      modalUpdate.style.display = "block";
+      overlay.style.display = "block";
+    }
+
+    if (deleteBtn) {
+      const idx = Number(deleteBtn.dataset.index);
+      if (!confirm("Bạn có chắc muốn xoá tiết học này?")) return;
+      schedule[selectedClass].splice(idx, 1);
+      setSchedule(schedule);
+      renderSchedule();
+    }
+  });
+
+  // ---------- Update form submit ----------
+  formUpdate &&
+    formUpdate.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const selectedClass = headerClassSelect ? headerClassSelect.value : "";
+      if (!selectedClass) return;
+
+      const editIndex = Number(formUpdate.dataset.editIndex);
+      if (isNaN(editIndex)) return;
+
+      const newClassRaw = fld_up_class ? fld_up_class.value : "";
+      const newClass = normalizeClassName(newClassRaw);
+      const newDay = fld_up_day ? fld_up_day.value : "";
+      const newLesson = fld_up_lesson
+        ? normalizeLesson(fld_up_lesson.value)
+        : "";
+      const newSubject = fld_up_subject ? fld_up_subject.value : "";
+      const newTeacher = fld_up_teacher ? fld_up_teacher.value.trim() : "";
+      const newRoom = fld_up_room ? fld_up_room.value.trim() : "";
+
+      if (
+        !newClass ||
+        !newDay ||
+        !newLesson ||
+        !newSubject ||
+        !newTeacher ||
+        !newRoom
+      ) {
+        alert("Vui lòng nhập đầy đủ thông tin khi cập nhật!");
+        return;
+      }
+
+      // When editing, ignore the current index in duplicate check.
+      if (isDuplicate(newClass, newDay, newLesson, editIndex)) {
+        alert("Trùng lịch khi cập nhật (cùng thứ & cùng tiết).");
+        return;
+      }
+      if (isTeacherBusy(newTeacher, newDay, newLesson, newClass, editIndex)) {
+        alert("Giáo viên này đang dạy lớp khác trong tiết này!");
+        return;
+      }
+      // perform move (if class changed) or update in place
+      const schedule = getSchedule();
+      // remove original from selectedClass at editIndex
+      const originalList = schedule[selectedClass] || [];
+      const item = originalList[editIndex];
+      if (!item) {
+        alert("Không tìm thấy tiết để cập nhật.");
+        modalUpdate.style.display = "none";
+        overlay.style.display = "none";
+        return;
+      }
+
+      // remove original
+      originalList.splice(editIndex, 1);
+
+      // ensure newClass array exists
+      if (!schedule[newClass]) schedule[newClass] = [];
+      schedule[newClass].push({
+        day: newDay,
+        lesson: newLesson,
+        subject: newSubject,
+        teacher: newTeacher,
+        room: newRoom,
+      });
+
+      setSchedule(schedule);
+      modalUpdate.style.display = "none";
+      overlay.style.display = "none";
+      formUpdate.reset();
+      renderSchedule();
+    });
+
+  // ---------- Modal open/close handlers ----------
+  addBtn &&
+    addBtn.addEventListener("click", () => {
+      populateClassSelects(); // refresh class list inside modal
+      modalAdd.style.display = "block";
+      overlay.style.display = "block";
+      formAdd && formAdd.reset();
+    });
+  document.getElementById("closeScheduleBtn")?.addEventListener("click", () => {
+    modalAdd.style.display = "none";
+    overlay.style.display = "none";
+  });
+  document
+    .getElementById("closeScheduleBtnUpdate")
+    ?.addEventListener("click", () => {
+      modalUpdate.style.display = "none";
+      overlay.style.display = "none";
+    });
+  overlay &&
+    overlay.addEventListener("click", () => {
+      modalAdd.style.display = "none";
+      modalUpdate.style.display = "none";
+      overlay.style.display = "none";
+    });
+
+  // ---------- Autocomplete for teacher inputs ----------
+  function setupAutocompleteForInput(inputEl) {
+    // create dropdown container
+    let box = document.createElement("div");
+    box.className = "autocomplete-suggestions";
+    box.style.position = "absolute";
+    box.style.zIndex = "9999";
+    box.style.background = "#fff";
+    box.style.border = "1px solid #ddd";
+    box.style.display = "none";
+    document.body.appendChild(box);
+
+    function positionBox() {
+      const rect = inputEl.getBoundingClientRect();
+      box.style.left = `${rect.left + window.scrollX}px`;
+      box.style.top = `${rect.bottom + window.scrollY}px`;
+      box.style.width = `${rect.width}px`;
+    }
+
+    inputEl.addEventListener("input", () => {
+      const q = inputEl.value.trim().toLowerCase();
+      box.innerHTML = "";
+      if (!q) {
+        box.style.display = "none";
+        return;
+      }
+      const teachers = getTeachers();
+      const matches = teachers
+        .filter((t) => {
+          // support both t.name / t.fullName / t.nameFull...
+          const nm = (t.fullName || t.name || t.fullname || "").toLowerCase();
+          return nm.includes(q);
+        })
+        .slice(0, 8);
+      if (matches.length === 0) {
+        box.style.display = "none";
+        return;
+      }
+      matches.forEach((m) => {
+        const div = document.createElement("div");
+        div.className = "autocomplete-item";
+        div.textContent = m.fullName || m.name;
+        div.style.padding = "6px";
+        div.style.cursor = "pointer";
+        div.addEventListener("click", () => {
+          inputEl.value = div.textContent;
+          box.style.display = "none";
+        });
+        box.appendChild(div);
+      });
+      positionBox();
+      box.style.display = "block";
+    });
+
+    window.addEventListener("resize", positionBox);
+    window.addEventListener("scroll", positionBox);
+    document.addEventListener("click", (ev) => {
+      if (ev.target !== inputEl) box.style.display = "none";
+    });
+  }
+
+  // attach to both add and update teacher inputs
+  if (fld_add_teacher) setupAutocompleteForInput(fld_add_teacher);
+  if (fld_up_teacher) setupAutocompleteForInput(fld_up_teacher);
+
+  // ---------- header select change ----------
+  headerClassSelect &&
+    headerClassSelect.addEventListener("change", () => {
+      renderSchedule();
+    });
+
+  // ---------- init ----------
+  populateClassSelects();
+  renderSchedule();
+  updateTotalLessons();
+});
