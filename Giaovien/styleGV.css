@@ -722,6 +722,9 @@
     width: 33%;
     height: 95%;
 }
+#anhLL img{
+   width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------CHon Thong Tin Liên lạc---------------------*/
 #ChonLopLL{
     margin-top: 20px;
@@ -758,6 +761,116 @@
 }
 .TinDenLL,.DBaLL{
     border: 1px solid black;
+}
+/* Khung hộp thư */
+#HopThuDenLL {
+    display: block;
+}
+
+/* Tiêu đề */
+#HopThuDenLL > span {
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Khung từng tin nhắn */
+.TinDenLL {
+    margin-top: 20px;
+    height: 23%;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Header của tin nhắn */
+.TinDenLL .tieuDeTin {
+    font-size: 14pt;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+}
+
+/* Box nhãn */
+.TinDenLL .nhanMoi {
+    background-color: black;
+    padding: 3px;
+    color: white;
+    border-radius: 10px;
+}
+
+.TinDenLL .nhanNguoiGui {
+    padding: 3px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+/* Nội dung */
+.TinDenLL p {
+    font-size: 13pt;
+}
+
+.TinDenLL p.tieuDeNoiDung {
+    font-weight: bold;
+}
+
+/* Nút trả lời */
+.btnSTHTD {
+    cursor: pointer;
+    height: 100%;
+    width: 3%;
+    background-color: white;
+    border-radius: 7px;
+    border: none;
+}
+
+/* Thời gian */
+.TinDenLL .thoiGian {
+    font-size: 13pt;
+}
+/* Ẩn ban đầu */
+#DaGuiLL {
+    display: none;
+}
+
+/* Tiêu đề */
+#DaGuiLL > span {
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Khối tin nhắn đã gửi */
+.TinGuiLL {
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 20%;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+/* Người nhận */
+.TinGuiLL .ngNhanll {
+    font-size: 14pt;
+    font-weight: bold;
+    justify-content: space-between;
+    display: flex;
+    height: 20%;
+}
+
+/* Tiêu đề tin */
+.TinGuiLL .tieudeLL {
+    font-size: 13pt;
+    font-weight: bold;
+}
+
+/* Nội dung tin */
+.TinGuiLL .ndguiLL {
+    font-size: 13pt;
+}
+
+/* Thời gian gửi */
+.TinGuiLL .tgguiLL {
+    font-size: 13pt;
 }
 /*----------------------btn soạn tin---------------------*/
 #CuaSoSoanTinLL{
@@ -999,6 +1112,21 @@
     height: 30px;;
     margin-right: 12px;
 }
+#anhDD img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#anhDS img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#anhLL img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
 #ThemGhichuSK{
     height: 29px;
     width: 50%;
@@ -1017,7 +1145,25 @@
    font-size: 9pt;
     width: 80%;
 }
-
+/*----------------------Điểm số---------------------*/
+#CuaSoNĐS,#CuaSoNĐSSUA {
+    width: 80%;
+}
+#chonHocSinhGhiChuDS,#chonHocSinhGhiChuDSSUA {
+    margin-left: 25px;
+    height: 30px;
+    width: 70%;
+    border-radius: 7px;
+}
+#btncuasoTGCDS,#btncuasoTGCDSSUA{
+    width:20%;
+}
+#txtDiemSODS,#txtDiemSODSSUA{
+    width: 70%;
+}
+#NhanxetblDS,#NhanxetblDSSUA{
+    width: 70%;
+}
 }
 
 /* Mobile (<= 767px) */
@@ -1261,6 +1407,11 @@
     height: 30px;
     margin-right: 12px;
 }
+#anhLL img{
+     width: 30px;
+    height: 30px;
+    margin-right: 12px;
+}
 /*----------------------btn ghi chú điểm danh---------------------*/
 #CuaSoGCDD{
     width: 80%;
@@ -1470,5 +1621,53 @@
     overflow-x: auto;   
     -webkit-overflow-scrolling: touch;
     min-width: 900px; 
+}
+/*----------------------btn nhập điểm---------------------*/
+#CuaSoNĐS,#CuaSoNĐSSUA {
+    width: 80%;
+}
+#chonHocSinhGhiChuDS,#chonHocSinhGhiChuDSSUA {
+    margin-left: 25px;
+    height: 30px;
+    width: 70%;
+    border-radius: 7px;
+}
+#btncuasoTGCDS,#btncuasoTGCDSSUA{
+    width:50%;
+}
+#txtDiemSODS,#txtDiemSODSSUA{
+    width: 70%;
+}
+#NhanxetblDS,#NhanxetblDSSUA{
+    width: 70%;
+}
+/*----------------------Liên lạc---------------------*/
+/*----------------------Menu LL---------------------*/
+#MenuLL button{
+    font-size: 8pt;
+}
+/*----------------------CHon Thong Tin Liên lạc---------------------*/
+#ChonLopLL{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#ChonLopLL div{
+    height: 30px;
+    margin-bottom: 20px;
+}
+#ChonLopLL button{
+   width: 30%;
+    height: 40px;
+}
+/*----------------------Hộp thư đến Liên lạc---------------------*/
+.TinDenLL {
+    overflow: auto;
+}
+.TinGuiLL {
+    overflow: auto;
+}
+.DBaLL{
+    overflow: auto;
 }
 }

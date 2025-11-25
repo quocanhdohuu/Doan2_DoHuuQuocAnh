@@ -665,7 +665,7 @@
               <div><span>Nội dung</span><textarea style="resize: none;  " id="TXTNDSTLL" placeholder="Nhập nội dung tin nhắn"></textarea></div>
              <button id="btnCSSTLL"><i class="fa-solid fa-paper-plane"></i>Gửi tin nhắn</button>
         </div>
-        <h3 style="margin-bottom: 2px;"><img style="width: 1.5%;width: 1.5%;margin-right: 20px;" src="../img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
+        <h3 id="anhLL" style="margin-bottom: 2px;"><img  src="../img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
         <span style="color: gray;">Gửi tin nhắn và thông báo tới phụ huynh học sinh</span>
         </h3>
         <!-----------------Menu Liên lạc------------------->
@@ -698,129 +698,133 @@
         </div>
 
          <!-----------------Hộp thư đến------------------->
-         <div id="HopThuDenLL" style="display: block;">
-            <span style="font-size: large;font-weight: bold;">Tin nhắn đến</span>
+         <div id="HopThuDenLL">
+            <span>Tin nhắn đến</span>
 
-            <div class="TinDenLL" id="TNdenLL1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
-                <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
-                    <div> Nguyễn Thị B 
-                      <span style="background-color: black;padding: 3px;color: white;border-radius: 10px;">Mới</span> 
-                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Nguyễn văn A</span>
-                    </div> 
-                    <button class="btnSTHTD" style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
+            <div class="TinDenLL" id="TNdenLL1">
+                <span class="tieuDeTin">
+                    <div>
+                        Nguyễn Thị B
+                     <span class="nhanMoi">Mới</span>
+                        <span class="nhanNguoiGui">Nguyễn văn A</span>
+                    </div>
+                    <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
                 </span>
-                <p style="font-size: 13pt;font-weight: bold;">Hỏi về bài tập về nhà</p>
-                <p style="font-size: 13pt;">Thầy ơi, con em hôm nay về không có ghi bài tập gì. Xin thầy cho biết bài tập môn Toán hôm nay ạ.</p>
-                <span style="font-size: 13pt;">08:30:00 23/12/2024</span>
-            </div>
 
-            <div class="TinDenLL" id="TNdenLL2" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
-                <span style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
-                    <div>Trần Văn D
-                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Trần Thị C</span>
-                    </div> 
-                    <button class="btnSTHTD" style="cursor: pointer;height: 100%;width: 3%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-reply"></i></button>
-                </span>
-                <p style="font-size: 13pt;font-weight: bold;">Xin phép nghỉ học</p>
-                <p style="font-size: 13pt;">Thầy ơi, con em bị sốt nên hôm nay xin phép nghỉ học. Em sẽ học bù vào ngày mai ạ.</p>
-                <span style="font-size: 13pt;">07:15:00 23/12/2024</span>
+                <p class="tieuDeNoiDung">Hỏi về bài tập về nhà</p>
+                 <p>Thầy ơi, con em hôm nay về không có ghi bài tập gì. Xin thầy cho biết bài tập môn Toán hôm nay ạ.</p>
+                 <span class="thoiGian">08:30:00 23/12/2024</span>
+                </div>
+
+                <div class="TinDenLL" id="TNdenLL2">
+                     <span class="tieuDeTin">
+                <div>
+                    Trần Văn D
+                    <span class="nhanNguoiGui">Trần Thị C</span>
+                </div>
+                <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
+                    </span>
+
+                 <p class="tieuDeNoiDung">Xin phép nghỉ học</p>
+                <p>Thầy ơi, con em bị sốt nên hôm nay xin phép nghỉ học. Em sẽ học bù vào ngày mai ạ.</p>
+                <span class="thoiGian">07:15:00 23/12/2024</span>
             </div>
-         </div>
+        </div>
 
           <!-----------------Hộp thư gửi------------------->
-         <div id="DaGuiLL" style="display: none;">
-            <span style="font-size: large;font-weight: bold;">Tin nhắn đã gửi</span>
-            <div class="TinGuiLL" id="TNGuiLL0" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+         <div id="DaGuiLL" >
+            <span >Tin nhắn đã gửi</span>
+            <div class="TinGuiLL" id="TNGuiLL0" >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
-            <div class="TinGuiLL" id="TNGuiLL1" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL1"  >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
-            <div class="TinGuiLL" id="TNGuiLL2" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL2" >
+                <span class="ngNhanll">
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
-            <div class="TinGuiLL" id="TNGuiLL3" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL3">
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
-            <div class="TinGuiLL" id="TNGuiLL4" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL4" >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
-            <div class="TinGuiLL" id="TNGuiLL5" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL5" >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
-                
-            </div>
-
-            <div class="TinGuiLL" id="TNGuiLL6" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
-                </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL"></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
 
-            <div class="TinGuiLL" id="TNGuiLL7" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL6"  >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
 
-            <div class="TinGuiLL" id="TNGuiLL8" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL7" >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
 
-            <div class="TinGuiLL" id="TNGuiLL9" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL8" >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL"></span>
                 
             </div>
 
-            <div class="TinGuiLL" id="TNGuiLL10" style="margin-top: 20px;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 20%;padding: 5px;border-radius: 7px;">
-                <span class="ngNhanll" style="font-size: 14pt; font-weight: bold;justify-content: space-between;display: flex; height: 20%;">
+            <div class="TinGuiLL" id="TNGuiLL9" >
+                <span class="ngNhanll" >
                 </span>
-                <p class="tieudeLL" style="font-size: 13pt;font-weight: bold;"></p>
-                <p class="ndguiLL" style="font-size: 13pt;"></p>
-                <span class="tgguiLL" style="font-size: 13pt;"></span>
+                <p class="tieudeLL"></p>
+                <p class="ndguiLL"></p>
+                <span class="tgguiLL" ></span>
+                
+            </div>
+
+            <div class="TinGuiLL" id="TNGuiLL10" >
+                <span class="ngNhanll" >
+                </span>
+                <p class="tieudeLL" ></p>
+                <p class="ndguiLL" ></p>
+                <span class="tgguiLL" ></span>
                 
             </div>
          </div>
@@ -869,7 +873,7 @@
                 <div>
                     <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
                     <div> Nguyễn Thị B
-                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
+                      <span>Mẹ</span>
                     </div> 
                     </span>
                     <p style="font-size: 13pt;">Học sinh: Nguyễn Văn A</p>
@@ -882,10 +886,6 @@
                     <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
-
-         </div>
-
-        
     </div>
 
     <script src="jvGV.js"></script>
