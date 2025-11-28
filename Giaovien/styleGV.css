@@ -238,6 +238,7 @@
     display: flex;
     justify-content: space-between;
     height: 20%;
+    gap: 10px;
 }
 #Lop,#chonNgay{
     height: 20%;
@@ -282,7 +283,7 @@
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;
-    width: 15%;
+    width: auto;
     justify-content: space-between;
     text-align: center;
 }
@@ -358,6 +359,9 @@
 #anhSK img{
      width: 1.5%;width: 1.5%;margin-right: 20px;
 }
+#anhLD img{
+     width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------Suc Khoe---------------------*/
 /*----------------------headerSK---------------------*/
 #SucKhoe{
@@ -378,6 +382,7 @@
     display: flex;
     justify-content: space-around;
     height: 20%;
+    gap: 10px;
 }
 #LopSK,#chonNgaySK{
     height: 20%;
@@ -431,7 +436,7 @@
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;
-    width: 15%;
+    width: auto;
     justify-content: space-between;
     text-align: center;
 }
@@ -555,6 +560,7 @@
     display: flex;
     justify-content: space-around;
     height: 20%;
+    gap: 10px;
 }
 #LopDS,#MonhocDS{
     height: 20%;
@@ -608,7 +614,7 @@
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;
-    width: 15%;
+    width: auto;
     justify-content: space-between;
     text-align: center;
 }
@@ -731,6 +737,7 @@
     display: flex;
     justify-content: space-around;
     height: 5%;
+    gap: 10px;
 }
 #LopLL,#TimKiemLL{
     height: 90%;
@@ -927,6 +934,74 @@
     width: 80%;
     border-radius: 7px;
 }
+/*----------------------Lịch dạy---------------------*/
+/*----------------------headerLD---------------------*/
+#LichDay{
+    overflow: auto;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+/*----------------------BodyLD---------------------*/   
+/*----------------------CHon Thong Tin LD---------------------*/
+#ChonTGLich{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    height: 20%;
+    gap: 10px;
+}
+#NamLich,#KyLich{
+    height: 20%;
+    width: 100%;
+    border-radius: 7px;
+}
+#chonKyHocLich,#chonNgayLD{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+#btnLocLichDay,#btnXuatLichDay{
+    height: 20%;
+    width: 30%;
+    border-radius: 7px;
+    margin-top: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+/*----------------------Danh Sach LichDay---------------------*/
+#DanhsachLich{
+    margin-top: 5px;
+    overflow: auto;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+}
+#DanhsachLich table{
+    font-family: monospace;
+    letter-spacing: 1px; 
+    font-size: 16px;
+    padding: 2px;
+    width: 100%;
+    height: 10%;
+}
+#DanhsachLich table td, th{
+    margin-left: 2px;
+    padding: 2px;
+    border-bottom: 2px solid black;
+    width: auto;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
 /*----------------------responsive---------------------*/
 /* Tablet (768px – 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -1230,8 +1305,13 @@
     color: black;
     cursor: pointer;
     padding: 10px 20px;
-    width: 33%;
+    width: 13%;
     height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
 }
 #menu button:hover{
     background-color: white;
@@ -1577,6 +1657,7 @@
     display: flex;
     flex-wrap: wrap;
     height: auto;
+    gap: 0px;
 }
 #ChonLopDS div{
     height: 30px;
@@ -1645,6 +1726,11 @@
 /*----------------------Menu LL---------------------*/
 #MenuLL button{
     font-size: 8pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
 }
 /*----------------------CHon Thong Tin Liên lạc---------------------*/
 #ChonLopLL{
@@ -1669,5 +1755,34 @@
 }
 .DBaLL{
     overflow: auto;
+}
+/*----------------------Lịch dạy---------------------*/
+#anhLD img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#DanhsachLich{
+    overflow: auto;
+    
+}
+#DanhsachLich table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#ChonTGLich{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 0px;
+}
+#ChonTGLich div{
+    height: 30px;
+    margin-bottom: 20px;
+}
+#ChonTGLich button{
+   width: 39%;
+    height: 40px;
 }
 }

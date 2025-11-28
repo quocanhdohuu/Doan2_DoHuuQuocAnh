@@ -7,6 +7,7 @@ const btnLienLac=document.querySelector('#btnLienLac');
 const btnDangXuat=document.querySelector('#btnLogout');
 const btnPhuDD=document.querySelectorAll('.btnDiemdanh'); 
 const btnPhuND=document.querySelectorAll('.btnNhapDiem');
+const btnLichday=document.querySelector('#btnLichDay');
 
 //HAm an menu
 function an(nutbam){
@@ -15,48 +16,54 @@ function an(nutbam){
     btnLienLac.style.backgroundColor='transparent';
     btnSucKhoe.style.backgroundColor='transparent';
     btnTONGQUAN.style.backgroundColor='transparent';
+    btnLichday.style.backgroundColor='transparent';
     nutbam.style.backgroundColor='white';
 };
 //ham doi trang
-function doi(trang1,trang2,trang3,trang4,trang5){
+function doi(trang1,trang2,trang3,trang4,trang5,trang6){
     document.querySelector(trang1).style.display='block';
     document.querySelector(trang2).style.display='none';
     document.querySelector(trang3).style.display='none';
     document.querySelector(trang4).style.display='none';
     document.querySelector(trang5).style.display='none';
+    document.querySelector(trang6).style.display='none';
 
 }
+btnLichday.addEventListener('click',function(){
+    an(btnLichday);
+    doi('#LichDay','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac');
+});
 btnTONGQUAN.addEventListener('click',function(){
     an(btnTONGQUAN);
-    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac');
+    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay');
 });
 btnDiemDanh.addEventListener('click',function(){
     an(btnDiemDanh);
-    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac');
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay');
 });
 btnPhuDD.forEach(btn=>{
     btn.addEventListener('click',function(){
     an(btnDiemDanh);
-    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac');
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay');
 });
 });
 btnDiemSo.addEventListener('click',function(){
     an(btnDiemSo);
-    doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac');
+    doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay');
 });
 btnPhuND.forEach(btn=>{
     btn.addEventListener('click',function(){
         an(btnDiemSo);
-        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac');
+        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay');
     })
 });
 btnLienLac.addEventListener('click',function(){
     an(btnLienLac);
-    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo');
+    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LichDay');
 });
 btnSucKhoe.addEventListener('click',function(){
     an(btnSucKhoe);
-    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac');
+    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac','#LichDay');
 });
 
 //---------------------------------Liên lạc------------------------------------

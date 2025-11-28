@@ -31,6 +31,7 @@
         <button id="btnSucKhoe">Sức khỏe</button>
         <button id="btnDiemSo">Điểm số</button>
         <button id="btnLienLac">Liên lạc</button>
+        <button id="btnLichDay">Lịch dạy</button>
     </div>
 <!----------------- tONG Quan ------------------->
     <div id="TongQuan">
@@ -667,7 +668,7 @@
         </div>
         <h3 id="anhLL" style="margin-bottom: 2px;"><img  src="../img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
         <span style="color: gray;">Gửi tin nhắn và thông báo tới phụ huynh học sinh</span>
-        </h3>
+        
         <!-----------------Menu Liên lạc------------------->
         <div id="MenuLL">
             <button id="btnHopThuDenLL" style="background-color: white;"><i class="fa-solid fa-inbox"></i>Hộp thư đến</button>
@@ -732,7 +733,7 @@
         </div>
 
           <!-----------------Hộp thư gửi------------------->
-         <div id="DaGuiLL" >
+        <div id="DaGuiLL" >
             <span >Tin nhắn đã gửi</span>
             <div class="TinGuiLL" id="TNGuiLL0" >
                 <span class="ngNhanll" >
@@ -886,8 +887,91 @@
                     <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
+        </div>
     </div>
+    </div>
+     <!------------------------Lịch dạy----------------------->
+<div id="LichDay" style="display: none;">
+        <h3 id="anhLD" style="margin-bottom: 2px;"><img  src="../img/schedule.png" alt=""><span></span>Theo dõi lịch giảng dạy</h3>
+        <span style="color: gray;">Ghi chú về lịch giảng dạy của giáo viên</span>
+        <div id="ChonTGLich">
+            <div id="KyLich">
+                <span>Kỳ học:</span>
+                <select id="chonKyHocLich">
+                    <option value="1">Kỳ 1</option>
+                    <option value="2">Kỳ 2</option>
+                </select>
+            </div>
 
+            <div id="NamLich">
+                <span>Năm học:</span>
+                <input type="number"  min="2000" max="2100" id="chonNgayLD">
+            </div>
+            <button id="btnLocLichDay"><i class="fa solid fa-search"></i>Lọc danh sách</button>
+            <button id="btnXuatLichDay"><i class="fa solid fa-download"></i>Xuất file</button>
+        </div>
+
+        <div id="DanhsachLich">
+            <table id="DanhSachLich">
+                <tr>
+                    <th>Tên môn</th>
+                    <th>Mã lớp</th>
+                    <th>Phòng học</th>
+                    <th>Kỳ</th>
+                    <th>Tiet</th>
+                    <th>Lịch(tuần)</th>
+                    <th>Thứ</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="TenMon">Toán</span><br>
+                    </td>
+                    <td>
+                        <span class="MaLop" >6A</span>
+                    </td>
+                    <td>
+                        <span id="PhongHoc">306</span>
+                    </td>
+                    <td>
+                        <span class="KyHoc" >1</span>
+                    </td>
+                    <td>
+                        <span id="TietLichHoc">123--------</span>
+                    </td>
+                    <td>
+                        <span id="LichHoc">12345-789---------</span>
+                    <td>
+                        <span class="Ngay">3</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="TenMon">Toán</span><br>
+                    </td>
+                    <td>
+                        <span class="MaLop" >7A</span>
+                    </td>
+                    <td>
+                        <span id="PhongHoc">307</span>
+                    </td>
+                    <td>
+                        <span class="KyHoc" >1</span>
+                    </td>
+                    <td>
+                        <span id="TietLichHoc">--345------</span>
+                    </td>
+                    <td>
+                        <span id="LichHoc">-----67890123-----</span>
+                    <td>
+                        <span class="Ngay">5</span>
+                    </td>
+                </tr>
+            </table>
+        </div> 
+    </div>
+   
     <script src="jvGV.js"></script>
+
+
 </body>
 </html>
