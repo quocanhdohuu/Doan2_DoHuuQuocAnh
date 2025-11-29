@@ -388,7 +388,6 @@ function suaghichuDS(button) {
     }
 
 }
-
 document.getElementById('DanhSachDS').addEventListener('click', function (e) {
     const btn = e.target.closest('.btnSuaDS');
     if (btn) {
@@ -405,21 +404,27 @@ btnThemDiemSo.addEventListener('click',function(){
     document.querySelector('#CuaSoNĐS').style.display='block';
 });
 btntheGCCDS.addEventListener('click',function(){
-    let diemso=document.getElementById('txtDiemSODS').value;
-    diemso=parseFloat(diemso);
-    if(diemso<0 || diemso>10){
-        alert("Điểm số không hợp lệ! Vui lòng nhập lại điểm số từ 0 đến 10.");
-        return;
-    }
-    if( document.getElementById('txtDiemSODS').value===""){
+    let diemso = document.getElementById('txtDiemSODS').value;
+
+    // 1. Kiểm tra rỗng (bắt buộc để không bị NaN)
+    if(diemso === ""){
         alert("Vui lòng nhập điểm số!");
         return;
-    }else{
-        themghichuvaobangDS();
-        document.querySelector('#CuaSoNĐS').style.display='none'
-        resetFormNhapDiemDS();
     }
-        
+
+    // 2. Parse sau khi chắc chắn không rỗng
+    diemso = parseFloat(diemso);
+
+    // 3. Kiểm tra hợp lệ
+    if(diemso < 0 || diemso > 10){
+        alert("Điểm số không hợp lệ! Vui lòng nhập lại từ 0-10.");
+        return;
+    }
+
+    // 4. Khi hợp lệ
+    themghichuvaobangDS();
+    document.querySelector('#CuaSoNĐS').style.display = 'none'; // TỰ TẮT
+    resetFormNhapDiemDS();
 });
 
 function resetFormNhapDiemDS() {
