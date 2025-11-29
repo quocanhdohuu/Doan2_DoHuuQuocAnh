@@ -228,6 +228,9 @@
     padding-right: 20px;
     padding-bottom: 20px;
 }
+#anhdd img{
+    width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------BODyDD---------------------*/
 /*----------------------CHon Thong Tin DD---------------------*/
 #ChonLop{
@@ -235,6 +238,7 @@
     display: flex;
     justify-content: space-between;
     height: 20%;
+    gap: 10px;
 }
 #Lop,#chonNgay{
     height: 20%;
@@ -279,7 +283,7 @@
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;
-    width: 15%;
+    width: auto;
     justify-content: space-between;
     text-align: center;
 }
@@ -310,7 +314,7 @@
 }
 /*----------------------btn ghi chú điểm danh---------------------*/
 #CuaSoGCDD{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -352,6 +356,12 @@
     border-radius: 7px;
     resize: none;
 }
+#anhSK img{
+     width: 1.5%;width: 1.5%;margin-right: 20px;
+}
+#anhLD img{
+     width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------Suc Khoe---------------------*/
 /*----------------------headerSK---------------------*/
 #SucKhoe{
@@ -372,6 +382,7 @@
     display: flex;
     justify-content: space-around;
     height: 20%;
+    gap: 10px;
 }
 #LopSK,#chonNgaySK{
     height: 20%;
@@ -425,7 +436,7 @@
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;
-    width: 15%;
+    width: auto;
     justify-content: space-between;
     text-align: center;
 }
@@ -457,8 +468,8 @@
    background-color:red;color: white;border-radius: 7px;padding: 3px 3px;
 }
 /*----------------------btnThem ghi chú---------------------*/
-#CuaSoThemGhiChuSK{
-    position: absolute;
+#CuaSoThemGhiChuSK, #CuaSoSUAGhiChuSK {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -471,41 +482,50 @@
     width: 40%;
     font-size: 12pt;
 }
-#CuaSoThemGhiChuSK > div {
+
+#CuaSoThemGhiChuSK > div,
+#CuaSoSUAGhiChuSK > div {
     margin-top: 15px;
 }
-#CuaSoThemGhiChuSK > div >span {
+
+#CuaSoThemGhiChuSK > div > span,
+#CuaSoSUAGhiChuSK > div > span {
     font-weight: bold;
 }
-#chonHocSinhGhiChuSK,#GhichuveTTSK,#GhichuveĐSK{
-    border-radius: 7px;
-}
-#CuaSoThemGhiChuSK input[type="radio"]{
+
+#CuaSoThemGhiChuSK input[type="radio"],
+#CuaSoSUAGhiChuSK input[type="radio"] {
     transform: scale(1.5);
     margin-left: 100px;
 }
-#GhichuveĐSK{
+
+#GhichuveĐSK, #GhichuveĐSKSUA {
     margin-left: 18px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
 }
-#GhichuveTTSK{
+
+#GhichuveTTSK, #GhichuveTTSKSUA {
     margin-left: 35px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
 }
-#chonHocSinhGhiChuSK{
+
+#chonHocSinhGhiChuSK,#chonHocSinhGhiChuSKSUA {
     margin-left: 35px;
     height: 30px;
     width: 80%;
     border-radius: 7px;
 }
-#CuaSoThemGhiChuSK input[type="checkbox"]{
+
+#CuaSoThemGhiChuSK input[type="checkbox"],
+#CuaSoSUAGhiChuSK input[type="checkbox"] {
     margin-left: 50px;
 }
-#btncuasoTGCSK{
+
+#btncuasoTGCSK, #btncuasoTGCSKSUA {
     margin-top: 20px;
     height: 40px;
     width: 25%;
@@ -518,8 +538,7 @@
     justify-content: space-between;
     align-items: center;
     padding-left: 20px;
-    padding-right: 20px;  
-
+    padding-right: 20px;
 }
 /*----------------------Điểm số---------------------*/
 /*----------------------headerDS---------------------*/
@@ -535,12 +554,13 @@
     padding-bottom: 20px;
 }
 /*----------------------BodySK---------------------*/   
-/*----------------------CHon Thong Tin SK---------------------*/
+/*----------------------CHon Thong Tin ds---------------------*/
 #ChonLopDS{
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
     height: 20%;
+    gap: 10px;
 }
 #LopDS,#MonhocDS{
     height: 20%;
@@ -558,6 +578,9 @@
     border-radius: 7px;
     margin-top: 18px;
     cursor: pointer;
+}
+#YeuTSDS, #TrungBinhTSDS, #KhaTSDS, #GioiTSDS,#DiemTBTSDS,#TongdiemTSDS{
+    font-weight: bold;font-size: 60pt;
 }
 /*----------------------Thong So DS---------------------*/
 #TSDiemSo{
@@ -591,13 +614,18 @@
     margin-left: 2px;
     padding: 2px;
     border-bottom: 2px solid black;
-    width: 15%;
+    width: auto;
     justify-content: space-between;
     text-align: center;
 }
+#anhds img{
+   width: 1.5%;
+   width: 1.5%;
+   margin-right: 20px;
+}
 /*----------------------btn nhập điểm---------------------*/
-#CuaSoNĐS{
-    position: absolute;
+#CuaSoNĐS,#CuaSoNĐSSUA {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -610,23 +638,23 @@
     width: 30%;
     font-size: 12pt;
 }
-#CuaSoNĐS > div {
+#CuaSoNĐS > div,#CuaSoNĐSSUA > div  {
     margin-top: 15px;
 }
-#CuaSoNĐS > div >span {
+#CuaSoNĐS > div >span,#CuaSoNĐSSUA > div >span {
     font-weight: bold;
 }
-#chonHocSinhGhiChuDS{
+#chonHocSinhGhiChuDS,#chonHocSinhGhiChuDSSUA {
     margin-left: 25px;
     height: 30px;
     width: 80%;
     border-radius: 7px;
 }
-#CuaSoNĐS input[type="radio"]{
+#CuaSoNĐS input[type="radio"],  #CuaSoNĐSSUA input[type="radio"]{
     transform: scale(1.5);
     margin-left: 30px;
 }
-#btncuasoTGCDS{
+#btncuasoTGCDS,#btncuasoTGCDSSUA{
     margin-top: 20px;
     height:40px;
     width:30%;
@@ -642,13 +670,13 @@
     padding-right: 20px;  
 
 }
-#txtDiemSODS{
+#txtDiemSODS,#txtDiemSODSSUA{
     margin-left: 35px;
     height: 30px;
     width: 80%;
     border-radius: 7px;
 }
-#NhanxetblDS{
+#NhanxetblDS,#NhanxetblDSSUA{
     margin-left: 28px;
     height: 60px;
     width: 80%;
@@ -669,7 +697,7 @@
 /*----------------------Liên lạc---------------------*/
 /*----------------------headerLL---------------------*/
 #LienLac{
-    height: 100%;
+    overflow: auto;
     width: 97%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -677,6 +705,7 @@
     padding-left: 20px;
     padding-top: 10px;
     padding-right: 20px;
+    padding-bottom: 20px;
 }
 /*----------------------BodyLL---------------------*/   
 /*----------------------Menu LL---------------------*/
@@ -699,12 +728,16 @@
     width: 33%;
     height: 95%;
 }
+#anhLL img{
+   width: 1.5%;width: 1.5%;margin-right: 20px;
+}
 /*----------------------CHon Thong Tin Liên lạc---------------------*/
 #ChonLopLL{
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
     height: 5%;
+    gap: 10px;
 }
 #LopLL,#TimKiemLL{
     height: 90%;
@@ -725,13 +758,130 @@
 }
 /*----------------------Hộp thư đến Liên lạc---------------------*/
 #HopThuDenLL, #DaGuiLL, #DanhBaLL{
-    height: 50%;
+    overflow: auto;
     width: 100%;
     margin-top: 40px;
 }
-/*----------------------btn nhập điểm---------------------*/
+.TinGuiLL{
+    display: none;
+    border: 1px solid black;
+}
+.TinDenLL,.DBaLL{
+    border: 1px solid black;
+}
+/* Khung hộp thư */
+#HopThuDenLL {
+    display: block;
+}
+
+/* Tiêu đề */
+#HopThuDenLL > span {
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Khung từng tin nhắn */
+.TinDenLL {
+    margin-top: 20px;
+    height: 23%;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Header của tin nhắn */
+.TinDenLL .tieuDeTin {
+    font-size: 14pt;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    height: 20%;
+}
+
+/* Box nhãn */
+.TinDenLL .nhanMoi {
+    background-color: black;
+    padding: 3px;
+    color: white;
+    border-radius: 10px;
+}
+
+.TinDenLL .nhanNguoiGui {
+    padding: 3px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+/* Nội dung */
+.TinDenLL p {
+    font-size: 13pt;
+}
+
+.TinDenLL p.tieuDeNoiDung {
+    font-weight: bold;
+}
+
+/* Nút trả lời */
+.btnSTHTD {
+    cursor: pointer;
+    height: 100%;
+    width: 3%;
+    background-color: white;
+    border-radius: 7px;
+    border: none;
+}
+
+/* Thời gian */
+.TinDenLL .thoiGian {
+    font-size: 13pt;
+}
+/* Ẩn ban đầu */
+#DaGuiLL {
+    display: none;
+}
+
+/* Tiêu đề */
+#DaGuiLL > span {
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Khối tin nhắn đã gửi */
+.TinGuiLL {
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 20%;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+/* Người nhận */
+.TinGuiLL .ngNhanll {
+    font-size: 14pt;
+    font-weight: bold;
+    justify-content: space-between;
+    display: flex;
+    height: 20%;
+}
+
+/* Tiêu đề tin */
+.TinGuiLL .tieudeLL {
+    font-size: 13pt;
+    font-weight: bold;
+}
+
+/* Nội dung tin */
+.TinGuiLL .ndguiLL {
+    font-size: 13pt;
+}
+
+/* Thời gian gửi */
+.TinGuiLL .tgguiLL {
+    font-size: 13pt;
+}
+/*----------------------btn soạn tin---------------------*/
 #CuaSoSoanTinLL{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -783,4 +933,856 @@
     height: 60px;
     width: 80%;
     border-radius: 7px;
+}
+/*----------------------Lịch dạy---------------------*/
+/*----------------------headerLD---------------------*/
+#LichDay{
+    overflow: auto;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+/*----------------------BodyLD---------------------*/   
+/*----------------------CHon Thong Tin LD---------------------*/
+#ChonTGLich{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    height: 20%;
+    gap: 10px;
+}
+#NamLich,#KyLich{
+    height: 20%;
+    width: 100%;
+    border-radius: 7px;
+}
+#chonKyHocLich,#chonNgayLD{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+#btnLocLichDay,#btnXuatLichDay{
+    height: 20%;
+    width: 30%;
+    border-radius: 7px;
+    margin-top: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+/*----------------------Danh Sach LichDay---------------------*/
+#DanhsachLich{
+    margin-top: 5px;
+    overflow: auto;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+}
+#DanhsachLich table{
+    font-family: monospace;
+    letter-spacing: 1px; 
+    font-size: 16px;
+    padding: 2px;
+    width: 100%;
+    height: 10%;
+}
+#DanhsachLich table td, th{
+    margin-left: 2px;
+    padding: 2px;
+    border-bottom: 2px solid black;
+    width: auto;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
+/*----------------------responsive---------------------*/
+/* Tablet (768px – 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* ---------------Tong Quan-------------------------- */
+#TongQuan{
+    margin: 20px;
+    background-color: white;
+}
+/* ---------------thong so-------------------------- */
+#thongSo{
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    border: none;
+    padding: 0px 0px;
+    gap: 20px;
+    flex-wrap: wrap; 
+}
+#tongHS , #coMat, #vangMat, #diMuon{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: 0px;
+    flex: 1 1 calc(50% - 10px);
+}
+#choChamDiem{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-left: 0px;
+}
+#tongHS img{
+    height: 25px;
+    width: 25px;
+    float:right;
+    margin-left: 250px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#vangMat img, #diMuon img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 275px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#choChamDiem img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 240px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#coMat img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 230px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+#tongHS h4, #coMat h4, #vangMat h4, #diMuon h4, #choChamDiem h4{
+    margin-left: 15px;
+    padding: 0px;
+     margin-right: 130px;
+     display: flex;
+     width: 100%;
+}
+#tongHS p, #vangMat p, #diMuon p, #choChamDiem p{
+    color: gray;
+    margin-left: 0px;
+    margin-right: 130px;
+}
+#coMat p{
+    margin-left: 0px;
+    color: gray;
+    margin-right: 170px;
+}
+#tongHS h2, #coMat h2, #vangMat h2, #diMuon h2, #choChamDiem h2{
+    margin-left: 0px;
+    color: black;
+    font-style: bold;
+     margin-right: 210px;
+}
+
+/*----------------------Lop day---------------------*/
+#LopDay{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-top: 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    height: auto;
+}
+#LopDay h3{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+}
+#spanan{
+    visibility: hidden;
+}
+.LOP{
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 10px;
+    box-sizing: border-box;
+
+    flex: 1 1 calc(50% - 40px);
+    height: auto;        /* QUAN TRỌNG */
+}
+.LOP button{
+    border: 0.5px solid gray;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px ;
+    background-color: white;
+    height: 18%;
+    width: 25%;
+    margin-right: 20px;
+    cursor: pointer;
+}
+/*----------------------Hoat Dong---------------------*/
+#HoatDong{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 50px;
+    padding-bottom: 20px;
+}
+#HoatDong h3,#HoatDong p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+}
+.HOATDONGGAN{
+    height: 30%;
+    width: 90%;
+    border-radius: 10px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+/*----------------------Danh Sach Diem Danh---------------------*/
+#DanhsachDD{
+    overflow: auto;
+    
+}
+#DanhsachDD table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#CuaSoGCDD{
+    width: 60%;
+}
+/*----------------------Suc khoe--------------------*/
+#DanhsachSK{
+    overflow: auto;
+    
+}
+#DanhsachSK table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#anhSK img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#anhDD img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#anhDS img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#anhLL img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#ThemGhichuSK{
+    height: 29px;
+    width: 50%;
+    border-radius: 7px;
+    margin-top: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 9pt;
+}
+#TSSucKhoe >div span{
+    font-size: 10pt;
+}
+
+#CuaSoThemGhiChuSK, #CuaSoSUAGhiChuSK {
+   font-size: 9pt;
+    width: 80%;
+}
+/*----------------------Điểm số---------------------*/
+#CuaSoNĐS,#CuaSoNĐSSUA {
+    width: 80%;
+}
+#chonHocSinhGhiChuDS,#chonHocSinhGhiChuDSSUA {
+    margin-left: 25px;
+    height: 30px;
+    width: 70%;
+    border-radius: 7px;
+}
+#btncuasoTGCDS,#btncuasoTGCDSSUA{
+    width:20%;
+}
+#txtDiemSODS,#txtDiemSODSSUA{
+    width: 70%;
+}
+#NhanxetblDS,#NhanxetblDSSUA{
+    width: 70%;
+}
+}
+
+/* Mobile (<= 767px) */
+@media (max-width: 767px) {
+  /* ------------thanh thông tin---------------- */
+#Thanhthongtin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    color: black;
+    border-bottom: 2px solid #ccc;
+}
+#Thanhthongtin img{
+    height: 35px;
+    width: 35px;
+    object-fit: contain;
+}
+#Thanhthongtin button{
+    height: 35px;
+    width: 100px;
+    border-radius: 7px;
+    font-weight: bold;
+   
+}
+#Thanhthongtin button img{
+    height: 15px;
+    width: 15px;
+    margin-right: 15px;
+}
+#ThongTin {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 0.2;
+}
+#ThongTin h4,
+#ThongTin h5 {
+  margin: 0;
+  line-height: 1.2;
+}
+#ThongTin h5 {
+  opacity: 0.9;
+}
+/* ------------------------------------------------------*/
+
+/* ---------------thanh menu-------------------------- */
+#menu{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(213, 211, 211);
+    padding: 5px 0;
+    border-radius: 30px;
+}
+#menu button{
+    background-color: transparent;
+    border: none;
+    border-radius: 70px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 13%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+#menu button:hover{
+    background-color: white;
+    transition: 0.3s;
+}
+/* ---------------Tong Quan-------------------------- */
+#TongQuan{
+    margin: 20px;
+    background-color: white;
+}
+/* ---------------thong so-------------------------- */
+#thongSo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    border: none;
+    padding: 0px 0px;
+    gap: 20px;
+}
+#tongHS , #coMat, #vangMat, #diMuon, #choChamDiem{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 30%;
+    width: 100%;
+    margin-left: 0px;
+    
+}
+#tongHS img{
+    height: 25px;
+    width: 25px;
+    float:right;
+    margin-left: 170px;
+    margin-top: -5px;
+    margin-right: 0px;
+}
+#vangMat img, #diMuon img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 195px;
+    margin-top: -5px;
+    margin-right: 0px;
+}
+#choChamDiem img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 160px;
+    margin-top: -5px;
+    margin-right: 0px;
+}
+#coMat img{
+    height: 25px;
+    width: 25px;
+   float:right;
+   margin-left: 150px;
+    margin-top: -5px;
+    margin-right: 0px;
+}
+#tongHS h4, #coMat h4, #vangMat h4, #diMuon h4, #choChamDiem h4{
+    margin-left: 15px;
+    padding: 0px;
+     margin-right: 130px;
+     display: flex;
+     width: 100%;
+}
+#tongHS p, #vangMat p, #diMuon p, #choChamDiem p{
+    color: gray;
+    margin-left: 0px;
+    margin-right: 130px;
+}
+#coMat p{
+    margin-left: 0px;
+    color: gray;
+    margin-right: 170px;
+}
+#tongHS h2, #coMat h2, #vangMat h2, #diMuon h2, #choChamDiem h2{
+    margin-left: 0px;
+    color: black;
+    font-style: bold;
+     margin-right: 210px;
+}
+/*----------------------Lop day---------------------*/
+#LopDay{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+.LOP button{
+    border: 0.5px solid gray;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 10px ;
+    background-color: white;
+    height: 18%;
+    width: 30%;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.LOP{
+    width: 90%;
+}
+/*----------------------Hoat Dong---------------------*/
+#HoatDong{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 50px;
+}
+#HoatDong h3,#HoatDong p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+    font-size: 10pt;
+}
+.HOATDONGGAN{
+    height: 30%;
+    width: 90%;
+    border-radius: 10px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding-left: 20px;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+/*----------------------Danh Sach Diem Danh---------------------*/
+#ChonLop{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#TSDiemDanh{
+    margin-top: 20px;
+}
+#ChonLop {
+    margin-bottom: 20px;
+}
+#ChonLop select{
+   height: 30px;
+}
+#ChonLop  input{
+    height: 30px;
+}
+#DanhsachDD{
+    overflow: auto;
+    
+}
+#DanhsachDD table{
+    overflow-y: auto;
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#anhdd img{
+     width: 30px;
+    height: 30px;
+    margin-right: 12px;
+}
+#anhLL img{
+     width: 30px;
+    height: 30px;
+    margin-right: 12px;
+}
+/*----------------------btn ghi chú điểm danh---------------------*/
+#CuaSoGCDD{
+    width: 80%;
+}
+#DanhsachDD table button{
+    margin-left: 5px;
+    align-items: center;
+    text-align: center;
+    padding: 5px 5px;
+}
+/*----------------------Suc khoe--------------------*/
+#DanhsachSK{
+    overflow: auto;
+    
+}
+#DanhsachSK table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#anhSK img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#ThemGhichuSK{
+    height: 29px;
+    width: 50%;
+    border-radius: 7px;
+    margin-top: 18px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    font-size: 9pt;
+}
+#ChonLopSK{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#ChonLopSK {
+    margin-bottom: 20px;
+}
+#ChonLopSK select{
+   height: 30px;
+}
+#ChonLopSK  input{
+    height: 30px;
+}
+#ChonLopSK button{
+   width: 30%;
+    height: 40px;
+}
+#TSSucKhoe{
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: space-between;
+    gap: 10px;            
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+}
+#TSSucKhoe> div {
+    border-radius: 15px;
+    text-align: center;
+    width: calc(50% - 10px);  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 0;
+}
+#TSSucKhoe >div span{
+    font-size: 10pt;
+}
+
+#CuaSoThemGhiChuSK, #CuaSoSUAGhiChuSK {
+   font-size: 9pt;
+    width: 80%;
+}
+
+#CuaSoThemGhiChuSK > div,
+#CuaSoSUAGhiChuSK > div {
+    margin-top: 5px;
+}
+
+#CuaSoThemGhiChuSK > div > span,
+#CuaSoSUAGhiChuSK > div > span {
+    font-weight: bold;
+}
+
+#CuaSoThemGhiChuSK input[type="radio"],
+#CuaSoSUAGhiChuSK input[type="radio"] {
+    transform: scale(1.5);
+    margin-left: 20px;
+}
+
+#GhichuveĐSK, #GhichuveĐSKSUA {
+    margin-left: 18px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+
+#GhichuveTTSK, #GhichuveTTSKSUA {
+    margin-left: 15px;
+    height: 60px;
+    width: 80%;
+    border-radius: 7px;
+}
+
+#chonHocSinhGhiChuSK,#chonHocSinhGhiChuSKSUA {
+    margin-left: 15px;
+    height: 30px;
+    width: 80%;
+    border-radius: 7px;
+}
+
+#CuaSoThemGhiChuSK input[type="checkbox"],
+#CuaSoSUAGhiChuSK input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+#btncuasoTGCSK, #btncuasoTGCSKSUA {
+    margin-top: 20px;
+    height: 40px;
+    width: 55%;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/*----------------------Điểm số---------------------*/
+#anhds img{
+   width: 30px;
+    height: 25px;
+   margin-right: 20px;
+}
+/*----------------------CHon Thong Tin DS---------------------*/
+#LopDS,#MonhocDS{
+    height: 20%;
+    width: 50%;
+    border-radius: 7px;
+}
+#chonLopHocDS,#chonMonHocDS{
+    height: 100%;
+    width: 100%;
+    border-radius: 7px;
+}
+#btnXuatEDS, #btnPhieuDiemDS, #btnNhapDiemDS{
+    height: 20%;
+    width: 30%;
+    border-radius: 7px;
+    margin-top: 18px;
+    cursor: pointer;
+    font-size: 8pt;
+}
+/*----------------------Thong So DS---------------------*/
+#ChonLopDS{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 0px;
+}
+#ChonLopDS div{
+    height: 30px;
+    margin-bottom: 20px;
+}
+#ChonLopDS button{
+   width: 30%;
+    height: 40px;
+}
+#TSDiemSo{
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: space-between;
+    gap: 10px;            
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+}
+
+#TSDiemSo > div {
+    border-radius: 15px;
+    text-align: center;
+    width: calc(50% - 10px);  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px 0;
+}
+#TSDiemSo > div span:first-of-type {
+    font-size: 35pt;       
+    font-weight: bold;
+}
+
+#TSDiemSo > div span:last-of-type {
+    font-size: 10pt;      
+    font-weight: 500;
+}
+/*----------------------DSđiểm---------------------*/
+#DanhSachDS{
+    overflow: auto;
+    
+}
+#DanhSachDS table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+/*----------------------btn nhập điểm---------------------*/
+#CuaSoNĐS,#CuaSoNĐSSUA {
+    width: 80%;
+}
+#chonHocSinhGhiChuDS,#chonHocSinhGhiChuDSSUA {
+    margin-left: 25px;
+    height: 30px;
+    width: 70%;
+    border-radius: 7px;
+}
+#btncuasoTGCDS,#btncuasoTGCDSSUA{
+    width:50%;
+}
+#txtDiemSODS,#txtDiemSODSSUA{
+    width: 70%;
+}
+#NhanxetblDS,#NhanxetblDSSUA{
+    width: 70%;
+}
+/*----------------------Liên lạc---------------------*/
+/*----------------------Menu LL---------------------*/
+#MenuLL button{
+    font-size: 8pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+/*----------------------CHon Thong Tin Liên lạc---------------------*/
+#ChonLopLL{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+#ChonLopLL div{
+    height: 30px;
+    margin-bottom: 20px;
+}
+#ChonLopLL button{
+   width: 30%;
+    height: 40px;
+}
+/*----------------------Hộp thư đến Liên lạc---------------------*/
+.TinDenLL {
+    overflow: auto;
+}
+.TinGuiLL {
+    overflow: auto;
+}
+.DBaLL{
+    overflow: auto;
+}
+/*----------------------Lịch dạy---------------------*/
+#anhLD img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#DanhsachLich{
+    overflow: auto;
+    
+}
+#DanhsachLich table{
+    overflow-x: auto;   
+    -webkit-overflow-scrolling: touch;
+    min-width: 900px; 
+}
+#ChonTGLich{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 0px;
+}
+#ChonTGLich div{
+    height: 30px;
+    margin-bottom: 20px;
+}
+#ChonTGLich button{
+   width: 39%;
+    height: 40px;
+}
 }

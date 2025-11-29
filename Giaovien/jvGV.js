@@ -1,67 +1,75 @@
 //------------------Tong Quan--------------------
-const btnTONGQUAN = document.querySelector("#btnTongQuan");
-const btnDiemDanh = document.querySelector("#btnDieDanh");
-const btnSucKhoe = document.querySelector("#btnSucKhoe");
-const btnDiemSo = document.querySelector("#btnDiemSo");
-const btnLienLac = document.querySelector("#btnLienLac");
-const btnDangXuat = document.querySelector("#btnLogout");
-const btnPhuDD = document.querySelectorAll(".btnDiemdanh");
-const btnPhuND = document.querySelectorAll(".btnNhapDiem");
+const btnTONGQUAN = document.querySelector('#btnTongQuan');
+const btnDiemDanh=document.querySelector('#btnDieDanh');
+const btnSucKhoe=document.querySelector('#btnSucKhoe',);
+const btnDiemSo=document.querySelector('#btnDiemSo');
+const btnLienLac=document.querySelector('#btnLienLac');
+const btnDangXuat=document.querySelector('#btnLogout');
+const btnPhuDD=document.querySelectorAll('.btnDiemdanh'); 
+const btnPhuND=document.querySelectorAll('.btnNhapDiem');
+const btnLichday=document.querySelector('#btnLichDay');
 
 //HAm an menu
-function an(nutbam) {
-  btnDiemDanh.style.backgroundColor = "transparent";
-  btnDiemSo.style.backgroundColor = "transparent";
-  btnLienLac.style.backgroundColor = "transparent";
-  btnSucKhoe.style.backgroundColor = "transparent";
-  btnTONGQUAN.style.backgroundColor = "transparent";
-  nutbam.style.backgroundColor = "white";
-}
+function an(nutbam){
+    btnDiemDanh.style.backgroundColor='transparent';
+    btnDiemSo.style.backgroundColor='transparent';
+    btnLienLac.style.backgroundColor='transparent';
+    btnSucKhoe.style.backgroundColor='transparent';
+    btnTONGQUAN.style.backgroundColor='transparent';
+    btnLichday.style.backgroundColor='transparent';
+    nutbam.style.backgroundColor='white';
+};
 //ham doi trang
-function doi(trang1, trang2, trang3, trang4, trang5) {
-  document.querySelector(trang1).style.display = "block";
-  document.querySelector(trang2).style.display = "none";
-  document.querySelector(trang3).style.display = "none";
-  document.querySelector(trang4).style.display = "none";
-  document.querySelector(trang5).style.display = "none";
+function doi(trang1,trang2,trang3,trang4,trang5,trang6){
+    document.querySelector(trang1).style.display='block';
+    document.querySelector(trang2).style.display='none';
+    document.querySelector(trang3).style.display='none';
+    document.querySelector(trang4).style.display='none';
+    document.querySelector(trang5).style.display='none';
+    document.querySelector(trang6).style.display='none';
+
 }
-btnTONGQUAN.addEventListener("click", function () {
-  an(btnTONGQUAN);
-  doi("#TongQuan", "#DieDanh", "#SucKhoe", "#DiemSo", "#LienLac");
+btnLichday.addEventListener('click',function(){
+    an(btnLichday);
+    doi('#LichDay','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac');
+});
+btnTONGQUAN.addEventListener('click',function(){
+    an(btnTONGQUAN);
+    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay');
 });
 btnDiemDanh.addEventListener("click", function () {
   an(btnDiemDanh);
-  doi("#DieDanh", "#TongQuan", "#SucKhoe", "#DiemSo", "#LienLac");
-});
-btnPhuDD.forEach((btn) => {
-  btn.addEventListener("click", function () {
-    an(btnDiemDanh);
-    doi("#DieDanh", "#TongQuan", "#SucKhoe", "#DiemSo", "#LienLac");
-  });
+  doi("#DieDanh", "#TongQuan", "#SucKhoe", "#DiemSo", "#LienLac", "#LichDay");
 });
 btnDiemSo.addEventListener("click", function () {
   an(btnDiemSo);
-  doi("#DiemSo", "#TongQuan", "#DieDanh", "#SucKhoe", "#LienLac");
+  doi("#DiemSo","#DieDanh", "#TongQuan", "#SucKhoe",'#LichDay', "#LienLac");
 });
-btnPhuND.forEach((btn) => {
-  btn.addEventListener("click", function () {
-    an(btnDiemSo);
-    doi("#DiemSo", "#TongQuan", "#DieDanh", "#SucKhoe", "#LienLac");
-  });
+btnPhuDD.forEach(btn => {
+    btn.addEventListener('click', () => {
+        an(btnDiemDanh);
+        doi('#DieDanh', '#TongQuan', '#SucKhoe', '#DiemSo', '#LienLac', '#LichDay');
+    });
 });
-btnLienLac.addEventListener("click", function () {
-  an(btnLienLac);
-  doi("#LienLac", "#TongQuan", "#DieDanh", "#SucKhoe", "#DiemSo");
+btnPhuND.forEach(btn => {
+    btn.addEventListener('click', () => {
+        an(btnDiemSo);
+        doi('#DiemSo', '#TongQuan', '#DieDanh', '#SucKhoe', '#LienLac', '#LichDay');
+    });
 });
-btnSucKhoe.addEventListener("click", function () {
-  an(btnSucKhoe);
-  doi("#SucKhoe", "#TongQuan", "#DieDanh", "#DiemSo", "#LienLac");
+btnLienLac.addEventListener('click',function(){
+    an(btnLienLac);
+    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LichDay');
 });
-
+btnSucKhoe.addEventListener('click',function(){
+    an(btnSucKhoe);
+    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac','#LichDay');
+});
 //---------------------------------Liên lạc------------------------------------
-const btnHopThuDenLL = document.querySelector("#btnHopThuDenLL");
-const btnTinnhandiLL = document.querySelector("#btnTinNhanDiLL");
-const btnDanhBaLL = document.querySelector("#btnDanhBaLL");
+const btnHopThuDenLL = document.querySelector('#btnHopThuDenLL');
+const btnTinnhandiLL=document.querySelector('#btnTinNhanDiLL');
+const btnDanhBaLL=document.querySelector('#btnDanhBaLL',);
+const btnguitincsLL=document.querySelector('#btnCSSTLL')
 //HAm an menuLL
 function anLL(nutbam) {
   btnHopThuDenLL.style.backgroundColor = "transparent";
@@ -87,37 +95,159 @@ btnDanhBaLL.addEventListener("click", function () {
   doiLL("#DanhBaLL", "#HopThuDenLL", "#DaGuiLL");
 });
 
+btnguitincsLL.addEventListener('click',function(){
+    themtindagui();
+    resetST();
+
+});
+function resetST() {
+    document.getElementById('txttieudeSTLL').value = ''; 
+    document.getElementById('TXTNDSTLL').value = ''; 
+}
+let sotingui=0
+function themtindagui() {
+    const phuhuynh = document.querySelector('#chonPHSTLL').value;
+  const tieude = document.querySelector('#txttieudeSTLL').value;
+  const noidung = document.querySelector('#TXTNDSTLL').value;
+  const thoigian = new Date().toLocaleString('vi-VN');
+
+  if(sotingui>=10){
+    sotingui=0;
+  }
+  let iddiv='#TNGuiLL'+(10-sotingui);
+  const tinMoi = document.querySelector(iddiv);
+
+  
+  tinMoi.querySelector('.ngNhanll').innerText = `Gửi đến: ${phuhuynh}`;
+  tinMoi.querySelector('.tieudeLL').innerText = tieude;
+  tinMoi.querySelector('.ndguiLL').innerText = noidung;
+  tinMoi.querySelector('.tgguiLL').innerText = thoigian;
+
+  
+  tinMoi.style.display = 'block';
+
+  
+  document.querySelector('#CuaSoSoanTinLL').style.display = 'none';
+  sotingui++;
+}
+
 //---------------------------------Sức khỏe------------------------------------
-const btnThemGhiChuSK = document.querySelector("#ThemGhichuSK");
-const btnThoatCuaSoTGCSK = document.querySelector("#btbThoatcsoGCSK");
-const btntheGCCSSK = document.querySelector("#btncuasoTGCSK");
-const TSTongGCSK = document.querySelector("#slgTBYQSK");
-const TSKhoemanhSK = document.querySelector("#slgKMTQSK");
-const TSChuYSK = document.querySelector("#slgCYTQSK");
-const TSAnDuSK = document.querySelector("#slgADTQSK");
+const btnThemGhiChuSK=document.querySelector('#ThemGhichuSK');
+const btnThoatCuaSoTGCSK=document.querySelectorAll('#btbThoatcsoGCSK');
+const btntheGCCSSK=document.querySelector('#btncuasoTGCSK');
+const TSTongGCSK=document.querySelector('#slgTBYQSK');
+const TSKhoemanhSK=document.querySelector('#slgKMTQSK');
+const TSChuYSK=document.querySelector('#slgCYTQSK');
+const TSAnDuSK=document.querySelector('#slgADTQSK');
+const capnhatghichusk=document.querySelector('#btncuasoTGCSKSUA');
 
-let tongghichu = 1;
-let khoemanh = 1;
-let chuy = 0;
-let andu = 0;
 
-btnThemGhiChuSK.addEventListener("click", function () {
-  document.querySelector("#CuaSoThemGhiChuSK").style.display = "block";
+let tongghichu=1;
+let khoemanh=1;
+let chuy=0;
+let andu=0
+document.getElementById('DanhSachSK').addEventListener('click', function (e) {
+    const btn = e.target.closest('.btnGHICHUSK');
+    if (btn) {
+        suaghichu(btn);
+    }
 });
-btnThoatCuaSoTGCSK.addEventListener("click", function () {
-  document.querySelector("#CuaSoThemGhiChuSK").style.display = "none";
+btnThemGhiChuSK.addEventListener('click',function(){
+    document.querySelector('#CuaSoThemGhiChuSK').style.display='block';
 });
-btntheGCCSSK.addEventListener("click", function () {
-  themghichuvaobangSK();
-  document.querySelector("#CuaSoThemGhiChuSK").style.display = "none";
-  resetFormNhapDiemSK();
+btnThoatCuaSoTGCSK.forEach(btn=>{
+btn.addEventListener('click',function(){
+    document.querySelector('#CuaSoThemGhiChuSK').style.display='none';
+    document.querySelector('#CuaSoSUAGhiChuSK').style.display='none';
+    resetFormNhapDiemSK();
+})});
+btntheGCCSSK.addEventListener('click',function(){
+        themghichuvaobangSK();
+         document.querySelector('#CuaSoThemGhiChuSK').style.display='none'
+        resetFormNhapDiemSK();
+});
+function suaghichu(button) {
+    document.querySelector('#CuaSoSUAGhiChuSK').style.display = 'block';
+    const row = button.closest('tr');
+    
+    document.querySelectorAll('#DanhSachSK tr').forEach(tr => tr.classList.remove('selected'));
+    
+    row.classList.add('selected');
+
+    document.getElementById('chonHocSinhGhiChuSKSUA').value = row.cells[0].querySelector('span').innerText;
+    document.getElementById('GhichuveTTSKSUA').value = row.cells[2].querySelector('span').innerText;
+    document.getElementById('GhichuveĐSKSUA').value = row.cells[4].querySelector('span').innerText;
+
+    const buaAnStatus = row.cells[5].querySelector('span').innerText;
+    document.getElementById("ckbuaanSKSUA").checked = (buaAnStatus === "Đã Xong");
+
+    const tinhTrangSK = row.cells[1].querySelector('span').innerText;
+    const tinhTrangRadios = document.getElementsByName('suckhoeSUA');
+    for (let i = 0; i < tinhTrangRadios.length; i++) {
+        tinhTrangRadios[i].checked = (tinhTrangRadios[i].value === tinhTrangSK);
+    }
+
+    const chedoan = row.cells[3].querySelector('span').innerText;
+    const chedoanRadios = document.getElementsByName('BuaANSUA');
+    for (let i = 0; i < chedoanRadios.length; i++) {
+        chedoanRadios[i].checked = (chedoanRadios[i].value === chedoan);
+    }
+}
+capnhatghichusk.addEventListener('click',function(){
+    const row = document.querySelector('#DanhSachSK').querySelector('tr.selected');
+    if (!row) return;
+
+    row.cells[0].querySelector('span').innerText = document.getElementById('chonHocSinhGhiChuSKSUA').value;
+    row.cells[2].querySelector('span').innerText = document.getElementById('GhichuveTTSKSUA').value;
+    row.cells[4].querySelector('span').innerText = document.getElementById('GhichuveĐSKSUA').value;
+
+    const buaAnChecked = document.getElementById("ckbuaanSKSUA").checked;
+    row.cells[5].innerHTML = buaAnChecked
+        ? `<span class="BuaAnSKXong">Đã Xong</span>`
+        : `<span class="BuaAnSKCXong">Chưa xong</span>`;
+
+        
+    const tinhTrangRadios = document.getElementsByName('suckhoeSUA');
+     for (let i = 0; i < tinhTrangRadios.length; i++) {
+        if (tinhTrangRadios[i].checked) {
+            const tinhTrang = tinhTrangRadios[i].value;
+            let className = "TinhtrangSK";
+            if (tinhTrang === "Ốm") className = "TinhtrangSK2";
+            else if (tinhTrang === "Chấn Thương") className = "TinhtrangSK3";
+            else if (tinhTrang === "Đang dùng thuốc") className = "TinhtrangSK4";
+
+            row.cells[1].innerHTML = `<span class="${className}">${tinhTrang}</span>`;
+            break;
+        }}
+
+    const chedoanRadios = document.getElementsByName('BuaANSUA');
+    for (let i = 0; i < chedoanRadios.length; i++) {
+        if (chedoanRadios[i].checked) {
+            const cda = chedoanRadios[i].value;
+            let className = "CheDoAnSK";
+            if (cda === "Dị Ứng") className = "CheDoAnSK2";
+            else if (cda === "Chế độ ăn đặc biệt") className = "CheDoAnSK3";
+
+            row.cells[3].innerHTML = `<span class="${className}">${cda}</span>`;
+            break;
+        }}
+
+    document.querySelector('#CuaSoSUAGhiChuSK').style.display = 'none';
+    resetFormNhapDiemSK();
 });
 
+    
 function resetFormNhapDiemSK() {
-  document.getElementById("chonHocSinhGhiChuSK").selectedIndex = 0;
-  document.getElementById("GhichuveTTSK").value = "";
-  document.getElementById("GhichuveĐSK").value = "";
-  document.getElementById("ckbuaanSK").checked = false;
+
+    document.getElementById('chonHocSinhGhiChuSK').selectedIndex = 0;
+    document.getElementById('GhichuveTTSK').value= '';
+    document.getElementById('GhichuveĐSK').value= '';
+    document.getElementById("ckbuaanSK").checked= false;
+     document.getElementById('chonHocSinhGhiChuSKSUA').selectedIndex = 0;
+    document.getElementById('GhichuveTTSKSUA').value= '';
+    document.getElementById('GhichuveĐSKSUA').value= '';
+    document.getElementById("ckbuaanSKSUA").checked= false;
+    
 }
 function themghichuvaobangSK() {
   let table = document.getElementById("DanhSachSK");
@@ -167,34 +297,38 @@ function themghichuvaobangSK() {
     TSChuYSK.innerText = chuy;
   }
 
-  if (buaAn) {
-    andu += 1;
-    TSAnDuSK.innerText = andu;
-  }
+   
+    if (buaAn) {
+  andu += 1;
+  TSAnDuSK.innerText = andu;}
 
-  cell1.innerHTML = `<span>${tenHS}</span><br><span style="color: gray;">HS001</span>`;
-  cell2.innerHTML = ttsk;
-  cell3.innerHTML = ghiChuSK;
-  cell4.innerHTML = cda;
-  cell5.innerHTML = ghiChuDD;
-  cell6.innerHTML = buaAn
+    cell1.innerHTML =`<span>${tenHS}</span>`;
+    cell2.innerHTML = ttsk;
+    cell3.innerHTML = `<span>${ghiChuSK}</span>`; 
+    cell4.innerHTML = cda;
+    cell5.innerHTML = `<span>${ghiChuDD}</span>`;
+    cell6.innerHTML = buaAn
     ? `<span class="BuaAnSKXong">Đã Xong</span>`
     : `<span class="BuaAnSKCXong">Chưa xong</span>`;
   cell7.innerHTML = `<button class="btnGHICHUSK"><i class="fa-solid fa-edit"></i></button>`;
 
-  tongghichu += 1;
-  TSTongGCSK.innerText = tongghichu;
+    tongghichu+=1;
+    TSTongGCSK.innerText=tongghichu;
+
 }
 //---------------------------------Điểm số------------------------------------
-const btnThemDiemSo = document.querySelector("#btnNhapDiemDS");
-const btnThoatCuaSoTGCDS = document.querySelector("#btbThoatcsoGCDS");
-const btntheGCCDS = document.querySelector("#btncuasoTGCDS");
-const TongDiemTSDS = document.querySelector("#TongdiemTSDS");
-const DTBTSDS = document.querySelector("#DiemTBTSDS");
-const GioiTSDS = document.querySelector("#GioiTSDS");
-const KhaTSDS = document.querySelector("#KhaTSDS");
-const TrungBinhTSDS = document.querySelector("#TrungBinhTSDS");
-const YeuTSDS = document.querySelector("#YeuTSDS");
+const btnThemDiemSo=document.querySelector('#btnNhapDiemDS');
+const btnThoatCuaSoTGCDS=document.querySelector('#btbThoatcsoGCDS');
+const btnThoatCuaSoTGCDSSUA=document.querySelector('#btbThoatcsoGCDSSUA');
+const btntheGCCDS=document.querySelector('#btncuasoTGCDS');
+const TongDiemTSDS=document.querySelector('#TongdiemTSDS');
+const DTBTSDS=document.querySelector('#DiemTBTSDS');
+const GioiTSDS=document.querySelector('#GioiTSDS');
+const KhaTSDS=document.querySelector('#KhaTSDS');
+const TrungBinhTSDS=document.querySelector('#TrungBinhTSDS');
+const YeuTSDS=document.querySelector('#YeuTSDS');
+const btnSuadiemDS=document.querySelectorAll('.btnSuaDS');
+const btnsuadiemDS=document.querySelector('#btncuasoTGCDSSUA');
 
 let tdds = parseFloat(TongDiemTSDS.innerText);
 let diemtbds = parseFloat(DTBTSDS.innerText);
@@ -203,11 +337,73 @@ let Khads = parseFloat(KhaTSDS.innerText);
 let Yeuds = parseFloat(YeuTSDS.innerText);
 let Trungbinhds = parseFloat(TrungBinhTSDS.innerText);
 
-btnThoatCuaSoTGCDS.addEventListener("click", function () {
-  document.querySelector("#CuaSoNĐS").style.display = "none";
+btnsuadiemDS.addEventListener('click',function(){
+    const row = document.querySelector('#DanhSachDS tr.selected');
+    if (!row) return;
+
+    
+    row.cells[0].querySelector('span').innerText =
+        document.getElementById('chonHocSinhGhiChuDSSUA').value;
+
+   
+    const loaidiemRadios = document.getElementsByName('LDSUA');
+    for (let i = 0; i < loaidiemRadios.length; i++) {
+        if (loaidiemRadios[i].checked) {
+            const ld = loaidiemRadios[i].value;
+
+            let className = "LoaiDiemDS"; 
+            if (ld === "15 phút") className = "LoaiDiemDS2";
+            else if (ld === "1 tiết") className = "LoaiDiemDS3";
+            else if (ld === "Học kỳ") className = "LoaiDiemDS4";
+
+            row.cells[1].innerHTML = `<span class="${className}">${ld}</span>`;
+        }
+    }
+
+   
+    row.cells[2].querySelector('span').innerText =
+        document.getElementById('txtDiemSODSSUA').value + "/10";
+
+   
+    row.cells[3].querySelector('span').innerText =
+        document.getElementById('NhanxetblDSSUA').value;
+
+    document.querySelector('#CuaSoNĐSSUA').style.display = 'none';
 });
-btnThemDiemSo.addEventListener("click", function () {
-  document.querySelector("#CuaSoNĐS").style.display = "block";
+function suaghichuDS(button) {
+    document.querySelector('#CuaSoNĐSSUA').style.display = 'block';
+    const row = button.closest('tr');
+    
+    document.querySelectorAll('#DanhSachDS tr').forEach(tr => tr.classList.remove('selected'));
+    
+    row.classList.add('selected');
+
+    document.getElementById('chonHocSinhGhiChuDSSUA').value = row.cells[0].querySelector('span').innerText;
+    document.getElementById('txtDiemSODSSUA').value =parseFloat(row.cells[2].querySelector('span').innerText) ;
+    document.getElementById('NhanxetblDSSUA').value = row.cells[3].querySelector('span').innerText;
+
+    const loaidiem = row.cells[1].querySelector('span').innerText;
+    const loaidiemRadios = document.getElementsByName('LDSUA');
+    for (let i = 0; i < loaidiemRadios.length; i++) {
+        loaidiemRadios[i].checked = (loaidiemRadios[i].value === loaidiem);
+    }
+
+}
+
+document.getElementById('DanhSachDS').addEventListener('click', function (e) {
+    const btn = e.target.closest('.btnSuaDS');
+    if (btn) {
+        suaghichuDS(btn);
+    }
+});
+btnThoatCuaSoTGCDS.addEventListener('click',function(){
+    document.querySelector('#CuaSoNĐS').style.display='none';
+});
+btnThoatCuaSoTGCDSSUA.addEventListener('click',function(){
+    document.querySelector('#CuaSoNĐSSUA').style.display='none';
+});
+btnThemDiemSo.addEventListener('click',function(){
+    document.querySelector('#CuaSoNĐS').style.display='block';
 });
 btntheGCCDS.addEventListener("click", function () {
   let diemso = document.getElementById("txtDiemSODS").value;
@@ -260,20 +456,12 @@ function themghichuvaobangDS() {
     cda = `<span class="LoaiDiemDS4">${LoaiDiem}</span>`;
   }
 
-  let diem = parseFloat(Diemso);
-  if (diem >= 8) {
-    Diemso = `<span style="color:green">${Diemso}/10</span>`;
-    Gioids += 1;
-  } else if (diem >= 6.5 && diem < 8) {
-    Diemso = `<span style="color:blue">${Diemso}/10</span>`;
-    Khads += 1;
-  } else if (diem < 6.5 && diem >= 5) {
-    Diemso = `<span style="color:orange">${Diemso}/10</span>`;
-    Trungbinhds += 1;
-  } else if (diem < 5) {
-    Diemso = `<span style="color:red">${Diemso}/10</span>`;
-    Yeuds += 1;
-  }
+    cell1.innerHTML =`<span>${tenHS}</span>`;
+    cell2.innerHTML = cda;
+    cell3.innerHTML = Diemso;
+    cell4.innerHTML = `<span>${Nhanxet}</span>`;
+    cell5.innerHTML = Ngay;
+    cell6.innerHTML = `<button class="btnSuaDS"><i class="fa-solid fa-edit"></i></button>`;
 
   tdds += 1;
   diemtbds = ((diemtbds * (tdds - 1) + diem) / tdds).toFixed(2);
@@ -302,14 +490,17 @@ const TSvangDD = document.querySelector("#slgvangDD");
 const TSdimuonDD = document.querySelector("#slgdimuonDD");
 const btnLUUDIEMDANHDD = document.querySelector("#btnLuuDiemDanh");
 
-let soComat = 0;
-let soVangmat = 0;
-let soDimuon = 0;
+
+ let soComat = 0;
+ let soVangmat = 0;
+ let soDimuon = 0;
 
 let currentRow = null;
-
-btnLUUDIEMDANHDD.addEventListener("click", function () {
-  alert("Đã lưu điểm danh");
+document.getElementById('btbThoatcsoGCDD').addEventListener('click', function (e) {
+    document.querySelector('#CuaSoGCDD').style.display = 'none';
+});
+btnLUUDIEMDANHDD.addEventListener('click',function(){
+    alert("Đã lưu điểm danh");
 });
 btncomatDsDD.forEach((btn) => {
   btn.addEventListener("click", function () {
@@ -465,9 +656,8 @@ btnSTLL.addEventListener("click", function () {
 btnThoatCSSTLL.addEventListener("click", function () {
   document.querySelector("#CuaSoSoanTinLL").style.display = "none";
 });
-
 btntlSTLL.forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    document.querySelector("#CuaSoSoanTinLL").style.display = "block";
-  });
+    btn.addEventListener("click", function () {
+        document.querySelector("#CuaSoSoanTinLL").style.display = "block";
+    });
 });
