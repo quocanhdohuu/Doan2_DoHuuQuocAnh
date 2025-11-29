@@ -29,6 +29,7 @@
         <button class="menu-btn" data-target="student">Học sinh</button>
         <button class="menu-btn" data-target="class">Lớp học</button>
         <button class="menu-btn" data-target="teacher">Giáo viên</button>
+        <button class="menu-btn" data-target="schedule">Lịch học</button>
         <button class="menu-btn" data-target="event">Sự kiện</button>
         <button class="menu-btn" data-target="report">Báo cáo</button>
     </nav>
@@ -120,15 +121,15 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form">
+                <form class="student-form" id="studentForm">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentName" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select>
+                        <select id="studentClass">
                             <option>Chọn lớp</option>
                             <option>1A</option>
                             <option>1B</option>
@@ -138,22 +139,22 @@
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="studentDOB">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentParent" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentPhone" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="studentAddress" placeholder="">
                     </div>
 
                     <div class="form-footer">
@@ -169,15 +170,15 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form">
+                <form class="student-form" id="studentFormUpdate">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updateName">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select>
+                        <select id="updateClass">
                             <option>Chọn lớp</option>
                             <option>1A</option>
                             <option>1B</option>
@@ -187,22 +188,22 @@
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="updateDOB">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updateParent">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updatePhone">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="updateAddress">
                     </div>
 
                     <div class="form-footer">
@@ -235,7 +236,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -248,7 +249,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -261,7 +262,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -274,7 +275,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -287,7 +288,7 @@
                         <td><span class="status active">Đang học</span></td>
                         <td class="actions">
                             <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -375,39 +376,39 @@
             </div>
             <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
 
-            <form class="class-form">
+            <form class="class-form" id="classForm">
                 <div class="form-group">
                     <label>Tên lớp</label>
-                    <input type="text" placeholder="">
+                    <input type="text" id="className" placeholder="">
                 </div>
 
                 <div class="form-group">
                     <label>Khối</label>
-                    <select>
+                    <select id="Khoi">
                         <option>Chọn khối</option>
                         <option>Khối 1</option>
                         <option>Khối 2</option>
                         <option>Khối 3</option>
+                        <option>Khối 4</option>
+                        <option>Khối 5</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>GVCN</label>
-                    <select>
+                    <select id="GVCN-class">
                         <option>Chọn giáo viên</option>
-                        <option>Nguyễn Văn A</option>
-                        <option>Trần Thị B</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Sĩ số tối đa</label>
-                    <input type="number" value="35">
+                    <input type="number" id="siso" value="35">
                 </div>
 
                 <div class="form-group">
                     <label>Phòng học</label>
-                    <input type="text" placeholder="">
+                    <input type="text" id="classroom" placeholder="">
                 </div>
 
                 <div class="form-footer">
@@ -422,39 +423,39 @@
             </div>
             <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
 
-            <form class="class-form">
+            <form class="class-form" id="classFormUpdate">
                 <div class="form-group">
                     <label>Tên lớp</label>
-                    <input type="text" placeholder="">
+                    <input type="text" id="classNameUpdate">
                 </div>
 
                 <div class="form-group">
                     <label>Khối</label>
-                    <select>
+                    <select id="KhoiUpdate">
                         <option>Chọn khối</option>
                         <option>Khối 1</option>
                         <option>Khối 2</option>
                         <option>Khối 3</option>
+                        <option>Khối 4</option>
+                        <option>Khối 5</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>GVCN</label>
-                    <select>
+                    <select id="GVCN-classUpdate">
                         <option>Chọn giáo viên</option>
-                        <option>Nguyễn Văn A</option>
-                        <option>Trần Thị B</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Sĩ số tối đa</label>
-                    <input type="number" value="35">
+                    <input type="number" id="sisoUpdate" value="35">
                 </div>
 
                 <div class="form-group">
                     <label>Phòng học</label>
-                    <input type="text" placeholder="">
+                    <input type="text" id="classroomUpdate">
                 </div>
 
                 <div class="form-footer">
@@ -482,25 +483,25 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin giáo viên và phân công lớp.</p>
 
-                <form class="teacher-form">
+                <form class="teacher-form" id="teacherForm">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="teacherName" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" placeholder="">
+                        <input type="email" id="teacherEmail" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="teacherSDT" placeholder="">
                     </div>
 
                     <div class="form-group">
                         <label>Môn dạy</label>
-                        <select>
+                        <select id="teacherSubject">
                             <option>Chọn môn dạy</option>
                             <option>Toán</option>
                             <option>Ngữ văn</option>
@@ -511,7 +512,7 @@
 
                     <div class="form-group">
                         <label>Lớp dạy</label>
-                        <div class="checkbox-group">
+                        <div class="checkbox-group" id="teacherClass">
                             <label><input type="checkbox"> 1A</label>
                             <label><input type="checkbox"> 1B</label>
                             <label><input type="checkbox"> 1C</label>
@@ -523,7 +524,7 @@
 
                     <div class="form-group">
                         <label>Chủ nhiệm</label>
-                        <input id="checkbox-chunhiem" type="checkbox">
+                        <input id="checkbox-chunhiem" class="teacherCN" type="checkbox">
                     </div>
 
                     <div class="form-footer">
@@ -538,25 +539,25 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin giáo viên và phân công lớp.</p>
 
-                <form class="teacher-form">
+                <form class="teacher-form" id="teacherFormUpdate">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="teacherNameUpdate">
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" placeholder="">
+                        <input type="email" id="teacherEmailUpdate">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="">
+                        <input type="text" id="teacherSDTUpdate">
                     </div>
 
                     <div class="form-group">
                         <label>Môn dạy</label>
-                        <select>
+                        <select id="teacherSubjectUpdate">
                             <option>Chọn môn dạy</option>
                             <option>Toán</option>
                             <option>Ngữ văn</option>
@@ -567,7 +568,7 @@
 
                     <div class="form-group">
                         <label>Lớp dạy</label>
-                        <div class="checkbox-group">
+                        <div class="checkbox-group" id="teacherClassUpdate">
                             <label><input type="checkbox"> 1A</label>
                             <label><input type="checkbox"> 1B</label>
                             <label><input type="checkbox"> 1C</label>
@@ -579,7 +580,7 @@
 
                     <div class="form-group">
                         <label>Chủ nhiệm</label>
-                        <input id="checkbox-chunhiem" type="checkbox">
+                        <input id="checkbox-chunhiem" class="teacherCNUpdate" type="checkbox">
                     </div>
 
                     <div class="form-footer">
@@ -611,7 +612,7 @@
                         <td><span class="status activeclass">Hoạt động</span></td>
                         <td class="actions">
                             <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteTeacher"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -627,7 +628,7 @@
                         <td><span class="status activeclass">Hoạt động</span></td>
                         <td class="actions">
                             <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteTeacher"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -640,8 +641,282 @@
                         <td><span class="status activeclass">Hoạt động</span></td>
                         <td class="actions">
                             <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete"><i class="fa-solid fa-trash-can"></i></button>
+                            <button class="delete deleteTeacher"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="schedule" class="page">
+            <div class="schedule-header">
+                <h3>Quản lý lịch học</h3>
+                <span>Quản lý thời khóa biểu theo tuần cho từng lớp học</span>
+
+                <div class="schedule-actions">
+                    <h5>Chọn lớp: </h5>
+                    <select>
+                        <option>Tất cả các lớp</option>
+                        <option>1A</option>
+                        <option>2E</option>
+                    </select>
+                    <img src="..\img\lichhoc.png" alt="">
+                    <h4>3 tiết/tuần</h4>
+                    <button class="addschedule-btn"><i class="fa-solid fa-plus"></i>Thêm tiết học</button>
+                </div>
+            </div>
+            <div id="overlaySchedule" class="overlaySchedule"></div>
+
+            <div class="modal" id="scheduleModal">
+                <div class="modal-header">
+                    <h2>Thêm tiết học mới</h2>
+                    <span class="close-btn" id="closeScheduleBtn">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
+
+                <form class="schedule-form" id="scheduleForm">
+                    <div class="form-group">
+                        <label>Lớp</label>
+                        <select id="schedule-Class">
+                            <option>Lớp 1A</option>
+                            <option>Lớp 1B</option>
+                            <option>Lớp 2A</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Thứ</label>
+                        <select id="schedule-dayofweek">
+                            <option>Thứ 2</option>
+                            <option>Thứ 3</option>
+                            <option>Thứ 4</option>
+                            <option>Thứ 5</option>
+                            <option>Thứ 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tiết</label>
+                        <select id="schedule-lesson">
+                            <option>Tiết 1 (07:00 - 07:35)</option>
+                            <option>Tiết 2 (07:40 - 08:15)</option>
+                            <option>Tiết 3 (08:20 - 08:55)</option>
+                            <option>Tiết 4 (09:00 - 09:35)</option>
+                            <option>Tiết 5 (09:40 - 10:15)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Môn học</label>
+                        <select id="schedule-subject">
+                            <option>Chọn môn học</option>
+                            <option>Toán</option>
+                            <option>Ngữ Văn</option>
+                            <option>Tiếng Anh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giáo viên</label>
+                        <input id="schedule-addteacher" type="text" placeholder="Nhập tên giáo viên">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input id="schedule-addroom" type="text" placeholder="Ví dụ: P101">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitSchedule-btn">Thêm tiết học</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal" id="scheduleModalUpdate">
+                <div class="modal-header">
+                    <h2>Sửa tiết học</h2>
+                    <span class="close-btn" id="closeScheduleBtnUpdate">&times;</span>
+                </div>
+                <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
+
+                <form class="schedule-form" id="scheduleFormUpdate">
+                    <div class="form-group">
+                        <label>Lớp</label>
+                        <select id="schedule-ClassUpdate">
+                            <option>Lớp 1A</option>
+                            <option>Lớp 1B</option>
+                            <option>Lớp 2A</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Thứ</label>
+                        <select id="schedule-dayofweekUpdate">
+                            <option>Thứ 2</option>
+                            <option>Thứ 3</option>
+                            <option>Thứ 4</option>
+                            <option>Thứ 5</option>
+                            <option>Thứ 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tiết</label>
+                        <select id="schedule-lessonUpdate">
+                            <option>Tiết 1 (07:00 - 07:35)</option>
+                            <option>Tiết 2 (07:40 - 08:15)</option>
+                            <option>Tiết 3 (08:20 - 08:55)</option>
+                            <option>Tiết 4 (09:00 - 09:35)</option>
+                            <option>Tiết 5 (09:40 - 10:15)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Môn học</label>
+                        <select id="schedule-subjectUpdate">
+                            <option>Chọn môn học</option>
+                            <option>Toán</option>
+                            <option>Ngữ Văn</option>
+                            <option>Tiếng Anh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Giáo viên</label>
+                        <input id="schedule-teacherUpdate" type="text" placeholder="Nhập tên giáo viên">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input id="schedule-roomUpdate" type="text" placeholder="Ví dụ: P101">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitScheduleUpdate-btn">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Tiết</th>
+                        <th>Thứ 2</th>
+                        <th>Thứ 3</th>
+                        <th>Thứ 4</th>
+                        <th>Thứ 5</th>
+                        <th>Thứ 6</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiết 1<br><small>07:00 - 07:35</small></td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Toán</strong>
+                                <div class="schedule-teacher">Nguyễn Văn A</div>
+                                <span class="badge schedule-room">P101</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Âm nhạc</strong>
+                                <div class="schedule-teacher">Lê Văn C</div>
+                                <span class="badge schedule-room">P201</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Tiếng Việt</strong>
+                                <div class="schedule-teacher">Trần Thị B</div>
+                                <span class="badge schedule-room">P101</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Tiếng Việt</strong>
+                                <div class="schedule-teacher">Trần Thị B</div>
+                                <span class="badge schedule-room">P101</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Tiếng Việt</strong>
+                                <div class="schedule-teacher">Trần Thị B</div>
+                                <span class="badge schedule-room">P101</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Tiết 2<br><small>07:40 - 08:15</small></td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Tiếng Việt</strong>
+                                <div class="schedule-teacher">Trần Thị B</div>
+                                <span class="badge schedule-room">P101</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="schedule-lesson">
+                                <strong>Tiếng Việt</strong>
+                                <div class="schedule-teacher">Trần Thị B</div>
+                                <span class="badge schedule-room">P101</span>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Tiết 3<br><small>08:20 - 08:55</small></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Tiết 4<br><small>09:00 - 09:35</small></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Tiết 5<br><small>09:40 - 10:15</small></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -666,7 +941,7 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
 
-                <form class="event-form">
+                <form class="event-form" id="eventForm">
                     <div class="form-group">
                         <label for="event-name">Tên</label>
                         <input type="text" id="event-name" placeholder="">
@@ -705,26 +980,26 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
 
-                <form class="event-form">
+                <form class="event-form" id="eventFormUpdate">
                     <div class="form-group">
                         <label for="event-name">Tên</label>
-                        <input type="text" id="event-name" placeholder="">
+                        <input type="text" id="event-nameUpdate" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="event-description">Mô tả</label>
-                        <textarea id="event-description" rows="3" placeholder=""></textarea>
+                        <textarea id="event-descriptionUpdate" rows="3" placeholder=""></textarea>
                     </div>
                     <div class="form-group">
                         <label for="event-date">Ngày</label>
-                        <input type="text" id="event-date" placeholder="dd/mm/yyyy">
+                        <input type="text" id="event-dateUpdate" placeholder="dd/mm/yyyy">
                     </div>
                     <div class="form-group">
                         <label for="event-time">Giờ</label>
-                        <input type="text" id="event-time" placeholder="--:-- --">
+                        <input type="text" id="event-timeUpdate" placeholder="--:-- --">
                     </div>
                     <div class="form-group">
                         <label>Loại</label>
-                        <div class="event-type">
+                        <div class="event-typeUpdate">
                             <div><input type="radio" name="type"> <span>Học thuật</span></div>
                             <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
                             <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
@@ -757,7 +1032,7 @@
                     </div>
                     <div class="eventlist-actions">
                         <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button><i class="fa-regular fa-trash-can"></i></button>
+                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
                     </div>
                 </div>
 
@@ -779,7 +1054,7 @@
                     </div>
                     <div class="eventlist-actions">
                         <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button><i class="fa-regular fa-trash-can"></i></button>
+                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
                     </div>
                 </div>
 
@@ -801,7 +1076,7 @@
                     </div>
                     <div class="eventlist-actions">
                         <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button><i class="fa-regular fa-trash-can"></i></button>
+                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
                     </div>
                 </div>
             </div>
@@ -1047,7 +1322,8 @@
             </div>
         </section>
     </main>
-
+    <!-- Toast Notification -->
+    <div id="toastContainer"></div>
 </body>
 
 </html>
