@@ -689,3 +689,99 @@ body {
 .button-dangnhap-footer input:hover {
   background-color: rgb(242, 242, 242);
 }
+@media (max-width: 1024px) {
+  #header {
+    width: 1000px;
+  }
+  .header-menu {
+    display: none;
+  }
+  .button-dangnhap-header {
+    float: right;
+  }
+  #content {
+    height: 4730px;
+    width: 100%;
+  }
+  .vetruongchungtoi-bottom-right img {
+    width: 360px;
+  }
+  .chuongtrinhgiaoduc {
+    height: 900px;
+  }
+  .thanhtichnoibat {
+    height: 860px;
+  }
+}
+@media (max-width: 768px) {
+  #header {
+    width: 560px;
+  }
+  #content {
+    height: 4950px;
+    width: 560px;
+  }
+  .button-dangnhap-header {
+    float: right;
+  }
+  .truongtieuhoctuonglai,
+  .vetruongchungtoi,
+  .chuongtrinhgiaoduc,
+  .doingugiaovien,
+  .cosovatchat,
+  .thanhtichnoibat,
+  .lienhechungtoi {
+    width: 500px;
+  }
+  .truongtieuhoctuonglai-left {
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+  .truongtieuhoctuonglai-left-buttons {
+    width: 260px;
+  }
+  .truongtieuhoctuonglai-left input {
+    height: 36px;
+    width: 100px;
+  }
+  #button-timhieuthem {
+    width: 120px;
+  }
+  .vetruongchungtoi-bottom-right {
+    display: none;
+  }
+  .box ul {
+    display: none;
+  }
+  .cosovatchat-bottom-left {
+    display: none;
+  }
+  .cosovatchat-bottom-right-thing {
+    width: 450px;
+  }
+  .thanhtichnoibat {
+    height: 1250px;
+  }
+  .lienhechungtoi {
+    height: 500px;
+  }
+  .lienhechungtoi-right {
+    display: none;
+  }
+  #footer {
+    width: 560px;
+  }
+  .footer-name {
+    width: 300px;
+    padding-top: 8px;
+    margin-left: 5px;
+    font-size: 8pt;
+  }
+  .button-dangnhap-footer {
+    width: 100px;
+    margin-right: 50px;
+  }
+  .button-dangnhap-footer input {
+    margin-left: 0px;
+  }
+}
