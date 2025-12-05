@@ -107,7 +107,8 @@ function resetST() {
 }
 let sotingui=0
 function themtindagui() {
-    const phuhuynh = document.querySelector('#chonPHSTLL').value;
+
+  const phuhuynh = document.querySelector('#chonPHSTLL').value;
   const tieude = document.querySelector('#txttieudeSTLL').value;
   const noidung = document.querySelector('#TXTNDSTLL').value;
   const thoigian = new Date().toLocaleString('vi-VN');
@@ -130,8 +131,46 @@ function themtindagui() {
   
   document.querySelector('#CuaSoSoanTinLL').style.display = 'none';
   sotingui++;
-}
+  // Tạo object tin mới
+    let obj = {
+    phuhuynh: phuhuynh,
+    tieude: tieude,
+    noidung: noidung,
+    thoigian: thoigian
+    };
 
+    // Lấy danh sách đã có (hoặc mảng rỗng)
+    let dsTin = JSON.parse(localStorage.getItem("TinDaGui") || "[]");
+
+    // Thêm tin mới vào mảng
+    dsTin.push(obj);
+
+    // Lưu lại LocalStorage
+    localStorage.setItem("TinDaGui", JSON.stringify(dsTin));
+}
+window.onload = function() {
+    loadTinDaGui();
+}
+function loadTinDaGui() {
+    let dsTin = JSON.parse(localStorage.getItem("TinDaGui") || "[]");
+
+    let index = 0;
+
+    dsTin.forEach(tin => {
+        if(index >= 10) return; // chỉ hiện tối đa 10
+
+        let iddiv = '#TNGuiLL' + (10 - index);
+        let tinDiv = document.querySelector(iddiv);
+
+        tinDiv.querySelector('.ngNhanll').innerText = `Gửi đến: ${tin.phuhuynh}`;
+        tinDiv.querySelector('.tieudeLL').innerText = tin.tieude;
+        tinDiv.querySelector('.ndguiLL').innerText = tin.noidung;
+        tinDiv.querySelector('.tgguiLL').innerText = tin.thoigian;
+        tinDiv.style.display = 'block';
+
+        index++;
+    });
+}
 //---------------------------------Sức khỏe------------------------------------
 const btnThemGhiChuSK=document.querySelector('#ThemGhichuSK');
 const btnThoatCuaSoTGCSK=document.querySelectorAll('#btbThoatcsoGCSK');
@@ -691,3 +730,6 @@ btntlSTLL.forEach(function(btn) {
         document.querySelector('#CuaSoSoanTinLL').style.display = 'block';
     });
 })
+document.getElementById('btnXuatLichDay').addEventListener('click', function() {
+    alert('Xuất lịch dạy theo ngày thành công!');
+});

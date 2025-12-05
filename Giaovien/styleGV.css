@@ -756,6 +756,58 @@
     margin-top: 18px;
     cursor: pointer;
 }
+/*----------------------Danh Sách Liên lạc---------------------*/
+#DanhBaLL {
+    display: none;
+}
+
+#DabaLL {
+    display: block;
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
+}
+
+.DBaLL {
+    align-items: center;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 23%;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.ten {
+    font-size: 14pt;
+    font-weight: bold;
+    display: flex;
+    height: 20%;
+}
+
+.loai {
+    padding: 3px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.hocSinh {
+    font-size: 13pt;
+}
+
+.lienHe {
+    font-size: 13pt;
+}
+
+.btn {
+    cursor: pointer;
+    height: 20%;
+    background-color: white;
+    border-radius: 7px;
+}
 /*----------------------Hộp thư đến Liên lạc---------------------*/
 #HopThuDenLL, #DaGuiLL, #DanhBaLL{
     overflow: auto;
@@ -1784,5 +1836,34 @@
 #ChonTGLich button{
    width: 39%;
     height: 40px;
+}
+/*=-------------lien lac----------------*/
+#CuaSoSoanTinLL{
+    width: 80%;
+}
+#CuaSoSoanTinLL > div {
+    margin-top: 15px;
+}
+#CuaSoSoanTinLL > div >span {
+    font-weight: bold;
+}
+#chonPHSTLL{
+    margin-left: 20px;
+    height: 30px;
+    width: 80%;
+}
+#btnCSSTLL{
+    height:35px;
+    width:45%;
+}
+#txttieudeSTLL{
+    margin-left: 20px;
+    height: 30px;
+    width: 80%;
+}
+#TXTNDSTLL{
+    margin-left: 20px;
+    height: 60px;
+    width: 80%;
 }
 }
