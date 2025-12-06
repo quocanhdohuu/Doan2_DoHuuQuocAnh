@@ -1147,7 +1147,7 @@ body {
 }
 /* Thanh tiến độ hoc tập */
 .vung-chua {
-  margin:  auto 20px;
+  margin:  auto;
   background: white;
   border-radius: 12px;
   padding: 24px;
