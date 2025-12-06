@@ -802,7 +802,7 @@
     font-size: 13pt;
 }
 
-.btn {
+.btnCCLL, .btnDSLL, .btnSTLL {
     cursor: pointer;
     height: 20%;
     background-color: white;
@@ -1052,7 +1052,119 @@
     justify-content: space-between;
     text-align: center;
 }
+/*----------------------TTcanhan---------------------*/
+#ThongTinCaNhan{
+    display: none;
+    overflow: auto;
+    width: 97%;
+    border-radius: 15px ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+#anhTTCN img{
+    width: 30px;
+    height: 30px;;
+    margin-right: 12px;
+}
+#ThongTinCaNhan {
+    width: 400px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    font-family: sans-serif;
+}
 
+#anhTTCN {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+#anhTTCN img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.sub-title {
+    font-size: 13px;
+    color: gray;
+    display: block;
+    margin-bottom: 15px;
+}
+
+#ThongTinGV {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.TTGV {
+    display: flex;
+    justify-content: space-between;
+    background: #f7f7f7;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    color: #0056a6;
+    font-weight: 500;
+}
+#ChucNangTTCN {
+    display: flex;
+    gap: 15px; /* khoảng cách 2 nút */
+    margin-top: 15px;
+}
+
+#ChucNangTTCN button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* khoảng cách icon và chữ */
+
+    padding: 10px 20px;
+    background-color: #0078ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: 0.2s;
+}
+body button:hover {
+    background-color: #dddede;
+    transform: scale(1.03);
+}
+body button:active {
+    transform: scale(0.97);
+}
+body button{
+    gap: 8px;
+}
+#ChucNangTTCN button:hover {
+    background-color: #005fd6;
+    transform: scale(1.03);
+}
+
+#ChucNangTTCN button:active {
+    transform: scale(0.97);
+}
 
 /*----------------------responsive---------------------*/
 /* Tablet (768px – 1023px) */

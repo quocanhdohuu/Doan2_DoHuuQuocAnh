@@ -32,6 +32,7 @@
         <button id="btnDiemSo">Điểm số</button>
         <button id="btnLienLac">Liên lạc</button>
         <button id="btnLichDay">Lịch dạy</button>
+        <button id="btnTTCN">TTCN</button>
     </div>
 <!----------------- tONG Quan ------------------->
     <div id="TongQuan">
@@ -701,35 +702,6 @@
          <!-----------------Hộp thư đến------------------->
          <div id="HopThuDenLL">
             <span>Tin nhắn đến</span>
-
-            <div class="TinDenLL" id="TNdenLL1">
-                <span class="tieuDeTin">
-                    <div>
-                        Nguyễn Thị B
-                     <span class="nhanMoi">Mới</span>
-                        <span class="nhanNguoiGui">Nguyễn văn A</span>
-                    </div>
-                    <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
-                </span>
-
-                <p class="tieuDeNoiDung">Hỏi về bài tập về nhà</p>
-                 <p>Thầy ơi, con em hôm nay về không có ghi bài tập gì. Xin thầy cho biết bài tập môn Toán hôm nay ạ.</p>
-                 <span class="thoiGian">08:30:00 23/12/2024</span>
-                </div>
-
-                <div class="TinDenLL" id="TNdenLL2">
-                     <span class="tieuDeTin">
-                <div>
-                    Trần Văn D
-                    <span class="nhanNguoiGui">Trần Thị C</span>
-                </div>
-                <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
-                    </span>
-
-                 <p class="tieuDeNoiDung">Xin phép nghỉ học</p>
-                <p>Thầy ơi, con em bị sốt nên hôm nay xin phép nghỉ học. Em sẽ học bù vào ngày mai ạ.</p>
-                <span class="thoiGian">07:15:00 23/12/2024</span>
-            </div>
         </div>
 
           <!-----------------Hộp thư gửi------------------->
@@ -833,7 +805,7 @@
           <!-----------------Danh bạ------------------->
          <div id="DanhBaLL">
         <div id="DabaLL">
-        <span class="title">Tin nhắn đến</span>
+        <span class="title">Danh bạ</span>
 
         <div class="DBaLL" id="DanhBaLL.1">
             <div>
@@ -850,9 +822,9 @@
             </div>
 
             <div>
-                <button class="btn">Chuyên cần</button>
-                <button class="btn">Điểm số</button>
-                <button class="btn"><i class="fa-solid fa-paper-plane"></i></button>
+                <button class="btnCCLL">Chuyên cần</button>
+                <button class="btnDSLL">Điểm số</button>
+                <button class="btnSTLL"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
 
@@ -871,9 +843,9 @@
             </div>
 
             <div>
-                <button class="btn">Chuyên cần</button>
-                <button class="btn">Điểm số</button>
-                <button class="btn"><i class="fa-solid fa-paper-plane"></i></button>
+                <button class="btnCCLL">Chuyên cần</button>
+                <button class="btnDSLL">Điểm số</button>
+                <button class="btnSTLL"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
             </div>
             </div>
@@ -960,7 +932,47 @@
             </table>
         </div> 
     </div>
-   
+   <!--========================================TTCANHaN========================================-->
+   <div id="ThongTinCaNhan">
+    <h3 id="anhTTCN">
+        <img src="/img/user (1).png" alt="">
+        <span>Thông tin cá nhân</span>
+    </h3>
+
+    <span class="sub-title">Quản lý thông tin cá nhân của giáo viên</span>
+
+    <div id="ThongTinGV">
+        <div class="TTGV">
+            <span class="label">Họ và tên:</span>
+            <span class="value" id="tenGV">Nguyễn Văn A</span>
+        </div>
+        <div class="TTGV">
+            <span class="label">Mã giáo viên:</span>
+            <span class="value" id="maGV">GV001</span>
+        </div>
+        <div class="TTGV">
+            <span class="label">Ngày sinh:</span>
+            <span class="value" id="ngaySinhGV">01/01/1980</span>
+        </div>
+        <div class="TTGV">
+            <span class="label">Chuyên môn:</span>
+            <span class="value" id="chuyenMonGV">Toán học</span>
+        </div>
+        <div class="TTGV">
+            <span class="label">Số điện thoại:</span>
+            <span class="value" id="sdtGV">0123456789</span>
+        </div>
+        <div class="TTGV">
+            <span class="label">Email:</span>
+            <span class="value" id="emailGV">sakjhaja@gmail.com</span>
+        </div>
+    </div>
+    <div id="ChucNangTTCN">
+        <button id="btnSuaTTCN"><i class="fa-solid fa-pen-to-square"></i>Sửa thông tin</button>
+        <button id="btnDoiMatKhau"><i class="fa-solid fa-key"></i>Đổi mật khẩu</button>
+    </div>
+    </div>
+
     <script src="jvGV.js"></script>
 
 

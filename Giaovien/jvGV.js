@@ -8,6 +8,7 @@ const btnDangXuat=document.querySelector('#btnLogout');
 const btnPhuDD=document.querySelectorAll('.btnDiemdanh'); 
 const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 const btnLichday=document.querySelector('#btnLichDay');
+const btnTTCN=document.querySelector('#btnTTCN');
 
 //HAm an menu
 function an(nutbam){
@@ -17,53 +18,59 @@ function an(nutbam){
     btnSucKhoe.style.backgroundColor='transparent';
     btnTONGQUAN.style.backgroundColor='transparent';
     btnLichday.style.backgroundColor='transparent';
+    btnTTCN.style.backgroundColor='transparent';
     nutbam.style.backgroundColor='white';
 };
 //ham doi trang
-function doi(trang1,trang2,trang3,trang4,trang5,trang6){
+function doi(trang1,trang2,trang3,trang4,trang5,trang6,trang7){
     document.querySelector(trang1).style.display='block';
     document.querySelector(trang2).style.display='none';
     document.querySelector(trang3).style.display='none';
     document.querySelector(trang4).style.display='none';
     document.querySelector(trang5).style.display='none';
     document.querySelector(trang6).style.display='none';
+    document.querySelector(trang7).style.display='none';
 
 }
+btnTTCN.addEventListener('click',function(){
+    an(btnTTCN);
+    doi('#ThongTinCaNhan','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+});
 btnLichday.addEventListener('click',function(){
     an(btnLichday);
-    doi('#LichDay','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac');
+    doi('#LichDay','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#ThongTinCaNhan');
 });
 btnTONGQUAN.addEventListener('click',function(){
     an(btnTONGQUAN);
-    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
 btnDiemDanh.addEventListener('click',function(){
     an(btnDiemDanh);
-    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
 btnPhuDD.forEach(btn=>{
     btn.addEventListener('click',function(){
     an(btnDiemDanh);
-    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
 });
 btnDiemSo.addEventListener('click',function(){
     an(btnDiemSo);
-    doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay');
+    doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay','#ThongTinCaNhan');
 });
 btnPhuND.forEach(btn=>{
     btn.addEventListener('click',function(){
         an(btnDiemSo);
-        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay');
+        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay','#ThongTinCaNhan');
     })
 });
 btnLienLac.addEventListener('click',function(){
     an(btnLienLac);
-    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LichDay');
+    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LichDay','#ThongTinCaNhan');
 });
 btnSucKhoe.addEventListener('click',function(){
     an(btnSucKhoe);
-    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac','#LichDay');
+    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
 
 //---------------------------------Liên lạc------------------------------------
@@ -150,7 +157,14 @@ function themtindagui() {
 }
 window.onload = function() {
     loadTinDaGui();
+    loadTinDen();
 }
+document.getElementById('btnXuatEDS').addEventListener('click', function() { 
+    alert("Đã hoàn thành!");
+});
+document.getElementById('btnPhieuDiemDS').addEventListener('click', function() { 
+    alert("Đã hoàn thành!");
+});
 function loadTinDaGui() {
     let dsTin = JSON.parse(localStorage.getItem("TinDaGui") || "[]");
 
@@ -706,8 +720,13 @@ function lughichu() {
   if (!currentRow) return;
 
   let ghichu = document.getElementById('GhichuDD').value;
-  let span = currentRow.cells[5].querySelector('span');
-  span.innerHTML = ghichu;
+  if (ghichu.trim() === "") {
+    alert("Vui lòng nhập ghi chú trước khi lưu.");
+    return;
+  }else{
+    let span = currentRow.cells[5].querySelector('span');
+    span.innerHTML = ghichu;
+  }
 
   document.getElementById('GhichuDD').value = "";
   currentRow = null;
@@ -717,7 +736,27 @@ function lughichu() {
 const btntlSTLL=document.querySelectorAll('.btnSTHTD');
 const btnThoatCSSTLL=document.querySelector('#btbThoatCSSTLL');
 const btnSTLL=document.querySelector('#btnSoanTinLL');
+const btnchuyencan=document.querySelectorAll('.btnCCLL');
+const btndienso=document.querySelectorAll('.btnDSLL');
+const btnST=document.querySelectorAll('.btnSTLL');
 
+btnchuyencan.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        an(btnDiemDanh);
+        doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+    });
+});
+btndienso.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        an(btnDiemSo);
+        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay');
+    });
+});
+btnST.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelector('#CuaSoSoanTinLL').style.display='block';
+    });
+});
 btnSTLL.addEventListener('click',function(){
     document.querySelector('#CuaSoSoanTinLL').style.display='block';
 })
@@ -733,3 +772,46 @@ btntlSTLL.forEach(function(btn) {
 document.getElementById('btnXuatLichDay').addEventListener('click', function() {
     alert('Xuất lịch dạy theo ngày thành công!');
 });
+
+let tinDen = {
+    tenNguoiGui: "Nguyễn Thị B",
+    tenPH: "Nguyễn Văn A",
+    tieuDe: "Hỏi về bài tập",
+    noiDung: "Thầy ơi...",
+    thoiGian: "08:30:00 23/12/2024",
+    moi: true  
+};
+
+let ds = JSON.parse(localStorage.getItem("TinDen") || "[]");
+ds.push(tinDen);
+localStorage.setItem("TinDen", JSON.stringify(ds));
+function taoHTMLTinDen(tin) {
+    return `
+        <div class="TinDenLL">
+            <span class="tieuDeTin">
+                <div>
+                    ${tin.tenNguoiGui}
+                    ${tin.moi ? `<span class="nhanMoi">Mới</span>` : ``}
+                    <span class="nhanNguoiGui">${tin.tenPH}</span>
+                </div>
+                <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
+            </span>
+
+            <p class="tieuDeNoiDung">${tin.tieuDe}</p>
+            <p>${tin.noiDung}</p>
+            <span class="thoiGian">${tin.thoiGian}</span>
+        </div>
+    `;
+}
+function loadTinDen() {
+    let ds = JSON.parse(localStorage.getItem("TinDen") || "[]");
+
+    let hopThu = document.querySelector("#HopThuDenLL");
+    let i=0;
+
+        ds.slice(-3).forEach(tin => {
+        hopThu.innerHTML += taoHTMLTinDen(tin);
+        i+=1;
+    });
+    
+}
