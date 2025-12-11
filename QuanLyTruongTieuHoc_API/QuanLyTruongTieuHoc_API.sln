@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLyTruongTieuHoc_API", "QuanLyTruongTieuHoc_API\QuanLyTruongTieuHoc_API.csproj", "{165AE576-6502-4782-B611-CE6ECC2E47C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLyTruongTieuHoc_API", "QuanLyTruongTieuHoc_API\QuanLyTruongTieuHoc_API.csproj", "{165AE576-6502-4782-B611-CE6ECC2E47C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Gateway", "API_Gateway\API_Gateway.csproj", "{BDBD04F0-27C8-4EBF-B73A-91F8F5B8B987}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{E53F99AD-B680-439A-A004-267B68682696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{841A7543-6549-49C0-8E26-7920711E8C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{1ACB62A8-8CB6-4AB7-AABE-6F35EF0DDF06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{165AE576-6502-4782-B611-CE6ECC2E47C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{165AE576-6502-4782-B611-CE6ECC2E47C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{165AE576-6502-4782-B611-CE6ECC2E47C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDBD04F0-27C8-4EBF-B73A-91F8F5B8B987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBD04F0-27C8-4EBF-B73A-91F8F5B8B987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBD04F0-27C8-4EBF-B73A-91F8F5B8B987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBD04F0-27C8-4EBF-B73A-91F8F5B8B987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53F99AD-B680-439A-A004-267B68682696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53F99AD-B680-439A-A004-267B68682696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53F99AD-B680-439A-A004-267B68682696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53F99AD-B680-439A-A004-267B68682696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841A7543-6549-49C0-8E26-7920711E8C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841A7543-6549-49C0-8E26-7920711E8C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841A7543-6549-49C0-8E26-7920711E8C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841A7543-6549-49C0-8E26-7920711E8C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ACB62A8-8CB6-4AB7-AABE-6F35EF0DDF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ACB62A8-8CB6-4AB7-AABE-6F35EF0DDF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ACB62A8-8CB6-4AB7-AABE-6F35EF0DDF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ACB62A8-8CB6-4AB7-AABE-6F35EF0DDF06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
