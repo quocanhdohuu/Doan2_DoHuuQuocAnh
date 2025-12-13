@@ -20,7 +20,7 @@ body {
 /*  */
 #header {
   height: 53px;
-  width: 1280px;
+  width: 100%;
   border-bottom: 1px solid #bdbbbb;
 }
 
@@ -691,7 +691,7 @@ body {
 }
 @media (max-width: 1024px) {
   #header {
-    width: 1000px;
+    width: 100%;
   }
   .header-menu {
     display: none;
@@ -715,7 +715,7 @@ body {
 }
 @media (max-width: 768px) {
   #header {
-    width: 560px;
+    width: 100%;
   }
   #content {
     height: 4950px;
