@@ -51,5 +51,17 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Created" });
         }
+
+        [Route("User_Update")]
+        [HttpPost]
+        public IActionResult Update(int id, [FromBody] Users user)
+        {
+            bool ok = _bll.UpdateUser(id, user, out string error);
+
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new { message = "Updated successfully" });
+        }
     }
 }

@@ -34,5 +34,23 @@ namespace BLL
 
             return _dal.InsertUser(user, out error);
         }
+        public bool UpdateUser(int id, Users user, out string error)
+        {
+            if (id <= 0)
+            {
+                error = "Invalid user id";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(user.Username))
+            {
+                error = "Username is required";
+                return false;
+            }
+
+            user.UserID = id;
+
+            return _dal.UpdateUser(user, out error);
+        }
     }
 }
