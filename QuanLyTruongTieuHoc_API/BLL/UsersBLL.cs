@@ -23,6 +23,16 @@ namespace BLL
         {
             return _dal.GetUserById(id, out error);
         }
+        public string GetRoleById(int id, out string error)
+        {
+            if (id <= 0)
+            {
+                error = "Invalid user id";
+                return null;
+            }
+
+            return _dal.GetRoleById(id, out error);
+        }
 
         public bool CreateUser(Users user, out string error)
         {

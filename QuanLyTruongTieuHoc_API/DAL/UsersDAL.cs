@@ -58,6 +58,20 @@ namespace DAL
                 Status = (bool)row["Status"]
             };
         }
+        public string GetRoleById(int id, out string error)
+        {
+            error = "";
+
+            var dt = _db.ExecuteQueryToDataTable(
+                $"SELECT Role FROM Users WHERE UserID = {id}",
+                out error
+            );
+
+            if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
+                return null;
+
+            return dt.Rows[0]["Role"].ToString();
+        }
 
         public bool InsertUser(Users user, out string error)
         {

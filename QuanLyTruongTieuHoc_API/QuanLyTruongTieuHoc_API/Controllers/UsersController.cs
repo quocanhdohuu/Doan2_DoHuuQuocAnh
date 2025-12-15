@@ -40,6 +40,24 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(user);
         }
+        [Route("User_GetRoleByID")]
+        [HttpGet]
+        public IActionResult GetRoleById(int id)
+        {
+            var role = _bll.GetRoleById(id, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            if (role == null)
+                return NotFound("User not found");
+
+            return Ok(new
+            {
+                UserID = id,
+                Role = role
+            });
+        }
         [Route("User_Create")]
         [HttpPost]
         public IActionResult Create([FromBody] Users user)
