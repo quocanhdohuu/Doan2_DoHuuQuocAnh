@@ -13,11 +13,22 @@ const btnTTCN=document.querySelector('#btnTTCN');
 document.getElementById('btnSuaTT').addEventListener('click', function() {
     alert("Sửa thông tin thành công!");
 });
+document.getElementById('btnbochan').addEventListener('click', function() {
+    document.querySelectorAll('#doimk input').forEach(input => {
+        input.type = input.type === 'password' ? 'text' : 'password';
+    });
+});
 document.getElementById('btnDoiMatKhau').addEventListener('click', function() {
+    document.querySelectorAll('#doimk input').forEach(input => {
+        input.value = '';
+    });
     document.querySelector('#doimk').style.display='block';
     document.querySelector('#TTCNGV').style.display='none';
 });
 document.getElementById('btnHuyDoiMK').addEventListener('click', function() {
+    document.querySelectorAll('#doimk input').forEach(input => {
+        input.value = '';
+    });
      document.querySelector('#doimk').style.display='none';
     document.querySelector('#TTCNGV').style.display='block';
 });
