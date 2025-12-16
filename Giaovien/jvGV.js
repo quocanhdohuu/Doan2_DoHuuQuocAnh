@@ -10,6 +10,96 @@ const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 const btnLichday=document.querySelector('#btnLichDay');
 const btnTTCN=document.querySelector('#btnTTCN');
 
+document.getElementById('btnSuaTT').addEventListener('click', function() {
+    alert("Sửa thông tin thành công!");
+});
+document.getElementById('btnDoiMatKhau').addEventListener('click', function() {
+    document.querySelector('#doimk').style.display='block';
+    document.querySelector('#TTCNGV').style.display='none';
+});
+document.getElementById('btnHuyDoiMK').addEventListener('click', function() {
+     document.querySelector('#doimk').style.display='none';
+    document.querySelector('#TTCNGV').style.display='block';
+});
+document.getElementById('btnXacNhanDoiMatKhau').addEventListener('click', function () {
+    let mkMoi = document.getElementById('makmoi').value.trim();
+    let mkNhapLai = document.getElementById('mkmoinl').value.trim();
+     let mkcu = document.getElementById('mkcu').value.trim();
+
+    if (mkMoi === '' || mkNhapLai === ''||mkcu === '') {
+        alert("Vui lòng điền đầy đủ các ô!");
+        return;
+    }
+
+    if (mkMoi !== mkNhapLai) {
+        alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!");
+        return;
+    }
+
+    alert("Đổi mật khẩu thành công!");
+    document.querySelector('#doimk').style.display = 'none';
+    document.querySelector('#TTCNGV').style.display = 'block';
+});  
+//ham xoa ghi chu
+function xoaGhiChu(button) {
+    button.closest('tr').remove();
+}
+document.getElementById('btxoa').addEventListener('click', function() {
+    const row = document.querySelector('#DanhSachDS').querySelector('tr.selected');
+    if (row) {
+        let diemText = row.cells[2].innerText; 
+        let diem = parseFloat(diemText);
+
+        tdds -= 1;
+
+        if (diem >= 8) Gioids -= 1;
+        else if (diem >= 6.5) Khads -= 1;
+        else if (diem >= 5) Trungbinhds -= 1;
+        else Yeuds -= 1;
+
+        if (tdds > 0) {
+            diemtbds = (
+                (diemtbds * (tdds + 1) - diem) / tdds
+         ).toFixed(2);
+        } else {
+            diemtbds = 0;
+        }
+
+        TongDiemTSDS.innerText = tdds;
+        DTBTSDS.innerText = diemtbds;
+        GioiTSDS.innerText = Gioids;
+        KhaTSDS.innerText = Khads;
+        TrungBinhTSDS.innerText = Trungbinhds;
+        YeuTSDS.innerText = Yeuds;
+
+        xoaGhiChu(row.querySelector('.btnSuaDS'));
+        document.querySelector('#CuaSoNĐSSUA').style.display = 'none';
+
+    }
+    
+});
+document.getElementById('btnxoask').addEventListener('click', function() {
+    const row = document.querySelector('#DanhsachSK').querySelector('tr.selected');
+    if (row) {
+        const tinhTrang = row.cells[1].innerText;
+        const buaAn = row.cells[5].innerText;
+
+        tongghichu -= 1;
+
+        if (tinhTrang === "Khỏe mạnh") khoemanh -= 1;
+        else chuy -= 1;
+
+        if (buaAn === "Đã Xong") andu -= 1;
+
+        TSTongGCSK.innerText = tongghichu;
+        TSKhoemanhSK.innerText = khoemanh;
+         TSChuYSK.innerText = chuy;
+        TSAnDuSK.innerText = andu;
+
+        xoaGhiChu(row.querySelector('.btnGHICHUSK'));
+        document.querySelector('#CuaSoSUAGhiChuSK').style.display = 'none';
+    }
+});
 //HAm an menu
 function an(nutbam){
     btnDiemDanh.style.backgroundColor='transparent';

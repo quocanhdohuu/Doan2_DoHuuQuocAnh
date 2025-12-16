@@ -525,7 +525,7 @@
     margin-left: 50px;
 }
 
-#btncuasoTGCSK, #btncuasoTGCSKSUA {
+#btncuasoTGCSK, #btncuasoTGCSKSUA,#btnxoask {
     margin-top: 20px;
     height: 40px;
     width: 25%;
@@ -654,7 +654,7 @@
     transform: scale(1.5);
     margin-left: 30px;
 }
-#btncuasoTGCDS,#btncuasoTGCDSSUA{
+#btncuasoTGCDS,#btncuasoTGCDSSUA,#btxoa{
     margin-top: 20px;
     height:40px;
     width:30%;
@@ -1129,7 +1129,9 @@
     gap: 15px; /* khoảng cách 2 nút */
     margin-top: 15px;
 }
-
+#doimk{
+    display: none;
+}
 #ChucNangTTCN button {
     display: flex;
     align-items: center;

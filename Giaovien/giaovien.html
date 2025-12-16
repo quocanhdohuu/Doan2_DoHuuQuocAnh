@@ -375,7 +375,7 @@
                 <span style="color: red;">Cần chú ý</span>
             </div>
             <div id="AnDuSK" style="background-color:#FFEBD2;color: orange;">
-                <span id="slgADTQSK" style="font-weight: bold;font-size: 60pt;">0</span><br>
+                <span id="slgADTQSK" style="font-weight: bold;font-size: 60pt;">1</span><br>
                 <span style="color: orange;">Ăn đầy đủ</span>
             </div>
         </div>
@@ -485,7 +485,7 @@
 
             <div><span>Bữa ăn</span> <input type="checkbox" id="ckbuaanSKSUA"><span>Đã hoàn thành bữa ăn</span></div>
             <button id="btncuasoTGCSKSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật</button>
-
+            <button id="btnxoask"><i class="fa-solid fa-trash"></i>Xóa</button>
         </div>
     </div>
     
@@ -645,7 +645,8 @@
              <div><span>Điểm số</span><input type="number" min="0" max="10" step="0.1" id="txtDiemSODSSUA" placeholder="Nhập điểm (0-10)"></div>
 
               <div><span>Nhận xét</span><textarea style="resize: none;  " id="NhanxetblDSSUA" placeholder="Nhận xét về bài làm..."></textarea></div>
-             <button style="width:40%;" id="btncuasoTGCDSSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật điểm</button>
+             <button id="btncuasoTGCDSSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật điểm</button>
+             <button id="btxoa"><i class="fa-solid fa-trash"></i>Xóa</button>
         </div>
     </div>
 <!-----------------Liên lạc------------------->
@@ -934,6 +935,7 @@
     </div>
    <!--========================================TTCANHaN========================================-->
    <div id="ThongTinCaNhan">
+    <div id="TTCNGV">
     <h3 id="anhTTCN">
         <img src="/img/user (1).png" alt="">
         <span>Thông tin cá nhân</span>
@@ -944,31 +946,53 @@
     <div id="ThongTinGV">
         <div class="TTGV">
             <span class="label">Họ và tên:</span>
-            <span class="value" id="tenGV">Trần Thị B</span>
+            <input class="value" id="tenGV" value="Trần Thị B">
         </div>
         <div class="TTGV">
             <span class="label">Mã giáo viên:</span>
-            <span class="value" id="maGV">GV001</span>
+            <input class="value" id="maGV" value="GV001">
         </div>
         <div class="TTGV">
             <span class="label">Ngày sinh:</span>
-            <span class="value" id="ngaySinhGV">01/01/1980</span>
+            <input class="value" id="ngaySinhGV" value="01/01/1980">
         </div>
         <div class="TTGV">
             <span class="label">Chuyên môn:</span>
-            <span class="value" id="chuyenMonGV">Toán học</span>
+            <input class="value" id="chuyenMonGV" value="Toán học">
         </div>
         <div class="TTGV">
             <span class="label">Số điện thoại:</span>
-            <span class="value" id="sdtGV">0123456789</span>
+            <input class="value" id="sdtGV" value="0123456789">
         </div>
         <div class="TTGV">
             <span class="label">Email:</span>
-            <span class="value" id="emailGV">sakjhaja@gmail.com</span>
+            <input class="value" id="emailGV" value="sakjhaja@gmail.com">
         </div>
     </div>
     <div id="ChucNangTTCN">
         <button id="btnDoiMatKhau"><i class="fa-solid fa-key"></i>Đổi mật khẩu</button>
+        <button id="btnSuaTT"><i class="fa-solid fa-edit"></i>Sửa thông tin</button>
+    </div>
+    </div>
+    <div id="doimk">
+        <div id="ThongTinGV">
+        <div class="TTGV">
+            <span class="label">Mật khẩu cũ:</span>
+            <input class="value" id="mkcu">
+        </div>
+        <div class="TTGV">
+            <span class="label">Mật khẩu mới:</span>
+            <input class="value" id="makmoi" >
+        </div>
+        <div class="TTGV">
+            <span class="label">Nhập lại mật khẩu mới:</span>
+            <input class="value" id="mkmoinl" >
+        </div>
+    </div>
+    <div id="ChucNangTTCN">
+        <button id="btnXacNhanDoiMatKhau"><i class="fa-solid fa-key"></i>Xác nhận đổi mật khẩu</button>
+        <button id="btnHuyDoiMK"><i class="fa-solid fa-xmark"></i>Hủy</button>
+    </div>
     </div>
     </div>
 
