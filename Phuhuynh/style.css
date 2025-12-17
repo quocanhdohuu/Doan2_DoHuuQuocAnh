@@ -625,7 +625,7 @@ body {
 .khung-chinh {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 20px;
     width: 97%;
     margin: auto;
