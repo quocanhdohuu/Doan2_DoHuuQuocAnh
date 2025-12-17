@@ -125,7 +125,7 @@ document.getElementById('btnxoask').addEventListener('click', function() {
 
         TSTongGCSK.innerText = tongghichu;
         TSKhoemanhSK.innerText = khoemanh;
-         TSChuYSK.innerText = chuy;
+        TSChuYSK.innerText = chuy;
         TSAnDuSK.innerText = andu;
 
         xoaGhiChu(row.querySelector('.btnGHICHUSK'));
@@ -166,15 +166,7 @@ btnTONGQUAN.addEventListener('click',function(){
     an(btnTONGQUAN);
     doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
-<<<<<<< HEAD
-btnDiemDanh.addEventListener("click", function () {
-  an(btnDiemDanh);
-  doi("#DieDanh", "#TongQuan", "#SucKhoe", "#DiemSo", "#LienLac", "#LichDay");
-});
-btnDiemSo.addEventListener("click", function () {
-  an(btnDiemSo);
-  doi("#DiemSo","#DieDanh", "#TongQuan", "#SucKhoe",'#LichDay', "#LienLac");
-=======
+
 btnDiemDanh.addEventListener('click',function(){
     an(btnDiemDanh);
     doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
@@ -183,7 +175,6 @@ btnPhuDD.forEach(btn=>{
     btn.addEventListener('click',function(){
     an(btnDiemDanh);
     doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
->>>>>>> origin/brand_Hieu
 });
 btnPhuDD.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -191,13 +182,6 @@ btnPhuDD.forEach(btn => {
         doi('#DieDanh', '#TongQuan', '#SucKhoe', '#DiemSo', '#LienLac', '#LichDay');
     });
 });
-<<<<<<< HEAD
-btnPhuND.forEach(btn => {
-    btn.addEventListener('click', () => {
-        an(btnDiemSo);
-        doi('#DiemSo', '#TongQuan', '#DieDanh', '#SucKhoe', '#LienLac', '#LichDay');
-    });
-=======
 btnDiemSo.addEventListener('click',function(){
     an(btnDiemSo);
     doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay','#ThongTinCaNhan');
@@ -207,7 +191,6 @@ btnPhuND.forEach(btn=>{
         an(btnDiemSo);
         doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay','#ThongTinCaNhan');
     })
->>>>>>> origin/brand_Hieu
 });
 btnLienLac.addEventListener('click',function(){
     an(btnLienLac);
@@ -602,23 +585,7 @@ btnThoatCuaSoTGCDSSUA.addEventListener('click',function(){
 btnThemDiemSo.addEventListener('click',function(){
     document.querySelector('#CuaSoNĐS').style.display='block';
 });
-<<<<<<< HEAD
-btntheGCCDS.addEventListener("click", function () {
-  let diemso = document.getElementById("txtDiemSODS").value;
-  diemso = parseFloat(diemso);
-  if (diemso < 0 || diemso > 10) {
-    alert("Điểm số không hợp lệ! Vui lòng nhập lại điểm số từ 0 đến 10.");
-    return;
-  }
-  if (document.getElementById("txtDiemSODS").value === "") {
-    alert("Vui lòng nhập điểm số!");
-    return;
-  } else {
-    themghichuvaobangDS();
-    document.querySelector("#CuaSoNĐS").style.display = "none";
-    resetFormNhapDiemDS();
-  }
-=======
+
 btntheGCCDS.addEventListener('click',function(){
     let diemso = document.getElementById('txtDiemSODS').value;
 
@@ -641,7 +608,6 @@ btntheGCCDS.addEventListener('click',function(){
     themghichuvaobangDS();
     document.querySelector('#CuaSoNĐS').style.display = 'none'; // TỰ TẮT
     resetFormNhapDiemDS();
->>>>>>> origin/brand_Hieu
 });
 
 function resetFormNhapDiemDS() {
@@ -859,11 +825,6 @@ btnluuGCDD.addEventListener("click", function () {
 function lughichu() {
   if (!currentRow) return;
 
-<<<<<<< HEAD
-  let ghichu = document.getElementById("GhichuDD").value;
-  let span = currentRow.cells[5].querySelector("span");
-  span.innerHTML = ghichu;
-=======
   let ghichu = document.getElementById('GhichuDD').value;
   if (ghichu.trim() === "") {
     alert("Vui lòng nhập ghi chú trước khi lưu.");
@@ -872,21 +833,12 @@ function lughichu() {
     let span = currentRow.cells[5].querySelector('span');
     span.innerHTML = ghichu;
   }
->>>>>>> origin/brand_Hieu
 
   document.getElementById("GhichuDD").value = "";
   currentRow = null;
 }
 
 //---------------------------------Liên lạc------------------------------------
-<<<<<<< HEAD
-const btntlSTLL = document.querySelectorAll(".btnSTHTD");
-const btnThoatCSSTLL = document.querySelector("#btbThoatCSSTLL");
-const btnSTLL = document.querySelector("#btnSoanTinLL");
-
-btnSTLL.addEventListener("click", function () {
-  document.querySelector("#CuaSoSoanTinLL").style.display = "block";
-=======
 const btntlSTLL=document.querySelectorAll('.btnSTHTD');
 const btnThoatCSSTLL=document.querySelector('#btbThoatCSSTLL');
 const btnSTLL=document.querySelector('#btnSoanTinLL');
@@ -916,7 +868,6 @@ btnSTLL.addEventListener('click',function(){
 })
 btnThoatCSSTLL.addEventListener('click',function(){
     document.querySelector('#CuaSoSoanTinLL').style.display='none';
->>>>>>> origin/brand_Hieu
 });
 btnThoatCSSTLL.addEventListener("click", function () {
   document.querySelector("#CuaSoSoanTinLL").style.display = "none";
@@ -925,9 +876,7 @@ btntlSTLL.forEach(function (btn) {
     btn.addEventListener("click", function () {
         document.querySelector("#CuaSoSoanTinLL").style.display = "block";
     });
-<<<<<<< HEAD
 });
-=======
 })
 document.getElementById('btnXuatLichDay').addEventListener('click', function() {
     alert('Xuất lịch dạy theo ngày thành công!');
@@ -975,4 +924,3 @@ function loadTinDen() {
     });
     
 }
->>>>>>> origin/brand_Hieu
