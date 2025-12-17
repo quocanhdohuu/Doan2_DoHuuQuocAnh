@@ -10,6 +10,27 @@ const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 const btnLichday=document.querySelector('#btnLichDay');
 const btnTTCN=document.querySelector('#btnTTCN');
 
+
+document.getElementById('btnLocLichDay').addEventListener('click', function () {
+    alert("Lọc lịch dạy thành công!");
+
+   
+    const kydangchon = document.getElementById('chonKyHocLich').value;
+    document.querySelectorAll('#DanhSachLich tr').forEach(tr => {
+        const kyTrongBang = tr.querySelector('.KyHoc');
+
+        if (!kyTrongBang) return;
+        if(kydangchon==="0"){
+            tr.style.display = 'table-row';
+        } else
+        if (Number(kyTrongBang.textContent.trim()) === Number(kydangchon)) {
+            tr.style.display = 'table-row';
+        } else {
+            tr.style.display = 'none';
+        }
+    });
+
+});
 document.getElementById('btnSuaTT').addEventListener('click', function() {
     alert("Sửa thông tin thành công!");
 });
