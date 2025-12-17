@@ -54,8 +54,34 @@
                 </div>
                 <div class="summary-item">
                     <div class="icon blue"><i class="fa-regular fa-comment"></i></div>
-                    <span class="tag number">2</span>
-                    <p>Tin nhắn mới</p>
+                    <span class="tag number">1</span>
+                    <p onclick="openChat()" style="cursor: pointer">Tin nhắn mới</p>
+                </div>
+                <!-- Overlay chat -->
+                <div class="chat-overlay" id="chatOverlay">
+                <div class="chat-container">
+                    <!-- Danh sách chat -->
+                    <div class="chat-list" id="chatList">
+                    <div class="chat-item active" onclick="selectChat(0)">
+                        <span class="name">Nguyễn Văn A</span>
+                        <span class="badge">1</span>
+                    </div>
+                    <div class="chat-item" onclick="selectChat(1)">
+                        <span class="name">Trần Thị B</span>
+                        <span class="badge">1</span>
+                    </div>
+                    </div>
+
+                    <!-- Nội dung chat -->
+                    <div class="chat-content">
+                    <div class="messages" id="messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Nhập tin nhắn...">
+                        <button onclick="sendMessage()">Gửi</button>
+                    </div>
+                    </div>
+                </div>
+                <button class="close-btn" onclick="closeChat()">✖</button>
                 </div>
             </div>
         </section>
@@ -894,5 +920,6 @@
         </section>
 
     <script src="main.js"></script>
+    <script src="details.js"></script>
     </body>
     </html>
