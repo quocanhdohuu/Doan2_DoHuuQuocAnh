@@ -8,7 +8,130 @@ const btnDangXuat=document.querySelector('#btnLogout');
 const btnPhuDD=document.querySelectorAll('.btnDiemdanh'); 
 const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 const btnLichday=document.querySelector('#btnLichDay');
+const btnTTCN=document.querySelector('#btnTTCN');
 
+
+document.getElementById('btnLocLichDay').addEventListener('click', function () {
+    alert("Lọc lịch dạy thành công!");
+
+   
+    const kydangchon = document.getElementById('chonKyHocLich').value;
+    document.querySelectorAll('#DanhSachLich tr').forEach(tr => {
+        const kyTrongBang = tr.querySelector('.KyHoc');
+
+        if (!kyTrongBang) return;
+        if(kydangchon==="0"){
+            tr.style.display = 'table-row';
+        } else
+        if (Number(kyTrongBang.textContent.trim()) === Number(kydangchon)) {
+            tr.style.display = 'table-row';
+        } else {
+            tr.style.display = 'none';
+        }
+    });
+
+});
+document.getElementById('btnSuaTT').addEventListener('click', function() {
+    alert("Sửa thông tin thành công!");
+});
+document.getElementById('btnbochan').addEventListener('click', function() {
+    document.querySelectorAll('#doimk input').forEach(input => {
+        input.type = input.type === 'password' ? 'text' : 'password';
+    });
+});
+document.getElementById('btnDoiMatKhau').addEventListener('click', function() {
+    document.querySelectorAll('#doimk input').forEach(input => {
+        input.value = '';
+    });
+    document.querySelector('#doimk').style.display='block';
+    document.querySelector('#TTCNGV').style.display='none';
+});
+document.getElementById('btnHuyDoiMK').addEventListener('click', function() {
+    document.querySelectorAll('#doimk input').forEach(input => {
+        input.value = '';
+    });
+     document.querySelector('#doimk').style.display='none';
+    document.querySelector('#TTCNGV').style.display='block';
+});
+document.getElementById('btnXacNhanDoiMatKhau').addEventListener('click', function () {
+    let mkMoi = document.getElementById('makmoi').value.trim();
+    let mkNhapLai = document.getElementById('mkmoinl').value.trim();
+     let mkcu = document.getElementById('mkcu').value.trim();
+
+    if (mkMoi === '' || mkNhapLai === ''||mkcu === '') {
+        alert("Vui lòng điền đầy đủ các ô!");
+        return;
+    }
+
+    if (mkMoi !== mkNhapLai) {
+        alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!");
+        return;
+    }
+
+    alert("Đổi mật khẩu thành công!");
+    document.querySelector('#doimk').style.display = 'none';
+    document.querySelector('#TTCNGV').style.display = 'block';
+});  
+//ham xoa ghi chu
+function xoaGhiChu(button) {
+    button.closest('tr').remove();
+}
+document.getElementById('btxoa').addEventListener('click', function() {
+    const row = document.querySelector('#DanhSachDS').querySelector('tr.selected');
+    if (row) {
+        let diemText = row.cells[2].innerText; 
+        let diem = parseFloat(diemText);
+
+        tdds -= 1;
+
+        if (diem >= 8) Gioids -= 1;
+        else if (diem >= 6.5) Khads -= 1;
+        else if (diem >= 5) Trungbinhds -= 1;
+        else Yeuds -= 1;
+
+        if (tdds > 0) {
+            diemtbds = (
+                (diemtbds * (tdds + 1) - diem) / tdds
+         ).toFixed(2);
+        } else {
+            diemtbds = 0;
+        }
+
+        TongDiemTSDS.innerText = tdds;
+        DTBTSDS.innerText = diemtbds;
+        GioiTSDS.innerText = Gioids;
+        KhaTSDS.innerText = Khads;
+        TrungBinhTSDS.innerText = Trungbinhds;
+        YeuTSDS.innerText = Yeuds;
+
+        xoaGhiChu(row.querySelector('.btnSuaDS'));
+        document.querySelector('#CuaSoNĐSSUA').style.display = 'none';
+
+    }
+    
+});
+document.getElementById('btnxoask').addEventListener('click', function() {
+    const row = document.querySelector('#DanhsachSK').querySelector('tr.selected');
+    if (row) {
+        const tinhTrang = row.cells[1].innerText;
+        const buaAn = row.cells[5].innerText;
+
+        tongghichu -= 1;
+
+        if (tinhTrang === "Khỏe mạnh") khoemanh -= 1;
+        else chuy -= 1;
+
+        if (buaAn === "Đã Xong") andu -= 1;
+
+        TSTongGCSK.innerText = tongghichu;
+        TSKhoemanhSK.innerText = khoemanh;
+         TSChuYSK.innerText = chuy;
+        TSAnDuSK.innerText = andu;
+
+        xoaGhiChu(row.querySelector('.btnGHICHUSK'));
+        document.querySelector('#CuaSoSUAGhiChuSK').style.display = 'none';
+    }
+});
 //HAm an menu
 function an(nutbam){
     btnDiemDanh.style.backgroundColor='transparent';
@@ -17,26 +140,33 @@ function an(nutbam){
     btnSucKhoe.style.backgroundColor='transparent';
     btnTONGQUAN.style.backgroundColor='transparent';
     btnLichday.style.backgroundColor='transparent';
+    btnTTCN.style.backgroundColor='transparent';
     nutbam.style.backgroundColor='white';
 };
 //ham doi trang
-function doi(trang1,trang2,trang3,trang4,trang5,trang6){
+function doi(trang1,trang2,trang3,trang4,trang5,trang6,trang7){
     document.querySelector(trang1).style.display='block';
     document.querySelector(trang2).style.display='none';
     document.querySelector(trang3).style.display='none';
     document.querySelector(trang4).style.display='none';
     document.querySelector(trang5).style.display='none';
     document.querySelector(trang6).style.display='none';
+    document.querySelector(trang7).style.display='none';
 
 }
+btnTTCN.addEventListener('click',function(){
+    an(btnTTCN);
+    doi('#ThongTinCaNhan','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+});
 btnLichday.addEventListener('click',function(){
     an(btnLichday);
-    doi('#LichDay','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac');
+    doi('#LichDay','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#ThongTinCaNhan');
 });
 btnTONGQUAN.addEventListener('click',function(){
     an(btnTONGQUAN);
-    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+    doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
+<<<<<<< HEAD
 btnDiemDanh.addEventListener("click", function () {
   an(btnDiemDanh);
   doi("#DieDanh", "#TongQuan", "#SucKhoe", "#DiemSo", "#LienLac", "#LichDay");
@@ -44,6 +174,16 @@ btnDiemDanh.addEventListener("click", function () {
 btnDiemSo.addEventListener("click", function () {
   an(btnDiemSo);
   doi("#DiemSo","#DieDanh", "#TongQuan", "#SucKhoe",'#LichDay', "#LienLac");
+=======
+btnDiemDanh.addEventListener('click',function(){
+    an(btnDiemDanh);
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
+});
+btnPhuDD.forEach(btn=>{
+    btn.addEventListener('click',function(){
+    an(btnDiemDanh);
+    doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
+>>>>>>> origin/brand_Hieu
 });
 btnPhuDD.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -51,19 +191,31 @@ btnPhuDD.forEach(btn => {
         doi('#DieDanh', '#TongQuan', '#SucKhoe', '#DiemSo', '#LienLac', '#LichDay');
     });
 });
+<<<<<<< HEAD
 btnPhuND.forEach(btn => {
     btn.addEventListener('click', () => {
         an(btnDiemSo);
         doi('#DiemSo', '#TongQuan', '#DieDanh', '#SucKhoe', '#LienLac', '#LichDay');
     });
+=======
+btnDiemSo.addEventListener('click',function(){
+    an(btnDiemSo);
+    doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay','#ThongTinCaNhan');
+});
+btnPhuND.forEach(btn=>{
+    btn.addEventListener('click',function(){
+        an(btnDiemSo);
+        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay','#ThongTinCaNhan');
+    })
+>>>>>>> origin/brand_Hieu
 });
 btnLienLac.addEventListener('click',function(){
     an(btnLienLac);
-    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LichDay');
+    doi('#LienLac','#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LichDay','#ThongTinCaNhan');
 });
 btnSucKhoe.addEventListener('click',function(){
     an(btnSucKhoe);
-    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac','#LichDay');
+    doi('#SucKhoe','#TongQuan','#DieDanh','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
 //---------------------------------Liên lạc------------------------------------
 const btnHopThuDenLL = document.querySelector('#btnHopThuDenLL');
@@ -106,7 +258,8 @@ function resetST() {
 }
 let sotingui=0
 function themtindagui() {
-    const phuhuynh = document.querySelector('#chonPHSTLL').value;
+
+  const phuhuynh = document.querySelector('#chonPHSTLL').value;
   const tieude = document.querySelector('#txttieudeSTLL').value;
   const noidung = document.querySelector('#TXTNDSTLL').value;
   const thoigian = new Date().toLocaleString('vi-VN');
@@ -129,8 +282,53 @@ function themtindagui() {
   
   document.querySelector('#CuaSoSoanTinLL').style.display = 'none';
   sotingui++;
-}
+  // Tạo object tin mới
+    let obj = {
+    phuhuynh: phuhuynh,
+    tieude: tieude,
+    noidung: noidung,
+    thoigian: thoigian
+    };
 
+    // Lấy danh sách đã có (hoặc mảng rỗng)
+    let dsTin = JSON.parse(localStorage.getItem("TinDaGui") || "[]");
+
+    // Thêm tin mới vào mảng
+    dsTin.push(obj);
+
+    // Lưu lại LocalStorage
+    localStorage.setItem("TinDaGui", JSON.stringify(dsTin));
+}
+window.onload = function() {
+    loadTinDaGui();
+    loadTinDen();
+}
+document.getElementById('btnXuatEDS').addEventListener('click', function() { 
+    alert("Đã hoàn thành!");
+});
+document.getElementById('btnPhieuDiemDS').addEventListener('click', function() { 
+    alert("Đã hoàn thành!");
+});
+function loadTinDaGui() {
+    let dsTin = JSON.parse(localStorage.getItem("TinDaGui") || "[]");
+
+    let index = 0;
+
+    dsTin.forEach(tin => {
+        if(index >= 10) return; // chỉ hiện tối đa 10
+
+        let iddiv = '#TNGuiLL' + (10 - index);
+        let tinDiv = document.querySelector(iddiv);
+
+        tinDiv.querySelector('.ngNhanll').innerText = `Gửi đến: ${tin.phuhuynh}`;
+        tinDiv.querySelector('.tieudeLL').innerText = tin.tieude;
+        tinDiv.querySelector('.ndguiLL').innerText = tin.noidung;
+        tinDiv.querySelector('.tgguiLL').innerText = tin.thoigian;
+        tinDiv.style.display = 'block';
+
+        index++;
+    });
+}
 //---------------------------------Sức khỏe------------------------------------
 const btnThemGhiChuSK=document.querySelector('#ThemGhichuSK');
 const btnThoatCuaSoTGCSK=document.querySelectorAll('#btbThoatcsoGCSK');
@@ -389,7 +587,6 @@ function suaghichuDS(button) {
     }
 
 }
-
 document.getElementById('DanhSachDS').addEventListener('click', function (e) {
     const btn = e.target.closest('.btnSuaDS');
     if (btn) {
@@ -405,6 +602,7 @@ btnThoatCuaSoTGCDSSUA.addEventListener('click',function(){
 btnThemDiemSo.addEventListener('click',function(){
     document.querySelector('#CuaSoNĐS').style.display='block';
 });
+<<<<<<< HEAD
 btntheGCCDS.addEventListener("click", function () {
   let diemso = document.getElementById("txtDiemSODS").value;
   diemso = parseFloat(diemso);
@@ -420,6 +618,30 @@ btntheGCCDS.addEventListener("click", function () {
     document.querySelector("#CuaSoNĐS").style.display = "none";
     resetFormNhapDiemDS();
   }
+=======
+btntheGCCDS.addEventListener('click',function(){
+    let diemso = document.getElementById('txtDiemSODS').value;
+
+    // 1. Kiểm tra rỗng (bắt buộc để không bị NaN)
+    if(diemso === ""){
+        alert("Vui lòng nhập điểm số!");
+        return;
+    }
+
+    // 2. Parse sau khi chắc chắn không rỗng
+    diemso = parseFloat(diemso);
+
+    // 3. Kiểm tra hợp lệ
+    if(diemso < 0 || diemso > 10){
+        alert("Điểm số không hợp lệ! Vui lòng nhập lại từ 0-10.");
+        return;
+    }
+
+    // 4. Khi hợp lệ
+    themghichuvaobangDS();
+    document.querySelector('#CuaSoNĐS').style.display = 'none'; // TỰ TẮT
+    resetFormNhapDiemDS();
+>>>>>>> origin/brand_Hieu
 });
 
 function resetFormNhapDiemDS() {
@@ -637,21 +859,64 @@ btnluuGCDD.addEventListener("click", function () {
 function lughichu() {
   if (!currentRow) return;
 
+<<<<<<< HEAD
   let ghichu = document.getElementById("GhichuDD").value;
   let span = currentRow.cells[5].querySelector("span");
   span.innerHTML = ghichu;
+=======
+  let ghichu = document.getElementById('GhichuDD').value;
+  if (ghichu.trim() === "") {
+    alert("Vui lòng nhập ghi chú trước khi lưu.");
+    return;
+  }else{
+    let span = currentRow.cells[5].querySelector('span');
+    span.innerHTML = ghichu;
+  }
+>>>>>>> origin/brand_Hieu
 
   document.getElementById("GhichuDD").value = "";
   currentRow = null;
 }
 
 //---------------------------------Liên lạc------------------------------------
+<<<<<<< HEAD
 const btntlSTLL = document.querySelectorAll(".btnSTHTD");
 const btnThoatCSSTLL = document.querySelector("#btbThoatCSSTLL");
 const btnSTLL = document.querySelector("#btnSoanTinLL");
 
 btnSTLL.addEventListener("click", function () {
   document.querySelector("#CuaSoSoanTinLL").style.display = "block";
+=======
+const btntlSTLL=document.querySelectorAll('.btnSTHTD');
+const btnThoatCSSTLL=document.querySelector('#btbThoatCSSTLL');
+const btnSTLL=document.querySelector('#btnSoanTinLL');
+const btnchuyencan=document.querySelectorAll('.btnCCLL');
+const btndienso=document.querySelectorAll('.btnDSLL');
+const btnST=document.querySelectorAll('.btnSTLL');
+
+btnchuyencan.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        an(btnDiemDanh);
+        doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay');
+    });
+});
+btndienso.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        an(btnDiemSo);
+        doi('#DiemSo','#TongQuan','#DieDanh','#SucKhoe','#LienLac','#LichDay');
+    });
+});
+btnST.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelector('#CuaSoSoanTinLL').style.display='block';
+    });
+});
+btnSTLL.addEventListener('click',function(){
+    document.querySelector('#CuaSoSoanTinLL').style.display='block';
+})
+btnThoatCSSTLL.addEventListener('click',function(){
+    document.querySelector('#CuaSoSoanTinLL').style.display='none';
+>>>>>>> origin/brand_Hieu
 });
 btnThoatCSSTLL.addEventListener("click", function () {
   document.querySelector("#CuaSoSoanTinLL").style.display = "none";
@@ -660,4 +925,54 @@ btntlSTLL.forEach(function (btn) {
     btn.addEventListener("click", function () {
         document.querySelector("#CuaSoSoanTinLL").style.display = "block";
     });
+<<<<<<< HEAD
 });
+=======
+})
+document.getElementById('btnXuatLichDay').addEventListener('click', function() {
+    alert('Xuất lịch dạy theo ngày thành công!');
+});
+
+let tinDen = {
+    tenNguoiGui: "Nguyễn Thị B",
+    tenPH: "Nguyễn Văn A",
+    tieuDe: "Hỏi về bài tập",
+    noiDung: "Thầy ơi...",
+    thoiGian: "08:30:00 23/12/2024",
+    moi: true  
+};
+
+let ds = JSON.parse(localStorage.getItem("TinDen") || "[]");
+ds.push(tinDen);
+localStorage.setItem("TinDen", JSON.stringify(ds));
+function taoHTMLTinDen(tin) {
+    return `
+        <div class="TinDenLL">
+            <span class="tieuDeTin">
+                <div>
+                    ${tin.tenNguoiGui}
+                    ${tin.moi ? `<span class="nhanMoi">Mới</span>` : ``}
+                    <span class="nhanNguoiGui">${tin.tenPH}</span>
+                </div>
+                <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
+            </span>
+
+            <p class="tieuDeNoiDung">${tin.tieuDe}</p>
+            <p>${tin.noiDung}</p>
+            <span class="thoiGian">${tin.thoiGian}</span>
+        </div>
+    `;
+}
+function loadTinDen() {
+    let ds = JSON.parse(localStorage.getItem("TinDen") || "[]");
+
+    let hopThu = document.querySelector("#HopThuDenLL");
+    let i=0;
+
+        ds.slice(-3).forEach(tin => {
+        hopThu.innerHTML += taoHTMLTinDen(tin);
+        i+=1;
+    });
+    
+}
+>>>>>>> origin/brand_Hieu

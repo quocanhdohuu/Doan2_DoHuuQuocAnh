@@ -34,6 +34,7 @@
         <button id="btnDiemSo">Điểm số</button>
         <button id="btnLienLac">Liên lạc</button>
         <button id="btnLichDay">Lịch dạy</button>
+        <button id="btnTTCN">TTCN</button>
     </div>
     <!----------------- tONG Quan ------------------->
     <div id="TongQuan">
@@ -391,7 +392,7 @@
                 <span style="color: red;">Cần chú ý</span>
             </div>
             <div id="AnDuSK" style="background-color:#FFEBD2;color: orange;">
-                <span id="slgADTQSK" style="font-weight: bold;font-size: 60pt;">0</span><br>
+                <span id="slgADTQSK" style="font-weight: bold;font-size: 60pt;">1</span><br>
                 <span style="color: orange;">Ăn đầy đủ</span>
             </div>
         </div>
@@ -513,7 +514,7 @@
 
             <div><span>Bữa ăn</span> <input type="checkbox" id="ckbuaanSKSUA"><span>Đã hoàn thành bữa ăn</span></div>
             <button id="btncuasoTGCSKSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật</button>
-
+            <button id="btnxoask"><i class="fa-solid fa-trash"></i>Xóa</button>
         </div>
     </div>
 
@@ -681,7 +682,8 @@
              <div><span>Điểm số</span><input type="number" min="0" max="10" step="0.1" id="txtDiemSODSSUA" placeholder="Nhập điểm (0-10)"></div>
 
               <div><span>Nhận xét</span><textarea style="resize: none;  " id="NhanxetblDSSUA" placeholder="Nhận xét về bài làm..."></textarea></div>
-             <button style="width:40%;" id="btncuasoTGCDSSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật điểm</button>
+             <button id="btncuasoTGCDSSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật điểm</button>
+             <button id="btxoa"><i class="fa-solid fa-trash"></i>Xóa</button>
         </div>
     </div>
     <!-----------------Liên lạc------------------->
@@ -745,35 +747,6 @@
          <!-----------------Hộp thư đến------------------->
          <div id="HopThuDenLL">
             <span>Tin nhắn đến</span>
-
-            <div class="TinDenLL" id="TNdenLL1">
-                <span class="tieuDeTin">
-                    <div>
-                        Nguyễn Thị B
-                     <span class="nhanMoi">Mới</span>
-                        <span class="nhanNguoiGui">Nguyễn văn A</span>
-                    </div>
-                    <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
-                </span>
-
-                <p class="tieuDeNoiDung">Hỏi về bài tập về nhà</p>
-                 <p>Thầy ơi, con em hôm nay về không có ghi bài tập gì. Xin thầy cho biết bài tập môn Toán hôm nay ạ.</p>
-                 <span class="thoiGian">08:30:00 23/12/2024</span>
-                </div>
-
-                <div class="TinDenLL" id="TNdenLL2">
-                     <span class="tieuDeTin">
-                <div>
-                    Trần Văn D
-                    <span class="nhanNguoiGui">Trần Thị C</span>
-                </div>
-                <button class="btnSTHTD"><i class="fa-solid fa-reply"></i></button>
-                    </span>
-
-                 <p class="tieuDeNoiDung">Xin phép nghỉ học</p>
-                <p>Thầy ơi, con em bị sốt nên hôm nay xin phép nghỉ học. Em sẽ học bù vào ngày mai ạ.</p>
-                <span class="thoiGian">07:15:00 23/12/2024</span>
-            </div>
         </div>
 
           <!-----------------Hộp thư gửi------------------->
@@ -873,15 +846,23 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <!-----------------Danh bạ------------------->
         <div id="DanhBaLL" style="display: none;">
             <div id="DabaLL" style="display: block;">
                 <span style="font-size: large;font-weight: bold;">Tin nhắn đến</span>
+=======
+          <!-----------------Danh bạ------------------->
+         <div id="DanhBaLL">
+        <div id="DabaLL">
+        <span class="title">Danh bạ</span>
+>>>>>>> origin/brand_Hieu
 
-            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
-                <div>
-                    <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
+        <div class="DBaLL" id="DanhBaLL.1">
+            <div>
+                <span class="ten">
                     <div> Nguyễn Thị B
+<<<<<<< HEAD
                       <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
                     </div> 
                     </span>
@@ -933,53 +914,59 @@
                     </div>
                 </div>
 
+=======
+                        <span class="loai">Mẹ</span>
+                    </div>
+                </span>
+                <p class="hocSinh">Học sinh: Nguyễn Văn A</p>
+                <span class="lienHe">
+                    <i class="fa-solid fa-phone"></i>0123456789
+                    <i class="fa-solid fa-envelope"></i> nguyenthib@email.com
+                </span>
+>>>>>>> origin/brand_Hieu
             </div>
 
-            <div class="DBaLL" id="DanhBaLL.2" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
-                <div>
-                    <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
-                    <div> Nguyễn Thị B
-                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
-                    </div> 
-                    </span>
-                    <p style="font-size: 13pt;">Học sinh: Nguyễn Văn A</p>
-                    <span style="font-size: 13pt;"><i class="fa-solid fa-phone"></i>0123456789
-                     <i class="fa-solid fa-envelope"></i> nguyenthib@email.com</span>
-                </div>
-                <div>
-                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;">Chuyên cần</button>
-                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"></i>Điểm số</button>
-                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
-                </div> 
+            <div>
+                <button class="btnCCLL">Chuyên cần</button>
+                <button class="btnDSLL">Điểm số</button>
+                <button class="btnSTLL"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
-            <div class="DBaLL" id="DanhBaLL.1" style="align-items: center;display: flex; margin-top: 20px;justify-content: space-between;  box-shadow: 0 2px 5px rgba(0,0,0,0.1);; height: 23%;padding: 10px;border-radius: 7px;">
-                <div>
-                    <span style="font-size: 14pt; font-weight: bold;display: flex; height: 20%;">
+        </div>
+
+        <div class="DBaLL" id="DanhBaLL.2">
+            <div>
+                <span class="ten">
                     <div> Nguyễn Thị B
-                      <span style="padding: 3px;border: 1px solid;border-radius: 10px;">Mẹ</span>
-                    </div> 
-                    </span>
-                    <p style="font-size: 13pt;">Học sinh: Nguyễn Văn A</p>
-                    <span style="font-size: 13pt;"><i class="fa-solid fa-phone"></i>0123456789
-                     <i class="fa-solid fa-envelope"></i> nguyenthib@email.com</span>
-                </div>
-                <div>
-                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;">Chuyên cần</button>
-                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"></i>Điểm số</button>
-                    <button style="cursor: pointer;height: 20%;background-color: white;border-radius: 7px;"><i class="fa-solid fa-paper-plane"></i></button>
+                        <span class="loai">Mẹ</span>
+                    </div>
+                </span>
+                <p class="hocSinh">Học sinh: Nguyễn Văn A</p>
+                <span class="lienHe">
+                    <i class="fa-solid fa-phone"></i>0123456789
+                    <i class="fa-solid fa-envelope"></i> nguyenthib@email.com
+                </span>
+            </div>
+
+            <div>
+                <button class="btnCCLL">Chuyên cần</button>
+                <button class="btnDSLL">Điểm số</button>
+                <button class="btnSTLL"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+            </div>
+            </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
      <!------------------------Lịch dạy----------------------->
-<div id="LichDay" style="display: none;">
+    <div id="LichDay" style="display: none;">
         <h3 id="anhLD" style="margin-bottom: 2px;"><img  src="../img/schedule.png" alt=""><span></span>Theo dõi lịch giảng dạy</h3>
         <span style="color: gray;">Ghi chú về lịch giảng dạy của giáo viên</span>
         <div id="ChonTGLich">
             <div id="KyLich">
                 <span>Kỳ học:</span>
                 <select id="chonKyHocLich">
+                    <option value="0">Tất cả</option>
                     <option value="1">Kỳ 1</option>
                     <option value="2">Kỳ 2</option>
                 </select>
@@ -1015,7 +1002,7 @@
                         <span id="PhongHoc">306</span>
                     </td>
                     <td>
-                        <span class="KyHoc" >1</span>
+                        <span class="KyHoc" >2</span>
                     </td>
                     <td>
                         <span id="TietLichHoc">123--------</span>
@@ -1048,10 +1035,95 @@
                         <span class="Ngay">5</span>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <span id="TenMon">Toán</span><br>
+                    </td>
+                    <td>
+                        <span class="MaLop" >7A</span>
+                    </td>
+                    <td>
+                        <span id="PhongHoc">307</span>
+                    </td>
+                    <td>
+                        <span class="KyHoc" >1</span>
+                    </td>
+                    <td>
+                        <span id="TietLichHoc">--345------</span>
+                    </td>
+                    <td>
+                        <span id="LichHoc">-----67890123-----</span>
+                    <td>
+                        <span class="Ngay">5</span>
+                    </td>
+                </tr>
             </table>
         </div> 
     </div>
-   
+   <!--========================================TTCANHaN========================================-->
+   <div id="ThongTinCaNhan">
+    <div id="TTCNGV">
+    <h3 id="anhTTCN">
+        <img src="/img/user (1).png" alt="">
+        <span>Thông tin cá nhân</span>
+    </h3>
+
+    <span class="sub-title">Quản lý thông tin cá nhân của giáo viên</span>
+
+    <div id="ThongTinGV">
+        <div class="TTGV">
+            <span class="label">Họ và tên:</span>
+            <input class="value" id="tenGV" value="Trần Thị B">
+        </div>
+        <div class="TTGV">
+            <span class="label">Mã giáo viên:</span>
+            <input class="value" id="maGV" value="GV001">
+        </div>
+        <div class="TTGV">
+            <span class="label">Ngày sinh:</span>
+            <input class="value" id="ngaySinhGV" value="01/01/1980">
+        </div>
+        <div class="TTGV">
+            <span class="label">Chuyên môn:</span>
+            <input class="value" id="chuyenMonGV" value="Toán học">
+        </div>
+        <div class="TTGV">
+            <span class="label">Số điện thoại:</span>
+            <input class="value" id="sdtGV" value="0123456789">
+        </div>
+        <div class="TTGV">
+            <span class="label">Email:</span>
+            <input class="value" id="emailGV" value="sakjhaja@gmail.com">
+        </div>
+    </div>
+    <div id="ChucNangTTCN">
+        <button id="btnDoiMatKhau"><i class="fa-solid fa-key"></i>Đổi mật khẩu</button>
+        <button id="btnSuaTT"><i class="fa-solid fa-edit"></i>Sửa thông tin</button>
+    </div>
+    </div>
+    <div id="doimk">
+        <div id="ThongTinGV">
+        <div class="TTGV">
+            <span class="label">Mật khẩu cũ:</span>
+            <input class="value" type="password" id="mkcu">
+        </div>
+        <div class="TTGV">
+            <span class="label">Mật khẩu mới:</span>
+            <input class="value" type="password" id="makmoi">
+        </div>
+        <div class="TTGV">
+            <span class="label">Nhập lại mật khẩu mới:</span>
+            <input class="value" type="password" id="mkmoinl">
+        </div>
+    </div>
+    <div id="ChucNangTTCN">
+        <button id="btnXacNhanDoiMatKhau"><i class="fa-solid fa-key"></i>Xác nhận đổi mật khẩu</button>
+        <button id="btnHuyDoiMK"><i class="fa-solid fa-xmark"></i>Hủy</button>
+        <button id="btnbochan"><i class="fa-solid fa-eye"></i></button>
+    </div>
+    </div>
+    </div>
+
     <script src="jvGV.js"></script>
 </body>
 
