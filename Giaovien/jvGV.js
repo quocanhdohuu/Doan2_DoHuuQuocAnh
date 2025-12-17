@@ -125,7 +125,7 @@ document.getElementById('btnxoask').addEventListener('click', function() {
 
         TSTongGCSK.innerText = tongghichu;
         TSKhoemanhSK.innerText = khoemanh;
-         TSChuYSK.innerText = chuy;
+        TSChuYSK.innerText = chuy;
         TSAnDuSK.innerText = andu;
 
         xoaGhiChu(row.querySelector('.btnGHICHUSK'));
@@ -166,6 +166,7 @@ btnTONGQUAN.addEventListener('click',function(){
     an(btnTONGQUAN);
     doi('#TongQuan','#DieDanh','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
 });
+
 btnDiemDanh.addEventListener('click',function(){
     an(btnDiemDanh);
     doi('#DieDanh','#TongQuan','#SucKhoe','#DiemSo','#LienLac','#LichDay','#ThongTinCaNhan');
@@ -935,5 +936,4 @@ function loadTinDen() {
         hopThu.innerHTML += taoHTMLTinDen(tin);
         i+=1;
     });
-    
 }
