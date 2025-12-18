@@ -5,6 +5,7 @@
     <title>Giáo Viên</title>
     <link rel="stylesheet" href="styleGV.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 <!----------------- Thanh thông tin ------------------->
@@ -12,7 +13,7 @@
         <div id="ThongTin">
             <img src="../img/book.png" alt="logo">
             <div>
-                <h4>Giáo Viên - Trần Thị B</h4>
+                <h4 id="TenGiaoVien"></h4>
                 <h5>Môn Toán • Chủ nhiệm lớp 6A</h5>
             </div>
         </div>
@@ -166,15 +167,15 @@
                     <th>Ghi chú</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr>
+                <tr class="rowDD">
                     <td>
-                        <span id="STTDIemDanh">1</span>
+                        <span class="STTDIemDanh">1</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS001</span>
+                        <span class="MaHS">HS001</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn A</span>
+                        <span class="TenHS">Nguyễn Văn A</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
@@ -182,22 +183,22 @@
                         <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
-                        <span id="GhiChuTTDD">-</span>
+                        <span class="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
-                <tr>
+                <tr class="rowDD">
                     <td>
-                        <span id="STTDIemDanh">2</span>
+                        <span class="STTDIemDanh">2</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS002</span>
+                        <span class="MaHS">HS002</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn B</span>
+                        <span class="TenHS">Nguyễn Văn B</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
@@ -205,22 +206,22 @@
                         <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
-                        <span id="GhiChuTTDD">-</span>
+                        <span class="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                       <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                       <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
-                <tr>
+                <tr class="rowDD">
                     <td>
-                        <span id="STTDIemDanh">3</span>
+                        <span class="STTDIemDanh">3</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS003</span>
+                        <span class="MaHS">HS003</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn C</span>
+                        <span class="TenHS">Nguyễn Văn C</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
@@ -228,45 +229,22 @@
                         <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
-                        <span id="GhiChuTTDD">-</span>
+                        <span class="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                        <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
-                <tr>
+                <tr class="rowDD">
                     <td>
-                        <span id="STTDIemDanh">4</span>
+                        <span class="STTDIemDanh">4</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS004</span>
+                        <span class="MaHS">HS004</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn V</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span id="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span id="STTDIemDanh">5</span>
-                    </td>
-                    <td>
-                        <span id="MaHS">HS005</span>
-                    </td>
-                    <td>
-                        <span id="TenHS">Nguyễn Văn T</span>
+                        <span class="TenHS">Nguyễn Văn V</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
@@ -274,22 +252,22 @@
                         <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
-                        <span id="GhiChuTTDD">-</span>
+                        <span class="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
-                <tr>
+                <tr class="rowDD">
                     <td>
-                        <span id="STTDIemDanh">6</span>
+                        <span class="STTDIemDanh">5</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS006</span>
+                        <span class="MaHS">HS005</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn F</span>
+                        <span class="TenHS">Nguyễn Văn T</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
@@ -297,22 +275,45 @@
                         <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
-                        <span id="GhiChuTTDD">-</span>
+                        <span class="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
-                <tr>
+                <tr class="rowDD">
                     <td>
-                        <span id="STTDIemDanh">7</span>
+                        <span class="STTDIemDanh">6</span>
                     </td>
                     <td>
-                        <span id="MaHS">HS007</span>
+                        <span class="MaHS">HS006</span>
                     </td>
                     <td>
-                        <span id="TenHS">Nguyễn Văn G</span>
+                        <span class="TenHS">Nguyễn Văn F</span>
+                    </td>
+                    <td>
+                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
+                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
+                    </td>
+                    <td>
+                        <span class="GhiChuTTDD">-</span>
+                    </td>
+                    <td>
+                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
+                        <button class="btnGHICHUDD" >Ghi chú</button>
+                    </td>
+                </tr>
+                <tr class="rowDD">
+                    <td>
+                        <span class="STTDIemDanh">7</span>
+                    </td>
+                    <td>
+                        <span class="MaHS">HS007</span>
+                    </td>
+                    <td>
+                        <span class="TenHS">Nguyễn Văn G</span>
                     </td>
                     <td>
                         <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;align-items: center;"><i class="fa-solid fa-circle-check"></i></button>
@@ -320,10 +321,10 @@
                         <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
                     </td>
                     <td>
-                        <span id="GhiChuTTDD">-</span>
+                        <span class="GhiChuTTDD">-</span>
                     </td>
                     <td>
-                        <span id="GhiCHuDD" >(Không quá 25 từ)</span>
+                        <span class="GhiCHuDD" >(Không quá 25 từ)</span>
                         <button class="btnGHICHUDD" >Ghi chú</button>
                     </td>
                 </tr>
@@ -691,8 +692,8 @@
             <div id="TimKiemLL">
                 <span>Tìm kiếm:</span>
                 <div id="nhapTimKiemLL" style="border: 1px solid; border-radius: 10px;display: flex;align-items: center;padding: 0;">
-                    <i class="fa fa-search"></i>
-                    <input type="text"  placeholder="Nhập tên học sinh hoặc phụ huynh" style="margin: 0; width: 100%;width: 100%;;border: none;">
+                    <button id="timLL" style="background-color: transparent;border: none;"><i class="fa fa-search"></i></button>
+                    <input type="text" id="tentimkiem"  placeholder="Nhập tên học sinh hoặc phụ huynh" style="margin: 0; width: 100%;width: 100%;;border: none;">
                 </div>
                 
             </div>
@@ -811,7 +812,7 @@
         <div class="DBaLL" id="DanhBaLL.1">
             <div>
                 <span class="ten">
-                    <div> Nguyễn Thị B
+                    <div> Nguyễn Thị C
                         <span class="loai">Mẹ</span>
                     </div>
                 </span>

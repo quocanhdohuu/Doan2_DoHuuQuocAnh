@@ -32,8 +32,51 @@ document.getElementById('btnLocLichDay').addEventListener('click', function () {
 
 });
 document.getElementById('btnSuaTT').addEventListener('click', function() {
-    alert("Sửa thông tin thành công!");
+    if(document.getElementById('emailGV').value.trim() === '' ||
+         document.getElementById('sdtGV').value.trim() === '' ||
+            document.getElementById('chuyenMonGV').value.trim() === '' ||
+            document.getElementById('ngaySinhGV').value.trim() === '' ||
+            document.getElementById('maGV').value.trim() === ''||
+            document.getElementById('tenGV').value.trim() === ''){
+        alert("Vui lòng điền đầy đủ thông tin!");}
+    else{
+        luutt();
+        alert("Sửa thông tin thành công!");
+    }
+    
 });
+function luutt(){
+    object={
+        email: document.getElementById('emailGV').value.trim(),
+        sdt: document.getElementById('sdtGV').value.trim(),
+        chuyenmon: document.getElementById('chuyenMonGV').value.trim(),
+        ngaysinh: document.getElementById('ngaySinhGV').value.trim(),
+        magv: document.getElementById('maGV').value.trim(),
+        tengv: document.getElementById('tenGV').value.trim()}
+    
+         // Lấy danh sách đã có (hoặc mảng rỗng)
+    let dsTin = JSON.parse(localStorage.getItem("TTGiaoVien") || "[]");
+
+    // Thêm tin mới vào mảng
+    dsTin.push(object);
+
+    // Lưu lại LocalStorage
+    localStorage.setItem("TTGiaoVien", JSON.stringify(dsTin));
+    
+}
+function loadTTGV() {
+    let dsTin = JSON.parse(localStorage.getItem("TTGiaoVien") || "[]");
+    let lastTT = dsTin[dsTin.length - 1];
+    if (!lastTT) return;
+    document.getElementById('emailGV').value = lastTT.email;
+    document.getElementById('sdtGV').value = lastTT.sdt;
+    document.getElementById('chuyenMonGV').value = lastTT.chuyenmon;
+    document.getElementById('ngaySinhGV').value = lastTT.ngaysinh;
+    document.getElementById('maGV').value = lastTT.magv;
+    document.getElementById('tenGV').value = lastTT.tengv;
+    document.getElementById('TenGiaoVien').innerText ='Giáo Viên - ' + lastTT.tengv;
+}
+ 
 document.getElementById('btnbochan').addEventListener('click', function() {
     document.querySelectorAll('#doimk input').forEach(input => {
         input.type = input.type === 'password' ? 'text' : 'password';
@@ -278,10 +321,7 @@ function themtindagui() {
     // Lưu lại LocalStorage
     localStorage.setItem("TinDaGui", JSON.stringify(dsTin));
 }
-window.onload = function() {
-    loadTinDaGui();
-    loadTinDen();
-}
+
 document.getElementById('btnXuatEDS').addEventListener('click', function() { 
     alert("Đã hoàn thành!");
 });
@@ -322,7 +362,70 @@ const capnhatghichusk=document.querySelector('#btncuasoTGCSKSUA');
 let tongghichu=1;
 let khoemanh=1;
 let chuy=0;
-let andu=0
+let andu=1;
+
+document.getElementById('timLL').addEventListener('click', function () {
+    const tukhoa = document.getElementById('tentimkiem').value.toLowerCase().trim();
+
+    if (tukhoa === "") {
+        alert("Vui lòng nhập từ khóa để tìm kiếm!");
+        return;
+    }
+
+    let coKetQua = false;
+
+    // Tin đã gửi
+    document.querySelectorAll('#DaGuiLL .ngNhanll').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const divCha = item.closest('div');
+
+        if (text.includes(tukhoa)) {
+            divCha.style.display = 'block';
+            coKetQua = true;
+        } else {
+            divCha.style.display = 'none';
+        }
+    });
+
+    // Danh bạ
+    document.querySelectorAll('#DabaLL .ten').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const divCha = item.closest('.DBaLL');
+         const hs = divCha.querySelector('.hocSinh')?.innerText.toLowerCase().trim() || '';
+
+        if (text.includes(tukhoa)|| hs.includes(tukhoa)) {
+            divCha.style.display = 'block';
+            coKetQua = true;
+        } else {
+            divCha.style.display = 'none';
+        }
+    });
+
+    // Hộp thư đến
+    document.querySelectorAll('#HopThuDenLL .nhanNguoiGui').forEach(item => {
+    const text = item.innerText.toLowerCase().trim();
+    const divCha = item.closest('.TinDenLL');
+     const ph = divCha.querySelector('.PHGui')?.innerText.toLowerCase().trim() || '';
+
+    if (!divCha) return;
+
+    if (text.includes(tukhoa) || ph.includes(tukhoa)) {
+        divCha.style.display = 'block';
+        coKetQua = true;
+    } else {
+        divCha.style.display = 'none';
+    }
+});
+    if (!coKetQua) {
+        alert("Không tìm thấy kết quả phù hợp!");
+    }
+});
+document.getElementById('tentimkiem').addEventListener('input', function () {
+    if (this.value.trim() === "") {
+        document.querySelectorAll('#DaGuiLL .TinGuiLL, #DabaLL .DBaLL, #HopThuDenLL .TinDenLL').forEach(item => {
+            item.style.display = 'block';
+        });}
+});
 document.getElementById('DanhSachSK').addEventListener('click', function (e) {
     const btn = e.target.closest('.btnGHICHUSK');
     if (btn) {
@@ -689,7 +792,7 @@ let currentRow = null;
 document.getElementById('btbThoatcsoGCDD').addEventListener('click', function (e) {
     document.querySelector('#CuaSoGCDD').style.display = 'none';
 });
-btnLUUDIEMDANHDD.addEventListener('click',function(){
+btnLUUDIEMDANHDD.addEventListener('click', function () {
     alert("Đã lưu điểm danh");
 });
 btncomatDsDD.forEach(btn => {
@@ -894,6 +997,15 @@ btntlSTLL.forEach(function(btn) {
 })
 document.getElementById('btnXuatLichDay').addEventListener('click', function() {
     alert('Xuất lịch dạy theo ngày thành công!');
+    const table = document.getElementById('DanhSachLich');
+
+    const wb = XLSX.utils.book_new();
+
+    const ws = XLSX.utils.table_to_sheet(table);
+
+    XLSX.utils.book_append_sheet(wb, ws, "DanhSachLich");
+
+    XLSX.writeFile(wb, "DanhSachLich.xlsx");
 });
 
 let tinDen = {
@@ -913,7 +1025,7 @@ function taoHTMLTinDen(tin) {
         <div class="TinDenLL">
             <span class="tieuDeTin">
                 <div>
-                    ${tin.tenNguoiGui}
+                    <span class="PHGui">${tin.tenNguoiGui}</span>
                     ${tin.moi ? `<span class="nhanMoi">Mới</span>` : ``}
                     <span class="nhanNguoiGui">${tin.tenPH}</span>
                 </div>
@@ -936,4 +1048,9 @@ function loadTinDen() {
         hopThu.innerHTML += taoHTMLTinDen(tin);
         i+=1;
     });
+}
+window.onload = function() {
+    loadTinDaGui();
+    loadTinDen();
+    loadTTGV();
 }
