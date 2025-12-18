@@ -10,17 +10,25 @@ const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 const btnLichday=document.querySelector('#btnLichDay');
 const btnTTCN=document.querySelector('#btnTTCN');
 
-
+document.getElementById('chonNgayLD').addEventListener('change', function () {
+    if(this.value<2010 || this.value===""||this.value>2100){
+        alert("Năm học phải lớn hơn hoặc bằng 2010 và bé hơn hoặc bằng 2100!");
+        this.value = "";
+    }
+});
 document.getElementById('btnLocLichDay').addEventListener('click', function () {
-    alert("Lọc lịch dạy thành công!");
+    
 
-   
+     if(document.getElementById('chonNgayLD').value===""){
+        alert("Vui lòng chọn năm học để lọc!");
+        return;
+        }
     const kydangchon = document.getElementById('chonKyHocLich').value;
     document.querySelectorAll('#DanhSachLich tr').forEach(tr => {
         const kyTrongBang = tr.querySelector('.KyHoc');
-
+       
         if (!kyTrongBang) return;
-        if(kydangchon==="0"){
+        else if(kydangchon==="0"){
             tr.style.display = 'table-row';
         } else
         if (Number(kyTrongBang.textContent.trim()) === Number(kydangchon)) {
@@ -29,6 +37,7 @@ document.getElementById('btnLocLichDay').addEventListener('click', function () {
             tr.style.display = 'none';
         }
     });
+     alert("Lọc lịch dạy thành công!");
 
 });
 document.getElementById('btnSuaTT').addEventListener('click', function() {
