@@ -11,7 +11,8 @@
         <!-- HEADER -->
         <header class="header">
             <div class="user-info">
-                <span class="icon">😊</span>
+                <span class="icon"><i class="fa-solid fa-circle-user"></i>
+</span>
                 <div>
                     <h3>Phụ huynh - Lê Văn C</h3>
                     <p>Học sinh: Nguyễn Văn A • Lớp 6A</p>
@@ -37,24 +38,50 @@
 
             <div class="summary-grid">
                 <div class="summary-item">
-                    <div class="icon green">✔</div>
+                    <div class="icon green"><i class="fa-solid fa-check"></i></div>
                     <span class="tag">Có mặt</span>
                     <p>Chuyên cần</p>
                 </div>
                 <div class="summary-item">
-                    <div class="icon green">♡</div>
+                    <div class="icon green"><i class="fa-regular fa-heart"></i></div>
                     <span class="tag">Khỏe mạnh</span>
                     <p>Sức khỏe</p>
                 </div>
                 <div class="summary-item">
-                    <div class="icon green">📘</div>
+                    <div class="icon green"><i class="fa-solid fa-book"></i></div>
                     <span class="tag">Hoàn thành</span>
                     <p>Bữa ăn</p>
                 </div>
                 <div class="summary-item">
-                    <div class="icon blue">💬</div>
-                    <span class="tag number">2</span>
-                    <p>Tin nhắn mới</p>
+                    <div class="icon blue"><i class="fa-regular fa-comment"></i></div>
+                    <span class="tag number">1</span>
+                    <p onclick="openChat()" style="cursor: pointer">Tin nhắn mới</p>
+                </div>
+                <!-- Overlay chat -->
+                <div class="chat-overlay" id="chatOverlay">
+                <div class="chat-container">
+                    <!-- Danh sách chat -->
+                    <div class="chat-list" id="chatList">
+                    <div class="chat-item active" onclick="selectChat(0)">
+                        <span class="name">Nguyễn Văn A</span>
+                        <span class="badge">1</span>
+                    </div>
+                    <div class="chat-item" onclick="selectChat(1)">
+                        <span class="name">Trần Thị B</span>
+                        <span class="badge">1</span>
+                    </div>
+                    </div>
+
+                    <!-- Nội dung chat -->
+                    <div class="chat-content">
+                    <div class="messages" id="messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Nhập tin nhắn...">
+                        <button onclick="sendMessage()">Gửi</button>
+                    </div>
+                    </div>
+                </div>
+                <button class="close-btn" onclick="closeChat()">✖</button>
                 </div>
             </div>
         </section>
@@ -104,22 +131,22 @@
             <h3>Thao tác nhanh</h3>
             <div class="Luachon">
                 <a class="Luachon-chucnang">
-                    <div class="icon green">✔</div>
+                    <div class="icon green"><i class="fa-solid fa-check"></i></div>
                     <p>Xem điểm danh</p>
                 </a>
 
                 <a class="Luachon-chucnang">
-                    <div class="icon green">♡</div>
+                    <div class="icon green"><i class="fa-regular fa-heart"></i></div>
                     <p>Sức khỏe</p>
                 </a>
 
                 <a class="Luachon-chucnang">
-                    <div class="icon green">📘</div>
+                    <div class="icon green"><i class="fa-solid fa-book"></i></div>
                     <p>Xem điểm</p>
                 </a>
 
                 <a class="Luachon-chucnang">
-                    <div class="icon blue">💬</div>
+                    <div class="icon blue"><i class="fa-regular fa-comment"></i></div>
                     <p>Liên hệ GV</p>
                 </a>
             </div>
@@ -139,7 +166,7 @@
 
         <!-- Thông tin cơ bản -->
             <div class="the-thong-tin">
-                <h3>👤 Thông tin cơ bản</h3>
+                <h3><i class="fa-solid fa-user"></i> Thông tin cơ bản</h3>
                 <div class="dong-thong-tin"><span class="nhan">Họ và tên:</span><span class="gia-tri">Nguyễn Văn A</span></div>
                 <div class="dong-thong-tin"><span class="nhan">Mã học sinh:</span><span class="gia-tri the-nho">HS001</span></div>
                 <div class="dong-thong-tin"><span class="nhan">Ngày sinh:</span><span class="gia-tri">15/3/2012</span></div>
@@ -149,7 +176,7 @@
 
             <!-- Thông tin liên hệ -->
             <div class="the-thong-tin">
-                <h3>📞 Thông tin liên hệ</h3>
+                <h3><i class="fa-solid fa-phone"></i> Thông tin liên hệ</h3>
                 <div class="dong-thong-tin">
                     <span class="nhan">Địa chỉ:</span>
                     <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
@@ -162,7 +189,7 @@
 
             <!-- Thông tin học tập -->
             <div class="the-thong-tin">
-                <h3>🎓 Thông tin học tập</h3>
+                <h3><i class="fa-solid fa-graduation-cap"></i> Thông tin học tập</h3>
                 <div class="dong-thong-tin"><span class="nhan">Lớp hiện tại:</span><span class="gia-tri the-lop">6A</span></div>
                 <div class="dong-thong-tin"><span class="nhan">Giáo viên chủ nhiệm:</span><span class="gia-tri">Nguyễn Thị Lan</span></div>
                 <div class="dong-thong-tin"><span class="nhan">SĐT giáo viên:</span><span class="gia-tri">0123456789</span></div>
@@ -171,7 +198,7 @@
 
             <!-- Thông tin sức khỏe -->
             <div class="the-thong-tin">
-                <h3>❤️ Thông tin sức khỏe</h3>
+                <h3><i class="fa-solid fa-heart"></i> Thông tin sức khỏe</h3>
                 <div class="dong-thong-tin"><span class="nhan">Nhóm máu:</span><span class="gia-tri the-nho do-dam">A+</span></div>
                 <div class="dong-thong-tin"><span class="nhan">Dị ứng:</span><span class="gia-tri">Không có</span></div>
 
@@ -183,12 +210,12 @@
         </div>
         <!-- Danh bạ khẩn cấp -->
         <div class="the-thong-tin danh-ba">
-            <h3>📞 Danh bạ khẩn cấp</h3>
+            <h3><i class="fa-solid fa-phone"></i> Danh bạ khẩn cấp</h3>
             <p class="mo-ta">Các số điện thoại liên hệ trong trường hợp khẩn cấp</p>
 
             <div class="luoi-danh-ba">
                 <div class="o-lien-he">
-                    <div class="bieu-tuong xanhduong">📞</div>
+                    <div class="bieu-tuong xanhduong"><i class="fa-solid fa-phone"></i></div>
                     <div class="noi-dung">
                         <strong>Văn phòng nhà trường</strong>
                         <p>(024) 1234 5678</p>
@@ -196,7 +223,7 @@
                 </div>
 
                 <div class="o-lien-he">
-                    <div class="bieu-tuong xanhla">📱</div>
+                    <div class="bieu-tuong xanhla"><i class="fa-solid fa-mobile-button"></i></div>
                     <div class="noi-dung">
                         <strong>Y tế học đường</strong>
                         <p>(024) 1234 5679</p>
@@ -204,7 +231,7 @@
                 </div>
 
                 <div class="o-lien-he">
-                    <div class="bieu-tuong tim">☎️</div>
+                    <div class="bieu-tuong tim"><i class="fa-solid fa-tty"></i></div>
                     <div class="noi-dung">
                         <strong>Giáo viên chủ nhiệm</strong>
                         <p>0123456789</p>
@@ -274,38 +301,38 @@
                     <p>Danh sách điểm danh theo ngày</p>
                     <div class="ds-ngay">
                     <div class="muc">
-                        <span>✅ Thứ Hai, 23/12/2024</span>
+                        <span><i class="fa-solid fa-check-to-slot"></i> Thứ Hai, 23/12/2024</span>
                         <span class="trang-thai co-mat">Có mặt</span>
                     </div>
                     <div class="muc">
-                        <span>✅ Chủ Nhật, 22/12/2024</span>
+                        <span><i class="fa-solid fa-check-to-slot"></i> Chủ Nhật, 22/12/2024</span>
                         <span class="trang-thai co-mat">Có mặt</span>
                     </div>
                     <div class="muc">
-                        <span>⚠️ Thứ Bảy, 21/12/2024</span>
+                        <span><i class="fa-solid fa-circle-exclamation"></i> Thứ Bảy, 21/12/2024</span>
                         <div class="ghi-chu">Đến muộn 10 phút do kẹt xe</div>
                         <span class="trang-thai di-muon">Đi muộn</span>
                     </div>
                     <div class="muc">
-                        <span>✅ Thứ Sáu, 20/12/2024</span>
+                        <span><i class="fa-solid fa-check-to-slot"></i> Thứ Sáu, 20/12/2024</span>
                         <span class="trang-thai co-mat">Có mặt</span>
                     </div>
                     <div class="muc">
-                        <span>❌ Thứ Năm, 19/12/2024</span>
+                        <span><i class="fa-solid fa-x"></i> Thứ Năm, 19/12/2024</span>
                         <div class="ghi-chu">Ốm sốt</div>
                         <span class="trang-thai vang-mat">Vắng mặt</span>
                     </div>
                     <div class="muc">
-                        <span>✅ Thứ Tư, 18/12/2024</span>
+                        <span><i class="fa-solid fa-check-to-slot"></i> Thứ Tư, 18/12/2024</span>
                         <span class="trang-thai co-mat">Có mặt</span>
                     </div>
                     </div>
                 </div>
 
                 <div class="hop-chi-tiet-ngay">
-                    <h4>📅 Chi tiết ngày 31/10/2025</h4>
+                    <h4><i class="fa-regular fa-calendar"></i> Chi tiết ngày 31/10/2025</h4>
                     <div class="no-data">
-                    <div class="icon">📆</div>
+                    <div class="icon"><i class="fa-regular fa-calendar"></i></div>
                     <p>Không có dữ liệu điểm danh cho ngày này</p>
                     <span>Có thể là ngày nghỉ hoặc chưa được cập nhật</span>
                     </div>
@@ -364,22 +391,22 @@
                         <h4>Chế độ ăn uống</h4>
                         <div class="bua-an">
                             <div class="bua">
-                            <i class="fa-thin fa-apple-whole"></i>
+                            <div class="icon"><i class="fa-solid fa-wheat-awn"></i></div>
                             <p>Bữa sáng</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <i class="fa-thin fa-plate-utensils"></i>
+                            <div class="icon"><i class="fa-solid fa-utensils"></i></div>
                             <p>Bữa trưa</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <i class="fa-thin fa-apple-whole"></i>
+                            <div class="icon"><i class="fa-solid fa-cookie-bite"></i></div>
                             <p>Bữa phụ</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <i class="fa-regular fa-glass-water"></i>
+                            <div class="icon"><i class="fa-solid fa-bottle-water"></i></div>
                             <p>Nước uống</p>
                             <span class="lit">1.2L</span>
                             </div>
@@ -414,22 +441,22 @@
                         <h4>Chế độ ăn uống</h4>
                         <div class="bua-an">
                             <div class="bua">
-                            <div class="icon">🍎</div>
+                            <div class="icon"><i class="fa-solid fa-wheat-awn"></i></div>
                             <p>Bữa sáng</p>
                             <span class="motphan">Một phần</span>
                             </div>
                             <div class="bua">
-                            <div class="icon">🍽️</div>
+                            <div class="icon"><i class="fa-solid fa-utensils"></i></div>
                             <p>Bữa trưa</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <div class="icon">🍇</div>
+                            <div class="icon"><i class="fa-solid fa-cookie-bite"></i></div>
                             <p>Bữa phụ</p>
                             <span class="thieu">Không ăn</span>
                             </div>
                             <div class="bua">
-                            <div class="icon nuocuong"></div>
+                            <div class="icon"><i class="fa-solid fa-bottle-water"></i></div>
                             <p>Nước uống</p>
                             <span class="lit">0.8L</span>
                             </div>
@@ -464,22 +491,22 @@
                         <h4>Chế độ ăn uống</h4>
                         <div class="bua-an">
                             <div class="bua">
-                            <div class="icon">🍎</div>
+                            <div class="icon"><i class="fa-solid fa-wheat-awn"></i></div>
                             <p>Bữa sáng</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <div class="icon">🍽️</div>
+                            <div class="icon"><i class="fa-solid fa-utensils"></i></div>
                             <p>Bữa trưa</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <i class="fa-solid fa-cookie-bite"></i>
+                            <div class="icon"><i class="fa-solid fa-cookie-bite"></i></div>
                             <p>Bữa phụ</p>
                             <span class="daydu">Đầy đủ</span>
                             </div>
                             <div class="bua">
-                            <i class="fa-regular fa-glass-water"></i>
+                            <div class="icon "><i class="fa-solid fa-bottle-water"></i></div>
                             <p>Nước uống</p>
                             <span class="lit">1.5L</span>
                             </div>
@@ -576,13 +603,13 @@
                     <button class="tab" data-tab="main">Môn chính</button>
                     <button class="tab" data-tab="progress">Tiến độ</button>
                 </div>
-
-                <!-- Môn học -->
+        </div>
+        <!-- Môn học -->
                 <div class="tatcamonhoc">
                 <div class="mon-hoc">
                     <div class="tieu-de-mon">
                         <div class="ten-mon">
-                            <i class="icon-book">📘</i>
+                            <i class="icon-book"><i class="fa-solid fa-book-open"></i></i>
                             <h3>Toán</h3>
                             <p>Giáo viên: Nguyễn Thị Lan</p>
                         </div>
@@ -619,14 +646,14 @@
                     </div>
 
                     <div class="nhan-xet">
-                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <h4><i class="fa-regular fa-star"></i> Nhận xét của giáo viên</h4>
                         <p>Em có năng khiếu toán học tốt, cần phát huy thêm.</p>
                     </div>
                 </div>
                 <div class="mon-hoc">
                     <div class="tieu-de-mon">
                         <div class="ten-mon">
-                            <i class="icon-book">📘</i>
+                            <i class="icon-book"><i class="fa-solid fa-book-open"></i></i>
                             <h3>Ngữ Văn</h3>
                             <p>Giáo viên: Trần Văn Minh</p>
                         </div>
@@ -663,7 +690,7 @@
                     </div>
 
                     <div class="nhan-xet">
-                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <h4><i class="fa-regular fa-star"></i> Nhận xét của giáo viên</h4>
                         <p>Em có khả năng diễn đạt tốt, cần đọc thêm nhiều sách.</p>
                     </div>
                 </div>
@@ -671,7 +698,7 @@
                 <div class="mon-hoc">
                     <div class="tieu-de-mon">
                         <div class="ten-mon">
-                            <i class="icon-book">📘</i>
+                            <i class="icon-book"><i class="fa-solid fa-book-open"></i></i>
                             <h3>Tiếng Anh</h3>
                             <p>Giáo viên: Sarah Johnson</p>
                         </div>
@@ -708,14 +735,14 @@
                     </div>
 
                     <div class="nhan-xet">
-                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <h4><i class="fa-regular fa-star"></i> Nhận xét của giáo viên</h4>
                         <p>Excellent pronunciation and vocabulary. Keep up the good work!</p>
                     </div>
                 </div>
                  <div class="mon-hoc">
                     <div class="tieu-de-mon">
                         <div class="ten-mon">
-                            <i class="icon-book">📘</i>
+                            <i class="icon-book"><i class="fa-solid fa-book-open"></i></i>
                             <h3>Khoa học tự nhiên</h3>
                             <p>Giáo viên: Lê Thị Hoa</p>
                         </div>
@@ -752,19 +779,17 @@
                     </div>
 
                     <div class="nhan-xet">
-                        <h4>⭐ Nhận xét của giáo viên</h4>
+                        <h4><i class="fa-regular fa-star"></i> Nhận xét của giáo viên</h4>
                         <p>Em tỏ ra hứng thú với các thí nghiệm khoa học.</p>
                     </div>
                 </div>
             </div>
-        </div>
             <div class="monchinh">
-                <h3>Tổng quan môn học</h3>
             <div class="subjects" id="subject-list">
                 <!-- Môn Toán -->
                 <div class="subject" data-type="main">
                     <div class="subject-header">
-                    <h3>📘 Toán</h3>
+                    <h3><i class="fa-solid fa-book-open"></i> Toán</h3>
                     <span class="score-box">8.6</span>
                     </div>
                     <p>Điểm trung bình: <strong>8.6</strong></p>
@@ -776,7 +801,7 @@
                 <!-- Môn Ngữ Văn -->
                 <div class="subject" data-type="main">
                     <div class="subject-header">
-                    <h3>📗 Ngữ Văn</h3>
+                    <h3><i class="fa-solid fa-book-open"></i> Ngữ Văn</h3>
                     <span class="score-box">8.2</span>
                     </div>
                     <p>Điểm trung bình: <strong>8.2</strong></p>
@@ -788,7 +813,7 @@
                 <!-- Môn Tiếng Anh -->
                 <div class="subject" data-type="main">
                     <div class="subject-header">
-                    <h3>📙 Tiếng Anh</h3>
+                    <h3><i class="fa-solid fa-book-open"></i> Tiếng Anh</h3>
                     <span class="score-box green">9.1</span>
                     </div>
                     <p>Điểm trung bình: <strong>9.1</strong></p>
@@ -895,5 +920,6 @@
         </section>
 
     <script src="main.js"></script>
+    <script src="details.js"></script>
     </body>
     </html>

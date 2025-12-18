@@ -94,3 +94,100 @@ document.querySelectorAll('.Luachon-chucnang').forEach((item, index) => {
     showSection('all');
   }
 })();
+// ====== DATA ======
+const chats = [
+    { name: "Nguyễn Văn A", key: "chat_NguyenVanA", unread: 1 },
+    { name: "Trần Thị B", key: "chat_TranThiB", unread: 1 }
+];
+
+let currentChatIndex = 0;
+function openChat() {
+    document.getElementById("chatOverlay").style.display = "flex";
+    selectChat(currentChatIndex);
+}
+
+function closeChat() {
+    document.getElementById("chatOverlay").style.display = "none";
+}
+function selectChat(index) {
+    currentChatIndex = index;
+
+    document.querySelectorAll(".chat-item").forEach((item, i) => {
+        item.classList.toggle("active", i === index);
+
+        if (i === index) {
+            const badge = item.querySelector(".badge");
+            if (badge) badge.style.display = "none";
+            chats[i].unread = 0;
+        }
+    });
+
+    renderMessages();
+}
+function getMessages() {
+    const key = chats[currentChatIndex].key;
+    return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+function saveMessage(sender, text) {
+    const key = chats[currentChatIndex].key;
+    const messages = getMessages();
+
+    messages.push({
+        sender: sender, // "parent" | "teacher"
+        text: text,
+        time: new Date().toLocaleString("vi-VN")
+    });
+
+    localStorage.setItem(key, JSON.stringify(messages));
+}
+function renderMessages() {
+    const messagesDiv = document.getElementById("messages");
+    messagesDiv.innerHTML = "";
+
+    getMessages().forEach(msg => {
+        const div = document.createElement("div");
+        div.className = `message ${msg.sender === "parent" ? "sent" : "received"}`;
+        div.innerText = msg.text;
+        messagesDiv.appendChild(div);
+    });
+
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+function sendMessage() {
+    const input = document.getElementById("messageInput");
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    saveMessage("parent", text);
+    renderMessages();
+    input.value = "";
+}
+function receiveMessage(chatIndex, text) {
+    const key = chats[chatIndex].key;
+    const messages = JSON.parse(localStorage.getItem(key)) || [];
+
+    messages.push({
+        sender: "teacher",
+        text: text,
+        time: new Date().toLocaleString("vi-VN")
+    });
+
+    localStorage.setItem(key, JSON.stringify(messages));
+
+    if (chatIndex === currentChatIndex &&
+        document.getElementById("chatOverlay").style.display === "flex") {
+        renderMessages();
+    } else {
+        chats[chatIndex].unread = 1;
+        const badge = document.querySelectorAll(".chat-item")[chatIndex]
+            .querySelector(".badge");
+        badge.style.display = "inline";
+        badge.innerText = "1";
+    }
+}
+
+setTimeout(() => {
+    receiveMessage(1, "Nhớ nộp bài trước 10h nhé");
+}, 3000);

@@ -625,17 +625,22 @@ body {
 .khung-chinh {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 20px;
     width: 97%;
     margin: auto;
     margin-bottom: 40px;
+    overflow: hidden;
 }
 /* ====== CỘT PHẢI ====== */
 /* Container */
 .cot-phai {
   padding: 16px;
   margin: 0 auto;
+  height: calc(500px); /* Trừ padding nếu có */
+  overflow-y: auto;
+  padding-right: 8px;
+  scroll-behavior: smooth;
 }
 
 /* Danh sách ngày */
@@ -1147,7 +1152,7 @@ body {
 }
 /* Thanh tiến độ hoc tập */
 .vung-chua {
-  margin:  auto 20px;
+  margin:  auto;
   background: white;
   border-radius: 12px;
   padding: 24px;
@@ -1222,7 +1227,147 @@ body {
   color: #28a745;
   font-weight: 500;
 }
+/* Overlay toàn màn hình */
+  .chat-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
 
+  .chat-container {
+    background: #fff;
+    width: 800px;
+    max-width: 95%;
+    height: 500px;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Danh sách tin nhắn */
+  .chat-list {
+    width: 250px;
+    background: #f0f0f0;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+  }
+
+  .chat-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+  }
+
+  .chat-item:hover {
+    background: #e0e0e0;
+  }
+
+  .chat-item.active {
+    background: #d0f0ff;
+  }
+
+  .chat-item .name {
+    font-weight: bold;
+  }
+
+  .chat-item .badge {
+    background: #3b82f6;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Khung chat hiển thị nội dung */
+  .chat-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+
+  .messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+  }
+
+  .message {
+    margin-bottom: 10px;
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    clear: both;
+  }
+
+  .message.sent {
+    background: #3b82f6;
+    color: #fff;
+    margin-left: auto;
+    border-bottom-right-radius: 0;
+  }
+
+  .message.received {
+    background: #e0e0e0;
+    margin-right: auto;
+    border-bottom-left-radius: 0;
+  }
+
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  .chat-input input {
+    flex: 1;
+    border: none;
+    padding: 15px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .chat-input button {
+    border: none;
+    background: #3b82f6;
+    color: #fff;
+    padding: 0 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+  }
+
+  .chat-input button:hover {
+    background: #2563eb;
+  }
+
+  /* Nút đóng */
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: #fff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
 /* ===== RESPONSIVE DESIGN ===== */
 
 /* Tablet: 768px and below */
@@ -1269,31 +1414,48 @@ body {
   /* Điểm danh */
   .khung-diem-danh {
     flex-direction: column;
-    margin: 15px;
+    margin: 20px;
+    gap: 20px;
+    width: calc(100% - 40px);
   }
 
-  .cot-trai, .cot-phai {
-    flex: 1 1 100%;
+  .cot-trai {
+    flex: 1;
+  }
+
+  .cot-phai {
+    flex: 1;
+  }
+
+  .ngay {
+    gap: 3px;
+  }
+
+  .ngay div {
+    padding: 4px 2px;
+    font-size: 12px;
+ 
   }
 
   /* Sức khỏe */
   .khung-chinh {
     flex-direction: column;
     width: 100%;
-    margin: 15px auto;
+    margin: 20px;
+    gap: 20px;
   }
 
   .cot-trai {
-    flex: 1 1 100%;
+    flex: 0 0 30%;
   }
 
   .cot-phai {
-    flex: 1 1 100%;
+    flex: 0 0 70%;
     padding: 0;
   }
 
   .ngay-list-wrapper {
-    gap: 15px;
+    gap: 12px;
   }
 
   .ngay-khoi {
@@ -1301,8 +1463,8 @@ body {
   }
 
   .bua-an {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
   }
 
   .bua {
@@ -1332,33 +1494,38 @@ body {
   }
 
   .tong-ket {
-    gap: 10px;
+
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .tong-ket .box {
-    min-width: 120px;
-    padding: 12px 10px;
+    min-width: 18%;
+    flex: 1 1 18%;
+    padding: 10px 8px;
   }
 
   .tong-ket .box h3 {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 2px;
   }
 
   .tong-ket .box p {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .tabs {
     width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 6px;
     padding: 4px;
   }
 
   .tab {
-    flex: 1 1 auto;
-    padding: 6px 10px;
-    font-size: 12px;
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 11px;
+    white-space: nowrap;
   }
 
   .mon-hoc {
@@ -1399,7 +1566,7 @@ body {
   }
 
   .tatcamonhoc, .monchinh, .tiendo {
-    margin: 0 15px 15px;
+    margin: 0 20px 20px;
   }
 
   .vung-chua {
@@ -1501,8 +1668,18 @@ body {
 
   /* Điểm danh */
   .khung-diem-danh {
-    margin: 10px;
-    gap: 15px;
+    flex-direction: column;
+    margin: 20px;
+    gap: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .cot-trai {
+    flex: 1;
+  }
+
+  .cot-phai {
+    flex: 1;
   }
 
   .ngay {
@@ -1531,8 +1708,18 @@ body {
 
   /* Sức khỏe */
   .khung-chinh {
-    margin: 10px auto;
-    width: 100%;
+    flex-direction: column;
+    margin: 20px;
+    width: calc(100% - 40px);
+    gap: 20px;
+  }
+
+  .cot-trai {
+    flex: 1;
+  }
+
+  .cot-phai {
+    flex: 1;
   }
 
   .cot-trai, .cot-phai {
@@ -1828,9 +2015,58 @@ body {
     gap: 4px;
   }
 
+  /* Summary boxes - 2-column grid on mobile */
+  .tong-ket {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tong-ket .box {
+    min-width: 48%;
+    flex: 1 1 48%;
+    padding: 8px;
+  }
+
+  .tong-ket .box h3 {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .tong-ket .box p {
+    font-size: 10px;
+  }
+
+  /* Health info - ensure 2-column layout for temp/note */
+  .thongtin {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .nhietdo, .ghichu {
+    padding: 6px;
+    font-size: 0.7rem;
+  }
+
+  /* Meal section - 2-column on very small screens */
+  .bua-an {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+
+  .bua {
+    padding: 5px;
+    font-size: 0.6rem;
+  }
+
+  /* Action boxes */
+  .Luachon {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
   /* Toàn cục margin */
   .card, .Nhanxetgv, .Update-sk, .tatcamonhoc, .monchinh, .tiendo {
-    margin: 0 10px 10px;
+    margin: 0 20px 20px;
   }
 
   .Nhanxetgv, .Update-sk {
