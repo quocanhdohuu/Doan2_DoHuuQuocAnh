@@ -1008,18 +1008,18 @@ document.getElementById('btnXuatLichDay').addEventListener('click', function() {
     XLSX.writeFile(wb, "DanhSachLich.xlsx");
 });
 
-let tinDen = {
-    tenNguoiGui: "Nguyễn Thị B",
-    tenPH: "Nguyễn Văn A",
-    tieuDe: "Hỏi về bài tập",
-    noiDung: "Thầy ơi...",
-    thoiGian: "08:30:00 23/12/2024",
-    moi: true  
-};
+// let tinDen = {
+//     tenNguoiGui: "Nguyễn Thị B",
+//     tenPH: "Nguyễn Văn A",
+//     tieuDe: "Hỏi về bài tập",
+//     noiDung: "Thầy ơi...",
+//     thoiGian: "08:30:00 23/12/2024",
+//     moi: true  
+// };
 
-let ds = JSON.parse(localStorage.getItem("TinDen") || "[]");
-ds.push(tinDen);
-localStorage.setItem("TinDen", JSON.stringify(ds));
+// let ds = JSON.parse(localStorage.getItem("TinDen") || "[]");
+// ds.push(tinDen);
+// localStorage.setItem("TinDen", JSON.stringify(ds));
 function taoHTMLTinDen(tin) {
     return `
         <div class="TinDenLL">
