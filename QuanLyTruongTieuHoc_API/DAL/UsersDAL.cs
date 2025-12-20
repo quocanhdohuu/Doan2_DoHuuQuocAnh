@@ -102,5 +102,31 @@ namespace DAL
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);
         }
+        public Users CheckLogin(string username, string password, out string error)
+        {
+            error = "";
+
+            string sql =
+                $"SELECT * FROM Users " +
+                $"WHERE Username = '{username.Replace("'", "''")}' " +
+                $"AND Password = '{password.Replace("'", "''")}' " +
+                $"AND Status = 1";
+
+            var dt = _db.ExecuteQueryToDataTable(sql, out error);
+
+            if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
+                return null;
+
+            var row = dt.Rows[0];
+
+            return new Users
+            {
+                UserID = (int)row["UserID"],
+                Username = row["Username"].ToString(),
+                Role = row["Role"].ToString(),
+                Status = (bool)row["Status"]
+            };
+        }
+
     }
 }

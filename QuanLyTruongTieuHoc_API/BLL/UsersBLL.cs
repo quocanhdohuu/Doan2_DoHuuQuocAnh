@@ -62,5 +62,22 @@ namespace BLL
 
             return _dal.UpdateUser(user, out error);
         }
+        public Users Login(string username, string password, out string error)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                error = "Username is required";
+                return null;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                error = "Password is required";
+                return null;
+            }
+
+            return _dal.CheckLogin(username, password, out error);
+        }
+
     }
 }

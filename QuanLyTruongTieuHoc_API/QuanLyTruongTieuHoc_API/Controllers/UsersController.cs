@@ -2,6 +2,7 @@
 using BLL;
 using System.Data;
 using Models;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace QuanLyTruongTieuHoc_API.Controllers
 {
@@ -80,6 +81,26 @@ namespace QuanLyTruongTieuHoc_API.Controllers
                 return BadRequest(error);
 
             return Ok(new { message = "Updated successfully" });
+        }
+        [Route("User_Login")]
+        [HttpPost]
+        public IActionResult Login([FromBody] UserLoginRequest request)
+        {
+            var user = _bll.Login(request.Username, request.Password, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return BadRequest(error);
+
+            if (user == null)
+                return Unauthorized(new { message = "Username or password is incorrect" });
+
+            return Ok(new
+            {
+                message = "Login successful",
+                user.UserID,
+                user.Username,
+                user.Role
+            });
         }
     }
 }
