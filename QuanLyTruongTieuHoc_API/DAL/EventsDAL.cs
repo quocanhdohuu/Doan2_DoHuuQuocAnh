@@ -135,5 +135,29 @@ namespace DAL
 
             return string.IsNullOrEmpty(error);
         }
+        public int GetTotalEvents(out string error)
+        {
+            error = "";
+            var dt = _db.ExecuteQueryToDataTable(
+                "SELECT COUNT(*) AS Total FROM Events", out error);
+
+            if (!string.IsNullOrEmpty(error) || dt == null)
+                return 0;
+
+            return Convert.ToInt32(dt.Rows[0]["Total"]);
+        }
+
+        public int GetUpcomingEvents(out string error)
+        {
+            error = "";
+            var dt = _db.ExecuteQueryToDataTable(
+                "SELECT COUNT(*) AS Total FROM Events WHERE EventDate > CAST(GETDATE() AS DATE)",
+                out error);
+
+            if (!string.IsNullOrEmpty(error) || dt == null)
+                return 0;
+
+            return Convert.ToInt32(dt.Rows[0]["Total"]);
+        }
     }
 }

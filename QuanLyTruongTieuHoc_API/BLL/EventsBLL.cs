@@ -68,5 +68,14 @@ namespace BLL
 
             return _dal.DeleteEvent(id, out error);
         }
+        public int GetTotalEvents(out string error)
+        {
+            return _dal.GetTotalEvents(out error);
+        }
+
+        public int GetUpcomingEvents(out string error)
+        {
+            return _dal.GetUpcomingEvents(out error);
+        }
     }
 }

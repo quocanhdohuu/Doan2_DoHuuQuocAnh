@@ -80,5 +80,33 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Deleted successfully" });
         }
+        [Route("Event_GetTotal")]
+        [HttpGet]
+        public IActionResult GetTotalEvents()
+        {
+            int total = _bll.GetTotalEvents(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(new
+            {
+                totalEvents = total
+            });
+        }
+        [Route("Event_GetUpcoming")]
+        [HttpGet]
+        public IActionResult GetUpcomingEvents()
+        {
+            int upcoming = _bll.GetUpcomingEvents(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(new
+            {
+                upcomingEvents = upcoming
+            });
+        }
     }
 }
