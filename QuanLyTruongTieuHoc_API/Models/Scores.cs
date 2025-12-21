@@ -11,7 +11,7 @@ namespace Models
         public int ScoreID { get; set; }
         public int StudentID { get; set; }
         public string Subject { get; set; }
-        public double ScoreValue { get; set; }
+        public double Score { get; set; }
         public string Term { get; set; }
         public DateTime Date { get; set; }
         public int TeacherID { get; set; }

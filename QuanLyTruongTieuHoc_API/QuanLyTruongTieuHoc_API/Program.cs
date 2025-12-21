@@ -13,6 +13,8 @@ builder.Services.AddScoped<UsersDAL>();
 builder.Services.AddScoped<UsersBLL>();
 builder.Services.AddScoped<Teacher_StudentsDAL>();
 builder.Services.AddScoped<Teacher_StudentsBLL>();
+builder.Services.AddScoped<Teacher_ScoreDAL>();
+builder.Services.AddScoped<Teacher_ScoreBLL>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
