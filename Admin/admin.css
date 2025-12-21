@@ -608,7 +608,10 @@ select {
 .addteacher-btn:hover {
   background-color: #222;
 }
-
+.table-teacher-wrapper {
+  max-height: 330px;
+  overflow: auto;
+}
 .status.activeclass1 {
   background: #ffffff;
   color: #000000;
