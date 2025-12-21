@@ -314,11 +314,6 @@ select {
   max-height: 330px;
   overflow: auto;
 }
-.student-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
 
 /*/Ql lịch học/*/
 #schedule {
@@ -559,11 +554,15 @@ select {
 }
 
 .class-table {
-  width: 97%;
+  width: 96%;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #ddd;
   margin: 0 20px;
+}
+.table-class-wrapper {
+  max-height: 330px;
+  overflow: auto;
 }
 
 .class-table th,
