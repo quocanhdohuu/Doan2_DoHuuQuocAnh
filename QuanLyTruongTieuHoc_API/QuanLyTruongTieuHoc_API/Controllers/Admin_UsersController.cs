@@ -8,11 +8,11 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 {
     [Route("api/QLUser")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class Admin_UsersController : ControllerBase
     {
-        private readonly UsersBLL _bll;
+        private readonly Admin_UsersBLL _bll;
 
-        public UsersController(UsersBLL bll)
+        public Admin_UsersController(Admin_UsersBLL bll)
         {
             _bll = bll;
         }

@@ -6,11 +6,11 @@ using System.Data;
 
 namespace DAL
 {
-    public class EventsDAL
+    public class Admin_EventsDAL
     {
         private readonly DatabaseHelper _db;
 
-        public EventsDAL(DatabaseHelper db)
+        public Admin_EventsDAL(DatabaseHelper db)
         {
             _db = db;
         }

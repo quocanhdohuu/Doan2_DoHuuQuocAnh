@@ -9,10 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped<DatabaseHelper>();
-builder.Services.AddScoped<UsersDAL>();
-builder.Services.AddScoped<UsersBLL>();
-builder.Services.AddScoped<EventsBLL>();
-builder.Services.AddScoped<EventsDAL>();
+builder.Services.AddScoped<Admin_UsersDAL>();
+builder.Services.AddScoped<Admin_UsersBLL>();
+builder.Services.AddScoped<Admin_EventsBLL>();
+builder.Services.AddScoped<Admin_EventsDAL>();
+builder.Services.AddScoped<Admin_SubjectsDAL>();
+builder.Services.AddScoped<Admin_SubjectsBLL>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

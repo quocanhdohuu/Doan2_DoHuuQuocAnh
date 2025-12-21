@@ -5,11 +5,11 @@ using System.Data;
 
 namespace DAL
 {
-    public class UsersDAL
+    public class Admin_UsersDAL
     {
         private readonly DatabaseHelper _db;
 
-        public UsersDAL(DatabaseHelper db)
+        public Admin_UsersDAL(DatabaseHelper db)
         {
             _db = db;
         }

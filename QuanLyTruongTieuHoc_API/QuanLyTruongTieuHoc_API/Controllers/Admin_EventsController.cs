@@ -6,11 +6,11 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 {
     [Route("api/QLEvent")]
     [ApiController]
-    public class EventsController : ControllerBase
+    public class Admin_EventsController : ControllerBase
     {
-        private readonly EventsBLL _bll;
+        private readonly Admin_EventsBLL _bll;
 
-        public EventsController(EventsBLL bll)
+        public Admin_EventsController(Admin_EventsBLL bll)
         {
             _bll = bll;
         }

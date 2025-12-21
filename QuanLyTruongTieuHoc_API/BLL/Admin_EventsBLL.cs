@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    public class EventsBLL
+    public class Admin_EventsBLL
     {
-        private readonly EventsDAL _dal;
+        private readonly Admin_EventsDAL _dal;
 
-        public EventsBLL(EventsDAL dal)
+        public Admin_EventsBLL(Admin_EventsDAL dal)
         {
             _dal = dal;
         }

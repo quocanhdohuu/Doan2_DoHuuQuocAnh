@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    public class UsersBLL
+    public class Admin_UsersBLL
     {
-        private readonly UsersDAL _dal;
+        private readonly Admin_UsersDAL _dal;
 
-        public UsersBLL(UsersDAL dal)
+        public Admin_UsersBLL(Admin_UsersDAL dal)
         {
             _dal = dal;
         }
