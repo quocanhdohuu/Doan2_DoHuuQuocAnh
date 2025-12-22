@@ -10,6 +10,58 @@ const btnPhuND=document.querySelectorAll('.btnNhapDiem');
 const btnLichday=document.querySelector('#btnLichDay');
 const btnTTCN=document.querySelector('#btnTTCN');
 
+function hdgan(button){
+    let viec='';
+    let loaiviec='';
+    if(button===document.getElementById('btnLuuDiemDanh')){
+        viec='Điểm danh lớp 6A';
+        loaiviec='Điểm danh';
+    } else if(button===document.getElementById('btnCSSTLL')){
+        viec='Gửi tin cho phụ huynh Nguyễn Thị B về học sinh Nguyễn Văn A';
+        loaiviec='Tin nhắn';
+    } else if(button===document.getElementById('btncuasoTGCDS')){
+        viec='Cập nhật điểm kiểm tra 15 phút lớp 7A';
+        loaiviec='Điểm số';
+    }
+    object={
+        viec: viec,
+        loaiviec: loaiviec,
+        thoigian: new Date().toLocaleString('vi-VN')
+    }
+        // Lấy danh sách đã có (hoặc mảng rỗng)
+    let dsTin = JSON.parse(localStorage.getItem("HoatDongGan") || "[]");
+    // Thêm tin mới vào mảng
+    dsTin.push(object);
+    // Lưu lại LocalStorage
+    localStorage.setItem("HoatDongGan", JSON.stringify(dsTin));
+}
+function loadhdgan(){
+    let dsTin = JSON.parse(localStorage.getItem("HoatDongGan") || "[]");
+    let index = 0;
+    dsTin.slice().reverse().forEach(tin => {
+        if(index >= 3) return; // chỉ hiện tối đa 3
+        let iddiv = '#HD' + (index + 1);
+        let tinDiv = document.querySelector(iddiv); 
+        let clss='';
+        if(tin.loaiviec==='Điểm danh'){
+            clss='diemdanhhd';
+        } else if(tin.loaiviec==='Tin nhắn'){
+            clss='tinnhanhd';
+        } else if(tin.loaiviec==='Điểm số'){
+            clss='diemsohd';
+        }
+        tinDiv.innerHTML=`
+            
+                <h3 >
+                    <span>${tin.viec}</span>
+                    <span  class="${clss}" >${tin.loaiviec}</span>
+                </h3>
+                <span style="color: gray;">${tin.thoigian}</span>
+            
+        `;
+        index++;
+    });
+}
 document.getElementById('chonNgayLD').addEventListener('change', function () {
     if(this.value<2010 || this.value===""||this.value>2100){
         alert("Năm học phải lớn hơn hoặc bằng 2010 và bé hơn hoặc bằng 2100!");
@@ -281,7 +333,7 @@ btnDanhBaLL.addEventListener('click',function(){
 btnguitincsLL.addEventListener('click',function(){
     themtindagui();
     resetST();
-
+    hdgan(btnguitincsLL);
 });
 function resetST() {
     document.getElementById('txttieudeSTLL').value = ''; 
@@ -333,9 +385,28 @@ function themtindagui() {
 
 document.getElementById('btnXuatEDS').addEventListener('click', function() { 
     alert("Đã hoàn thành!");
+    const table = document.getElementById('DanhSachDS');
+
+    const wb = XLSX.utils.book_new();
+
+    const ws = XLSX.utils.table_to_sheet(table);
+
+    XLSX.utils.book_append_sheet(wb, ws, "DanhSachDS");
+
+    XLSX.writeFile(wb, "DanhSachDS.xlsx");
 });
 document.getElementById('btnPhieuDiemDS').addEventListener('click', function() { 
     alert("Đã hoàn thành!");
+     const { jsPDF } = window.jspdf;
+     const doc = new jsPDF();
+
+    const table = document.getElementById('DanhSachDS');
+    
+    doc.autoTable({
+        html: table
+    });
+
+    doc.save("DanhSachDS.pdf");
 });
 function loadTinDaGui() {
     let dsTin = JSON.parse(localStorage.getItem("TinDaGui") || "[]");
@@ -403,7 +474,7 @@ document.getElementById('timLL').addEventListener('click', function () {
          const hs = divCha.querySelector('.hocSinh')?.innerText.toLowerCase().trim() || '';
 
         if (text.includes(tukhoa)|| hs.includes(tukhoa)) {
-            divCha.style.display = 'block';
+            divCha.style.display = 'flex';
             coKetQua = true;
         } else {
             divCha.style.display = 'none';
@@ -431,7 +502,11 @@ document.getElementById('timLL').addEventListener('click', function () {
 });
 document.getElementById('tentimkiem').addEventListener('input', function () {
     if (this.value.trim() === "") {
-        document.querySelectorAll('#DaGuiLL .TinGuiLL, #DabaLL .DBaLL, #HopThuDenLL .TinDenLL').forEach(item => {
+        loadTinDaGui();
+        document.querySelectorAll('#DabaLL .DBaLL').forEach(item => {
+            item.style.display = 'flex';
+        });
+        document.querySelectorAll('#HopThuDenLL .TinDenLL').forEach(item => {
             item.style.display = 'block';
         });}
 });
@@ -713,6 +788,7 @@ btntheGCCDS.addEventListener('click',function(){
     themghichuvaobangDS();
     document.querySelector('#CuaSoNĐS').style.display = 'none'; // TỰ TẮT
     resetFormNhapDiemDS();
+    hdgan(btntheGCCDS);
 });
 
 function resetFormNhapDiemDS() {
@@ -803,6 +879,7 @@ document.getElementById('btbThoatcsoGCDD').addEventListener('click', function (e
 });
 btnLUUDIEMDANHDD.addEventListener('click', function () {
     alert("Đã lưu điểm danh");
+    hdgan(btnLUUDIEMDANHDD);
 });
 btncomatDsDD.forEach(btn => {
   btn.addEventListener('click', function() {
@@ -1062,4 +1139,5 @@ window.onload = function() {
     loadTinDaGui();
     loadTinDen();
     loadTTGV();
+    loadhdgan();
 }

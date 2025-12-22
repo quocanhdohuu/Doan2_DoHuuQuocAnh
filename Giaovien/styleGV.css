@@ -193,7 +193,7 @@
 }
 /*----------------------Hoat Dong---------------------*/
 #HoatDong{
-    height: 40%;
+    height: auto;
     width: 100%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -207,7 +207,7 @@
     color: black;
 }
 .HOATDONGGAN{
-    height: 20%;
+    height: auto;
     width: 98%;
     border-radius: 15px ;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -215,6 +215,13 @@
     padding-top: 10px;
     margin-top: 10px;
 }
+.HOATDONGGAN h3{
+    display: flex;justify-content: space-between;margin-right: 10px;margin-bottom: 0px;
+    align-items: center;
+}
+.diemdanhhd{background-color: black;color:white;border-radius: 15px;padding: 5px;}
+.tinnhanhd{background-color: white;color:black;border: 1px solid black;border-radius: 15px;padding: 5px;}
+.diemsohd{background-color: gray;text-align: center;color:black;border-radius: 15px;padding: 5px;}
 /*----------------------DIEM DANH---------------------*/
 /*----------------------headerDD---------------------*/
 #DieDanh{
@@ -1005,21 +1012,21 @@
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
-    height: 20%;
+    height: 10%;
     gap: 10px;
 }
 #NamLich,#KyLich{
-    height: 20%;
+    height: auto;
     width: 100%;
     border-radius: 7px;
 }
 #chonKyHocLich,#chonNgayLD{
-    height: 100%;
+    height: 50%;
     width: 100%;
     border-radius: 7px;
 }
 #btnLocLichDay,#btnXuatLichDay{
-    height: 20%;
+    height: 50%;
     width: 30%;
     border-radius: 7px;
     margin-top: 18px;
@@ -1325,6 +1332,8 @@ body button{
     padding-top: 10px;
     margin-top: 10px;
 }
+
+
 /*----------------------Danh Sach Diem Danh---------------------*/
 #DanhsachDD{
     overflow: auto;
@@ -1749,49 +1758,38 @@ body button{
 #CuaSoThemGhiChuSK input[type="radio"],
 #CuaSoSUAGhiChuSK input[type="radio"] {
     transform: scale(1.5);
-    margin-left: 20px;
+    margin-left: 36px;
 }
 
 #GhichuveĐSK, #GhichuveĐSKSUA {
-    margin-left: 18px;
+    margin-left: 35px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
 }
 
 #GhichuveTTSK, #GhichuveTTSKSUA {
-    margin-left: 15px;
+    margin-left: 35px;
     height: 60px;
     width: 80%;
     border-radius: 7px;
 }
 
 #chonHocSinhGhiChuSK,#chonHocSinhGhiChuSKSUA {
-    margin-left: 15px;
+    margin-left: 35px;
     height: 30px;
     width: 80%;
-    border-radius: 7px;
 }
 
 #CuaSoThemGhiChuSK input[type="checkbox"],
 #CuaSoSUAGhiChuSK input[type="checkbox"] {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 #btncuasoTGCSK, #btncuasoTGCSKSUA {
     margin-top: 20px;
     height: 40px;
     width: 55%;
-    border-radius: 10px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    float: right;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 /*----------------------Điểm số---------------------*/
 #anhds img{
@@ -1803,7 +1801,6 @@ body button{
 #LopDS,#MonhocDS{
     height: 20%;
     width: 50%;
-    border-radius: 7px;
 }
 #chonLopHocDS,#chonMonHocDS{
     height: 100%;
@@ -1962,7 +1959,7 @@ body button{
     font-weight: bold;
 }
 #chonPHSTLL{
-    margin-left: 20px;
+    margin-left: 40px;
     height: 30px;
     width: 80%;
 }
@@ -1971,12 +1968,12 @@ body button{
     width:45%;
 }
 #txttieudeSTLL{
-    margin-left: 20px;
+    margin-left: 40px;
     height: 30px;
     width: 80%;
 }
 #TXTNDSTLL{
-    margin-left: 20px;
+    margin-left: 40px;
     height: 60px;
     width: 80%;
 }
