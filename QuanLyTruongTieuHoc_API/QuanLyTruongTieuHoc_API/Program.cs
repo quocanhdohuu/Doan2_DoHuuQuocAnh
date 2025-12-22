@@ -15,6 +15,8 @@ builder.Services.AddScoped<Admin_EventsBLL>();
 builder.Services.AddScoped<Admin_EventsDAL>();
 builder.Services.AddScoped<Admin_SubjectsDAL>();
 builder.Services.AddScoped<Admin_SubjectsBLL>();
+builder.Services.AddScoped<Admin_StudentsDAL>();
+builder.Services.AddScoped<Admin_StudentsBLL>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
