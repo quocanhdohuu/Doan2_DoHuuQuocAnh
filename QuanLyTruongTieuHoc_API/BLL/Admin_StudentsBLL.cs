@@ -17,7 +17,7 @@ namespace BLL
             _dal = dal;
         }
 
-        public bool CreateStudent(StudentCreate student, out string error)
+        public bool CreateStudent(Manage_Student student, out string error)
         {
             if (string.IsNullOrWhiteSpace(student.StudentName))
             {
@@ -39,8 +39,34 @@ namespace BLL
 
             return _dal.InsertStudent(student, out error);
         }
+        public bool UpdateStudent(Manage_Student student, out string error)
+        {
+            if (student.StudentID <= 0)
+            {
+                error = "Invalid StudentID";
+                return false;
+            }
 
-       
+            if (string.IsNullOrWhiteSpace(student.StudentName))
+            {
+                error = "Student name is required";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(student.ClassName))
+            {
+                error = "Class name is required";
+                return false;
+            }
+
+            return _dal.UpdateStudent(student, out error);
+        }
+
+
+
+
+
+
     }
 
 }

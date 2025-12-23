@@ -17,7 +17,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
         [HttpPost]
         [Route("Student_Create")]
-        public IActionResult Create([FromBody] StudentCreate student)
+        public IActionResult Create([FromBody] Manage_Student student)
         {
             if (student == null)
                 return BadRequest("Invalid request body");
@@ -28,6 +28,20 @@ namespace QuanLyTruongTieuHoc_API.Controllers
                 return BadRequest(error);
 
             return Ok(new { message = "Student created successfully" });
+        }
+        [HttpPost]
+        [Route("Student_Update")]
+        public IActionResult Update([FromBody] Manage_Student student)
+        {
+            if (student == null)
+                return BadRequest("Invalid request body");
+
+            bool ok = _bll.UpdateStudent(student, out string error);
+
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new { message = "Student updated successfully" });
         }
 
     }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class StudentCreate
+    public class Manage_Student
     {
+        public int StudentID { get; set; }
         public string StudentName { get; set; }
         public DateTime BirthDate { get; set; }
         public string ClassName { get; set; }
