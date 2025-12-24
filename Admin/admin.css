@@ -272,7 +272,7 @@ select {
 }
 
 .student-table {
-  width: 97%;
+  width: 96%;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #ddd;
@@ -309,6 +309,10 @@ select {
 
 .actions button:hover {
   background-color: #ececec;
+}
+.table-wrapper {
+  max-height: 330px;
+  overflow: auto;
 }
 
 /*/Ql lịch học/*/
@@ -550,11 +554,15 @@ select {
 }
 
 .class-table {
-  width: 97%;
+  width: 96%;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid #ddd;
   margin: 0 20px;
+}
+.table-class-wrapper {
+  max-height: 330px;
+  overflow: auto;
 }
 
 .class-table th,
@@ -600,7 +608,10 @@ select {
 .addteacher-btn:hover {
   background-color: #222;
 }
-
+.table-teacher-wrapper {
+  max-height: 330px;
+  overflow: auto;
+}
 .status.activeclass1 {
   background: #ffffff;
   color: #000000;
@@ -677,6 +688,9 @@ select {
   flex-direction: column;
   gap: 15px;
   padding: 0 20px;
+  
+  max-height: 330px;
+  overflow: auto;
 }
 
 .listevent {
