@@ -16,6 +16,7 @@ namespace Models
         public string ParentName { get; set; }
         public string ParentPhone { get; set; }
         public string ParentAddress { get; set; }
+        public int Status { get; set; }
     }
 
 }

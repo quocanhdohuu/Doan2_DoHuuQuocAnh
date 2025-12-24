@@ -61,11 +61,40 @@ namespace BLL
 
             return _dal.UpdateStudent(student, out error);
         }
+        public bool DeleteStudent(int studentId, out string error)
+        {
+            if (studentId <= 0)
+            {
+                error = "Invalid StudentID";
+                return false;
+            }
 
+            return _dal.DeleteStudent(studentId, out error);
+        }
+        public List<Manage_Student> GetAll(out string error)
+        {
+            return _dal.GetAllStudents(out error);
+        }
+        public List<Manage_Student> GetByClassName(string className, out string error)
+        {
+            if (string.IsNullOrWhiteSpace(className))
+            {
+                error = "ClassName is required";
+                return new List<Manage_Student>();
+            }
 
+            return _dal.GetStudentsByClassName(className, out error);
+        }
+        public List<Manage_Student> SearchByStudentOrParent(string keyword, out string error)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                error = "Keyword is required";
+                return new List<Manage_Student>();
+            }
 
-
-
+            return _dal.GetStudentsByNameOrParent(keyword, out error);
+        }
 
     }
 

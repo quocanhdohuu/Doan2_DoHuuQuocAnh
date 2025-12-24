@@ -43,7 +43,53 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Student updated successfully" });
         }
+        [HttpPost]
+        [Route("Student_Delete")]
+        public IActionResult Delete(int studentId)
+        {
+            bool ok = _bll.DeleteStudent(studentId, out string error);
 
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new
+            {
+                message = "Student deleted successfully"
+            });
+        }
+        [HttpGet]
+        [Route("Student_GetAll")]
+        public IActionResult GetAll()
+        {
+            var list = _bll.GetAll(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(list);
+        }
+        [HttpGet]
+        [Route("Student_GetByClass")]
+        public IActionResult GetByClass(string className)
+        {
+            var list = _bll.GetByClassName(className, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return BadRequest(error);
+
+            return Ok(list);
+        }
+        [HttpGet]
+        [Route("Student_Search")]
+        public IActionResult Search(string keyword)
+        {
+            var list = _bll.SearchByStudentOrParent(keyword, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return BadRequest(error);
+
+            return Ok(list);
+        }
     }
 
 }
