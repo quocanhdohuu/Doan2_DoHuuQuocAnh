@@ -503,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .map((c) => `<span class="status activeclass1">${c}</span>`)
         .join(" ");
       const cnHTML = t.isCN
-        ? `<span class="status activeclass">${t.classes[0] || ""}</span>`
+        ? `<span class="status activeclass">${"Có" || ""}</span>`
         : "Không";
       const tr = document.createElement("tr");
       tr.innerHTML = `
