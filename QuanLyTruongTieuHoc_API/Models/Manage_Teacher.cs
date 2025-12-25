@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Teachers
+    public class Manage_Teacher
     {
         public int TeacherID { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Specialization { get; set; }
-
-        public int UserID { get; set; }
-        public string IsCN { get; set; }
-        public string Status { get; set; }
+        public bool IsCN { get; set; }
+        public List<string> ClassNames { get; set; }
     }
 
 }
