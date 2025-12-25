@@ -62,6 +62,25 @@ namespace BLL
 
             return _dal.UpdateClass(model, out error);
         }
+        public List<Classes> GetAllClasses(out string error)
+        {
+            return _dal.GetAllClasses(out error);
+        }
+        public Classes GetClassByID(int classID, out string error)
+        {
+            if (classID <= 0)
+            {
+                error = "ClassID không hợp lệ";
+                return null;
+            }
+
+            return _dal.GetClassByID(classID, out error);
+        }
+        public int GetTotalClasses(out string error)
+        {
+            return _dal.GetTotalClasses(out error);
+        }
+
     }
 
 }

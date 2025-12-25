@@ -90,6 +90,21 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(list);
         }
+        [HttpGet]
+        [Route("Student_GetByID")]
+        public IActionResult GetByID(int id)
+        {
+            var student = _bll.GetStudentByID(id, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return BadRequest(error);
+
+            if (student == null)
+                return NotFound("Không tìm thấy học sinh");
+
+            return Ok(student);
+        }
+
     }
 
 }

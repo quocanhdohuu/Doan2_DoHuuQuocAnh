@@ -206,7 +206,48 @@ namespace DAL
             return list;
         }
 
+        public Manage_Student GetStudentsByID(int studentID, out string error)
+        {
+            error = "";
 
+            string sql = @"
+                SELECT
+                s.StudentID,
+                s.FullName AS StudentName,
+                s.BirthDate,
+                c.ClassName,
+                p.FullName AS ParentName,
+                p.Phone AS ParentPhone,
+                p.Address AS ParentAddress,
+                s.Status
+                FROM Students s
+                INNER JOIN Parents p ON s.ParentID = p.ParentID
+                INNER JOIN StudentClass sc 
+                ON s.StudentID = sc.StudentID AND sc.ToDate IS NULL
+                INNER JOIN Classes c 
+                ON sc.ClassID = c.ClassID
+                WHERE s.StudentID = " + studentID + @"
+                AND s.Status = 1";
+
+            var dt = _db.ExecuteQueryToDataTable(sql, out error);
+
+            if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
+                return null;
+
+            DataRow row = dt.Rows[0];
+
+            return new Manage_Student
+            {
+                StudentID = Convert.ToInt32(row["StudentID"]),
+                StudentName = row["StudentName"].ToString(),
+                BirthDate = Convert.ToDateTime(row["BirthDate"]),
+                ClassName = row["ClassName"].ToString(),
+                ParentName = row["ParentName"].ToString(),
+                ParentPhone = row["ParentPhone"].ToString(),
+                ParentAddress = row["ParentAddress"].ToString(),
+                Status = Convert.ToInt32(row["Status"])
+            };
+        }
     }
 
 }

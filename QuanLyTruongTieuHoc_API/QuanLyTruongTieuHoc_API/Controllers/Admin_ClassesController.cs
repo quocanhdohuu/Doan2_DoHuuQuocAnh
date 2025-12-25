@@ -42,6 +42,47 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Cập nhật lớp học thành công" });
         }
+        [HttpGet]
+        [Route("Class_GetAll")]
+        public IActionResult GetAll()
+        {
+            var list = _bll.GetAllClasses(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(list);
+        }
+        [HttpGet]
+        [Route("Class_GetByID")]
+        public IActionResult GetByID(int id)
+        {
+            var cls = _bll.GetClassByID(id, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            if (cls == null)
+                return NotFound("Không tìm thấy lớp học");
+
+            return Ok(cls);
+        }
+        [HttpGet]
+        [Route("Class_GetTotal")]
+        public IActionResult GetTotalClasses()
+        {
+            int total = _bll.GetTotalClasses(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(new
+            {
+                totalClasses = total
+            });
+        }
+
+
     }
 
 }

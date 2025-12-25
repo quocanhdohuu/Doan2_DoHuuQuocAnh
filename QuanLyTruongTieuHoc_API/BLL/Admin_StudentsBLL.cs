@@ -95,6 +95,17 @@ namespace BLL
 
             return _dal.GetStudentsByNameOrParent(keyword, out error);
         }
+        public Manage_Student GetStudentByID(int studentID, out string error)
+        {
+            if (studentID <= 0)
+            {
+                error = "StudentID không hợp lệ";
+                return null;
+            }
+
+            return _dal.GetStudentsByID(studentID, out error);
+        }
+
 
     }
 
