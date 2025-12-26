@@ -54,6 +54,41 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok("Xoá giáo viên thành công");
         }
+        [HttpGet]
+        [Route("Teacher_GetAll")]
+        public IActionResult GetAllTeachers()
+        {
+            var teachers = _bll.GetAllTeachers(out string error);
 
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(teachers);
+        }
+        [HttpGet]
+        [Route("Teacher_GetByID")]
+        public IActionResult GetTeacherByID(int id)
+        {
+            var teacher = _bll.GetTeacherByID(id, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            if (teacher == null)
+                return NotFound("Không tìm thấy giáo viên");
+
+            return Ok(teacher);
+        }
+        [HttpGet]
+        [Route("Teacher_GetTotal")]
+        public IActionResult GetTotalTeachers()
+        {
+            int total = _bll.GetTotalTeachers(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(new { TotalTeachers = total });
+        }
     }
 }

@@ -49,6 +49,17 @@ namespace BLL
 
             return _dal.DeleteTeacher(teacherID, out error);
         }
-
+        public List<Manage_Teacher> GetAllTeachers(out string error)
+        {
+            return _dal.GetAllTeachers(out error);
+        }
+        public Manage_Teacher GetTeacherByID(int teacherID, out string error)
+        {
+            return _dal.GetTeacherByID(teacherID, out error);
+        }
+        public int GetTotalTeachers(out string error)
+        {
+            return _dal.GetTotalTeachers(out error);
+        }
     }
 }

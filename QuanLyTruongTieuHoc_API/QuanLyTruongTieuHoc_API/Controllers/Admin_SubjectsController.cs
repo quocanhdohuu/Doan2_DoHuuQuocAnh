@@ -14,6 +14,17 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         {
             _bll = bll;
         }
+        [HttpGet]
+        [Route("GetAll")]
+        public IActionResult GetAllSubjects()
+        {
+            var list = _bll.GetAllSubjects(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(list);
+        }
 
         [HttpGet("GetAllName")]
         public IActionResult GetAllName()

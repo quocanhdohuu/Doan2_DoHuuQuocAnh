@@ -248,6 +248,23 @@ namespace DAL
                 Status = Convert.ToInt32(row["Status"])
             };
         }
+        public int GetTotalStudents(out string error)
+        {
+            error = "";
+
+            string sql = @"
+                SELECT COUNT(*) AS Total
+                FROM Students
+                WHERE Status = 1";
+
+            var dt = _db.ExecuteQueryToDataTable(sql, out error);
+
+            if (!string.IsNullOrEmpty(error) || dt == null)
+                return 0;
+
+            return Convert.ToInt32(dt.Rows[0]["Total"]);
+        }
+
     }
 
 }

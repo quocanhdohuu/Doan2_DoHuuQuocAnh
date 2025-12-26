@@ -12,7 +12,10 @@ namespace BLL
         {
             _dal = dal;
         }
-
+        public List<Subjects> GetAllSubjects(out string error)
+        {
+            return _dal.GetAllSubjects(out error);
+        }
         public List<Subjects> GetAllName(out string error)
             => _dal.GetAllName(out error);
 

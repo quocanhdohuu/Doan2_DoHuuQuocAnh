@@ -104,7 +104,20 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(student);
         }
+        [HttpGet]
+        [Route("Student_GetTotal")]
+        public IActionResult GetTotalStudents()
+        {
+            int total = _bll.GetTotalStudents(out string error);
 
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(new
+            {
+                totalStudents = total
+            });
+        }
     }
 
 }

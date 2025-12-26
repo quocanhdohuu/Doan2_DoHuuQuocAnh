@@ -105,8 +105,10 @@ namespace BLL
 
             return _dal.GetStudentsByID(studentID, out error);
         }
-
-
+        public int GetTotalStudents(out string error)
+        {
+            return _dal.GetTotalStudents(out error);
+        }
     }
 
 }
