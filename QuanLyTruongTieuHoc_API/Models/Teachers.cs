@@ -13,8 +13,9 @@ namespace Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Specialization { get; set; }
-
         public int UserID { get; set; }
+        public string IsCN {  get; set; }
+        public string Status { get; set; }
     }
 
 }

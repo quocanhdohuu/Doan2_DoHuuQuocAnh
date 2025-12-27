@@ -11,6 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<DatabaseHelper>();
 builder.Services.AddScoped<UsersDAL>();
 builder.Services.AddScoped<UsersBLL>();
+builder.Services.AddScoped<PhuHuynh_Event_DAL>();
+builder.Services.AddScoped<PhuHuynh_Event_BLL>();
+builder.Services.AddScoped<PhuHuynh_Student_DAL>();
+builder.Services.AddScoped<PhuHuynh_Student_BLL>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

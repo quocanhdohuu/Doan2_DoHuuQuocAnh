@@ -14,7 +14,7 @@ namespace Models
         public string Gender { get; set; }
         public string Address { get; set; }
         public string HealthNote { get; set; }
-
+        public int Status { get; set; }
         public int ParentID { get; set; }
     }
 
