@@ -1142,7 +1142,7 @@
 #ChucNangTTCN button {
     display: flex;
     align-items: center;
-    gap: 8px; /* khoảng cách icon và chữ */
+    gap: 8px; 
 
     padding: 10px 20px;
     background-color: #0078ff;

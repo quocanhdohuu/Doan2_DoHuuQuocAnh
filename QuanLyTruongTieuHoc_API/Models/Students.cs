@@ -16,6 +16,7 @@ namespace Models
         public string HealthNote { get; set; }
 
         public int ParentID { get; set; }
+        public int Status { get; set; }
     }
 
 }

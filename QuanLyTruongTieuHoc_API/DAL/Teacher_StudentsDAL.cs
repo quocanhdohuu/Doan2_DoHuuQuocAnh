@@ -37,7 +37,8 @@ namespace DAL
                     Gender = row["Gender"].ToString(),
                     Address = row["Address"].ToString(),
                     ParentID = (int)row["ParentID"],
-                    HealthNote = row["HealthNote"].ToString()
+                    HealthNote = row["HealthNote"].ToString(),
+                    Status = (int)row["HealthNote"],
                 });
             }
 
@@ -61,7 +62,8 @@ namespace DAL
                 Gender = row["Gender"].ToString(),
                 Address = row["Address"].ToString(),
                 ParentID = (int)row["ParentID"],
-                HealthNote = row["HealthNote"].ToString()
+                HealthNote = row["HealthNote"].ToString(),
+                Status= (int)row["HealthNote"],
             };
         }
         public bool UpdateStu(Students student, out string error)
@@ -80,6 +82,7 @@ namespace DAL
                 $"Address = '{student.Address.Replace("'", "''")}', " +
                 $"ParentID = {student.ParentID}, " +
                 $"HealthNote = '{student.HealthNote.Replace("'", "''")}' " +
+                $"Status = {student.Status} " +
                 $"WHERE StudentID = {student.StudentID}";
 
             error = _db.ExecuteNoneQuery(sql);
