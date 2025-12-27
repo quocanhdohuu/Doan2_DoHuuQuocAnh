@@ -21,6 +21,8 @@ builder.Services.AddScoped<Admin_ClassesDAL>();
 builder.Services.AddScoped<Admin_ClassesBLL>();
 builder.Services.AddScoped<Admin_TeachersDAL>();
 builder.Services.AddScoped<Admin_TeachersBLL>();
+builder.Services.AddScoped<Admin_SchedulesDAL>();
+builder.Services.AddScoped<Admin_SchedulesBLL>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
