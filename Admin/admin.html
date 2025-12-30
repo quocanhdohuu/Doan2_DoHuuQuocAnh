@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../jquery-3.7.1.min.js"></script>
+    <script src="../angular.min.js"></script>
     <script src="admin.js" defer></script>
 
     <title>Trường Tiểu học tương lai</title>
@@ -41,26 +43,26 @@
                 <div class="card hocsinh">
                     <h3>Tổng học sinh</h3>
                     <img src="..\img\hocsinh.png" alt="anh">
-                    <p class="number">1247</p>
+                    <p class="number" id="totalStudents">0</p>
                     <span>+12 so với tháng trước</span>
                 </div>
                 <div class="card giaovien">
                     <h3>Giáo viên</h3>
                     <img src="..\img\giaovien.png" alt="anh">
-                    <p class="number">54</p>
+                    <p class="number" id="totalTeachers">0</p>
                     <span>+2 so với tháng trước</span>
                 </div>
                 <div class="card lophoc">
                     <h3>Lớp học</h3>
                     <img src="..\img\lophoc.png" alt="anh">
-                    <p class="number">32</p>
+                    <p class="number" id="totalClasses">0</p>
                     <span>Không thay đổi</span>
                 </div>
                 <div class="card chuyencan">
                     <img src="..\img\chuyencan.png" alt="anh">
                     <h3>Chuyên cần hôm nay</h3>
-                    <p class="number">1185</p>
-                    <span>95.2% có mặt</span>
+                    <p class="number" id="totalAttendance">0</p>
+                    <span id="presentPercent">0% có mặt</span>
                 </div>
             </div>
 
