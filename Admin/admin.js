@@ -499,6 +499,7 @@ app.controller("StudentCtrl", function ($scope, $http, $timeout) {
     $http
       .post(API_CREATE, payload)
       .then(() => {
+        alert("Thêm Học sinh thành công!");
         closeAllModal();
         $scope.onKeywordChange();
         if (!($scope.keyword || "").trim()) $scope.onClassChange();
@@ -532,6 +533,7 @@ app.controller("StudentCtrl", function ($scope, $http, $timeout) {
     $http
       .post(API_UPDATE, payload)
       .then(() => {
+        alert("Cập nhật Học sinh thành công!");
         closeAllModal();
         $scope.onKeywordChange();
         if (!($scope.keyword || "").trim()) $scope.onClassChange();
@@ -549,6 +551,7 @@ app.controller("StudentCtrl", function ($scope, $http, $timeout) {
     $http
       .post(API_DELETE, null, { params: { studentId: id } })
       .then(() => {
+        alert("Xoá Học sinh thành công!");
         $scope.onKeywordChange();
         if (!($scope.keyword || "").trim()) $scope.onClassChange();
       })
@@ -561,4 +564,215 @@ app.controller("StudentCtrl", function ($scope, $http, $timeout) {
   // init
   closeAllModal();
   $scope.loadClasses().finally(() => $scope.loadAll());
+});
+
+//Xử lý dữ liệu QL Lớp học
+var app;
+try {
+  app = angular.module("QLTruongTieuHocApp");
+} catch (e) {
+  app = angular.module("QLTruongTieuHocApp", []);
+}
+
+app.controller("ClassCtrl", function ($scope, $http, $timeout) {
+  // ===== API =====
+  const API_CLASS_GETALL =
+    "https://localhost:7010/api-doan2/QLLopHoc/Class_GetAll";
+  const API_CLASS_ADD = "https://localhost:7010/api-doan2/QLLopHoc/add";
+  const API_CLASS_UPDATE = "https://localhost:7010/api-doan2/QLLopHoc/update";
+  const API_TEACHER_GETALL =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_GetAll";
+
+  // ===== API TOTAL =====
+  const API_CLASS_TOTAL =
+    "https://localhost:7010/api-doan2/QLLopHoc/Class_GetTotal";
+  const API_STUDENT_TOTAL =
+    "https://localhost:7010/api-doan2/QLHocSinh/Student_GetTotal";
+
+  $scope.classes = [];
+  $scope.teachers = [];
+
+  $scope.formCreate = {
+    className: "",
+    grade: "",
+    numberOfStudents: 35,
+    classroom: "",
+    gvcn: "",
+    description: "Lớp chọn",
+  };
+
+  $scope.formUpdate = {};
+
+  $scope.loadTotals = function () {
+    // Tổng lớp
+    $http
+      .get(API_CLASS_TOTAL)
+      .then(function (res) {
+        const total = res.data?.totalClasses ?? 0;
+        const el = document.getElementById("totalClass_Class");
+        if (el) el.innerText = "Tổng: " + total + " lớp";
+      })
+      .catch(function (err) {
+        console.error("Lỗi khi load tổng lớp học", err);
+        const el = document.getElementById("totalClass_Class");
+        if (el) el.innerText = "Tổng: 0 lớp";
+      });
+
+    // Tổng học sinh
+    $http
+      .get(API_STUDENT_TOTAL)
+      .then(function (res) {
+        const total = res.data?.totalStudents ?? 0;
+        const el = document.getElementById("totalStudents_Class");
+        if (el) el.innerText = "Học sinh: " + total;
+      })
+      .catch(function (err) {
+        console.error("Lỗi khi load tổng học sinh", err);
+        const el = document.getElementById("totalStudents_Class");
+        if (el) el.innerText = "Học sinh: 0";
+      });
+  };
+
+  // ===== LOAD =====
+  $scope.loadTeachers = function () {
+    return $http.get(API_TEACHER_GETALL).then(function (res) {
+      $scope.teachers = res.data || [];
+    });
+  };
+
+  $scope.loadClasses = function () {
+    return $http.get(API_CLASS_GETALL).then(function (res) {
+      $scope.classes = res.data || [];
+    });
+  };
+
+  // ===== MODAL =====
+  let overlay, modalCreate, modalUpdate, closeBtn, closeBtnUpdate;
+
+  function initModalDom() {
+    overlay = document.getElementById("overlayclass");
+    modalCreate = document.getElementById("classModal");
+    modalUpdate = document.getElementById("classModalUpdate");
+    closeBtn = document.getElementById("closeClassBtn");
+    closeBtnUpdate = document.getElementById("closeClassBtnUpdate");
+
+    if (overlay) overlay.onclick = closeAllModal;
+    if (closeBtn) closeBtn.onclick = closeAllModal;
+    if (closeBtnUpdate) closeBtnUpdate.onclick = closeAllModal;
+  }
+
+  function show(el) {
+    if (el) el.style.display = "block";
+  }
+  function hide(el) {
+    if (el) el.style.display = "none";
+  }
+
+  function openCreateModal() {
+    show(overlay);
+    show(modalCreate);
+    hide(modalUpdate);
+  }
+
+  function openUpdateModal() {
+    show(overlay);
+    show(modalUpdate);
+    hide(modalCreate);
+  }
+
+  function closeAllModal() {
+    hide(overlay);
+    hide(modalCreate);
+    hide(modalUpdate);
+  }
+
+  // ===== OPEN MODAL =====
+  $scope.openCreate = function () {
+    $scope.formCreate = {
+      className: "",
+      grade: "",
+      numberOfStudents: 35,
+      classroom: "",
+      gvcn: "",
+      description: "Lớp chọn",
+    };
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+      openCreateModal();
+    }, 0);
+  };
+
+  $scope.openUpdate = function (c) {
+    $scope.formUpdate = {
+      classID: c.classID || c.classId || c.id,
+      className: c.className,
+      grade: c.grade,
+      numberOfStudents: c.numberOfStudents,
+      classroom: c.classroom,
+      gvcn: c.gvcn,
+      description: "Sửa",
+    };
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+      openUpdateModal();
+    }, 0);
+  };
+
+  // ===== CREATE =====
+  $scope.createClass = function () {
+    const p = angular.copy($scope.formCreate);
+
+    if (!p.className || !p.grade || !p.gvcn) {
+      return alert("Nhập đủ thông tin!");
+    }
+
+    $http
+      .post(API_CLASS_ADD, p)
+      .then(function () {
+        alert("Thêm lớp thành công!");
+        closeAllModal();
+
+        // load lại bảng + tổng
+        $scope.loadClasses();
+        $scope.loadTotals();
+      })
+      .catch(function (err) {
+        console.error(err);
+        alert("Thêm lớp thất bại!");
+      });
+  };
+
+  // ===== UPDATE =====
+  $scope.updateClass = function () {
+    const p = angular.copy($scope.formUpdate);
+
+    if (!p.classID) return alert("Không xác định lớp!");
+
+    $http
+      .post(API_CLASS_UPDATE, p)
+      .then(function () {
+        alert("Cập nhật lớp thành công!");
+        closeAllModal();
+
+        $scope.loadClasses();
+        $scope.loadTotals();
+      })
+      .catch(function (err) {
+        console.error(err);
+        alert("Cập nhật thất bại!");
+      });
+  };
+
+  // ===== INIT =====
+  (function init() {
+    $timeout(function () {
+      initModalDom();
+    }, 0);
+
+    $scope.loadTeachers();
+    $scope.loadClasses();
+    $scope.loadTotals();
+  })();
 });

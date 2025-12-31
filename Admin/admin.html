@@ -263,18 +263,24 @@
         </section>
 
         <!-- Các section khác -->
-        <section id="class" class="page">
+        <section id="class" class="page" ng-app="QLTruongTieuHocApp" ng-controller="ClassCtrl">
             <div class="class-header">
                 <h3>Quản lý lớp học</h3>
                 <span>Tạo lớp, cập nhật thông tin và gán giáo viên chủ nhiệm</span>
+
                 <div class="class-actions">
                     <img src="..\img\hocsinh.png" alt="">
-                    <h4>Tổng: 3 lớp</h4>
+                    <h4 id="totalClass_Class">Tổng: 0 lớp</h4>
+
                     <img src="..\img\giaovien.png" alt="">
-                    <h4>Học sinh: 90</h4>
-                    <button class="addclass-btn"><i class="fa-solid fa-plus"></i>Tạo lớp mới</button>
+                    <h4 id="totalStudents_Class">Học sinh: 0 </h4>
+
+                    <button class="addclass-btn" ng-click="openCreate()">
+                        <i class="fa-solid fa-plus"></i>Tạo lớp mới
+                    </button>
                 </div>
             </div>
+
             <div class="table-class-wrapper">
                 <table class="class-table">
                     <thead>
@@ -288,150 +294,137 @@
                             <th>Thao tác</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        <tr>
-                            <td>1A</td>
-                            <td>Khối 1</td>
-                            <td>Nguyễn Thị B</td>
-                            <td>38</td>
-                            <td>A101</td>
-                            <td><span class="status activeclass">Hoạt động</span></td>
-                            <td class="actions">
-                                <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <tr ng-repeat="c in classes track by (c.classID || c.classId || c.id)">
+                            <td>{{c.className}}</td>
+                            <td>{{c.grade}}</td>
+                            <td>{{c.gvcn}}</td>
+                            <td>{{c.numberOfStudents}}</td>
+                            <td>{{c.classroom}}</td>
+                            <td>
+                                <span class="status activeclass">{{c.status || 'Hoạt động'}}</span>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>1B</td>
-                            <td>Khối 1</td>
-                            <td>Nguyễn Thu H</td>
-                            <td>39</td>
-                            <td>A102</td>
-                            <td><span class="status activeclass">Hoạt động</span></td>
                             <td class="actions">
-                                <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1C</td>
-                            <td>Khối 1</td>
-                            <td>Phạm T</td>
-                            <td>32</td>
-                            <td>A103</td>
-                            <td><span class="status activeclass">Hoạt động</span></td>
-                            <td class="actions">
-                                <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2E</td>
-                            <td>Khối 2</td>
-                            <td>Trần Thị P</td>
-                            <td>41</td>
-                            <td>B101</td>
-                            <td><span class="status activeclass">Hoạt động</span></td>
-                            <td class="actions">
-                                <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="edit editClass" ng-click="openUpdate(c)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <!-- overlay -->
+            <div class="overlayclass" id="overlayclass"></div>
+
+            <!-- MODAL CREATE -->
+            <div class="modal" id="classModal">
+                <div class="modal-header">
+                    <h2>Tạo lớp mới</h2>
+                    <span class="close-btn" id="closeClassBtn">&times;</span>
+                </div>
+
+                <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
+
+                <form class="class-form" ng-submit="createClass()">
+                    <div class="form-group">
+                        <label>Tên lớp</label>
+                        <input type="text" ng-model="formCreate.className">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Khối</label>
+                        <select ng-model="formCreate.grade">
+                            <option value="">Chọn khối</option>
+                            <option>Khối 1</option>
+                            <option>Khối 2</option>
+                            <option>Khối 3</option>
+                            <option>Khối 4</option>
+                            <option>Khối 5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>GVCN</label>
+                        <select ng-model="formCreate.gvcn">
+                            <option value="">Chọn giáo viên</option>
+                            <option ng-repeat="t in teachers" value="{{t.fullName}}">
+                                {{t.fullName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sĩ số tối đa</label>
+                        <input type="number" ng-model="formCreate.numberOfStudents">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input type="text" ng-model="formCreate.classroom">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitClass-btn">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- MODAL UPDATE -->
+            <div class="modal" id="classModalUpdate">
+                <div class="modal-header">
+                    <h2>Sửa thông tin lớp</h2>
+                    <span class="close-btn" id="closeClassBtnUpdate">&times;</span>
+                </div>
+
+                <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
+
+                <form class="class-form" ng-submit="updateClass()">
+                    <div class="form-group">
+                        <label>Tên lớp</label>
+                        <input type="text" ng-model="formUpdate.className">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Khối</label>
+                        <select ng-model="formUpdate.grade">
+                            <option value="">Chọn khối</option>
+                            <option>Khối 1</option>
+                            <option>Khối 2</option>
+                            <option>Khối 3</option>
+                            <option>Khối 4</option>
+                            <option>Khối 5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>GVCN</label>
+                        <select ng-model="formUpdate.gvcn">
+                            <option value="">Chọn giáo viên</option>
+                            <option ng-repeat="t in teachers" value="{{t.fullName}}">
+                                {{t.fullName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sĩ số tối đa</label>
+                        <input type="number" ng-model="formUpdate.numberOfStudents">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input type="text" ng-model="formUpdate.classroom">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitClassUpdate-btn">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
         </section>
-        <div class="overlayclass" id="overlayclass"></div>
-        <div class="modal" id="classModal">
-            <div class="modal-header">
-                <h2>Tạo lớp mới</h2>
-                <span class="close-btn" id="closeClassBtn">&times;</span>
-            </div>
-            <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
 
-            <form class="class-form" id="classForm">
-                <div class="form-group">
-                    <label>Tên lớp</label>
-                    <input type="text" id="className" placeholder="">
-                </div>
-
-                <div class="form-group">
-                    <label>Khối</label>
-                    <select id="Khoi">
-                        <option>Chọn khối</option>
-                        <option>Khối 1</option>
-                        <option>Khối 2</option>
-                        <option>Khối 3</option>
-                        <option>Khối 4</option>
-                        <option>Khối 5</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>GVCN</label>
-                    <select id="GVCN-class">
-                        <option>Chọn giáo viên</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Sĩ số tối đa</label>
-                    <input type="number" id="siso" value="35">
-                </div>
-
-                <div class="form-group">
-                    <label>Phòng học</label>
-                    <input type="text" id="classroom" placeholder="">
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="submitClass-btn">Thêm mới</button>
-                </div>
-            </form>
-        </div>
-        <div class="modal" id="classModalUpdate">
-            <div class="modal-header">
-                <h2>Sửa thông tin lớp</h2>
-                <span class="close-btn" id="closeClassBtnUpdate">&times;</span>
-            </div>
-            <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
-
-            <form class="class-form" id="classFormUpdate">
-                <div class="form-group">
-                    <label>Tên lớp</label>
-                    <input type="text" id="classNameUpdate">
-                </div>
-
-                <div class="form-group">
-                    <label>Khối</label>
-                    <select id="KhoiUpdate">
-                        <option>Chọn khối</option>
-                        <option>Khối 1</option>
-                        <option>Khối 2</option>
-                        <option>Khối 3</option>
-                        <option>Khối 4</option>
-                        <option>Khối 5</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>GVCN</label>
-                    <select id="GVCN-classUpdate">
-                        <option>Chọn giáo viên</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Sĩ số tối đa</label>
-                    <input type="number" id="sisoUpdate" value="35">
-                </div>
-
-                <div class="form-group">
-                    <label>Phòng học</label>
-                    <input type="text" id="classroomUpdate">
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="submitClassUpdate-btn">Cập nhật</button>
-                </div>
-            </form>
-        </div>
         <section id="teacher" class="page">
             <div class="class-header">
                 <h3>Quản lý giáo viên</h3>
