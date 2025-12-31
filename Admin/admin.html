@@ -16,7 +16,7 @@
     <title>Trường Tiểu học tương lai</title>
 </head>
 
-<body>
+<body ng-app="QLTruongTieuHocApp">
     <header class="navbar">
         <div class="logo">
             <i class="fa-solid fa-school"></i>
@@ -99,19 +99,25 @@
         </section>
 
         <!-- Học sinh -->
-        <section id="student" class="page">
+        <section id="student" class="page" ng-controller="StudentCtrl">
             <div class="student-header">
                 <h3>Quản lý học sinh</h3>
                 <span>Thêm, sửa, xóa và phân lớp học sinh</span>
                 <div class="student-actions">
-                    <input type="text" placeholder="Tìm kiếm học sinh hoặc phụ huynh...">
-                    <select>
-                        <option>Tất cả các lớp</option>
-                        <option>1A</option>
-                        <option>2E</option>
+                    <input type="text" placeholder="Tìm kiếm học sinh hoặc phụ huynh..." ng-model="keyword"
+                        ng-change="onKeywordChange()">
+
+                    <select ng-model="selectedClass" ng-change="onClassChange()">
+                        <option value="">Tất cả các lớp</option>
+                        <option ng-repeat="c in classList" value="{{c}}">{{c}}</option>
                     </select>
-                    <button class="add-btn"><i class="fa-solid fa-plus"></i>Thêm học sinh</button>
+
+
+                    <button class="add-btn" type="button" ng-click="openCreate()">
+                        <i class="fa-solid fa-plus"></i>Thêm học sinh
+                    </button>
                 </div>
+
             </div>
             <!-- Form thêm học sinh -->
             <div class="overlay" id="overlay"></div>
@@ -123,46 +129,45 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form" id="studentForm">
+                <form class="student-form" id="studentForm" ng-submit="createStudent($event)">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" id="studentName" placeholder="">
+                        <input type="text" id="studentName" ng-model="create.studentName">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="studentClass">
-                            <option>Chọn lớp</option>
-                            <option>1A</option>
-                            <option>1B</option>
-                            <option>2A</option>
+                        <select id="studentClass" ng-model="create.className">
+                            <option value="">Chọn lớp</option>
+                            <option ng-repeat="c in classList" value="{{c}}">{{c}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date" id="studentDOB">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="studentDOB" ng-value="create.birthDate">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" id="studentParent" placeholder="">
+                        <input type="text" id="studentParent" ng-model="create.parentName">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" id="studentPhone" placeholder="">
+                        <input type="text" id="studentPhone" ng-model="create.parentPhone">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" id="studentAddress" placeholder="">
+                        <input type="text" id="studentAddress" ng-model="create.parentAddress">
                     </div>
 
                     <div class="form-footer">
                         <button type="submit" class="submit-btn">Thêm mới</button>
                     </div>
                 </form>
+
             </div>
 
             <div class="modal" id="studentModalUpdate">
@@ -172,40 +177,38 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form" id="studentFormUpdate">
+                <form class="student-form" id="studentFormUpdate" ng-submit="updateStudent($event)">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" id="updateName">
+                        <input type="text" id="updateName" ng-model="update.studentName">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="updateClass">
-                            <option>Chọn lớp</option>
-                            <option>1A</option>
-                            <option>1B</option>
-                            <option>2A</option>
+                        <select id="updateClass" ng-model="update.className">
+                            <option value="">Chọn lớp</option>
+                            <option ng-repeat="c in classList" value="{{c}}">{{c}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date" id="updateDOB">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="updateDOB" ng-value="update.birthDate">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" id="updateParent">
+                        <input type="text" id="updateParent" ng-model="update.parentName">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" id="updatePhone">
+                        <input type="text" id="updatePhone" ng-model="update.parentPhone">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" id="updateAddress">
+                        <input type="text" id="updateAddress" ng-model="update.parentAddress">
                     </div>
 
                     <div class="form-footer">
@@ -228,70 +231,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Nguyễn Văn A</td>
-                            <td>1A</td>
-                            <td>15/3/2012</td>
-                            <td>Nguyễn Thị B</td>
-                            <td>0123456789</td>
-                            <td>Hà Nội</td>
-                            <td><span class="status active">Đang học</span></td>
+                        <tr ng-repeat="s in students">
+                            <td>{{s.studentName}}</td>
+                            <td>{{s.className}}</td>
+                            <td>{{ formatDateVN(s.birthDate) }}</td>
+                            <td>{{s.parentName}}</td>
+                            <td>{{s.parentPhone}}</td>
+                            <td>{{s.parentAddress}}</td>
+                            <td>
+                                <span class="status" ng-class="{'active': s.status==1, 'inactive': s.status!=1}">
+                                    {{ s.status==1 ? 'Đang học' : 'Nghỉ học' }}
+                                </span>
+                            </td>
                             <td class="actions">
-                                <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
+                                <button class="edit editStudent" type="button" ng-click="openUpdate(s)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="delete deleteStudent" type="button"
+                                    ng-click="deleteStudent(s.studentID)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Trần Thị B</td>
-                            <td>2E</td>
-                            <td>5/12/2011</td>
-                            <td>Trần Thị L</td>
-                            <td>0123456789</td>
-                            <td>Hà Nội</td>
-                            <td><span class="status active">Đang học</span></td>
-                            <td class="actions">
-                                <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Đỗ Hữu Q</td>
-                            <td>1A</td>
-                            <td>10/8/2012</td>
-                            <td>Nguyễn Văn T</td>
-                            <td>0123456789</td>
-                            <td>Hà Nội</td>
-                            <td><span class="status active">Đang học</span></td>
-                            <td class="actions">
-                                <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Đỗ Hữu A</td>
-                            <td>1A</td>
-                            <td>14/3/2012</td>
-                            <td>Đỗ Hữu M</td>
-                            <td>0123456789</td>
-                            <td>Hà Nội</td>
-                            <td><span class="status active">Đang học</span></td>
-                            <td class="actions">
-                                <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lâm Xung</td>
-                            <td>2E</td>
-                            <td>15/9/2011</td>
-                            <td>Nguyễn S</td>
-                            <td>0123456789</td>
-                            <td>Hà Nội</td>
-                            <td><span class="status active">Đang học</span></td>
-                            <td class="actions">
-                                <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
+
+                        <tr ng-if="students.length===0">
+                            <td colspan="8" style="text-align:center; padding:14px; color:#777;">Không có học sinh</td>
                         </tr>
                     </tbody>
                 </table>
