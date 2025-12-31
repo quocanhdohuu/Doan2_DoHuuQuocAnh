@@ -1,6 +1,7 @@
 using BLL;
 using DAL.Helper;
 using DAL;
+using QuanLyTruongTieuHoc_API.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,11 @@ builder.Services.AddScoped<Teacher_TeachersBLL>();
 builder.Services.AddScoped<Teacher_TeachersDAL>();
 builder.Services.AddScoped<Teacher_TeachersClassBLL>();
 builder.Services.AddScoped<Teacher_TeachersClassDAL>();
+builder.Services.AddScoped<Teacher_AttendanceBLL>();
+builder.Services.AddScoped<Teacher_AttendanceDAL>();
+builder.Services.AddScoped<Teacher_ParentsBLL>();
+builder.Services.AddScoped<Teacher_ParentsDAL>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
