@@ -776,3 +776,337 @@ app.controller("ClassCtrl", function ($scope, $http, $timeout) {
     $scope.loadTotals();
   })();
 });
+
+//Xử lý dữ liệu QL Giáo viên
+var app;
+try {
+  app = angular.module("QLTruongTieuHocApp");
+} catch (e) {
+  app = angular.module("QLTruongTieuHocApp", []);
+}
+
+app.controller("TeacherCtrl", function ($scope, $http, $timeout) {
+  // ===== API =====
+  const API_TEACHER_GETALL =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_GetAll";
+  const API_TEACHER_GETTOTAL =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_GetTotal";
+  const API_TEACHER_ADD =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_Add";
+  const API_TEACHER_UPDATE =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_Update";
+  const API_TEACHER_DELETE =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_Delete";
+
+  const API_SUBJECT_GETALL =
+    "https://localhost:7010/api-doan2/QLSubject/GetAll";
+  const API_CLASS_GETALL =
+    "https://localhost:7010/api-doan2/QLLopHoc/Class_GetAll";
+
+  // ===== State =====
+  $scope.teachers = [];
+  $scope.subjects = [];
+  $scope.classList = [];
+  $scope.editingTeacherId = null;
+
+  // =========================
+  // ===== LOAD DATA =========
+  // =========================
+  $scope.loadTeachers = function () {
+    return $http.get(API_TEACHER_GETALL).then(function (res) {
+      $scope.teachers = res.data || [];
+    });
+  };
+
+  $scope.loadTotalTeachers = function () {
+    return $http
+      .get(API_TEACHER_GETTOTAL)
+      .then(function (res) {
+        const total = res.data?.totalTeachers ?? res.data?.total ?? 0;
+        const el = document.getElementById("totalTeacher_Teacher");
+        if (el) el.innerText = "Tổng: " + total + " giáo viên";
+      })
+      .catch(function () {
+        const el = document.getElementById("totalTeacher_Teacher");
+        if (el) el.innerText = "Tổng: 0 giáo viên";
+      });
+  };
+
+  $scope.loadSubjects = function () {
+    return $http.get(API_SUBJECT_GETALL).then(function (res) {
+      $scope.subjects = res.data || [];
+    });
+  };
+
+  $scope.loadClassList = function () {
+    return $http.get(API_CLASS_GETALL).then(function (res) {
+      $scope.classList = res.data || [];
+    });
+  };
+
+  // =========================
+  // ===== MODAL DOM =========
+  // =========================
+  let overlay, modalCreate, modalUpdate, closeBtn, closeBtnUpdate;
+
+  function initModalDom() {
+    overlay = document.getElementById("overlayteacher");
+    modalCreate = document.getElementById("teacherModal");
+    modalUpdate = document.getElementById("teacherModalUpdate");
+    closeBtn = document.getElementById("closeTeacherBtn");
+    closeBtnUpdate = document.getElementById("closeTeacherBtnUpdate");
+
+    if (overlay) overlay.onclick = closeAllModal;
+    if (closeBtn) closeBtn.onclick = closeAllModal;
+    if (closeBtnUpdate) closeBtnUpdate.onclick = closeAllModal;
+  }
+
+  function show(el) {
+    if (el) el.style.display = "block";
+  }
+  function hide(el) {
+    if (el) el.style.display = "none";
+  }
+
+  function openCreateModal() {
+    show(overlay);
+    show(modalCreate);
+    hide(modalUpdate);
+  }
+
+  function openUpdateModal() {
+    show(overlay);
+    show(modalUpdate);
+    hide(modalCreate);
+  }
+
+  function closeAllModal() {
+    hide(overlay);
+    hide(modalCreate);
+    hide(modalUpdate);
+  }
+
+  // =========================
+  // ===== HELPERS ===========
+  // =========================
+  function normalizeClassNames(arr) {
+    const clean = (arr || []).map((x) => (x || "").trim()).filter(Boolean);
+
+    return Array.from(new Set(clean));
+  }
+
+  function getCheckedClasses(containerId) {
+    const box = document.getElementById(containerId);
+    if (!box) return [];
+    const checked = box.querySelectorAll('input[type="checkbox"]:checked');
+
+    const arr = Array.from(checked)
+      .map((i) => (i.value || "").trim())
+      .filter(Boolean);
+
+    return normalizeClassNames(arr);
+  }
+
+  function setCheckedClasses(containerId, classNames) {
+    const box = document.getElementById(containerId);
+    if (!box) return;
+
+    const set = new Set(normalizeClassNames(classNames));
+    const inputs = box.querySelectorAll('input[type="checkbox"]');
+
+    inputs.forEach((inp) => {
+      inp.checked = set.has((inp.value || "").trim());
+    });
+  }
+
+  function resetCreateFormDom() {
+    const name = document.getElementById("teacherName");
+    const email = document.getElementById("teacherEmail");
+    const phone = document.getElementById("teacherSDT");
+    const subject = document.getElementById("teacherSubject");
+
+    if (name) name.value = "";
+    if (email) email.value = "";
+    if (phone) phone.value = "";
+    if (subject) subject.value = "";
+
+    const box = document.getElementById("teacherClass");
+    if (box)
+      box
+        .querySelectorAll('input[type="checkbox"]')
+        .forEach((i) => (i.checked = false));
+
+    const cn = document.querySelector(".teacherCN");
+    if (cn) cn.checked = false;
+  }
+
+  // =========================
+  // ===== OPEN MODALS =======
+  // =========================
+  $scope.openCreateTeacher = function () {
+    $scope.editingTeacherId = null;
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+      resetCreateFormDom();
+      openCreateModal();
+    }, 0);
+  };
+
+  $scope.openUpdateTeacher = function (t) {
+    $scope.editingTeacherId = t.teacherID || t.teacherId || t.id;
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+
+      const name = document.getElementById("teacherNameUpdate");
+      const email = document.getElementById("teacherEmailUpdate");
+      const phone = document.getElementById("teacherSDTUpdate");
+      const subject = document.getElementById("teacherSubjectUpdate");
+
+      if (name) name.value = t.fullName || "";
+      if (email) email.value = t.email || "";
+      if (phone) phone.value = t.phone || "";
+      if (subject) subject.value = t.specialization || "";
+
+      setCheckedClasses("teacherClassUpdate", t.classNames || []);
+
+      const cn = document.querySelector(".teacherCNUpdate");
+      if (cn) cn.checked = !!t.isCN;
+
+      openUpdateModal();
+    }, 0);
+  };
+
+  // =========================
+  // ===== CREATE ============
+  // =========================
+  $scope.createTeacher = function () {
+    const fullName = (
+      document.getElementById("teacherName")?.value || ""
+    ).trim();
+    const email = (document.getElementById("teacherEmail")?.value || "").trim();
+    const phone = (document.getElementById("teacherSDT")?.value || "").trim();
+    const specialization = (
+      document.getElementById("teacherSubject")?.value || ""
+    ).trim();
+    const classNames = getCheckedClasses("teacherClass");
+    const isCN = !!document.querySelector(".teacherCN")?.checked;
+
+    if (!fullName || !email || !phone || !specialization) {
+      return alert("Vui lòng nhập đủ thông tin!");
+    }
+
+    const payload = {
+      fullName,
+      phone,
+      email,
+      specialization,
+      isCN,
+      classNames: normalizeClassNames(classNames),
+    };
+
+    $http
+      .post(API_TEACHER_ADD, payload)
+      .then(function () {
+        alert("Thêm giáo viên thành công!");
+        closeAllModal();
+        $scope.loadTeachers();
+        $scope.loadTotalTeachers();
+      })
+      .catch(function (err) {
+        console.error("Teacher_Add error:", err);
+        alert("Thêm giáo viên thất bại!");
+      });
+  };
+
+  // =========================
+  // ===== UPDATE (FIX) ======
+  // =========================
+  $scope.updateTeacher = function () {
+    const teacherID = $scope.editingTeacherId;
+
+    const fullName = (
+      document.getElementById("teacherNameUpdate")?.value || ""
+    ).trim();
+    const email = (
+      document.getElementById("teacherEmailUpdate")?.value || ""
+    ).trim();
+    const phone = (
+      document.getElementById("teacherSDTUpdate")?.value || ""
+    ).trim();
+    const specialization = (
+      document.getElementById("teacherSubjectUpdate")?.value || ""
+    ).trim();
+    const classNames = getCheckedClasses("teacherClassUpdate");
+    const isCN = !!document.querySelector(".teacherCNUpdate")?.checked;
+
+    if (!teacherID) return alert("Không xác định giáo viên cần sửa!");
+    if (!fullName || !email || !phone || !specialization) {
+      return alert("Vui lòng nhập đủ thông tin!");
+    }
+
+    const payload = {
+      teacherID: Number(teacherID), // chắc chắn là số
+      fullName,
+      phone,
+      email,
+      specialization,
+      isCN,
+      classNames: normalizeClassNames(classNames),
+    };
+    console.log("classNames gửi lên =", classNames);
+    alert("classNames gửi lên = " + JSON.stringify(classNames));
+    $http
+      .post(API_TEACHER_UPDATE, payload)
+      .then(function () {
+        alert("Cập nhật giáo viên thành công!");
+        closeAllModal();
+        $scope.loadTeachers();
+        $scope.loadTotalTeachers();
+      })
+      .catch(function (err) {
+        console.error("Teacher_Update error:", err);
+        alert("Cập nhật giáo viên thất bại!");
+      });
+  };
+
+  // =========================
+  // ===== DELETE (FIX) ======
+  // =========================
+  $scope.deleteTeacher = function (t) {
+    const id = t.teacherID || t.teacherId || t.id;
+    if (!id) return;
+
+    if (!confirm("Bạn có chắc muốn xóa giáo viên này?")) return;
+
+    $http
+      .post(API_TEACHER_DELETE + "?id=" + id)
+      .then(function () {
+        alert("Xóa giáo viên thành công!");
+      })
+      .catch(function (err) {
+        console.error("Teacher_Delete error:", err);
+        alert("Xóa giáo viên thất bại!");
+      })
+      .finally(function () {
+        $scope.loadTeachers();
+        $scope.loadTotalTeachers();
+      });
+  };
+
+  // =========================
+  // ===== INIT ==============
+  // =========================
+  (function init() {
+    $timeout(function () {
+      initModalDom();
+    }, 0);
+
+    $scope.loadTeachers();
+    $scope.loadTotalTeachers();
+
+    $scope.loadSubjects();
+    $scope.loadClassList();
+  })();
+});

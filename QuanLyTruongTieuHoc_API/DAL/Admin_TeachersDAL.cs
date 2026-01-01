@@ -46,16 +46,17 @@ namespace DAL
             }
 
             string classNames = model.ClassNames != null && model.ClassNames.Any()
-                ? string.Join(",", model.ClassNames)
-                : "";
+                     ? string.Join(",", model.ClassNames.Select(x => (x ?? "").Trim()).Where(x => x != "")): "";
+
+            classNames = classNames.Replace("'", "''");
 
             string sql = $@"
                 EXEC sp_UpdateTeacher
                 @TeacherID = {model.TeacherID},
-                @FullName = N'{model.FullName.Replace("'", "''")}',
-                @Phone = '{model.Phone}',
-                @Email = '{model.Email}',
-                @Specialization = N'{model.Specialization}',
+                @FullName = N'{(model.FullName ?? "").Replace("'", "''")}',
+                @Phone = '{(model.Phone ?? "").Replace("'", "''")}',
+                @Email = '{(model.Email ?? "").Replace("'", "''")}',
+                @Specialization = N'{(model.Specialization ?? "").Replace("'", "''")}',
                 @IsCN = N'{(model.IsCN ? "Có" : "Không")}',
                 @ClassNames = N'{classNames}'";
 

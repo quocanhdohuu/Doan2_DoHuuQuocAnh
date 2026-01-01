@@ -14,7 +14,7 @@ namespace Models
         public string Email { get; set; }
         public string Specialization { get; set; }
         public bool IsCN { get; set; }
-        public List<string> ClassNames { get; set; }
+        public List<string> ClassNames { get; set; } = new List<string>();
     }
 
 }
