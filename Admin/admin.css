@@ -688,7 +688,7 @@ select {
   flex-direction: column;
   gap: 15px;
   padding: 0 20px;
-  
+
   max-height: 330px;
   overflow: auto;
 }
@@ -740,7 +740,7 @@ select {
   background: #e3f2fd;
   color: #1976d2;
   border: 1px solid #ddd;
-  width: 58px;
+  width: 56px;
 }
 .tag.red {
   background: #ffebee;
@@ -758,13 +758,13 @@ select {
   background: #ffffff;
   color: #19ce6a;
   border: 1px solid #ddd;
-  width: 43px;
+  width: 32px;
 }
 .tag.gray {
   background: #f3e5f5;
   color: #262626;
   border: 1px solid #ddd;
-  width: 26px;
+  width: 42px;
 }
 
 .status {

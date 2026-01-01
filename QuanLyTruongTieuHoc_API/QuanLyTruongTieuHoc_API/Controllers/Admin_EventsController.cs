@@ -60,9 +60,9 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
         [Route("Event_Update")]
         [HttpPost]
-        public IActionResult Update(int id, [FromBody] Events ev)
+        public IActionResult Update([FromBody] Events ev)
         {
-            bool ok = _bll.UpdateEvent(id, ev, out string error);
+            bool ok = _bll.UpdateEvent(ev, out string error);
 
             if (!ok)
                 return BadRequest(error);

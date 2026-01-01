@@ -879,16 +879,18 @@
                 </tbody>
             </table>
         </section>
-        <section id="event" class="page">
+        <section id="event" class="page" ng-controller="EventCtrl">
             <div class="event-header">
                 <h3>Quản lý sự kiện & lịch học</h3>
                 <span>Tạo và quản lý các sự kiện, lịch thi, lịch họp</span>
                 <div class="event-actions">
                     <img src="../img/hocsinh.png" alt="">
-                    <h4>Tổng: 3 sự kiện</h4>
+                    <h4 id="totalEvent_Event">Tổng: 0 sự kiện</h4>
                     <img src="../img/giaovien.png" alt="">
-                    <h4>Sắp tới: 2</h4>
-                    <button class="addevent-btn"><i class="fa-solid fa-plus"></i>Thêm sự kiện</button>
+                    <h4 id="upcomingEvent_Event">Sắp tới: 0</h4>
+                    <button class="addevent-btn" ng-click="openCreateEvent()">
+                        <i class="fa-solid fa-plus"></i>Thêm sự kiện
+                    </button>
                 </div>
             </div>
             <div id="overlayevent" class="overlayevent"></div>
@@ -898,8 +900,7 @@
                     <span class="close-btn" id="closeEventBtn">&times;</span>
                 </div>
                 <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
-
-                <form class="event-form" id="eventForm">
+                <form class="event-form" id="eventForm" ng-submit="createEvent($event)">
                     <div class="form-group">
                         <label for="event-name">Tên</label>
                         <input type="text" id="event-name" placeholder="">
@@ -919,11 +920,11 @@
                     <div class="form-group">
                         <label>Loại</label>
                         <div class="event-type">
-                            <div><input type="radio" name="type"> <span>Học thuật</span></div>
-                            <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
-                            <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
-                            <div><input type="radio" name="type"> <span>Họp</span></div>
-                            <div><input type="radio" name="type"> <span>Khác</span></div>
+                            <div><input type="radio" name="typeCreate" value="Học thuật"> <span>Học thuật</span></div>
+                            <div><input type="radio" name="typeCreate" value="Kiểm tra"> <span>Kiểm tra</span></div>
+                            <div><input type="radio" name="typeCreate" value="Nghỉ lễ"> <span>Nghỉ lễ</span></div>
+                            <div><input type="radio" name="typeCreate" value="Họp"> <span>Họp</span></div>
+                            <div><input type="radio" name="typeCreate" value="Khác"> <span>Khác</span></div>
                         </div>
                     </div>
                     <div class="form-footer">
@@ -937,8 +938,7 @@
                     <span class="close-btn" id="closeEventBtnUpdate">&times;</span>
                 </div>
                 <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
-
-                <form class="event-form" id="eventFormUpdate">
+                <form class="event-form" id="eventFormUpdate" ng-submit="updateEvent($event)">
                     <div class="form-group">
                         <label for="event-name">Tên</label>
                         <input type="text" id="event-nameUpdate" placeholder="">
@@ -958,11 +958,11 @@
                     <div class="form-group">
                         <label>Loại</label>
                         <div class="event-typeUpdate">
-                            <div><input type="radio" name="type"> <span>Học thuật</span></div>
-                            <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
-                            <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
-                            <div><input type="radio" name="type"> <span>Họp</span></div>
-                            <div><input type="radio" name="type"> <span>Khác</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Học thuật"> <span>Học thuật</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Kiểm tra"> <span>Kiểm tra</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Nghỉ lễ"> <span>Nghỉ lễ</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Họp"> <span>Họp</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Khác"> <span>Khác</span></div>
                         </div>
                     </div>
                     <div class="form-footer">
@@ -971,70 +971,34 @@
                 </form>
             </div>
             <div class="event-list">
-
-                <!-- SỰ KIỆN 1 -->
-                <div class="listevent gray">
+                <div class="listevent" ng-repeat="e in events" ng-class="getEventCardClass(e)">
                     <div class="event-content">
                         <div class="eventlist-header">
-                            <h3>Ngày hội thể thao</h3>
-                            <span class="tag blue">Học thuật</span>
-                            <span class="status ended">Đã kết thúc</span>
+                            <h3>{{e.title}}</h3>
+                            <!-- TAG loại -->
+                            <span class="tag" ng-class="getTagClass(e.eventType)">
+                                {{e.eventType}}
+                            </span>
+                            <!-- STATUS -->
+                            <span class="status" ng-class="getStatusClass(e)">
+                                {{ getStatusText(e) }}
+                            </span>
                         </div>
-                        <p>Ngày hội thể thao toàn trường</p>
+                        <p>{{e.description}}</p>
                         <div class="eventlist-footer">
                             <i class="fa-regular fa-calendar"></i>
-                            <span>9/10/2025</span>
+                            <span>{{ formatDate(e.eventDate) }}</span>
                             <i class="fa-regular fa-clock"></i>
-                            <span>08:00</span>
+                            <span>{{ formatTime(e.eventTime) }}</span>
                         </div>
                     </div>
                     <div class="eventlist-actions">
-                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
-                    </div>
-                </div>
-
-                <!-- SỰ KIỆN 2 -->
-                <div class="listevent blue">
-                    <div class="event-content">
-                        <div class="eventlist-header">
-                            <h3>Kiểm tra giữa kỳ môn Toán</h3>
-                            <span class="tag red">Kiểm tra</span>
-                            <span class="status upcoming">Sắp tới</span>
-                        </div>
-                        <p>Kiểm tra 45 phút cho các lớp khối 5</p>
-                        <div class="eventlist-footer">
-                            <i class="fa-regular fa-calendar"></i>
-                            <span>15/10/2025</span>
-                            <i class="fa-regular fa-clock"></i>
-                            <span>08:00</span>
-                        </div>
-                    </div>
-                    <div class="eventlist-actions">
-                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
-                    </div>
-                </div>
-
-                <!-- SỰ KIỆN 3 -->
-                <div class="listevent blue">
-                    <div class="event-content">
-                        <div class="eventlist-header">
-                            <h3>Họp phụ huynh cuối kỳ</h3>
-                            <span class="tag purple">Họp</span>
-                            <span class="status upcoming">Sắp tới</span>
-                        </div>
-                        <p>Họp báo cáo kết quả học tập học kỳ 1</p>
-                        <div class="eventlist-footer">
-                            <i class="fa-regular fa-calendar"></i>
-                            <span>20/12/2025</span>
-                            <i class="fa-regular fa-clock"></i>
-                            <span>18:00</span>
-                        </div>
-                    </div>
-                    <div class="eventlist-actions">
-                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
+                        <button class="edit editEvent" ng-click="openUpdateEvent(e)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                        <button class="delete deleteEvent" ng-click="deleteEvent(e)">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
                     </div>
                 </div>
             </div>

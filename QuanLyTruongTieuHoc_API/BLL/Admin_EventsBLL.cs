@@ -41,9 +41,9 @@ namespace BLL
             return _dal.InsertEvent(ev, out error);
         }
 
-        public bool UpdateEvent(int id, Events ev, out string error)
+        public bool UpdateEvent(Events ev, out string error)
         {
-            if (id <= 0)
+            if (ev.EventID <= 0)
             {
                 error = "Invalid event id";
                 return false;
@@ -55,7 +55,6 @@ namespace BLL
                 return false;
             }
 
-            ev.EventID = id;
             return _dal.UpdateEvent(ev, out error);
         }
         public bool DeleteEvent(int id, out string error)

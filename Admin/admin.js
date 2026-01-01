@@ -1110,3 +1110,394 @@ app.controller("TeacherCtrl", function ($scope, $http, $timeout) {
     $scope.loadClassList();
   })();
 });
+
+//Xử lý sự kiện QL Sự kiện
+var app;
+try {
+  app = angular.module("QLTruongTieuHocApp");
+} catch (e) {
+  app = angular.module("QLTruongTieuHocApp", []);
+}
+
+app.controller("EventCtrl", function ($scope, $http, $timeout) {
+  // ===== API =====
+  const API_EVENT_GETALL =
+    "https://localhost:7010/api-doan2/QLEvent/Event_GetAll";
+  const API_EVENT_CREATE =
+    "https://localhost:7010/api-doan2/QLEvent/Event_Create";
+  const API_EVENT_UPDATE =
+    "https://localhost:7010/api-doan2/QLEvent/Event_Update";
+  const API_EVENT_DELETE =
+    "https://localhost:7010/api-doan2/QLEvent/Event_Delete";
+  const API_EVENT_GETTOTAL =
+    "https://localhost:7010/api-doan2/QLEvent/Event_GetTotal";
+  const API_EVENT_GETUPCOMING =
+    "https://localhost:7010/api-doan2/QLEvent/Event_GetUpcoming";
+
+  // ===== State =====
+  $scope.events = [];
+  $scope.editingEventId = null;
+
+  // =========================
+  // ===== LOAD ==============
+  // =========================
+  $scope.loadEvents = function () {
+    return $http.get(API_EVENT_GETALL).then(function (res) {
+      $scope.events = res.data || [];
+    });
+  };
+
+  $scope.loadTotal = function () {
+    return $http
+      .get(API_EVENT_GETTOTAL)
+      .then(function (res) {
+        const total = res.data?.totalEvents ?? res.data?.total ?? 0;
+        const el = document.getElementById("totalEvent_Event");
+        if (el) el.innerText = "Tổng: " + total + " sự kiện";
+      })
+      .catch(function () {
+        const el = document.getElementById("totalEvent_Event");
+        if (el) el.innerText = "Tổng: 0 sự kiện";
+      });
+  };
+
+  $scope.loadUpcoming = function () {
+    return $http
+      .get(API_EVENT_GETUPCOMING)
+      .then(function (res) {
+        const up = res.data?.upcomingEvents ?? res.data?.upcoming ?? 0;
+        const el = document.getElementById("upcomingEvent_Event");
+        if (el) el.innerText = "Sắp tới: " + up;
+      })
+      .catch(function () {
+        const el = document.getElementById("upcomingEvent_Event");
+        if (el) el.innerText = "Sắp tới: 0";
+      });
+  };
+
+  function refreshAll() {
+    $scope.loadEvents();
+    $scope.loadTotal();
+    $scope.loadUpcoming();
+  }
+
+  // =========================
+  // ===== MODAL DOM =========
+  // =========================
+  let overlay, modalCreate, modalUpdate, closeBtn, closeBtnUpdate;
+
+  function initModalDom() {
+    overlay = document.getElementById("overlayevent");
+    modalCreate = document.getElementById("eventModal");
+    modalUpdate = document.getElementById("eventModalUpdate");
+    closeBtn = document.getElementById("closeEventBtn");
+    closeBtnUpdate = document.getElementById("closeEventBtnUpdate");
+
+    if (overlay) overlay.onclick = closeAllModal;
+    if (closeBtn) closeBtn.onclick = closeAllModal;
+    if (closeBtnUpdate) closeBtnUpdate.onclick = closeAllModal;
+  }
+
+  function show(el) {
+    if (el) el.style.display = "block";
+  }
+  function hide(el) {
+    if (el) el.style.display = "none";
+  }
+
+  function openCreateModal() {
+    show(overlay);
+    show(modalCreate);
+    hide(modalUpdate);
+  }
+
+  function openUpdateModal() {
+    show(overlay);
+    show(modalUpdate);
+    hide(modalCreate);
+  }
+
+  function closeAllModal() {
+    hide(overlay);
+    hide(modalCreate);
+    hide(modalUpdate);
+  }
+
+  // =========================
+  // ===== HELPERS ===========
+  // =========================
+  function pad2(n) {
+    n = Number(n) || 0;
+    return n < 10 ? "0" + n : "" + n;
+  }
+
+  // input "dd/mm/yyyy" -> "yyyy-mm-ddT00:00:00"
+  function vnDateToIso(dateStr) {
+    const s = (dateStr || "").trim();
+    if (!s) return "";
+
+    const parts = s.includes("/") ? s.split("/") : s.split("-");
+    if (parts.length !== 3) return "";
+
+    const dd = parseInt(parts[0], 10);
+    const mm = parseInt(parts[1], 10);
+    const yyyy = parseInt(parts[2], 10);
+    if (!dd || !mm || !yyyy) return "";
+
+    return `${yyyy}-${pad2(mm)}-${pad2(dd)}T00:00:00`;
+  }
+
+  // ======= FORMAT for UI (dùng trong HTML) =======
+  // hiển thị eventDate ISO -> dd/mm/yyyy
+  $scope.formatDate = function (isoDate) {
+    if (!isoDate) return "";
+    const s = String(isoDate).substring(0, 10); // yyyy-mm-dd
+    const d = new Date(s + "T00:00:00");
+    if (isNaN(d.getTime())) return "" + isoDate;
+    return `${pad2(d.getDate())}/${pad2(d.getMonth() + 1)}/${d.getFullYear()}`;
+  };
+
+  // hiển thị time "08:00:00" -> "08:00"
+  $scope.formatTime = function (t) {
+    if (!t) return "--:--";
+    const s = String(t);
+    return s.length >= 5 ? s.substring(0, 5) : s;
+  };
+
+  // ======= Radio helpers =======
+  function getRadioValue(name) {
+    const checked = document.querySelector(
+      `input[type="radio"][name="${name}"]:checked`
+    );
+    return checked && checked.value ? checked.value.trim() : "";
+  }
+
+  function setRadioValue(name, value) {
+    const v = (value || "").trim();
+    const radios = document.querySelectorAll(
+      `input[type="radio"][name="${name}"]`
+    );
+    radios.forEach((r) => {
+      r.checked = (r.value || "").trim() === v;
+    });
+  }
+
+  function clearRadio(name) {
+    const radios = document.querySelectorAll(
+      `input[type="radio"][name="${name}"]`
+    );
+    radios.forEach((r) => (r.checked = false));
+  }
+
+  // ======= Upcoming logic (đúng theo Date + Time) =======
+  $scope.isUpcoming = function (e) {
+    const datePart = String(e?.eventDate || "").substring(0, 10);
+    if (!datePart) return false;
+
+    // timePart có thể null => 00:00:00
+    let timePart = e?.eventTime ? String(e.eventTime) : "00:00:00";
+    if (timePart.length === 5) timePart += ":00"; // "08:00" -> "08:00:00"
+
+    const dt = new Date(datePart + "T" + timePart);
+    if (isNaN(dt.getTime())) return false;
+
+    return dt.getTime() >= Date.now();
+  };
+
+  // ======= BIND CSS theo giao diện =======
+  $scope.getEventCardClass = function (e) {
+    return $scope.isUpcoming(e) ? "blue" : "gray";
+  };
+
+  $scope.getStatusClass = function (e) {
+    return $scope.isUpcoming(e) ? "upcoming" : "ended";
+  };
+
+  $scope.getStatusText = function (e) {
+    return $scope.isUpcoming(e) ? "Sắp tới" : "Đã kết thúc";
+  };
+
+  $scope.getTagClass = function (type) {
+    const t = (type || "").trim().toLowerCase();
+    if (t.includes("kiểm tra")) return "red";
+    if (t.includes("họp")) return "purple";
+    if (t.includes("nghỉ")) return "gray";
+    if (t.includes("học thuật")) return "blue";
+    return "green"; // Khác
+  };
+
+  // =========================
+  // ===== OPEN MODALS =======
+  // =========================
+  function resetCreateFormDom() {
+    const title = document.getElementById("event-name");
+    const desc = document.getElementById("event-description");
+    const date = document.getElementById("event-date");
+    const time = document.getElementById("event-time");
+
+    if (title) title.value = "";
+    if (desc) desc.value = "";
+    if (date) date.value = "";
+    if (time) time.value = "";
+
+    clearRadio("typeCreate");
+  }
+
+  $scope.openCreateEvent = function () {
+    $scope.editingEventId = null;
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+      resetCreateFormDom();
+      openCreateModal();
+    }, 0);
+  };
+
+  $scope.openUpdateEvent = function (e) {
+    $scope.editingEventId = e.eventID || e.eventId || e.id;
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+
+      const title = document.getElementById("event-nameUpdate");
+      const desc = document.getElementById("event-descriptionUpdate");
+      const date = document.getElementById("event-dateUpdate");
+      const time = document.getElementById("event-timeUpdate");
+
+      if (title) title.value = e.title || "";
+      if (desc) desc.value = e.description || "";
+      if (date) date.value = $scope.formatDate(e.eventDate);
+      if (time) time.value = $scope.formatTime(e.eventTime);
+
+      setRadioValue("typeUpdate", e.eventType || "");
+
+      openUpdateModal();
+    }, 0);
+  };
+
+  // =========================
+  // ===== CREATE/UPDATE/DEL ==
+  // =========================
+  $scope.createEvent = function ($event) {
+    if ($event && $event.preventDefault) $event.preventDefault();
+
+    const title = (document.getElementById("event-name")?.value || "").trim();
+    const description = (
+      document.getElementById("event-description")?.value || ""
+    ).trim();
+    const dateStr = (document.getElementById("event-date")?.value || "").trim();
+    const timeStr = (document.getElementById("event-time")?.value || "").trim();
+    const eventType = getRadioValue("typeCreate");
+
+    const eventDate = vnDateToIso(dateStr);
+
+    if (!title || !eventDate || !eventType) {
+      return alert("Vui lòng nhập đủ: Tên, Ngày, Loại!");
+    }
+
+    const payload = {
+      title,
+      description,
+      eventDate,
+      eventTime: timeStr
+        ? timeStr.length === 5
+          ? timeStr + ":00"
+          : timeStr
+        : null,
+      eventType,
+    };
+
+    $http
+      .post(API_EVENT_CREATE, payload)
+      .then(function () {
+        alert("Thêm sự kiện thành công!");
+        closeAllModal();
+        refreshAll();
+      })
+      .catch(function (err) {
+        console.error("Event_Create error:", err);
+        alert("Thêm sự kiện thất bại!");
+      });
+  };
+
+  $scope.updateEvent = function ($event) {
+    if ($event && $event.preventDefault) $event.preventDefault();
+
+    const eventID = $scope.editingEventId;
+
+    const title = (
+      document.getElementById("event-nameUpdate")?.value || ""
+    ).trim();
+    const description = (
+      document.getElementById("event-descriptionUpdate")?.value || ""
+    ).trim();
+    const dateStr = (
+      document.getElementById("event-dateUpdate")?.value || ""
+    ).trim();
+    const timeStr = (
+      document.getElementById("event-timeUpdate")?.value || ""
+    ).trim();
+    const eventType = getRadioValue("typeUpdate");
+
+    const eventDate = vnDateToIso(dateStr);
+
+    if (!eventID) return alert("Không xác định sự kiện cần sửa!");
+    if (!title || !eventDate || !eventType) {
+      return alert("Vui lòng nhập đủ: Tên, Ngày, Loại!");
+    }
+
+    const payload = {
+      eventID: Number(eventID),
+      title,
+      description,
+      eventDate,
+      eventTime: timeStr
+        ? timeStr.length === 5
+          ? timeStr + ":00"
+          : timeStr
+        : null,
+      eventType,
+    };
+
+    $http
+      .post(API_EVENT_UPDATE, payload)
+      .then(function () {
+        alert("Cập nhật sự kiện thành công!");
+        closeAllModal();
+        refreshAll();
+      })
+      .catch(function (err) {
+        console.error("Event_Update error:", err);
+        alert("Cập nhật sự kiện thất bại!");
+      });
+  };
+
+  $scope.deleteEvent = function (e) {
+    const id = e.eventID || e.eventId || e.id;
+    if (!id) return;
+
+    if (!confirm("Bạn có chắc muốn xóa sự kiện này?")) return;
+
+    $http
+      .post(API_EVENT_DELETE + "?id=" + id)
+      .then(function () {
+        alert("Xóa sự kiện thành công!");
+        refreshAll();
+      })
+      .catch(function (err) {
+        console.error("Event_Delete error:", err);
+        alert("Xóa sự kiện thất bại!");
+      });
+  };
+
+  // =========================
+  // ===== INIT ==============
+  // =========================
+  (function init() {
+    $timeout(function () {
+      initModalDom();
+    }, 0);
+
+    refreshAll();
+  })();
+});
