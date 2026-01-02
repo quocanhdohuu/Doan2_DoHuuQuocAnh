@@ -19,6 +19,14 @@ builder.Services.AddScoped<PhuHuynh_Parents_DAL>();
 builder.Services.AddScoped<PhuHuynh_Parents_BLL>();
 builder.Services.AddScoped<PhuHuynh_Messager_DAL>();
 builder.Services.AddScoped<PhuHuynh_Messager_BLL>();
+builder.Services.AddScoped<PhuHuynh_Attendance_DAL>();
+builder.Services.AddScoped<PhuHuynh_Attendance_BLL>();
+builder.Services.AddScoped<PhuHuynh_HealthyDaily_DAL>();
+builder.Services.AddScoped<PhuHuynh_HealthyDaily_BLL>();
+builder.Services.AddScoped<PhuHuynh_Schedules_DAL>();
+builder.Services.AddScoped<PhuHuynh_Schedules_BLL>();
+builder.Services.AddScoped<PhuHuynh_Scores_DAL>();
+builder.Services.AddScoped<PhuHuynh_Scores_BLL>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

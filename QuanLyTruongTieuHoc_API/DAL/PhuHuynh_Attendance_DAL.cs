@@ -18,7 +18,7 @@ namespace DAL
             _db = db;
         }
 
-        public List<Attendance> GetAllEvents(out string error)
+        public List<Attendance> GetAllAttendance(out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Attendance", out error);
@@ -44,7 +44,7 @@ namespace DAL
             return list;
         }
 
-        public Attendance GetEventsById(int id, out string error)
+        public Attendance GetAttendanceById(int id, out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Attendance WHERE AttendanceID={id}", out error);

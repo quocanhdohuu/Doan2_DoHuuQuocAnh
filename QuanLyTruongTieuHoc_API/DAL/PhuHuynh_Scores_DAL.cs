@@ -18,7 +18,7 @@ namespace DAL
             _db = db;
         }
 
-        public List<Scores> GetAllEvents(out string error)
+        public List<Scores> GetAllScores(out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Scores", out error);
@@ -45,7 +45,7 @@ namespace DAL
             return list;
         }
 
-        public Scores GetEventsById(int id, out string error)
+        public Scores GetScoresById(int id, out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Scores WHERE ScoreID={id}", out error);

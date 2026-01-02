@@ -18,7 +18,7 @@ namespace DAL
             _db = db;
         }
 
-        public List<HealthDaily> GetAllEvents(out string error)
+        public List<HealthDaily> GetAllHealthDaily(out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable("SELECT * FROM HealthDaily", out error);
@@ -44,7 +44,7 @@ namespace DAL
             return list;
         }
 
-        public HealthDaily GetEventsById(int id, out string error)
+        public HealthDaily GetHealthDailyById(int id, out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM HealthDaily WHERE HealthID={id}", out error);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class PhuHuynh_Schedules_DAL
+    public class PhuHuynh_Schedules_DAL
     {
         private readonly DatabaseHelper _db;
 
@@ -18,7 +18,7 @@ namespace DAL
             _db = db;
         }
 
-        public List<Schedule> GetAllEvents(out string error)
+        public List<Schedule> GetAllSchedules(out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Schedule", out error);
@@ -45,7 +45,7 @@ namespace DAL
             return list;
         }
 
-        public Schedule GetEventsById(int id, out string error)
+        public Schedule GetSchedulesById(int id, out string error)
         {
             error = "";
             var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Schedule WHERE ScheduleID={id}", out error);
