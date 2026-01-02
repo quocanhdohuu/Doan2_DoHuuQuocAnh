@@ -1111,7 +1111,398 @@ app.controller("TeacherCtrl", function ($scope, $http, $timeout) {
   })();
 });
 
-//Xử lý sự kiện QL Sự kiện
+//Xử lý dữ liệu QL Lịch Học
+var app;
+try {
+  app = angular.module("QLTruongTieuHocApp");
+} catch (e) {
+  app = angular.module("QLTruongTieuHocApp", []);
+}
+
+app.controller("ScheduleCtrl", function ($scope, $http, $timeout) {
+  // ===== API =====
+  const API_CLASS_GETALL =
+    "https://localhost:7010/api-doan2/QLLopHoc/Class_GetAll";
+
+  const API_SUBJECT_GETALL =
+    "https://localhost:7010/api-doan2/QLSubject/GetAll";
+
+  const API_TEACHER_GETALL =
+    "https://localhost:7010/api-doan2/QLGiaoVien/Teacher_GetAll";
+
+  const API_SCHEDULE_GETBYCLASS =
+    "https://localhost:7010/api-doan2/QLLichHoc/GetByClassName";
+
+  const API_SCHEDULE_GETTOTAL_BYCLASS =
+    "https://localhost:7010/api-doan2/QLLichHoc/GetTotalByClassName";
+
+  const API_SCHEDULE_ADD = "https://localhost:7010/api-doan2/QLLichHoc/Add";
+
+  const API_SCHEDULE_UPDATE =
+    "https://localhost:7010/api-doan2/QLLichHoc/Update";
+
+  const API_SCHEDULE_DELETE =
+    "https://localhost:7010/api-doan2/QLLichHoc/Delete";
+
+  // ===== State =====
+  $scope.classList = [];
+  $scope.subjects = [];
+  $scope.teachers = [];
+  $scope.schedules = []; // list theo lớp
+  $scope.selectedClassName = "";
+
+  $scope.editingScheduleId = null;
+
+  // Table helper: cellMap["day-period"] = row
+  $scope.cellMap = {};
+
+  // ===== UI Lists =====
+  $scope.dayOfWeekList = [
+    { value: 2, label: "Thứ 2" },
+    { value: 3, label: "Thứ 3" },
+    { value: 4, label: "Thứ 4" },
+    { value: 5, label: "Thứ 5" },
+    { value: 6, label: "Thứ 6" },
+  ];
+
+  $scope.periodList = [
+    { value: 1, label: "Tiết 1 (07:00 - 07:35)", time: "07:00 - 07:35" },
+    { value: 2, label: "Tiết 2 (07:40 - 08:15)", time: "07:40 - 08:15" },
+    { value: 3, label: "Tiết 3 (08:20 - 08:55)", time: "08:20 - 08:55" },
+    { value: 4, label: "Tiết 4 (09:00 - 09:35)", time: "09:00 - 09:35" },
+    { value: 5, label: "Tiết 5 (09:40 - 10:15)", time: "09:40 - 10:15" },
+  ];
+
+  // ===== Modal DOM =====
+  let overlay, modalCreate, modalUpdate, closeBtn, closeBtnUpdate;
+
+  function initModalDom() {
+    overlay = document.getElementById("overlaySchedule");
+    modalCreate = document.getElementById("scheduleModal");
+    modalUpdate = document.getElementById("scheduleModalUpdate");
+    closeBtn = document.getElementById("closeScheduleBtn");
+    closeBtnUpdate = document.getElementById("closeScheduleBtnUpdate");
+
+    if (overlay) overlay.onclick = closeAllModal;
+    if (closeBtn) closeBtn.onclick = closeAllModal;
+    if (closeBtnUpdate) closeBtnUpdate.onclick = closeAllModal;
+  }
+
+  function show(el) {
+    if (el) el.style.display = "block";
+  }
+  function hide(el) {
+    if (el) el.style.display = "none";
+  }
+  function openCreateModal() {
+    show(overlay);
+    show(modalCreate);
+    hide(modalUpdate);
+  }
+  function openUpdateModal() {
+    show(overlay);
+    show(modalUpdate);
+    hide(modalCreate);
+  }
+  function closeAllModal() {
+    hide(overlay);
+    hide(modalCreate);
+    hide(modalUpdate);
+  }
+
+  // ===== Helpers =====
+  function cleanStr(s) {
+    return (s || "").toString().trim();
+  }
+
+  function rebuildCellMap() {
+    const map = {};
+    ($scope.schedules || []).forEach((x) => {
+      const day = Number(x.dayOfWeek);
+      const period = Number(x.period);
+      if (!day || !period) return;
+      map[`${day}-${period}`] = x;
+    });
+    $scope.cellMap = map;
+  }
+
+  $scope.getCell = function (dayOfWeek, period) {
+    return $scope.cellMap[`${dayOfWeek}-${period}`] || null;
+  };
+
+  function setTotalText(total) {
+    const el = document.getElementById("totalSchedule_Schedule");
+    if (el) el.innerText = (total || 0) + " tiết/tuần";
+  }
+
+  // ===== Load base data =====
+  $scope.loadClassList = function () {
+    return $http.get(API_CLASS_GETALL).then(function (res) {
+      $scope.classList = res.data || [];
+      if (!$scope.selectedClassName && $scope.classList.length) {
+        $scope.selectedClassName = $scope.classList[0].className;
+      }
+    });
+  };
+
+  $scope.loadSubjects = function () {
+    return $http.get(API_SUBJECT_GETALL).then(function (res) {
+      $scope.subjects = res.data || [];
+    });
+  };
+
+  $scope.loadTeachers = function () {
+    return $http.get(API_TEACHER_GETALL).then(function (res) {
+      $scope.teachers = res.data || [];
+    });
+  };
+
+  // ===== Load schedules by class =====
+  $scope.loadSchedules = function () {
+    const cls = cleanStr($scope.selectedClassName);
+    if (!cls) {
+      $scope.schedules = [];
+      rebuildCellMap();
+      setTotalText(0);
+      return Promise.resolve();
+    }
+
+    return $http
+      .get(API_SCHEDULE_GETBYCLASS + "?className=" + encodeURIComponent(cls))
+      .then(function (res) {
+        $scope.schedules = res.data || [];
+        rebuildCellMap();
+      })
+      .catch(function () {
+        $scope.schedules = [];
+        rebuildCellMap();
+      });
+  };
+
+  $scope.loadTotalByClass = function () {
+    const cls = cleanStr($scope.selectedClassName);
+    if (!cls) return setTotalText(0);
+
+    return $http
+      .get(
+        API_SCHEDULE_GETTOTAL_BYCLASS + "?className=" + encodeURIComponent(cls)
+      )
+      .then(function (res) {
+        const total = res.data?.totalSchedule ?? res.data?.total ?? 0;
+        setTotalText(total);
+      })
+      .catch(function () {
+        setTotalText(0);
+      });
+  };
+
+  $scope.onChangeClass = function () {
+    refreshAll();
+  };
+
+  function refreshAll() {
+    $scope.loadSchedules();
+    $scope.loadTotalByClass();
+  }
+
+  // ===== Models for form =====
+  $scope.createModel = {
+    className: "",
+    dayOfWeek: null,
+    period: null,
+    subjectName: "",
+    teacherName: "",
+    room: "",
+  };
+
+  $scope.updateModel = {
+    scheduleID: 0,
+    className: "",
+    dayOfWeek: null,
+    period: null,
+    subjectName: "",
+    teacherName: "",
+    room: "",
+  };
+
+  function resetCreateModel() {
+    $scope.createModel = {
+      className: cleanStr($scope.selectedClassName) || "",
+      dayOfWeek: null,
+      period: null,
+      subjectName: "",
+      teacherName: "",
+      room: "",
+    };
+  }
+
+  // ===== Open modals =====
+  $scope.openCreateSchedule = function () {
+    $scope.editingScheduleId = null;
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+      resetCreateModel();
+      openCreateModal();
+    }, 0);
+  };
+
+  $scope.openUpdateSchedule = function (row) {
+    const id = row.scheduleID || row.scheduleId || row.id;
+    $scope.editingScheduleId = id;
+
+    $timeout(function () {
+      if (!overlay || !modalCreate || !modalUpdate) initModalDom();
+
+      $scope.updateModel = {
+        scheduleID: Number(id),
+        className: cleanStr(row.className),
+        dayOfWeek: Number(row.dayOfWeek),
+        period: Number(row.period),
+        subjectName: cleanStr(row.subjectName),
+        teacherName: cleanStr(row.teacherName),
+        room: cleanStr(row.room),
+      };
+
+      openUpdateModal();
+    }, 0);
+  };
+
+  // ===== CRUD =====
+  $scope.createSchedule = function ($event) {
+    if ($event && $event.preventDefault) $event.preventDefault();
+
+    const payload = {
+      className: cleanStr($scope.createModel.className),
+      dayOfWeek: Number($scope.createModel.dayOfWeek),
+      period: Number($scope.createModel.period),
+      subjectName: cleanStr($scope.createModel.subjectName),
+      teacherName: cleanStr($scope.createModel.teacherName),
+      room: cleanStr($scope.createModel.room),
+    };
+
+    // tránh lỗi 400 do khoảng trắng / thiếu field
+    if (
+      !payload.className ||
+      !payload.dayOfWeek ||
+      !payload.period ||
+      !payload.subjectName ||
+      !payload.teacherName ||
+      !payload.room
+    ) {
+      return alert("Vui lòng nhập đủ thông tin tiết học!");
+    }
+
+    $http
+      .post(API_SCHEDULE_ADD, payload)
+      .then(function () {
+        alert("Thêm tiết học thành công!");
+        closeAllModal();
+        refreshAll();
+      })
+      .catch(function (err) {
+        console.log("STATUS:", err.status);
+        console.log("DATA:", err.data);
+        console.log("HEADERS:", err.headers && err.headers());
+        alert(
+          "Thất bại! " +
+            (err.data?.message ||
+              err.data?.title ||
+              JSON.stringify(err.data) ||
+              "Không rõ lỗi")
+        );
+      });
+  };
+
+  $scope.updateSchedule = function ($event) {
+    if ($event && $event.preventDefault) $event.preventDefault();
+
+    const id = Number(
+      $scope.updateModel.scheduleID || $scope.editingScheduleId
+    );
+    if (!id) return alert("Không xác định tiết học cần sửa!");
+
+    const payload = {
+      scheduleID: id,
+      className: cleanStr($scope.updateModel.className),
+      dayOfWeek: Number($scope.updateModel.dayOfWeek),
+      period: Number($scope.updateModel.period),
+      subjectName: cleanStr($scope.updateModel.subjectName),
+      teacherName: cleanStr($scope.updateModel.teacherName),
+      room: cleanStr($scope.updateModel.room),
+    };
+
+    if (
+      !payload.className ||
+      !payload.dayOfWeek ||
+      !payload.period ||
+      !payload.subjectName ||
+      !payload.teacherName ||
+      !payload.room
+    ) {
+      return alert("Vui lòng nhập đủ thông tin tiết học!");
+    }
+
+    $http
+      .post(API_SCHEDULE_UPDATE, payload)
+      .then(function () {
+        alert("Cập nhật tiết học thành công!");
+        closeAllModal();
+        refreshAll();
+      })
+      .catch(function (err) {
+        console.log("STATUS:", err.status);
+        console.log("DATA:", err.data);
+        console.log("HEADERS:", err.headers && err.headers());
+        alert(
+          "Thất bại! " +
+            (err.data?.message ||
+              err.data?.title ||
+              JSON.stringify(err.data) ||
+              "Không rõ lỗi")
+        );
+      });
+  };
+
+  $scope.deleteSchedule = function (row) {
+    const id = row.scheduleID || row.scheduleId || row.id;
+    if (!id) return;
+
+    if (!confirm("Bạn có chắc muốn xóa tiết học này?")) return;
+
+    $http
+      .post(API_SCHEDULE_DELETE + "?id=" + id)
+      .then(function () {
+        alert("Xóa tiết học thành công!");
+        refreshAll();
+      })
+      .catch(function (err) {
+        console.error("Schedule_Delete error:", err);
+        alert("Xóa tiết học thất bại!");
+      });
+  };
+
+  // ===== INIT =====
+  (function init() {
+    $timeout(function () {
+      initModalDom();
+    }, 0);
+
+    Promise.all([
+      $scope.loadClassList(),
+      $scope.loadSubjects(),
+      $scope.loadTeachers(),
+    ])
+      .then(function () {
+        refreshAll();
+      })
+      .catch(function () {
+        refreshAll();
+      });
+  })();
+});
+
+//Xử lý dữ liệu QL Sự kiện
 var app;
 try {
   app = angular.module("QLTruongTieuHocApp");

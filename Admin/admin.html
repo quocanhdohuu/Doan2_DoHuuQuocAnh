@@ -585,21 +585,22 @@
                 </table>
             </div>
         </section>
-        <section id="schedule" class="page">
+        <section id="schedule" class="page" ng-controller="ScheduleCtrl">
             <div class="schedule-header">
                 <h3>Quản lý lịch học</h3>
                 <span>Quản lý thời khóa biểu theo tuần cho từng lớp học</span>
 
                 <div class="schedule-actions">
                     <h5>Chọn lớp: </h5>
-                    <select>
-                        <option>Tất cả các lớp</option>
-                        <option>1A</option>
-                        <option>2E</option>
+                    <select ng-model="selectedClassName" ng-options="c.className as c.className for c in classList"
+                        ng-change="onChangeClass()">
+                        <option value="">Tất cả các lớp</option>
                     </select>
                     <img src="..\img\lichhoc.png" alt="">
-                    <h4>3 tiết/tuần</h4>
-                    <button class="addschedule-btn"><i class="fa-solid fa-plus"></i>Thêm tiết học</button>
+                    <h4 id="totalSchedule_Schedule">0 tiết/tuần</h4>
+                    <button class="addschedule-btn" ng-click="openCreateSchedule()">
+                        <i class="fa-solid fa-plus"></i>Thêm tiết học
+                    </button>
                 </div>
             </div>
             <div id="overlaySchedule" class="overlaySchedule"></div>
@@ -611,66 +612,51 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
 
-                <form class="schedule-form" id="scheduleForm">
+                <form class="schedule-form" id="scheduleForm" ng-submit="createSchedule($event)">
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="schedule-Class">
-                            <option>Lớp 1A</option>
-                            <option>Lớp 1B</option>
-                            <option>Lớp 2A</option>
+                        <select id="schedule-Class" ng-model="createModel.className"
+                            ng-options="c.className as c.className for c in classList" required>
+                            <option value="">Chọn lớp</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Thứ</label>
-                        <select id="schedule-dayofweek">
-                            <option>Thứ 2</option>
-                            <option>Thứ 3</option>
-                            <option>Thứ 4</option>
-                            <option>Thứ 5</option>
-                            <option>Thứ 6</option>
+                        <select id="schedule-dayofweek" ng-model="createModel.dayOfWeek"
+                            ng-options="d.value as d.label for d in dayOfWeekList" required>
+                            <option value="">Chọn thứ</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Tiết</label>
-                        <select id="schedule-lesson">
-                            <option>Tiết 1 (07:00 - 07:35)</option>
-                            <option>Tiết 2 (07:40 - 08:15)</option>
-                            <option>Tiết 3 (08:20 - 08:55)</option>
-                            <option>Tiết 4 (09:00 - 09:35)</option>
-                            <option>Tiết 5 (09:40 - 10:15)</option>
+                        <select id="schedule-lesson" ng-model="createModel.period"
+                            ng-options="p.value as p.label for p in periodList" required>
+                            <option value="">Chọn tiết</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Môn học</label>
-                        <select id="schedule-subject">
-                            <option>Chọn môn học</option>
-                            <option>Tiếng Việt</option>
-                            <option>Toán</option>
-                            <option>Đạo đức</option>
-                            <option>Tự nhiên và Xã hội</option>
-                            <option>Khoa học</option>
-                            <option>Lịch sử</option>
-                            <option>Địa lí</option>
-                            <option>Tin học và Công nghệ</option>
-                            <option>Âm nhạc</option>
-                            <option>Mĩ thuật</option>
-                            <option>Giáo dục Thể chất</option>
-                            <option>Hoạt động trải nghiệm</option>
-                            <option>Tiếng Anh</option>
+                        <select id="schedule-subject" ng-model="createModel.subjectName"
+                            ng-options="s.subjectName as s.subjectName for s in subjects" required>
+                            <option value="">Chọn môn học</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Giáo viên</label>
-                        <input id="schedule-addteacher" type="text" placeholder="Nhập tên giáo viên">
+                        <select ng-model="createModel.teacherName"
+                            ng-options="t.fullName as t.fullName for t in teachers" required>
+                            <option value="">Chọn giáo viên</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Phòng học</label>
-                        <input id="schedule-addroom" type="text" placeholder="Ví dụ: P101">
+                        <input id="schedule-addroom" type="text" ng-model="createModel.room" placeholder="Ví dụ: P101"
+                            required>
                     </div>
 
                     <div class="form-footer">
@@ -685,66 +671,51 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
 
-                <form class="schedule-form" id="scheduleFormUpdate">
+                <form class="schedule-form" id="scheduleFormUpdate" ng-submit="updateSchedule($event)">
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="schedule-ClassUpdate">
-                            <option>Lớp 1A</option>
-                            <option>Lớp 1B</option>
-                            <option>Lớp 2A</option>
+                        <select id="schedule-ClassUpdate" ng-model="updateModel.className"
+                            ng-options="c.className as c.className for c in classList" required>
+                            <option value="">Chọn lớp</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Thứ</label>
-                        <select id="schedule-dayofweekUpdate">
-                            <option>Thứ 2</option>
-                            <option>Thứ 3</option>
-                            <option>Thứ 4</option>
-                            <option>Thứ 5</option>
-                            <option>Thứ 6</option>
+                        <select id="schedule-dayofweekUpdate" ng-model="updateModel.dayOfWeek"
+                            ng-options="d.value as d.label for d in dayOfWeekList" required>
+                            <option value="">Chọn thứ</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Tiết</label>
-                        <select id="schedule-lessonUpdate">
-                            <option>Tiết 1 (07:00 - 07:35)</option>
-                            <option>Tiết 2 (07:40 - 08:15)</option>
-                            <option>Tiết 3 (08:20 - 08:55)</option>
-                            <option>Tiết 4 (09:00 - 09:35)</option>
-                            <option>Tiết 5 (09:40 - 10:15)</option>
+                        <select id="schedule-lessonUpdate" ng-model="updateModel.period"
+                            ng-options="p.value as p.label for p in periodList" required>
+                            <option value="">Chọn tiết</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Môn học</label>
-                        <select id="schedule-subjectUpdate">
-                            <option>Chọn môn học</option>
-                            <option>Tiếng Việt</option>
-                            <option>Toán</option>
-                            <option>Đạo đức</option>
-                            <option>Tự nhiên và Xã hội</option>
-                            <option>Khoa học</option>
-                            <option>Lịch sử</option>
-                            <option>Địa lí</option>
-                            <option>Tin học và Công nghệ</option>
-                            <option>Âm nhạc</option>
-                            <option>Mĩ thuật</option>
-                            <option>Giáo dục Thể chất</option>
-                            <option>Hoạt động trải nghiệm</option>
-                            <option>Tiếng Anh</option>
+                        <select id="schedule-subjectUpdate" ng-model="updateModel.subjectName"
+                            ng-options="s.subjectName as s.subjectName for s in subjects" required>
+                            <option value="">Chọn môn học</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Giáo viên</label>
-                        <input id="schedule-teacherUpdate" type="text" placeholder="Nhập tên giáo viên">
+                        <select ng-model="updateModel.teacherName"
+                            ng-options="t.fullName as t.fullName for t in teachers" required>
+                            <option value="">Chọn giáo viên</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Phòng học</label>
-                        <input id="schedule-roomUpdate" type="text" placeholder="Ví dụ: P101">
+                        <input id="schedule-roomUpdate" type="text" ng-model="updateModel.room"
+                            placeholder="Ví dụ: P101" required>
                     </div>
 
                     <div class="form-footer">
@@ -764,117 +735,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiết 1<br><small>07:00 - 07:35</small></td>
+                    <tr ng-repeat="p in periodList">
                         <td>
-                            <div class="schedule-lesson">
-                                <strong>Toán</strong>
-                                <div class="schedule-teacher">Nguyễn Văn A</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
+                            Tiết {{p.value}}<br>
+                            <small>{{p.time}}</small>
                         </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Âm nhạc</strong>
-                                <div class="schedule-teacher">Lê Văn C</div>
-                                <span class="badge schedule-room">P201</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>Tiết 2<br><small>07:40 - 08:15</small></td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        <td ng-repeat="d in dayOfWeekList">
+                            <div class="schedule-lesson" ng-if="getCell(d.value, p.value)">
+                                <strong>{{getCell(d.value, p.value).subjectName}}</strong>
+                                <div class="schedule-teacher">{{getCell(d.value, p.value).teacherName}}</div>
+                                <span class="badge schedule-room">{{getCell(d.value, p.value).room}}</span>
 
-                    <tr>
-                        <td>Tiết 3<br><small>08:20 - 08:55</small></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Tiết 4<br><small>09:00 - 09:35</small></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Tiết 5<br><small>09:40 - 10:15</small></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"
+                                        ng-click="openUpdateSchedule(getCell(d.value, p.value))">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="deleteschedule" ng-click="deleteSchedule(getCell(d.value, p.value))">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
