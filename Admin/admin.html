@@ -311,6 +311,9 @@
                                 </button>
                             </td>
                         </tr>
+                        <tr ng-if="classes.length===0">
+                            <td colspan="8" style="text-align:center; padding:14px; color:#777;">Không có lớp học</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -580,6 +583,9 @@
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </td>
+                        </tr>
+                        <tr ng-if="teachers.length===0">
+                            <td colspan="8" style="text-align:center; padding:14px; color:#777;">Không có giáo viên</td>
                         </tr>
                     </tbody>
                 </table>
@@ -884,6 +890,9 @@
                         </button>
                     </div>
                 </div>
+                <div ng-if="events.length===0">
+                    <p style="text-align:center; padding-top:14px; color:#777;">Không có sự kiện</p>
+                </div>
             </div>
         </section>
         <section id="report" class="page">
@@ -928,13 +937,13 @@
                 <div class="card-baocao tonghocsinh">
                     <h3>Tổng học sinh</h3>
                     <img src="..\img\tonghocsinh.png" alt="anh">
-                    <p class="number">228</p>
+                    <p class="number" id="totalStudents_report">0</p>
                     <span>Trên tất cả lớp</span>
                 </div>
                 <div class="card-baocao chuyencanTB">
                     <h3>Chuyên cần TB</h3>
                     <img src="..\img\chuyencantb.png" alt="anh">
-                    <p class="number">94.4%</p>
+                    <p class="number" id="totalAttendance_report">0</p>
                     <span>+0.3 so với tháng trước</span>
                 </div>
                 <div class="card-baocao hoclucgioi">

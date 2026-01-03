@@ -1892,3 +1892,38 @@ app.controller("EventCtrl", function ($scope, $http, $timeout) {
     refreshAll();
   })();
 });
+
+//Xử lý dữ liệu trang báo cáo
+$(document).ready(function () {
+  loadTotalStudents_report();
+  loadTotalAttendences_report();
+});
+
+function loadTotalStudents_report() {
+  $.ajax({
+    url: "https://localhost:7010/api-doan2/QLHocSinh/Student_GetTotal",
+    type: "GET",
+    success: function (res) {
+      $("#totalStudents_report").text(res.totalStudents);
+    },
+    error: function (err) {
+      console.error("Lỗi khi load tổng học sinh", err);
+      $("#totalStudents_report").text("0");
+    },
+  });
+}
+
+
+function loadTotalAttendences_report() {
+  $.ajax({
+    url: "https://localhost:7010/api-doan2/BaoCao/GetTodaySummary",
+    type: "GET",
+    success: function (res) {
+      $("#totalAttendance_report").text(res.totalAttendance);
+      $("#presentPercent_report").text(res.presentPercent + "% có mặt");
+    },
+    error: function (err) {
+      console.error("Lỗi lấy dữ liệu chuyên cần", err);
+    },
+  });
+}
