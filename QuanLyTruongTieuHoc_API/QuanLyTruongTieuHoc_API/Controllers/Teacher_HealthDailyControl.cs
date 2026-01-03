@@ -1,0 +1,63 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using BLL;
+using System.Data;
+using Models;
+using DAL;
+namespace QuanLyTruongTieuHoc_API.Controllers
+{
+    [Route("api/GiaoVien")]
+    [ApiController]
+    public class Teacher_HealthDailyControl:ControllerBase
+    {
+        private readonly Teacher_HealthDailyBLL _bll;
+        public Teacher_HealthDailyControl(Teacher_HealthDailyBLL bll)
+        {
+            _bll = bll;
+        }
+        [Route("HT_GetAll")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var list = _bll.GetAll(out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            return Ok(list);
+        }
+        [Route("HD_Create")]
+        [HttpPost]
+        public IActionResult Create([FromBody] HealthDaily HD)
+        {
+            bool ok = _bll.CreateHD(HD, out string error);
+
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new { message = "Created" });
+        }
+
+        [Route("HD_Update")]
+        [HttpPost]
+        public IActionResult Update(int id, [FromBody] HealthDaily HD)
+        {
+            bool ok = _bll.UpdateHD(id, HD, out string error);
+
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new { message = "Updated successfully" });
+        }
+        [Route("HD_Delete")]
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            bool ok = _bll.DeleteHD(id, out string error);
+
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new { message = "Delete successfully" });
+        }
+    }
+}

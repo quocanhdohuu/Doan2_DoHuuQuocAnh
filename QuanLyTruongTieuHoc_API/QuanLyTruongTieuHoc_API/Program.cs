@@ -24,6 +24,12 @@ builder.Services.AddScoped<Teacher_AttendanceBLL>();
 builder.Services.AddScoped<Teacher_AttendanceDAL>();
 builder.Services.AddScoped<Teacher_ParentsBLL>();
 builder.Services.AddScoped<Teacher_ParentsDAL>();
+builder.Services.AddScoped<Teacher_HealthDailyBLL>();
+builder.Services.AddScoped<Teacher_HealthDailyDAL>();
+builder.Services.AddScoped<Teacher_MessagesBLL>();
+builder.Services.AddScoped<Teacher_MessagesDAL>();
+builder.Services.AddScoped<Teacher_ScheduleBLL>();
+builder.Services.AddScoped<Teacher_ScheduleDAL>();
 
 
 builder.Services.AddEndpointsApiExplorer();
