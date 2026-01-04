@@ -52,7 +52,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
 
         [Route("AT_Update")]
-        [HttpPost]
+        [HttpPut]
         public IActionResult Update(int id, [FromBody] Attendance AT)
         {
             bool ok = _bll.UpdateAten(id, AT, out string error);
@@ -63,7 +63,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
             return Ok(new { message = "Updated successfully" });
         }
         [Route("AT_Delete")]
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             bool ok = _bll.DeleteAT(id, out string error);

@@ -1,3 +1,22 @@
+// var current_url = "https://localhost:44319";
+// var app = angular.module('GiaoVien', []);
+
+// app.controller("ThongTinGV_Ctrl", function ($scope, $http) {
+
+//     $scope.teacher = {};
+//     const teacherId = 1;
+
+//     $scope.LoadTeacher = function () {
+//       $http.get("https://localhost:44319/api/GiaoVien/Tea_GetByID?id=1")
+//             .then(function (res) {
+//                 $scope.teacher = res.data;
+//             }, function () {
+//                 alert("Không lấy được thông tin giáo viên");
+//             });
+//     };
+
+//     $scope.LoadTeacher();
+// });
 //------------------Tong Quan--------------------
 const btnTONGQUAN = document.querySelector('#btnTongQuan');
 const btnDiemDanh=document.querySelector('#btnDieDanh');
@@ -1141,3 +1160,4 @@ window.onload = function() {
     loadTTGV();
     loadhdgan();
 }
+

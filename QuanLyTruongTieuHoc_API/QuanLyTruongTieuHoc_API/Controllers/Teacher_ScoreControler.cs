@@ -53,7 +53,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
 
         [Route("Score_Update")]
-        [HttpPost]
+        [HttpPut]
         public IActionResult Update(int id, [FromBody] Scores score)
         {
             bool ok = _bll.UpdateScore(id, score, out string error);
@@ -64,7 +64,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
             return Ok(new { message = "Updated successfully" });
         }
         [Route("Score_Delete")]
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             bool ok = _bll.DeleteScore(id, out string error);

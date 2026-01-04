@@ -25,9 +25,8 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(list);
         }
-        [Route("Tea_GetByID")]
-        [HttpGet]
-        public IActionResult GetById(int id)
+        [HttpGet("Tea_GetByID")]
+        public IActionResult GetById([FromQuery] int id)
         {
             var user = _bll.GetById(id, out string error);
 
@@ -40,7 +39,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
             return Ok(user);
         }
         [Route("Tea_Update")]
-        [HttpPost]
+        [HttpPut]
         public IActionResult Update(int id, [FromBody] Teachers tea)
         {
             bool ok = _bll.UpdateStu(id, tea, out string error);

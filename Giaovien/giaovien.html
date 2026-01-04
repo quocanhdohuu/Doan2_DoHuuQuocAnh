@@ -8,9 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <script src="../jquery-3.7.1.min.js"></script>
+    <script src="../angular.min.js"></script>
 
 </head>
-<body>
+<body ng-app="GiaoVien">
 <!----------------- Thanh thông tin ------------------->
     <div id="Thanhthongtin">
         <div id="ThongTin">
@@ -132,10 +134,10 @@
         <div id="ChonLop">
             <div id="Lop">
                 <span>Lớp học:</span>
-                <select id="chonLopHoc">
-                    <option value="6A">6A - Toán</option>
-                    <option value="6B">6B - Toán</option>
-                    <option value="7A">7A - Toán</option>
+                <select id="chonLopHoc" >
+                    <option value="1">6A - Toán</option>
+                    <option value="2">6B - Toán</option>
+                    <option value="3">7A - Toán</option>
                 </select>
             </div>
 
@@ -1029,7 +1031,7 @@
         </div> 
     </div>
    <!--========================================TTCANHaN========================================-->
-   <div id="ThongTinCaNhan">
+   <div id="ThongTinCaNhan"   ng-controller="ThongTinGV_Ctrl">
     <div id="TTCNGV">
     <h3 id="anhTTCN">
         <img src="../img/user (1).png"  alt="">
@@ -1039,31 +1041,31 @@
     <span class="sub-title">Quản lý thông tin cá nhân của giáo viên</span>
 
     <div id="ThongTinGV">
-        <div class="TTGV">
-            <span class="label">Họ và tên:</span>
-            <input class="value" id="tenGV" value="Trần Thị B">
-        </div>
-        <div class="TTGV">
-            <span class="label">Mã giáo viên:</span>
-            <input class="value" id="maGV" value="GV001">
-        </div>
-        <div class="TTGV">
-            <span class="label">Ngày sinh:</span>
-            <input class="value" id="ngaySinhGV" value="1980-01-01">
-        </div>
-        <div class="TTGV">
-            <span class="label">Chuyên môn:</span>
-            <input class="value" id="chuyenMonGV" value="Toán học">
-        </div>
-        <div class="TTGV">
-            <span class="label">Số điện thoại:</span>
-            <input class="value" id="sdtGV" value="0123456789">
-        </div>
-        <div class="TTGV">
-            <span class="label">Email:</span>
-            <input class="value" id="emailGV" value="sakjhaja@gmail.com">
-        </div>
+    <div class="TTGV">
+        <span class="label">Họ và tên:</span>
+        <input class="value" ng-model="teacher.FullName">
     </div>
+
+    <div class="TTGV">
+        <span class="label">Mã giáo viên:</span>
+       <input class="value" ng-model="teacher.TeacherID" readonly>
+    </div>
+
+    <div class="TTGV">
+        <span class="label">Chuyên môn:</span>
+        <input class="value" ng-model="teacher.Specialization">
+    </div>
+
+    <div class="TTGV">
+        <span class="label">Số điện thoại:</span>
+        <input class="value" ng-model="teacher.Phone">
+    </div>
+
+    <div class="TTGV">
+        <span class="label">Email:</span>
+        <input class="value" ng-model="teacher.Email">
+    </div>
+</div>
     <div id="ChucNangTTCN">
         <button id="btnDoiMatKhau"><i class="fa-solid fa-key"></i>Đổi mật khẩu</button>
         <button id="btnSuaTT"><i class="fa-solid fa-edit"></i>Sửa thông tin</button>

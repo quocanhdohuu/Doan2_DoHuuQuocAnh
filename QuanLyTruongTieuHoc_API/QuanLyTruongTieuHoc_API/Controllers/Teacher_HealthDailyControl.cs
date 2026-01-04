@@ -38,7 +38,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
 
         [Route("HD_Update")]
-        [HttpPost]
+        [HttpPut]
         public IActionResult Update(int id, [FromBody] HealthDaily HD)
         {
             bool ok = _bll.UpdateHD(id, HD, out string error);
@@ -49,7 +49,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
             return Ok(new { message = "Updated successfully" });
         }
         [Route("HD_Delete")]
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             bool ok = _bll.DeleteHD(id, out string error);
