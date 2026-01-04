@@ -1055,8 +1055,6 @@ app.controller("TeacherCtrl", function ($scope, $http, $timeout) {
       isCN,
       classNames: normalizeClassNames(classNames),
     };
-    console.log("classNames gửi lên =", classNames);
-    alert("classNames gửi lên = " + JSON.stringify(classNames));
     $http
       .post(API_TEACHER_UPDATE, payload)
       .then(function () {
@@ -1894,36 +1892,246 @@ app.controller("EventCtrl", function ($scope, $http, $timeout) {
 });
 
 //Xử lý dữ liệu trang báo cáo
-$(document).ready(function () {
-  loadTotalStudents_report();
-  loadTotalAttendences_report();
+var app;
+try {
+  app = angular.module("QLTruongTieuHocApp");
+} catch (e) {
+  app = angular.module("QLTruongTieuHocApp", []);
+}
+
+app.controller("AdminDashboardCtrl", function ($scope, $http, $timeout) {
+  const API_DASHBOARD_GETALL = "https://localhost:7010/api-doan2/BaoCao/GetAll";
+
+  // ===== Helpers =====
+  function fmtPercent(x) {
+    if (x === null || x === undefined || isNaN(x)) return "0%";
+    return Number(x).toFixed(1).replace(".0", "") + "%";
+  }
+
+  function escapeHtml(s) {
+    if (s === null || s === undefined) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function pick(obj, ...keys) {
+    if (!obj) return undefined;
+    for (const k of keys) {
+      if (obj[k] !== undefined && obj[k] !== null) return obj[k];
+    }
+    return undefined;
+  }
+
+  function renderCards(data) {
+    const summary = pick(data, "AcademicSummary", "academicSummary") || {};
+
+    const total = pick(summary, "TotalStudents", "totalStudents") ?? 0;
+
+    // Tổng học sinh
+    setText("totalStudents_report", total);
+
+    // Học lực giỏi
+    const excellentCount =
+      pick(summary, "ExcellentCount", "excellentCount") ?? 0;
+    const excellentPercent =
+      pick(summary, "ExcellentPercent", "excellentPercent") ?? 0;
+    setText("excellentPercent_report", fmtPercent(excellentPercent));
+    setText("excellentCount_report", `${excellentCount}/${total} học sinh`);
+
+    // Cần cải thiện
+    const needCount =
+      pick(summary, "NeedImproveCount", "needImproveCount") ?? 0;
+    const needPercent =
+      pick(summary, "NeedImprovePercent", "needImprovePercent") ?? 0;
+    setText("needImprovePercent_report", fmtPercent(needPercent));
+    setText("needImproveCount_report", `${needCount}/${total} học sinh`);
+
+    // Chuyên cần TB: tính chuẩn = tổng Có mặt / tổng (Có mặt+Vắng+Muộn) * 100
+    const attList = pick(data, "AttendanceByClass", "attendanceByClass") || [];
+    let totalPresent = 0,
+      totalRecords = 0;
+
+    attList.forEach((x) => {
+      const p = Number(pick(x, "PresentCount", "presentCount") ?? 0);
+      const a = Number(pick(x, "AbsentCount", "absentCount") ?? 0);
+      const l = Number(pick(x, "LateCount", "lateCount") ?? 0);
+      totalPresent += p;
+      totalRecords += p + a + l;
+    });
+
+    const avg = totalRecords === 0 ? 0 : (totalPresent * 100.0) / totalRecords;
+    setText("totalAttendance_report", fmtPercent(avg));
+  }
+
+  function renderAttendanceByClassTable(data) {
+    const tbody = document.getElementById("tbodyAttendanceByClass");
+    if (!tbody) return;
+
+    const list = pick(data, "AttendanceByClass", "attendanceByClass") || [];
+    let html = "";
+
+    list.forEach((item) => {
+      const className = escapeHtml(pick(item, "ClassName", "className") ?? "");
+      const present = pick(item, "PresentCount", "presentCount") ?? 0;
+      const absent = pick(item, "AbsentCount", "absentCount") ?? 0;
+      const late = pick(item, "LateCount", "lateCount") ?? 0;
+
+      html += `
+        <tr>
+          <td>${className}</td>
+          <td>${present}</td>
+          <td>${absent}</td>
+          <td>${late}</td>
+        </tr>`;
+    });
+
+    tbody.innerHTML = html || `<tr><td colspan="4">Không có dữ liệu</td></tr>`;
+  }
+
+  function renderAcademicDistribution(data) {
+    const tbody = document.getElementById("tbodyAcademicDistribution");
+    if (!tbody) return;
+
+    const list =
+      pick(data, "AcademicDistribution", "academicDistribution") || [];
+    let html = "";
+
+    list.forEach((item) => {
+      const level = (pick(item, "XepLoai", "xepLoai") ?? "").trim();
+      const percent = Number(pick(item, "TiLe", "tiLe") ?? 0);
+
+      let rowClass = "";
+      if (level === "Giỏi") rowClass = "gioi";
+      else if (level === "Khá") rowClass = "kha";
+      else if (level === "Trung bình") rowClass = "trungbinh";
+      else if (level === "Yếu") rowClass = "yeu";
+
+      html += `
+        <tr class="${rowClass}">
+          <td>${escapeHtml(level)}</td>
+          <td>${percent.toFixed(0)}%</td>
+        </tr>`;
+    });
+
+    tbody.innerHTML = html || `<tr><td colspan="2">Không có dữ liệu</td></tr>`;
+  }
+
+  function renderMonthlyTrend(data) {
+    const tbody = document.getElementById("tbodyMonthlyTrend");
+    if (!tbody) return;
+
+    const list = pick(data, "MonthlyTrend", "monthlyTrend") || [];
+    let html = "";
+
+    list.forEach((item) => {
+      const month = escapeHtml(pick(item, "Thang", "thang") ?? "");
+      const percent = Number(pick(item, "TiLeChuyenCan", "tiLeChuyenCan") ?? 0);
+
+      html += `
+        <tr>
+          <td>${month}</td>
+          <td>${percent.toFixed(0)}%</td>
+        </tr>`;
+    });
+
+    tbody.innerHTML = html || `<tr><td colspan="2">Không có dữ liệu</td></tr>`;
+  }
+
+  function renderClassDetailCards(data) {
+    const container = document.getElementById("classDetailContainer");
+    if (!container) return;
+
+    const list =
+      pick(
+        data,
+        "ClassDetail",
+        "classDetail",
+        "AttendanceByClass",
+        "attendanceByClass"
+      ) || [];
+    let html = "";
+
+    list.forEach((item) => {
+      const className = escapeHtml(pick(item, "ClassName", "className") ?? "");
+      const total = pick(item, "TotalStudents", "totalStudents") ?? 0;
+      const present = pick(item, "PresentCount", "presentCount") ?? 0;
+      const absent = pick(item, "AbsentCount", "absentCount") ?? 0;
+      const late = pick(item, "LateCount", "lateCount") ?? 0;
+      const percent = pick(item, "PresentPercent", "presentPercent") ?? 0;
+
+      html += `
+        <div class="chitietlop">
+          <div class="lop-left">
+            <button class="lop-btn">${className}</button>
+            <div class="lop-info">
+              <p><b>Sĩ số: ${total}</b></p>
+              <span>Có mặt: ${present} | Vắng: ${absent} | Muộn: ${late}</span>
+            </div>
+          </div>
+          <div class="lop-right">
+            <h3>${fmtPercent(percent)}</h3>
+            <span>Chuyên cần</span>
+          </div>
+        </div>`;
+    });
+
+    container.innerHTML =
+      html || `<div class="chitietlop">Không có dữ liệu</div>`;
+  }
+
+  function loadDashboard() {
+    const fromDate = document.getElementById("from-date")?.value;
+    const toDate = document.getElementById("to-date")?.value;
+
+    if (!fromDate || !toDate) return;
+
+    const from = new Date(fromDate);
+    const to = new Date(toDate);
+
+    if (from > to) {
+      console.warn("Từ ngày lớn hơn Đến ngày → bỏ qua load dữ liệu");
+      return;
+    }
+
+    const url = `${API_DASHBOARD_GETALL}?fromDate=${encodeURIComponent(
+      fromDate
+    )}&toDate=${encodeURIComponent(toDate)}`;
+
+    $http
+      .get(url)
+      .then(function (res) {
+        const data = res.data;
+
+        console.log("Dashboard API response:", data);
+
+        renderCards(data);
+        renderAttendanceByClassTable(data);
+        renderAcademicDistribution(data);
+        renderMonthlyTrend(data);
+        renderClassDetailCards(data);
+      })
+      .catch(function (err) {
+        console.log("Load dashboard error:", err);
+      });
+  }
+
+  $timeout(function () {
+    loadDashboard();
+
+    document
+      .getElementById("from-date")
+      ?.addEventListener("change", loadDashboard);
+    document
+      .getElementById("to-date")
+      ?.addEventListener("change", loadDashboard);
+  }, 0);
 });
-
-function loadTotalStudents_report() {
-  $.ajax({
-    url: "https://localhost:7010/api-doan2/QLHocSinh/Student_GetTotal",
-    type: "GET",
-    success: function (res) {
-      $("#totalStudents_report").text(res.totalStudents);
-    },
-    error: function (err) {
-      console.error("Lỗi khi load tổng học sinh", err);
-      $("#totalStudents_report").text("0");
-    },
-  });
-}
-
-
-function loadTotalAttendences_report() {
-  $.ajax({
-    url: "https://localhost:7010/api-doan2/BaoCao/GetTodaySummary",
-    type: "GET",
-    success: function (res) {
-      $("#totalAttendance_report").text(res.totalAttendance);
-      $("#presentPercent_report").text(res.presentPercent + "% có mặt");
-    },
-    error: function (err) {
-      console.error("Lỗi lấy dữ liệu chuyên cần", err);
-    },
-  });
-}

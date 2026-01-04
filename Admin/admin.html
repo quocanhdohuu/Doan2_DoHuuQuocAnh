@@ -895,7 +895,7 @@
                 </div>
             </div>
         </section>
-        <section id="report" class="page">
+        <section id="report" class="page" ng-controller="AdminDashboardCtrl">
             <div class="report-top">
                 <div class="report-top-header">
                     <h3>Báo cáo tổng hợp</h3>
@@ -949,14 +949,14 @@
                 <div class="card-baocao hoclucgioi">
                     <h3>Học lực giỏi</h3>
                     <img src="..\img\hoclucgioi.png" alt="anh">
-                    <p class="number">21.1%</p>
-                    <span>45/228 học sinh</span>
+                    <p class="number" id="excellentPercent_report">0%</p>
+                    <span id="excellentCount_report">0/0 học sinh</span>
                 </div>
                 <div class="card-baocao cancaithien">
                     <h3>Cần cải thiện</h3>
                     <img src="..\img\cancaithien.png" alt="anh">
-                    <p class="number">5.6%</p>
-                    <span>12/228 học sinh</span>
+                    <p class="number" id="needImprovePercent_report">0%</p>
+                    <span id="needImproveCount_report">0/0 học sinh</span>
                 </div>
             </div>
             <div class="chuyencan-hocluc">
@@ -972,44 +972,7 @@
                                 <th class="muon">Đi muộn</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1A</td>
-                                <td>33</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1B</td>
-                                <td>31</td>
-                                <td>3</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1C</td>
-                                <td>29</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1D</td>
-                                <td>32</td>
-                                <td>1</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>2A</td>
-                                <td>31</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>2B</td>
-                                <td>34</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tbodyAttendanceByClass"></tbody>
                     </table>
                 </div>
                 <div class="phanbohocluc">
@@ -1022,24 +985,7 @@
                                 <th>Tỉ lệ (%)</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="gioi">
-                                <td>Giỏi</td>
-                                <td>21%</td>
-                            </tr>
-                            <tr class="kha">
-                                <td>Khá</td>
-                                <td>42%</td>
-                            </tr>
-                            <tr class="trungbinh">
-                                <td>Trung bình</td>
-                                <td>31%</td>
-                            </tr>
-                            <tr class="yeu">
-                                <td>Yếu</td>
-                                <td>6%</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tbodyAcademicDistribution"></tbody>
                     </table>
                 </div>
             </div>
@@ -1053,86 +999,13 @@
                             <th>Tỉ lệ chuyên cần (%)</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>T9</td>
-                            <td>94%</td>
-                        </tr>
-                        <tr>
-                            <td>T10</td>
-                            <td>95%</td>
-                        </tr>
-                        <tr>
-                            <td>T11</td>
-                            <td>93%</td>
-                        </tr>
-                        <tr>
-                            <td>T12</td>
-                            <td>94%</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tbodyMonthlyTrend"></tbody>
                 </table>
             </div>
             <div class="baocaochitiet">
                 <h3>Báo cáo chi tiết theo lớp</h3>
                 <span>Chi tiết chuyên cần và học lực từng lớp</span>
-                <div class="baocaochitiet-lops">
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">1A</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 36</b></p>
-                                <span>Có mặt: 32 | Vắng: 3 | Muộn: 1</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>88.9%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">1B</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 36</b></p>
-                                <span>Có mặt: 30 | Vắng: 4 | Muộn: 2</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>88.9%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">1C</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 31</b></p>
-                                <span>Có mặt: 28 | Vắng: 2 | Muộn: 1</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>88.9%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">2A</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 32</b></p>
-                                <span>Có mặt: 32 | Vắng: 0 | Muộn: 0</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>100%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="baocaochitiet-lops" id="classDetailContainer"></div>
             </div>
         </section>
     </main>
