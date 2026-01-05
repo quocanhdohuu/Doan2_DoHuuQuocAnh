@@ -5,11 +5,11 @@ using System.Data;
 
 namespace DAL
 {
-    public class UsersDAL
+    public class Admin_UsersDAL
     {
         private readonly DatabaseHelper _db;
 
-        public UsersDAL(DatabaseHelper db)
+        public Admin_UsersDAL(DatabaseHelper db)
         {
             _db = db;
         }
@@ -58,6 +58,20 @@ namespace DAL
                 Status = (bool)row["Status"]
             };
         }
+        public string GetRoleById(int id, out string error)
+        {
+            error = "";
+
+            var dt = _db.ExecuteQueryToDataTable(
+                $"SELECT Role FROM Users WHERE UserID = {id}",
+                out error
+            );
+
+            if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
+                return null;
+
+            return dt.Rows[0]["Role"].ToString();
+        }
 
         public bool InsertUser(Users user, out string error)
         {
@@ -88,5 +102,31 @@ namespace DAL
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);
         }
+        public Users CheckLogin(string username, string password, out string error)
+        {
+            error = "";
+
+            string sql =
+                $"SELECT * FROM Users " +
+                $"WHERE Username = '{username.Replace("'", "''")}' " +
+                $"AND Password = '{password.Replace("'", "''")}' " +
+                $"AND Status = 1";
+
+            var dt = _db.ExecuteQueryToDataTable(sql, out error);
+
+            if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
+                return null;
+
+            var row = dt.Rows[0];
+
+            return new Users
+            {
+                UserID = (int)row["UserID"],
+                Username = row["Username"].ToString(),
+                Role = row["Role"].ToString(),
+                Status = (bool)row["Status"]
+            };
+        }
+
     }
 }

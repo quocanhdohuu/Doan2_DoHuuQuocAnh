@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    public class UsersBLL
+    public class Admin_UsersBLL
     {
-        private readonly UsersDAL _dal;
+        private readonly Admin_UsersDAL _dal;
 
-        public UsersBLL(UsersDAL dal)
+        public Admin_UsersBLL(Admin_UsersDAL dal)
         {
             _dal = dal;
         }
@@ -22,6 +22,16 @@ namespace BLL
         public Users GetById(int id, out string error)
         {
             return _dal.GetUserById(id, out error);
+        }
+        public string GetRoleById(int id, out string error)
+        {
+            if (id <= 0)
+            {
+                error = "Invalid user id";
+                return null;
+            }
+
+            return _dal.GetRoleById(id, out error);
         }
 
         public bool CreateUser(Users user, out string error)
@@ -52,5 +62,22 @@ namespace BLL
 
             return _dal.UpdateUser(user, out error);
         }
+        public Users Login(string username, string password, out string error)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                error = "Username is required";
+                return null;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                error = "Password is required";
+                return null;
+            }
+
+            return _dal.CheckLogin(username, password, out error);
+        }
+
     }
 }

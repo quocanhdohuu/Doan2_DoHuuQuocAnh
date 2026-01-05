@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="../jquery-3.7.1.min.js"></script>
+    <script src="../angular.min.js"></script>
     <script src="admin.js" defer></script>
 
     <title>Trường Tiểu học tương lai</title>
 </head>
 
-<body>
+<body ng-app="QLTruongTieuHocApp">
     <header class="navbar">
         <div class="logo">
             <i class="fa-solid fa-school"></i>
@@ -41,26 +43,26 @@
                 <div class="card hocsinh">
                     <h3>Tổng học sinh</h3>
                     <img src="..\img\hocsinh.png" alt="anh">
-                    <p class="number">1247</p>
+                    <p class="number" id="totalStudents">0</p>
                     <span>+12 so với tháng trước</span>
                 </div>
                 <div class="card giaovien">
                     <h3>Giáo viên</h3>
                     <img src="..\img\giaovien.png" alt="anh">
-                    <p class="number">54</p>
+                    <p class="number" id="totalTeachers">0</p>
                     <span>+2 so với tháng trước</span>
                 </div>
                 <div class="card lophoc">
                     <h3>Lớp học</h3>
                     <img src="..\img\lophoc.png" alt="anh">
-                    <p class="number">32</p>
+                    <p class="number" id="totalClasses">0</p>
                     <span>Không thay đổi</span>
                 </div>
                 <div class="card chuyencan">
                     <img src="..\img\chuyencan.png" alt="anh">
                     <h3>Chuyên cần hôm nay</h3>
-                    <p class="number">1185</p>
-                    <span>95.2% có mặt</span>
+                    <p class="number" id="totalAttendance">0</p>
+                    <span id="presentPercent">0% có mặt</span>
                 </div>
             </div>
 
@@ -97,19 +99,25 @@
         </section>
 
         <!-- Học sinh -->
-        <section id="student" class="page">
+        <section id="student" class="page" ng-controller="StudentCtrl">
             <div class="student-header">
                 <h3>Quản lý học sinh</h3>
                 <span>Thêm, sửa, xóa và phân lớp học sinh</span>
                 <div class="student-actions">
-                    <input type="text" placeholder="Tìm kiếm học sinh hoặc phụ huynh...">
-                    <select>
-                        <option>Tất cả các lớp</option>
-                        <option>1A</option>
-                        <option>2E</option>
+                    <input type="text" placeholder="Tìm kiếm học sinh hoặc phụ huynh..." ng-model="keyword"
+                        ng-change="onKeywordChange()">
+
+                    <select ng-model="selectedClass" ng-change="onClassChange()">
+                        <option value="">Tất cả các lớp</option>
+                        <option ng-repeat="c in classList" value="{{c}}">{{c}}</option>
                     </select>
-                    <button class="add-btn"><i class="fa-solid fa-plus"></i>Thêm học sinh</button>
+
+
+                    <button class="add-btn" type="button" ng-click="openCreate()">
+                        <i class="fa-solid fa-plus"></i>Thêm học sinh
+                    </button>
                 </div>
+
             </div>
             <!-- Form thêm học sinh -->
             <div class="overlay" id="overlay"></div>
@@ -121,46 +129,45 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form" id="studentForm">
+                <form class="student-form" id="studentForm" ng-submit="createStudent($event)">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" id="studentName" placeholder="">
+                        <input type="text" id="studentName" ng-model="create.studentName">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="studentClass">
-                            <option>Chọn lớp</option>
-                            <option>1A</option>
-                            <option>1B</option>
-                            <option>2A</option>
+                        <select id="studentClass" ng-model="create.className">
+                            <option value="">Chọn lớp</option>
+                            <option ng-repeat="c in classList" value="{{c}}">{{c}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date" id="studentDOB">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="studentDOB" ng-value="create.birthDate">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" id="studentParent" placeholder="">
+                        <input type="text" id="studentParent" ng-model="create.parentName">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" id="studentPhone" placeholder="">
+                        <input type="text" id="studentPhone" ng-model="create.parentPhone">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" id="studentAddress" placeholder="">
+                        <input type="text" id="studentAddress" ng-model="create.parentAddress">
                     </div>
 
                     <div class="form-footer">
                         <button type="submit" class="submit-btn">Thêm mới</button>
                     </div>
                 </form>
+
             </div>
 
             <div class="modal" id="studentModalUpdate">
@@ -170,40 +177,38 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin học sinh vào form bên dưới.</p>
 
-                <form class="student-form" id="studentFormUpdate">
+                <form class="student-form" id="studentFormUpdate" ng-submit="updateStudent($event)">
                     <div class="form-group">
                         <label>Họ tên</label>
-                        <input type="text" id="updateName">
+                        <input type="text" id="updateName" ng-model="update.studentName">
                     </div>
 
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="updateClass">
-                            <option>Chọn lớp</option>
-                            <option>1A</option>
-                            <option>1B</option>
-                            <option>2A</option>
+                        <select id="updateClass" ng-model="update.className">
+                            <option value="">Chọn lớp</option>
+                            <option ng-repeat="c in classList" value="{{c}}">{{c}}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input style="color: rgb(91, 91, 91);" type="date" id="updateDOB">
+                        <input style="color: rgb(91, 91, 91);" type="date" id="updateDOB" ng-value="update.birthDate">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ huynh</label>
-                        <input type="text" id="updateParent">
+                        <input type="text" id="updateParent" ng-model="update.parentName">
                     </div>
 
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" id="updatePhone">
+                        <input type="text" id="updatePhone" ng-model="update.parentPhone">
                     </div>
 
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" id="updateAddress">
+                        <input type="text" id="updateAddress" ng-model="update.parentAddress">
                     </div>
 
                     <div class="form-footer">
@@ -211,266 +216,228 @@
                     </div>
                 </form>
             </div>
+            <div class="table-wrapper">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>Lớp</th>
+                            <th>Ngày sinh</th>
+                            <th>Phụ huynh</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="s in students">
+                            <td>{{s.studentName}}</td>
+                            <td>{{s.className}}</td>
+                            <td>{{ formatDateVN(s.birthDate) }}</td>
+                            <td>{{s.parentName}}</td>
+                            <td>{{s.parentPhone}}</td>
+                            <td>{{s.parentAddress}}</td>
+                            <td>
+                                <span class="status" ng-class="{'active': s.status==1, 'inactive': s.status!=1}">
+                                    {{ s.status==1 ? 'Đang học' : 'Nghỉ học' }}
+                                </span>
+                            </td>
+                            <td class="actions">
+                                <button class="edit editStudent" type="button" ng-click="openUpdate(s)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="delete deleteStudent" type="button"
+                                    ng-click="deleteStudent(s.studentID)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </td>
+                        </tr>
 
-            <table class="student-table">
-                <thead>
-                    <tr>
-                        <th>Họ tên</th>
-                        <th>Lớp</th>
-                        <th>Ngày sinh</th>
-                        <th>Phụ huynh</th>
-                        <th>Số điện thoại</th>
-                        <th>Địa chỉ</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Nguyễn Văn A</td>
-                        <td>1A</td>
-                        <td>15/3/2012</td>
-                        <td>Nguyễn Thị B</td>
-                        <td>0123456789</td>
-                        <td>Hà Nội</td>
-                        <td><span class="status active">Đang học</span></td>
-                        <td class="actions">
-                            <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Trần Thị B</td>
-                        <td>2E</td>
-                        <td>5/12/2011</td>
-                        <td>Trần Thị L</td>
-                        <td>0123456789</td>
-                        <td>Hà Nội</td>
-                        <td><span class="status active">Đang học</span></td>
-                        <td class="actions">
-                            <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Đỗ Hữu Q</td>
-                        <td>1A</td>
-                        <td>10/8/2012</td>
-                        <td>Nguyễn Văn T</td>
-                        <td>0123456789</td>
-                        <td>Hà Nội</td>
-                        <td><span class="status active">Đang học</span></td>
-                        <td class="actions">
-                            <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Đỗ Hữu A</td>
-                        <td>1A</td>
-                        <td>14/3/2012</td>
-                        <td>Đỗ Hữu M</td>
-                        <td>0123456789</td>
-                        <td>Hà Nội</td>
-                        <td><span class="status active">Đang học</span></td>
-                        <td class="actions">
-                            <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lâm Xung</td>
-                        <td>2E</td>
-                        <td>15/9/2011</td>
-                        <td>Nguyễn S</td>
-                        <td>0123456789</td>
-                        <td>Hà Nội</td>
-                        <td><span class="status active">Đang học</span></td>
-                        <td class="actions">
-                            <button class="edit editStudent"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteStudent"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr ng-if="students.length===0">
+                            <td colspan="8" style="text-align:center; padding:14px; color:#777;">Không có học sinh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- Các section khác -->
-        <section id="class" class="page">
+        <section id="class" class="page" ng-app="QLTruongTieuHocApp" ng-controller="ClassCtrl">
             <div class="class-header">
                 <h3>Quản lý lớp học</h3>
                 <span>Tạo lớp, cập nhật thông tin và gán giáo viên chủ nhiệm</span>
+
                 <div class="class-actions">
                     <img src="..\img\hocsinh.png" alt="">
-                    <h4>Tổng: 3 lớp</h4>
+                    <h4 id="totalClass_Class">Tổng: 0 lớp</h4>
+
                     <img src="..\img\giaovien.png" alt="">
-                    <h4>Học sinh: 90</h4>
-                    <button class="addclass-btn"><i class="fa-solid fa-plus"></i>Tạo lớp mới</button>
+                    <h4 id="totalStudents_Class">Học sinh: 0 </h4>
+
+                    <button class="addclass-btn" ng-click="openCreate()">
+                        <i class="fa-solid fa-plus"></i>Tạo lớp mới
+                    </button>
                 </div>
             </div>
-            <table class="class-table">
-                <thead>
-                    <tr>
-                        <th>Tên lớp</th>
-                        <th>Khối</th>
-                        <th>GVCN</th>
-                        <th>Sĩ số</th>
-                        <th>Phòng học</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1A</td>
-                        <td>Khối 1</td>
-                        <td>Nguyễn Thị B</td>
-                        <td>38</td>
-                        <td>A101</td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1B</td>
-                        <td>Khối 1</td>
-                        <td>Nguyễn Thu H</td>
-                        <td>39</td>
-                        <td>A102</td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1C</td>
-                        <td>Khối 1</td>
-                        <td>Phạm T</td>
-                        <td>32</td>
-                        <td>A103</td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2E</td>
-                        <td>Khối 2</td>
-                        <td>Trần Thị P</td>
-                        <td>41</td>
-                        <td>B101</td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editClass"><i class="fa-solid fa-pen-to-square"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div class="table-class-wrapper">
+                <table class="class-table">
+                    <thead>
+                        <tr>
+                            <th>Tên lớp</th>
+                            <th>Khối</th>
+                            <th>GVCN</th>
+                            <th>Sĩ số</th>
+                            <th>Phòng học</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="c in classes track by (c.classID || c.classId || c.id)">
+                            <td>{{c.className}}</td>
+                            <td>{{c.grade}}</td>
+                            <td>{{c.gvcn}}</td>
+                            <td>{{c.numberOfStudents}}</td>
+                            <td>{{c.classroom}}</td>
+                            <td>
+                                <span class="status activeclass">{{c.status || 'Hoạt động'}}</span>
+                            </td>
+                            <td class="actions">
+                                <button class="edit editClass" ng-click="openUpdate(c)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-if="classes.length===0">
+                            <td colspan="8" style="text-align:center; padding:14px; color:#777;">Không có lớp học</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- overlay -->
+            <div class="overlayclass" id="overlayclass"></div>
+
+            <!-- MODAL CREATE -->
+            <div class="modal" id="classModal">
+                <div class="modal-header">
+                    <h2>Tạo lớp mới</h2>
+                    <span class="close-btn" id="closeClassBtn">&times;</span>
+                </div>
+
+                <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
+
+                <form class="class-form" ng-submit="createClass()">
+                    <div class="form-group">
+                        <label>Tên lớp</label>
+                        <input type="text" ng-model="formCreate.className">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Khối</label>
+                        <select ng-model="formCreate.grade">
+                            <option value="">Chọn khối</option>
+                            <option>Khối 1</option>
+                            <option>Khối 2</option>
+                            <option>Khối 3</option>
+                            <option>Khối 4</option>
+                            <option>Khối 5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>GVCN</label>
+                        <select ng-model="formCreate.gvcn">
+                            <option value="">Chọn giáo viên</option>
+                            <option ng-repeat="t in teachers" value="{{t.fullName}}">
+                                {{t.fullName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sĩ số tối đa</label>
+                        <input type="number" ng-model="formCreate.numberOfStudents">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input type="text" ng-model="formCreate.classroom">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitClass-btn">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- MODAL UPDATE -->
+            <div class="modal" id="classModalUpdate">
+                <div class="modal-header">
+                    <h2>Sửa thông tin lớp</h2>
+                    <span class="close-btn" id="closeClassBtnUpdate">&times;</span>
+                </div>
+
+                <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
+
+                <form class="class-form" ng-submit="updateClass()">
+                    <div class="form-group">
+                        <label>Tên lớp</label>
+                        <input type="text" ng-model="formUpdate.className">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Khối</label>
+                        <select ng-model="formUpdate.grade">
+                            <option value="">Chọn khối</option>
+                            <option>Khối 1</option>
+                            <option>Khối 2</option>
+                            <option>Khối 3</option>
+                            <option>Khối 4</option>
+                            <option>Khối 5</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>GVCN</label>
+                        <select ng-model="formUpdate.gvcn">
+                            <option value="">Chọn giáo viên</option>
+                            <option ng-repeat="t in teachers" value="{{t.fullName}}">
+                                {{t.fullName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sĩ số tối đa</label>
+                        <input type="number" ng-model="formUpdate.numberOfStudents">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phòng học</label>
+                        <input type="text" ng-model="formUpdate.classroom">
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit" class="submitClassUpdate-btn">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
         </section>
-        <div class="overlayclass" id="overlayclass"></div>
-        <div class="modal" id="classModal">
-            <div class="modal-header">
-                <h2>Tạo lớp mới</h2>
-                <span class="close-btn" id="closeClassBtn">&times;</span>
-            </div>
-            <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
 
-            <form class="class-form" id="classForm">
-                <div class="form-group">
-                    <label>Tên lớp</label>
-                    <input type="text" id="className" placeholder="">
-                </div>
-
-                <div class="form-group">
-                    <label>Khối</label>
-                    <select id="Khoi">
-                        <option>Chọn khối</option>
-                        <option>Khối 1</option>
-                        <option>Khối 2</option>
-                        <option>Khối 3</option>
-                        <option>Khối 4</option>
-                        <option>Khối 5</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>GVCN</label>
-                    <select id="GVCN-class">
-                        <option>Chọn giáo viên</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Sĩ số tối đa</label>
-                    <input type="number" id="siso" value="35">
-                </div>
-
-                <div class="form-group">
-                    <label>Phòng học</label>
-                    <input type="text" id="classroom" placeholder="">
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="submitClass-btn">Thêm mới</button>
-                </div>
-            </form>
-        </div>
-        <div class="modal" id="classModalUpdate">
-            <div class="modal-header">
-                <h2>Sửa thông tin lớp</h2>
-                <span class="close-btn" id="closeClassBtnUpdate">&times;</span>
-            </div>
-            <p class="modal-desc">Nhập thông tin lớp học vào form bên dưới.</p>
-
-            <form class="class-form" id="classFormUpdate">
-                <div class="form-group">
-                    <label>Tên lớp</label>
-                    <input type="text" id="classNameUpdate">
-                </div>
-
-                <div class="form-group">
-                    <label>Khối</label>
-                    <select id="KhoiUpdate">
-                        <option>Chọn khối</option>
-                        <option>Khối 1</option>
-                        <option>Khối 2</option>
-                        <option>Khối 3</option>
-                        <option>Khối 4</option>
-                        <option>Khối 5</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>GVCN</label>
-                    <select id="GVCN-classUpdate">
-                        <option>Chọn giáo viên</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Sĩ số tối đa</label>
-                    <input type="number" id="sisoUpdate" value="35">
-                </div>
-
-                <div class="form-group">
-                    <label>Phòng học</label>
-                    <input type="text" id="classroomUpdate">
-                </div>
-
-                <div class="form-footer">
-                    <button type="submit" class="submitClassUpdate-btn">Cập nhật</button>
-                </div>
-            </form>
-        </div>
-        <section id="teacher" class="page">
+        <section id="teacher" class="page" ng-controller="TeacherCtrl">
             <div class="class-header">
                 <h3>Quản lý giáo viên</h3>
                 <span>TThêm, sửa, xóa giáo viên và phân công lớp</span>
                 <div class="class-actions">
                     <img src="..\img\hocsinh.png" alt="">
-                    <h4>Tổng: 3 giáo viên</h4>
-                    <button class="addteacher-btn"><i class="fa-solid fa-plus"></i>Thêm giáo viên</button>
+                    <h4 id="totalTeacher_Teacher">Tổng: 0 giáo viên</h4>
+                    <button class="addteacher-btn" ng-click="openCreateTeacher()">
+                        <i class="fa-solid fa-plus"></i>Thêm giáo viên
+                    </button>
                 </div>
             </div>
             <div id="overlayteacher" class="overlayteacher"></div>
@@ -483,7 +450,7 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin giáo viên và phân công lớp.</p>
 
-                <form class="teacher-form" id="teacherForm">
+                <form class="teacher-form" id="teacherForm" ng-submit="createTeacher()">
                     <div class="form-group">
                         <label>Họ tên</label>
                         <input type="text" id="teacherName" placeholder="">
@@ -502,32 +469,19 @@
                     <div class="form-group">
                         <label>Môn dạy</label>
                         <select id="teacherSubject">
-                            <option>Chọn môn dạy</option>
-                            <option>Tiếng Việt</option>
-                            <option>Toán</option>
-                            <option>Đạo đức</option>
-                            <option>Tự nhiên và Xã hội</option>
-                            <option>Khoa học</option>
-                            <option>Lịch sử</option>
-                            <option>Địa lí</option>
-                            <option>Tin học và Công nghệ</option>
-                            <option>Âm nhạc</option>
-                            <option>Mĩ thuật</option>
-                            <option>Giáo dục Thể chất</option>
-                            <option>Hoạt động trải nghiệm</option>
-                            <option>Tiếng Anh</option>
+                            <option value="">Chọn môn dạy</option>
+                            <option ng-repeat="s in subjects" value="{{s.subjectName}}">
+                                {{s.subjectName}}
+                            </option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Lớp dạy</label>
                         <div class="checkbox-group" id="teacherClass">
-                            <label><input type="checkbox"> 1A</label>
-                            <label><input type="checkbox"> 1B</label>
-                            <label><input type="checkbox"> 1C</label>
-                            <label><input type="checkbox"> 1D</label>
-                            <label><input type="checkbox"> 2A</label>
-                            <label><input type="checkbox"> 2B</label>
+                            <label ng-repeat="c in classList">
+                                <input type="checkbox" value="{{c.className}}"> {{c.className}}
+                            </label>
                         </div>
                     </div>
 
@@ -548,7 +502,7 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin giáo viên và phân công lớp.</p>
 
-                <form class="teacher-form" id="teacherFormUpdate">
+                <form class="teacher-form" id="teacherFormUpdate" ng-submit="updateTeacher()">
                     <div class="form-group">
                         <label>Họ tên</label>
                         <input type="text" id="teacherNameUpdate">
@@ -567,32 +521,19 @@
                     <div class="form-group">
                         <label>Môn dạy</label>
                         <select id="teacherSubjectUpdate">
-                            <option>Chọn môn dạy</option>
-                            <option>Tiếng Việt</option>
-                            <option>Toán</option>
-                            <option>Đạo đức</option>
-                            <option>Tự nhiên và Xã hội</option>
-                            <option>Khoa học</option>
-                            <option>Lịch sử</option>
-                            <option>Địa lí</option>
-                            <option>Tin học và Công nghệ</option>
-                            <option>Âm nhạc</option>
-                            <option>Mĩ thuật</option>
-                            <option>Giáo dục Thể chất</option>
-                            <option>Hoạt động trải nghiệm</option>
-                            <option>Tiếng Anh</option>
+                            <option value="">Chọn môn dạy</option>
+                            <option ng-repeat="s in subjects" value="{{s.subjectName}}">
+                                {{s.subjectName}}
+                            </option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Lớp dạy</label>
                         <div class="checkbox-group" id="teacherClassUpdate">
-                            <label><input type="checkbox"> 1A</label>
-                            <label><input type="checkbox"> 1B</label>
-                            <label><input type="checkbox"> 1C</label>
-                            <label><input type="checkbox"> 1D</label>
-                            <label><input type="checkbox"> 2A</label>
-                            <label><input type="checkbox"> 2B</label>
+                            <label ng-repeat="c in classList">
+                                <input type="checkbox" value="{{c.className}}"> {{c.className}}
+                            </label>
                         </div>
                     </div>
 
@@ -606,80 +547,66 @@
                     </div>
                 </form>
             </div>
-            <table class="class-table">
-                <thead>
-                    <tr>
-                        <th>Họ tên</th>
-                        <th>Email</th>
-                        <th>Số điện thoại</th>
-                        <th>Môn dạy</th>
-                        <th>Lớp dạy</th>
-                        <th>Chủ nhiệm</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Nguyễn Thị Lan</td>
-                        <td>lan.nguyen@school.edu.vn</td>
-                        <td>0987654321</td>
-                        <td>Toán</td>
-                        <td><span class="status activeclass1">1A</span> <span class="status activeclass1">1B</span></td>
-                        <td><span class="status activeclass">1A</span></td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteTeacher"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Trần Thị M</td>
-                        <td>mtran@school.edu.vn</td>
-                        <td>0369852147</td>
-                        <td>Văn</td>
-                        <td>
-                            <span class="status activeclass1">1A</span>
-                            <span class="status activeclass1">1B</span>
-                        </td>
-                        <td><span class="status activeclass">1B</span></td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteTeacher"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Đào Thị B</td>
-                        <td>bdao@school.edu.vn</td>
-                        <td>0123456789</td>
-                        <td>Anh</td>
-                        <td><span class="status activeclass1">2A</span></td>
-                        <td><span class="status activeclass">2A</span></td>
-                        <td><span class="status activeclass">Hoạt động</span></td>
-                        <td class="actions">
-                            <button class="edit editTeacher"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="delete deleteTeacher"><i class="fa-solid fa-trash-can"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-teacher-wrapper">
+                <table class="class-table">
+                    <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Môn dạy</th>
+                            <th>Lớp dạy</th>
+                            <th>Chủ nhiệm</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="t in teachers track by (t.teacherID || t.teacherId || t.id)">
+                            <td>{{t.fullName}}</td>
+                            <td>{{t.email}}</td>
+                            <td>{{t.phone}}</td>
+                            <td>{{t.specialization}}</td>
+                            <td>
+                                <span class="status activeclass1"
+                                    ng-repeat="cn in (t.classNames || []) track by $index">
+                                    {{cn}}
+                                </span>
+                            </td>
+                            <td><span class="status activeclass">{{t.isCN ? 'Có' : 'Không'}}</span></td>
+                            <td><span class="status activeclass">Hoạt động</span></td>
+                            <td class="actions">
+                                <button class="edit editTeacher" ng-click="openUpdateTeacher(t)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button class="delete deleteTeacher" ng-click="deleteTeacher(t)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-if="teachers.length===0">
+                            <td colspan="8" style="text-align:center; padding:14px; color:#777;">Không có giáo viên</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-        <section id="schedule" class="page">
+        <section id="schedule" class="page" ng-controller="ScheduleCtrl">
             <div class="schedule-header">
                 <h3>Quản lý lịch học</h3>
                 <span>Quản lý thời khóa biểu theo tuần cho từng lớp học</span>
 
                 <div class="schedule-actions">
                     <h5>Chọn lớp: </h5>
-                    <select>
-                        <option>Tất cả các lớp</option>
-                        <option>1A</option>
-                        <option>2E</option>
+                    <select ng-model="selectedClassName" ng-options="c.className as c.className for c in classList"
+                        ng-change="onChangeClass()">
+                        <option value="">Tất cả các lớp</option>
                     </select>
                     <img src="..\img\lichhoc.png" alt="">
-                    <h4>3 tiết/tuần</h4>
-                    <button class="addschedule-btn"><i class="fa-solid fa-plus"></i>Thêm tiết học</button>
+                    <h4 id="totalSchedule_Schedule">0 tiết/tuần</h4>
+                    <button class="addschedule-btn" ng-click="openCreateSchedule()">
+                        <i class="fa-solid fa-plus"></i>Thêm tiết học
+                    </button>
                 </div>
             </div>
             <div id="overlaySchedule" class="overlaySchedule"></div>
@@ -691,66 +618,51 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
 
-                <form class="schedule-form" id="scheduleForm">
+                <form class="schedule-form" id="scheduleForm" ng-submit="createSchedule($event)">
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="schedule-Class">
-                            <option>Lớp 1A</option>
-                            <option>Lớp 1B</option>
-                            <option>Lớp 2A</option>
+                        <select id="schedule-Class" ng-model="createModel.className"
+                            ng-options="c.className as c.className for c in classList" required>
+                            <option value="">Chọn lớp</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Thứ</label>
-                        <select id="schedule-dayofweek">
-                            <option>Thứ 2</option>
-                            <option>Thứ 3</option>
-                            <option>Thứ 4</option>
-                            <option>Thứ 5</option>
-                            <option>Thứ 6</option>
+                        <select id="schedule-dayofweek" ng-model="createModel.dayOfWeek"
+                            ng-options="d.value as d.label for d in dayOfWeekList" required>
+                            <option value="">Chọn thứ</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Tiết</label>
-                        <select id="schedule-lesson">
-                            <option>Tiết 1 (07:00 - 07:35)</option>
-                            <option>Tiết 2 (07:40 - 08:15)</option>
-                            <option>Tiết 3 (08:20 - 08:55)</option>
-                            <option>Tiết 4 (09:00 - 09:35)</option>
-                            <option>Tiết 5 (09:40 - 10:15)</option>
+                        <select id="schedule-lesson" ng-model="createModel.period"
+                            ng-options="p.value as p.label for p in periodList" required>
+                            <option value="">Chọn tiết</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Môn học</label>
-                        <select id="schedule-subject">
-                            <option>Chọn môn học</option>
-                            <option>Tiếng Việt</option>
-                            <option>Toán</option>
-                            <option>Đạo đức</option>
-                            <option>Tự nhiên và Xã hội</option>
-                            <option>Khoa học</option>
-                            <option>Lịch sử</option>
-                            <option>Địa lí</option>
-                            <option>Tin học và Công nghệ</option>
-                            <option>Âm nhạc</option>
-                            <option>Mĩ thuật</option>
-                            <option>Giáo dục Thể chất</option>
-                            <option>Hoạt động trải nghiệm</option>
-                            <option>Tiếng Anh</option>
+                        <select id="schedule-subject" ng-model="createModel.subjectName"
+                            ng-options="s.subjectName as s.subjectName for s in subjects" required>
+                            <option value="">Chọn môn học</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Giáo viên</label>
-                        <input id="schedule-addteacher" type="text" placeholder="Nhập tên giáo viên">
+                        <select ng-model="createModel.teacherName"
+                            ng-options="t.fullName as t.fullName for t in teachers" required>
+                            <option value="">Chọn giáo viên</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Phòng học</label>
-                        <input id="schedule-addroom" type="text" placeholder="Ví dụ: P101">
+                        <input id="schedule-addroom" type="text" ng-model="createModel.room" placeholder="Ví dụ: P101"
+                            required>
                     </div>
 
                     <div class="form-footer">
@@ -765,66 +677,51 @@
                 </div>
                 <p class="modal-desc">Nhập thông tin tiết học vào form bên dưới.</p>
 
-                <form class="schedule-form" id="scheduleFormUpdate">
+                <form class="schedule-form" id="scheduleFormUpdate" ng-submit="updateSchedule($event)">
                     <div class="form-group">
                         <label>Lớp</label>
-                        <select id="schedule-ClassUpdate">
-                            <option>Lớp 1A</option>
-                            <option>Lớp 1B</option>
-                            <option>Lớp 2A</option>
+                        <select id="schedule-ClassUpdate" ng-model="updateModel.className"
+                            ng-options="c.className as c.className for c in classList" required>
+                            <option value="">Chọn lớp</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Thứ</label>
-                        <select id="schedule-dayofweekUpdate">
-                            <option>Thứ 2</option>
-                            <option>Thứ 3</option>
-                            <option>Thứ 4</option>
-                            <option>Thứ 5</option>
-                            <option>Thứ 6</option>
+                        <select id="schedule-dayofweekUpdate" ng-model="updateModel.dayOfWeek"
+                            ng-options="d.value as d.label for d in dayOfWeekList" required>
+                            <option value="">Chọn thứ</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Tiết</label>
-                        <select id="schedule-lessonUpdate">
-                            <option>Tiết 1 (07:00 - 07:35)</option>
-                            <option>Tiết 2 (07:40 - 08:15)</option>
-                            <option>Tiết 3 (08:20 - 08:55)</option>
-                            <option>Tiết 4 (09:00 - 09:35)</option>
-                            <option>Tiết 5 (09:40 - 10:15)</option>
+                        <select id="schedule-lessonUpdate" ng-model="updateModel.period"
+                            ng-options="p.value as p.label for p in periodList" required>
+                            <option value="">Chọn tiết</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Môn học</label>
-                        <select id="schedule-subjectUpdate">
-                            <option>Chọn môn học</option>
-                            <option>Tiếng Việt</option>
-                            <option>Toán</option>
-                            <option>Đạo đức</option>
-                            <option>Tự nhiên và Xã hội</option>
-                            <option>Khoa học</option>
-                            <option>Lịch sử</option>
-                            <option>Địa lí</option>
-                            <option>Tin học và Công nghệ</option>
-                            <option>Âm nhạc</option>
-                            <option>Mĩ thuật</option>
-                            <option>Giáo dục Thể chất</option>
-                            <option>Hoạt động trải nghiệm</option>
-                            <option>Tiếng Anh</option>
+                        <select id="schedule-subjectUpdate" ng-model="updateModel.subjectName"
+                            ng-options="s.subjectName as s.subjectName for s in subjects" required>
+                            <option value="">Chọn môn học</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Giáo viên</label>
-                        <input id="schedule-teacherUpdate" type="text" placeholder="Nhập tên giáo viên">
+                        <select ng-model="updateModel.teacherName"
+                            ng-options="t.fullName as t.fullName for t in teachers" required>
+                            <option value="">Chọn giáo viên</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Phòng học</label>
-                        <input id="schedule-roomUpdate" type="text" placeholder="Ví dụ: P101">
+                        <input id="schedule-roomUpdate" type="text" ng-model="updateModel.room"
+                            placeholder="Ví dụ: P101" required>
                     </div>
 
                     <div class="form-footer">
@@ -844,131 +741,45 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiết 1<br><small>07:00 - 07:35</small></td>
+                    <tr ng-repeat="p in periodList">
                         <td>
-                            <div class="schedule-lesson">
-                                <strong>Toán</strong>
-                                <div class="schedule-teacher">Nguyễn Văn A</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
+                            Tiết {{p.value}}<br>
+                            <small>{{p.time}}</small>
                         </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Âm nhạc</strong>
-                                <div class="schedule-teacher">Lê Văn C</div>
-                                <span class="badge schedule-room">P201</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>Tiết 2<br><small>07:40 - 08:15</small></td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="schedule-lesson">
-                                <strong>Tiếng Việt</strong>
-                                <div class="schedule-teacher">Trần Thị B</div>
-                                <span class="badge schedule-room">P101</span>
-                                <div class="schedule-table-actions">
-                                    <button class="editschedule"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button class="deleteschedule"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        <td ng-repeat="d in dayOfWeekList">
+                            <div class="schedule-lesson" ng-if="getCell(d.value, p.value)">
+                                <strong>{{getCell(d.value, p.value).subjectName}}</strong>
+                                <div class="schedule-teacher">{{getCell(d.value, p.value).teacherName}}</div>
+                                <span class="badge schedule-room">{{getCell(d.value, p.value).room}}</span>
 
-                    <tr>
-                        <td>Tiết 3<br><small>08:20 - 08:55</small></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Tiết 4<br><small>09:00 - 09:35</small></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Tiết 5<br><small>09:40 - 10:15</small></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                                <div class="schedule-table-actions">
+                                    <button class="editschedule"
+                                        ng-click="openUpdateSchedule(getCell(d.value, p.value))">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button class="deleteschedule" ng-click="deleteSchedule(getCell(d.value, p.value))">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </section>
-        <section id="event" class="page">
+        <section id="event" class="page" ng-controller="EventCtrl">
             <div class="event-header">
                 <h3>Quản lý sự kiện & lịch học</h3>
                 <span>Tạo và quản lý các sự kiện, lịch thi, lịch họp</span>
                 <div class="event-actions">
                     <img src="../img/hocsinh.png" alt="">
-                    <h4>Tổng: 3 sự kiện</h4>
+                    <h4 id="totalEvent_Event">Tổng: 0 sự kiện</h4>
                     <img src="../img/giaovien.png" alt="">
-                    <h4>Sắp tới: 2</h4>
-                    <button class="addevent-btn"><i class="fa-solid fa-plus"></i>Thêm sự kiện</button>
+                    <h4 id="upcomingEvent_Event">Sắp tới: 0</h4>
+                    <button class="addevent-btn" ng-click="openCreateEvent()">
+                        <i class="fa-solid fa-plus"></i>Thêm sự kiện
+                    </button>
                 </div>
             </div>
             <div id="overlayevent" class="overlayevent"></div>
@@ -978,8 +789,7 @@
                     <span class="close-btn" id="closeEventBtn">&times;</span>
                 </div>
                 <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
-
-                <form class="event-form" id="eventForm">
+                <form class="event-form" id="eventForm" ng-submit="createEvent($event)">
                     <div class="form-group">
                         <label for="event-name">Tên</label>
                         <input type="text" id="event-name" placeholder="">
@@ -999,11 +809,11 @@
                     <div class="form-group">
                         <label>Loại</label>
                         <div class="event-type">
-                            <div><input type="radio" name="type"> <span>Học thuật</span></div>
-                            <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
-                            <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
-                            <div><input type="radio" name="type"> <span>Họp</span></div>
-                            <div><input type="radio" name="type"> <span>Khác</span></div>
+                            <div><input type="radio" name="typeCreate" value="Học thuật"> <span>Học thuật</span></div>
+                            <div><input type="radio" name="typeCreate" value="Kiểm tra"> <span>Kiểm tra</span></div>
+                            <div><input type="radio" name="typeCreate" value="Nghỉ lễ"> <span>Nghỉ lễ</span></div>
+                            <div><input type="radio" name="typeCreate" value="Họp"> <span>Họp</span></div>
+                            <div><input type="radio" name="typeCreate" value="Khác"> <span>Khác</span></div>
                         </div>
                     </div>
                     <div class="form-footer">
@@ -1017,8 +827,7 @@
                     <span class="close-btn" id="closeEventBtnUpdate">&times;</span>
                 </div>
                 <p class="modal-desc">Nhập thông tin sự kiện vào form bên dưới.</p>
-
-                <form class="event-form" id="eventFormUpdate">
+                <form class="event-form" id="eventFormUpdate" ng-submit="updateEvent($event)">
                     <div class="form-group">
                         <label for="event-name">Tên</label>
                         <input type="text" id="event-nameUpdate" placeholder="">
@@ -1038,11 +847,11 @@
                     <div class="form-group">
                         <label>Loại</label>
                         <div class="event-typeUpdate">
-                            <div><input type="radio" name="type"> <span>Học thuật</span></div>
-                            <div><input type="radio" name="type"> <span>Kiểm tra</span></div>
-                            <div><input type="radio" name="type"> <span>Nghỉ lễ</span></div>
-                            <div><input type="radio" name="type"> <span>Họp</span></div>
-                            <div><input type="radio" name="type"> <span>Khác</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Học thuật"> <span>Học thuật</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Kiểm tra"> <span>Kiểm tra</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Nghỉ lễ"> <span>Nghỉ lễ</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Họp"> <span>Họp</span></div>
+                            <div><input type="radio" name="typeUpdate" value="Khác"> <span>Khác</span></div>
                         </div>
                     </div>
                     <div class="form-footer">
@@ -1051,75 +860,42 @@
                 </form>
             </div>
             <div class="event-list">
-
-                <!-- SỰ KIỆN 1 -->
-                <div class="listevent gray">
+                <div class="listevent" ng-repeat="e in events" ng-class="getEventCardClass(e)">
                     <div class="event-content">
                         <div class="eventlist-header">
-                            <h3>Ngày hội thể thao</h3>
-                            <span class="tag blue">Học thuật</span>
-                            <span class="status ended">Đã kết thúc</span>
+                            <h3>{{e.title}}</h3>
+                            <!-- TAG loại -->
+                            <span class="tag" ng-class="getTagClass(e.eventType)">
+                                {{e.eventType}}
+                            </span>
+                            <!-- STATUS -->
+                            <span class="status" ng-class="getStatusClass(e)">
+                                {{ getStatusText(e) }}
+                            </span>
                         </div>
-                        <p>Ngày hội thể thao toàn trường</p>
+                        <p>{{e.description}}</p>
                         <div class="eventlist-footer">
                             <i class="fa-regular fa-calendar"></i>
-                            <span>9/10/2025</span>
+                            <span>{{ formatDate(e.eventDate) }}</span>
                             <i class="fa-regular fa-clock"></i>
-                            <span>08:00</span>
+                            <span>{{ formatTime(e.eventTime) }}</span>
                         </div>
                     </div>
                     <div class="eventlist-actions">
-                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
+                        <button class="edit editEvent" ng-click="openUpdateEvent(e)">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                        <button class="delete deleteEvent" ng-click="deleteEvent(e)">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
                     </div>
                 </div>
-
-                <!-- SỰ KIỆN 2 -->
-                <div class="listevent blue">
-                    <div class="event-content">
-                        <div class="eventlist-header">
-                            <h3>Kiểm tra giữa kỳ môn Toán</h3>
-                            <span class="tag red">Kiểm tra</span>
-                            <span class="status upcoming">Sắp tới</span>
-                        </div>
-                        <p>Kiểm tra 45 phút cho các lớp khối 5</p>
-                        <div class="eventlist-footer">
-                            <i class="fa-regular fa-calendar"></i>
-                            <span>15/10/2025</span>
-                            <i class="fa-regular fa-clock"></i>
-                            <span>08:00</span>
-                        </div>
-                    </div>
-                    <div class="eventlist-actions">
-                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
-                    </div>
-                </div>
-
-                <!-- SỰ KIỆN 3 -->
-                <div class="listevent blue">
-                    <div class="event-content">
-                        <div class="eventlist-header">
-                            <h3>Họp phụ huynh cuối kỳ</h3>
-                            <span class="tag purple">Họp</span>
-                            <span class="status upcoming">Sắp tới</span>
-                        </div>
-                        <p>Họp báo cáo kết quả học tập học kỳ 1</p>
-                        <div class="eventlist-footer">
-                            <i class="fa-regular fa-calendar"></i>
-                            <span>20/12/2025</span>
-                            <i class="fa-regular fa-clock"></i>
-                            <span>18:00</span>
-                        </div>
-                    </div>
-                    <div class="eventlist-actions">
-                        <button class="edit editEvent"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button class="delete deleteEvent"><i class="fa-regular fa-trash-can"></i></button>
-                    </div>
+                <div ng-if="events.length===0">
+                    <p style="text-align:center; padding-top:14px; color:#777;">Không có sự kiện</p>
                 </div>
             </div>
         </section>
-        <section id="report" class="page">
+        <section id="report" class="page" ng-controller="AdminDashboardCtrl">
             <div class="report-top">
                 <div class="report-top-header">
                     <h3>Báo cáo tổng hợp</h3>
@@ -1144,7 +920,7 @@
 
                     <div class="filter-group">
                         <label for="to-date">Đến ngày</label>
-                        <input type="date" id="to-date" value="2025-09-01">
+                        <input type="date" id="to-date" value="2026-09-01">
                     </div>
 
                     <div class="filter-buttons">
@@ -1161,26 +937,26 @@
                 <div class="card-baocao tonghocsinh">
                     <h3>Tổng học sinh</h3>
                     <img src="..\img\tonghocsinh.png" alt="anh">
-                    <p class="number">228</p>
+                    <p class="number" id="totalStudents_report">0</p>
                     <span>Trên tất cả lớp</span>
                 </div>
                 <div class="card-baocao chuyencanTB">
                     <h3>Chuyên cần TB</h3>
                     <img src="..\img\chuyencantb.png" alt="anh">
-                    <p class="number">94.4%</p>
+                    <p class="number" id="totalAttendance_report">0</p>
                     <span>+0.3 so với tháng trước</span>
                 </div>
                 <div class="card-baocao hoclucgioi">
                     <h3>Học lực giỏi</h3>
                     <img src="..\img\hoclucgioi.png" alt="anh">
-                    <p class="number">21.1%</p>
-                    <span>45/228 học sinh</span>
+                    <p class="number" id="excellentPercent_report">0%</p>
+                    <span id="excellentCount_report">0/0 học sinh</span>
                 </div>
                 <div class="card-baocao cancaithien">
                     <h3>Cần cải thiện</h3>
                     <img src="..\img\cancaithien.png" alt="anh">
-                    <p class="number">5.6%</p>
-                    <span>12/228 học sinh</span>
+                    <p class="number" id="needImprovePercent_report">0%</p>
+                    <span id="needImproveCount_report">0/0 học sinh</span>
                 </div>
             </div>
             <div class="chuyencan-hocluc">
@@ -1196,44 +972,7 @@
                                 <th class="muon">Đi muộn</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1A</td>
-                                <td>33</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1B</td>
-                                <td>31</td>
-                                <td>3</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1C</td>
-                                <td>29</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>1D</td>
-                                <td>32</td>
-                                <td>1</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>2A</td>
-                                <td>31</td>
-                                <td>2</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>2B</td>
-                                <td>34</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tbodyAttendanceByClass"></tbody>
                     </table>
                 </div>
                 <div class="phanbohocluc">
@@ -1246,24 +985,7 @@
                                 <th>Tỉ lệ (%)</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="gioi">
-                                <td>Giỏi</td>
-                                <td>21%</td>
-                            </tr>
-                            <tr class="kha">
-                                <td>Khá</td>
-                                <td>42%</td>
-                            </tr>
-                            <tr class="trungbinh">
-                                <td>Trung bình</td>
-                                <td>31%</td>
-                            </tr>
-                            <tr class="yeu">
-                                <td>Yếu</td>
-                                <td>6%</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tbodyAcademicDistribution"></tbody>
                     </table>
                 </div>
             </div>
@@ -1277,86 +999,13 @@
                             <th>Tỉ lệ chuyên cần (%)</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>T9</td>
-                            <td>94%</td>
-                        </tr>
-                        <tr>
-                            <td>T10</td>
-                            <td>95%</td>
-                        </tr>
-                        <tr>
-                            <td>T11</td>
-                            <td>93%</td>
-                        </tr>
-                        <tr>
-                            <td>T12</td>
-                            <td>94%</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tbodyMonthlyTrend"></tbody>
                 </table>
             </div>
             <div class="baocaochitiet">
                 <h3>Báo cáo chi tiết theo lớp</h3>
                 <span>Chi tiết chuyên cần và học lực từng lớp</span>
-                <div class="baocaochitiet-lops">
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">1A</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 36</b></p>
-                                <span>Có mặt: 32 | Vắng: 3 | Muộn: 1</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>88.9%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">1B</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 36</b></p>
-                                <span>Có mặt: 30 | Vắng: 4 | Muộn: 2</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>88.9%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">1C</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 31</b></p>
-                                <span>Có mặt: 28 | Vắng: 2 | Muộn: 1</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>88.9%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-
-                    <div class="chitietlop">
-                        <div class="lop-left">
-                            <button class="lop-btn">2A</button>
-                            <div class="lop-info">
-                                <p><b>Sĩ số: 32</b></p>
-                                <span>Có mặt: 32 | Vắng: 0 | Muộn: 0</span>
-                            </div>
-                        </div>
-                        <div class="lop-right">
-                            <h3>100%</h3>
-                            <span>Chuyên cần</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="baocaochitiet-lops" id="classDetailContainer"></div>
             </div>
         </section>
     </main>

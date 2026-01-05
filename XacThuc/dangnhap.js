@@ -1,26 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const button = document.querySelector(".dangnhap-button");
+  const form = document.getElementById("loginForm");
+  if (!form) {
+    console.error("Không tìm thấy form loginForm");
+    return;
+  }
 
-  button.addEventListener("click", function () {
-    const role = document.getElementById("vaitro").value;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    let basePath = window.location.origin; // http://127.0.0.1:5500
-    let projectRoot = "/Doan2_DoHuuQuocAnh"; // tên repo
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("matkhau").value.trim();
 
-    if (
-      window.location.hostname === "127.0.0.1" ||
-      window.location.hostname === "localhost"
-    ) {
-      // Khi chạy local (Live Server)
-      projectRoot = "";
+    if (!email || !password) {
+      alert("Vui lòng nhập đầy đủ email và mật khẩu");
+      return;
     }
 
-    if (role === "admin") {
-      window.location.href = `${basePath}${projectRoot}/Admin/admin.html`;
-    } else if (role === "giaovien") {
-      window.location.href = `${basePath}${projectRoot}/Giaovien/giaovien.html`;
-    } else if (role === "phuhuynh") {
-      window.location.href = `${basePath}${projectRoot}/Phuhuynh/phuhuynh.html`;
-    }
+    const data = {
+      username: email,
+      password: password,
+    };
+
+    fetch("https://localhost:7010/api-doan2/QLUser/User_Login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Sai tài khoản hoặc mật khẩu");
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log("LOGIN OK:", result);
+
+        localStorage.setItem("userID", result.userID);
+        localStorage.setItem("username", result.username);
+        localStorage.setItem("role", result.role);
+
+        switch (result.role) {
+          case "admin":
+            window.location.href = "../Admin/admin.html";
+            break;
+          case "teacher":
+            window.location.href = "../Giaovien/giaovien.html";
+            break;
+          case "parent":
+            window.location.href = "../Phuhuynh/phuhuynh.html";
+            break;
+          default:
+            alert("Vai trò không hợp lệ: " + result.role);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert(err.message);
+      });
   });
 });

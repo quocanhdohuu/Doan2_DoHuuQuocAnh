@@ -2,16 +2,17 @@
 using BLL;
 using System.Data;
 using Models;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace QuanLyTruongTieuHoc_API.Controllers
 {
     [Route("api/QLUser")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class Admin_UsersController : ControllerBase
     {
-        private readonly UsersBLL _bll;
+        private readonly Admin_UsersBLL _bll;
 
-        public UsersController(UsersBLL bll)
+        public Admin_UsersController(Admin_UsersBLL bll)
         {
             _bll = bll;
         }
@@ -40,6 +41,24 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(user);
         }
+        [Route("User_GetRoleByID")]
+        [HttpGet]
+        public IActionResult GetRoleById(int id)
+        {
+            var role = _bll.GetRoleById(id, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return StatusCode(500, error);
+
+            if (role == null)
+                return NotFound("User not found");
+
+            return Ok(new
+            {
+                UserID = id,
+                Role = role
+            });
+        }
         [Route("User_Create")]
         [HttpPost]
         public IActionResult Create([FromBody] Users user)
@@ -62,6 +81,26 @@ namespace QuanLyTruongTieuHoc_API.Controllers
                 return BadRequest(error);
 
             return Ok(new { message = "Updated successfully" });
+        }
+        [Route("User_Login")]
+        [HttpPost]
+        public IActionResult Login([FromBody] UserLoginRequest request)
+        {
+            var user = _bll.Login(request.Username, request.Password, out string error);
+
+            if (!string.IsNullOrEmpty(error))
+                return BadRequest(error);
+
+            if (user == null)
+                return Unauthorized(new { message = "Username or password is incorrect" });
+
+            return Ok(new
+            {
+                message = "Login successful",
+                user.UserID,
+                user.Username,
+                user.Role
+            });
         }
     }
 }
