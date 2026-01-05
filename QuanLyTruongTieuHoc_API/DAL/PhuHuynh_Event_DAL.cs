@@ -34,10 +34,10 @@ namespace DAL
                 {
                     EventID = (int)row["EventID"],
                     Title = row["Title"].ToString(),
-                    Description = row["Description"].ToString(),
-                    EventDate = (DateTime)row["EventDate"],
-                    EventTime = (TimeSpan)row["EventTime"],
-                    EventType = row["EventType"].ToString(),
+                    Description = row.Field<string>("Description"),
+                    EventDate = row.Field<DateTime>("EventDate"),
+                    EventTime = row.Field<TimeSpan?>("EventTime"),
+                    EventType = row.Field<string>("EventType"),
                 });
             }
 

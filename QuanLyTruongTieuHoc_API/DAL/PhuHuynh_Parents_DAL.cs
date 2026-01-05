@@ -47,7 +47,7 @@ namespace DAL
         public Parents GetParentsById(int id, out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Parents WHERE ParentsID={id}", out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Parents WHERE ParentID={id}", out error);
 
             if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
                 return null;
@@ -77,9 +77,11 @@ namespace DAL
                 $"FullName = '{parents.FullName.Replace("'", "''")}', " +
                 $"Phone = '{parents.Phone.Replace("'", "''")}', " +
                 $"Email = '{parents.Email.Replace("'", "''")}', " +
-                $"Address = {parents.Address.Replace("'", "''")} " +
-                $"UserID ='{parents.UserID}'"+
+                $"Address = '{parents.Address.Replace("'", "''")}', " +
+                $"[UserID] = '{parents.UserID}' " +
                 $"WHERE ParentID = {parents.ParentID}";
+
+
 
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);

@@ -47,7 +47,7 @@ namespace DAL
         public Messages GetMessagesById(int id, out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Messages WHERE MessagesID={id}", out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Messages WHERE MessageID={id}", out error);
 
             if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
                 return null;
@@ -68,13 +68,14 @@ namespace DAL
         public bool InsertMessages(Messages messages, out string error)
         {
             string sql =
-                $"INSERT INTO Messages (MessageID, SenderID, ReceiverID, Content, SentTime, IsRead) " +
-                $"VALUES ('{messages.MessageID}', '{messages.SenderID}', '{messages.ReceiverID}', '{messages.Content}', '{messages.SentTime}',{(messages.IsRead ? 1 : 0)})";
+                $"INSERT INTO Messages (SenderID, ReceiverID, Content, SentTime, IsRead) " +
+                $"VALUES ('{messages.SenderID}', '{messages.ReceiverID}', N'{messages.Content}', '{messages.SentTime}', {(messages.IsRead ? 1 : 0)})";
 
             error = _db.ExecuteNoneQuery(sql);
 
             return string.IsNullOrEmpty(error);
         }
+
         public bool UpdateMessages(Messages messages, out string error)
         {
             if (messages.MessageID <= 0)

@@ -191,3 +191,64 @@ function receiveMessage(chatIndex, text) {
 setTimeout(() => {
     receiveMessage(1, "Nhớ nộp bài trước 10h nhé");
 }, 3000);
+function makeEditable(btn) {
+        const span = btn.previousElementSibling;
+        const originalValue = span.textContent.trim();
+
+        span.contentEditable = true;
+        span.focus();
+
+        // Hiển thị nút Lưu & Hủy khi bắt đầu chỉnh sửa
+        document.getElementById('saveAllBtn').style.display = 'inline-block';
+        document.getElementById('cancelBtn').style.display = 'inline-block';
+
+        // Lưu giá trị gốc để có thể hủy
+        span.dataset.original = originalValue;
+    }
+
+    // Lưu tất cả thay đổi vào localStorage
+    document.getElementById('saveAllBtn').addEventListener('click', () => {
+        const items = document.querySelectorAll('#contactSection .gia-tri');
+        items.forEach(item => {
+            if (item.contentEditable === 'true') {
+                const field = item.dataset.field;
+                const value = item.textContent.trim();
+                localStorage.setItem(`contact_${field}`, value);
+                item.contentEditable = false;
+                item.style.background = '';
+                item.style.border = '';
+            }
+        });
+
+        document.getElementById('saveAllBtn').style.display = 'none';
+        document.getElementById('cancelBtn').style.display = 'none';
+        alert('Đã lưu tất cả thay đổi!');
+    });
+
+    // Hủy tất cả chỉnh sửa đang mở
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+        const items = document.querySelectorAll('#contactSection .gia-tri');
+        items.forEach(item => {
+            if (item.contentEditable === 'true') {
+                item.textContent = item.dataset.original || '';
+                item.contentEditable = false;
+                item.style.background = '';
+                item.style.border = '';
+            }
+        });
+
+        document.getElementById('saveAllBtn').style.display = 'none';
+        document.getElementById('cancelBtn').style.display = 'none';
+    });
+
+    // Tải dữ liệu đã lưu từ localStorage khi mở trang
+    window.addEventListener('load', () => {
+        const fields = ['address', 'parent', 'phone', 'email', 'emergency'];
+        fields.forEach(field => {
+            const saved = localStorage.getItem(`contact_${field}`);
+            if (saved) {
+                const span = document.querySelector(`[data-field="${field}"]`);
+                if (span) span.textContent = saved;
+            }
+        });
+    });

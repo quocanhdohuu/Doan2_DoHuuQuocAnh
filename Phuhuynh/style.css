@@ -2073,3 +2073,27 @@ body {
     padding: 15px;
   }
 }
+/* cập nhật tt*/
+.edit-btn {
+        font-size: 0.85rem;
+        padding: 4px 10px;
+        margin-left: 12px;
+        background: #e9ecef;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #495057;
+    }
+    .edit-btn:hover {
+        background: #dee2e6;
+    }
+    .gia-tri[contenteditable="true"] {
+        background: #fff3cd;
+        border: 1px dashed #ffc107;
+        padding: 2px 6px;
+        border-radius: 4px;
+        outline: none;
+    }
+    .gia-tri:focus {
+        outline: 2px solid #007bff;
+    }

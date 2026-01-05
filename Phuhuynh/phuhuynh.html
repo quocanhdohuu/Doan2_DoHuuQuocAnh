@@ -175,16 +175,47 @@
             </div>
 
             <!-- Thông tin liên hệ -->
-            <div class="the-thong-tin">
+            <div class="the-thong-tin" id="contactSection">
                 <h3><i class="fa-solid fa-phone"></i> Thông tin liên hệ</h3>
+
                 <div class="dong-thong-tin">
                     <span class="nhan">Địa chỉ:</span>
-                    <span class="gia-tri">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
+                    <span class="gia-tri" contenteditable="false" data-field="address">123 Đường ABC, Phường XYZ, Quận 1, TP.HCM</span>
+                    <button class="edit-btn" onclick="makeEditable(this)">Sửa</button>
                 </div>
-                <div class="dong-thong-tin"><span class="nhan">Phụ huynh:</span><span class="gia-tri">Nguyễn Thị Mẹ</span></div>
-                <div class="dong-thong-tin"><span class="nhan">Số điện thoại:</span><span class="gia-tri">0987654321</span></div>
-                <div class="dong-thong-tin"><span class="nhan">Email:</span><span class="gia-tri">parent@email.com</span></div>
-                <div class="dong-thong-tin"><span class="nhan">Liên hệ khẩn cấp:</span><span class="gia-tri">Nguyễn Văn Cha - 0123456789</span></div>
+
+                <div class="dong-thong-tin">
+                    <span class="nhan">Phụ huynh:</span>
+                    <span class="gia-tri" contenteditable="false" data-field="parent">Nguyễn Thị Mẹ</span>
+                    <button class="edit-btn" onclick="makeEditable(this)">Sửa</button>
+                </div>
+
+                <div class="dong-thong-tin">
+                    <span class="nhan">Số điện thoại:</span>
+                    <span class="gia-tri" contenteditable="false" data-field="phone">0987654321</span>
+                    <button class="edit-btn" onclick="makeEditable(this)">Sửa</button>
+                </div>
+
+                <div class="dong-thong-tin">
+                    <span class="nhan">Email:</span>
+                    <span class="gia-tri" contenteditable="false" data-field="email">parent@email.com</span>
+                    <button class="edit-btn" onclick="makeEditable(this)">Sửa</button>
+                </div>
+
+                <div class="dong-thong-tin">
+                    <span class="nhan">Liên hệ khẩn cấp:</span>
+                    <span class="gia-tri" contenteditable="false" data-field="emergency">Nguyễn Văn Cha - 0123456789</span>
+                    <button class="edit-btn" onclick="makeEditable(this)">Sửa</button>
+                </div>
+
+                <div style="margin-top: 16px; text-align: right;">
+                    <button id="saveAllBtn" style="display:none; padding:8px 16px; background:#28a745; color:white; border:none; border-radius:6px; cursor:pointer;">
+                        Lưu tất cả thay đổi
+                    </button>
+                    <button id="cancelBtn" style="display:none; padding:8px 16px; background:#dc3545; color:white; border:none; border-radius:6px; cursor:pointer; margin-left:8px;">
+                        Hủy
+                    </button>
+                </div>
             </div>
 
             <!-- Thông tin học tập -->
