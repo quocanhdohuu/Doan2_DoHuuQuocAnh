@@ -5,7 +5,7 @@ using Models;
 using DAL;
 namespace QuanLyTruongTieuHoc_API.Controllers
 {
-    [Route("api/GiaoVien")]
+    [Route("api/GiaoVien_TC")]
     [ApiController]
     public class Teacher_TeachersControl:ControllerBase
     {

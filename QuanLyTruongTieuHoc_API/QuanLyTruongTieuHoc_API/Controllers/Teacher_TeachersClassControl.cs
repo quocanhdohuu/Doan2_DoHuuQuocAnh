@@ -4,7 +4,7 @@ using System.Data;
 using Models;
 using DAL;
 namespace QuanLyTruongTieuHoc_API.Controllers
-{
+{   
     public class Teacher_TeachersClassControl:ControllerBase
     {
         private readonly Teacher_TeachersClassBLL _bll;

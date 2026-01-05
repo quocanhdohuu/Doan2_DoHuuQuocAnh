@@ -4,10 +4,10 @@ using System.Data;
 using Models;
 using DAL;
 namespace QuanLyTruongTieuHoc_API.Controllers
-{ 
-    [Route("api/GiaoVien")]
+{
     [ApiController]
-    public class Teacher_AttendanceControl:ControllerBase
+    [Route("api/GiaoVien_Attendance")]
+    public class Teacher_AttendanceControl : ControllerBase
     {
         private readonly Teacher_AttendanceBLL _bll;
         public Teacher_AttendanceControl(Teacher_AttendanceBLL bll)

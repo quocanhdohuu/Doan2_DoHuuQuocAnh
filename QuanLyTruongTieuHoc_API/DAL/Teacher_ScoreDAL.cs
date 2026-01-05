@@ -69,9 +69,9 @@ namespace DAL
             string sql =
             $"INSERT INTO Scores (StudentID, Subject, Score, Term, Date, TeacherID) " +
             $"VALUES ({score.StudentID}, " +
-            $"'{score.Subject.Replace("'", "''")}', " +
+            $"N'{score.Subject.Replace("'", "''")}', " +
             $"{score.Score}, " +
-            $"'{score.Term.Replace("'", "''")}', " +
+            $"N'{score.Term.Replace("'", "''")}', " +
             $"'{score.Date:yyyy-MM-dd}', " +
             $"{score.TeacherID})";
 

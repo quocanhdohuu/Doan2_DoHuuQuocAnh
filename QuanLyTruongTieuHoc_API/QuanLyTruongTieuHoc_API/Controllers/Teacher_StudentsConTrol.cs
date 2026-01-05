@@ -6,7 +6,7 @@ using DAL;
 
 namespace QuanLyTruongTieuHoc_API.Controllers
 {
-    [Route("api/GiaoVien")]
+    [Route("api/GiaoVien_Stu")]
     [ApiController]
     public class Teacher_StudentsConTrol: ControllerBase
     {

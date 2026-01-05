@@ -7,18 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
     <script src="../jquery-3.7.1.min.js"></script>
     <script src="../angular.min.js"></script>
 
 </head>
 <body ng-app="GiaoVien">
 <!----------------- Thanh thông tin ------------------->
-    <div id="Thanhthongtin">
+    <div id="Thanhthongtin" ng-controller="ThongTinGV_Ctrl">
         <div id="ThongTin">
             <img src="../img/book.png" alt="logo">
             <div>
-                <h4 id="TenGiaoVien"></h4>
+                <h4 id="TenGiaoVien">{{teacher.fullName}}</h4>
                 <h5>Môn Toán • Chủ nhiệm lớp 6A</h5>
             </div>
         </div>
@@ -128,22 +127,22 @@
         </div>
     </div>
 <!-----------------Diem Danh------------------->
-    <div id="DieDanh" style="display: none;">
+    <div id="DieDanh" style="display: none;" ng-controller="DiemDanhCtrl">
         <h3 id="anhdd" style="margin-bottom: 2px;"><img   src="../img/user (1).png" alt=""><span></span>Điểm danh học sinh</h3>
         <span style="color: gray;">Ghi nhận tình hình chuyên cần hàng ngày</span>
         <div id="ChonLop">
             <div id="Lop">
                 <span>Lớp học:</span>
-                <select id="chonLopHoc" >
-                    <option value="1">6A - Toán</option>
-                    <option value="2">6B - Toán</option>
-                    <option value="3">7A - Toán</option>
+                <select id="chonLopHoc" ng-model="lopDangChon" ng-change="loadHocSinh()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 </select>
             </div>
 
-            <div id="Ngay">
+            <div id="Ngay" >
                 <span>Ngày điểm danh:</span>
-                <input type="date" id="chonNgay">
+                <input ng-model="ngayDiemDanh" ng-change="loadHocSinh()" type="date" id="chonNgay">
             </div>
         </div>
 
@@ -172,239 +171,29 @@
                     <th>Ghi chú</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">1</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS001</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn An</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">2</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS002</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Hải</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                       <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">3</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS003</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Cương</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                       <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">4</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS004</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Vân</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">5</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS005</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Khá</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">6</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS006</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Lân</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;">(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">7</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS007</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Linh</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;align-items: center;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;" >(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">8</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS008</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Hieu</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;align-items: center;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;" >(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">9</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS009</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Văn Lâm</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;align-items: center;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;" >(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
-                <tr class="rowDD">
-                    <td>
-                        <span class="STTDIemDanh">10</span>
-                    </td>
-                    <td>
-                        <span class="MaHS">HS010</span>
-                    </td>
-                    <td>
-                        <span class="TenHS">Nguyễn Vũ Linh</span>
-                    </td>
-                    <td>
-                        <button class="btnDDComat" style="height:100%;width: 15%;border-radius: 5px;align-items: center;"><i class="fa-solid fa-circle-check"></i></button>
-                        <button class="btnDDVangMat" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-circle-xmark"></i></button>
-                        <button class="btnDDDiMuon" style="height:100%;width: 15%;border-radius: 5px;"><i class="fa-solid fa-clock"></i></button>
-                    </td>
-                    <td>
-                        <span class="GhiChuTTDD">-</span>
-                    </td>
-                    <td>
-                        <span class="GhiCHuDD" style="color: gray;" >(Không quá 25 từ)</span>
-                        <button class="btnGHICHUDD" >Ghi chú</button>
-                    </td>
-                </tr>
+                <tr ng-repeat="hs in dsHocSinh | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by hs.studentID">
+    <td>{{$index + 1}}</td>
+    <td>{{hs.studentID}}</td>
+    <td>{{hs.fullName}}</td>
+    <td>
+        <button class="btnDDComat" ng-click="setTrangThai(hs, 'comat')" ng-style="getBtnStyle(hs, 'comat')">✔</button>
+        <button class="btnDDVangMat" ng-click="setTrangThai(hs, 'vang')" ng-style="getBtnStyle(hs, 'vang')">✖</button>
+        <button class="btnDDDiMuon" ng-click="setTrangThai(hs, 'dimuon')" ng-style="getBtnStyle(hs, 'dimuon')">⏰</button>
+    </td>
+    <td ng-class="getClassTrangThai(hs)">{{ getTextTrangThai(hs) }}</td>
+    <td>
+        <button  class="btnGHICHUDD">Ghi chú</button>
+    </td>
+</tr>
+                
             </table>
         </div>
-        <button id="btnLuuDiemDanh"> <i class="fa-solid fa-floppy-disk"></i><span>Lưu điểm danh</span></button>
+        <div id="pagination" style="margin-top:10px;text-align:center;">
+    <button ng-disabled="currentPage == 1" ng-click="currentPage = currentPage-1">« Trước</button>
+    <span>Trang {{currentPage}} / {{numberOfPages()}}</span>
+    <button ng-disabled="currentPage == numberOfPages()" ng-click="currentPage = currentPage+1">Sau »</button>
+</div>
+        <button id="btnLuuDiemDanh" ng-click="luuDiemDanh()"> <i class="fa-solid fa-floppy-disk"></i><span>Lưu điểm danh</span></button>
 
         <div id="CuaSoGCDD" >
             <button id="btbThoatcsoGCDD" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
@@ -416,7 +205,7 @@
         </div>
     </div>
 <!-----------------SỨC KHỎE------------------->
-    <div id="SucKhoe" style="display: none;">
+    <div id="SucKhoe" style="display: none;" ng-controller="SucKhoeCtrl">
         <h3 id="anhSK" style="margin-bottom: 2px;"><img  src="../img/heart.png" alt=""><span></span>Quản lý sức khỏe và dinh dưỡng</h3>
         <span style="color: gray;">Ghi chú tình hình sức khỏe và chế độ ăn học sinh</span>
         <div id="ChonLopSK">
@@ -465,31 +254,65 @@
                     <th>Ghi chú dinh dưỡng</th>
                     <th>Bữa ăn</th>
                     <th>Thao tác</th>
-                </tr>
-                <tr>
-                    <td>
-                        <span id="HSSK">Nguyễn Văn An</span><br>
-                    </td>
-                    <td>
-                        <span class="TinhtrangSK" >Khỏe mạnh</span>
-                    </td>
-                    <td>
-                        <span id="GhichuSK">Ăn tốt, khỏe mạnh</span>
-                    </td>
-                    <td>
-                        <span class="CheDoAnSK" >Bình thường</span>
-                    </td>
-                    <td>
-                        <span id="DinhDuongSK">Đủ chất sơ, đạm, sắt và protein</span>
-                    </td>
-                    <td>
-                        <span class="BuaAnSKXong">Đã Xong</span>
-                    </td>
-                    <td>
-                        <button class="btnGHICHUSK" ><i class="fa-solid fa-edit"></i></button>
-                    </td>
-                </tr>
+                <tr ng-repeat="sk in healthList| startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by sk.healthID">
+        <td>
+                <span class="HSSK">
+                    {{ getTenHocSinh(sk.studentID) }}
+                </span>
+        </td>
+
+        <td>
+            <span ng-class="{
+                'TinhtrangSK': sk.healthStatus === 'Khỏe mạnh',
+                'TinhtrangSK2': sk.healthStatus === 'Ốm',
+                'TinhtrangSK3': sk.healthStatus === 'Đang dùng thuốc',
+                'TinhtrangSK4': sk.healthStatus === 'Chấn Thương',
+            }">
+                {{ sk.healthStatus }}
+            </span>
+        </td>
+
+        <td>
+            <span class="GhichuSK">
+                {{ sk.teacherNote }}
+            </span>
+        </td>
+
+        <td>
+            <span class="CheDoAnSK">
+                {{ sk.mealStatus }}
+            </span>
+        </td>
+
+        <td>
+            <span class="DinhDuongSK">
+                {{ sk.nutritionNote }}
+            </span>
+        </td>
+
+        <td>
+            <span 
+                ng-class="{
+                    'BuaAnSKXong': sk.mealStatus === 'Ăn đầy đủ',
+                    'BuaAnSKCXong': sk.mealStatus !== 'Ăn đầy đủ'
+                }">
+                {{ sk.mealStatus }}
+            </span>
+        </td>
+
+        <td>
+            <button class="btnGHICHUSK"
+                    ng-click="editHealth(sk)">
+                <i class="fa-solid fa-edit"></i>
+            </button>
+        </td>
+    </tr>
             </table>
+            <div id="pagination" style="margin-top:10px;text-align:center;">
+    <button ng-disabled="currentPage == 1" ng-click="currentPage = currentPage-1">« Trước</button>
+    <span>Trang {{currentPage}} / {{numberOfPages()}}</span>
+    <button ng-disabled="currentPage == numberOfPages()" ng-click="currentPage = currentPage+1">Sau »</button>
+</div>
         </div>
 
         <div id="CuaSoThemGhiChuSK">
@@ -532,14 +355,6 @@
             <h3 style="margin-bottom: 2px;">Thêm ghi chú sức khỏe & dinh dưỡng</h3>
             <span style="color: gray;">Ghi chú tình hình sức khỏe và chế độ ăn của học sinh</span>
 
-            <div style="justify-content: space-between;"> <span>Học sinh</span> 
-                <select id="chonHocSinhGhiChuSKSUA">
-                    <option value="Nguyễn Văn A">Nguyễn Văn A</option>
-                    <option value="Nguyễn Văn B">Nguyễn Văn B </option>
-                    <option value="Nguyễn Văn C">Nguyễn Văn C</option>
-                </select> 
-            </div>
-
             <div style="display: flex;;">
                 <div><input type="radio" checked name="suckhoeSUA" value="Khỏe mạnh" id="rdbtnKhoeManhSUA"><span>Khỏe mạnh</span></div>
                  <div><input type="radio" name="suckhoeSUA"  value="Ốm" id="rdbtnOmSUA"><span>Ốm</span></div></div>
@@ -564,7 +379,7 @@
     </div>
     
 <!------------------Điểm số------------------>
-    <div id="DiemSo" style="display: none;">
+    <div id="DiemSo" style="display: none;"  ng-controller="ScoreCtrl">
         <h3 id="anhds" style="margin-bottom: 2px;"><img  src="../img/open-book.png" alt=""><span></span>Quản lý điểm số</h3>
         <span style="color: gray;">Nhập điểm, nhận xét và tạo phiếu điểm học sinh</span>
 
@@ -572,27 +387,23 @@
             <div id="LopDS">
                 <span>Lớp học:</span>
                 <select id="chonLopHocDS">
-                    <option value="6A">6A </option>
-                    <option value="6B">6B </option>
-                    <option value="7A">7A </option>
+                    <option value="1">6A </option>
+                    <option value="2">6B </option>
+                    <option value="3">7A </option>
                 </select>
             </div>
 
             <div id="MonhocDS">
-                <span>Môn học:</span>
+                <span>Loại điểm:</span>
                 <select id="chonMonHocDS">
-                    <option value="Toan">Toán</option>
-                    <option value="Van">Văn</option>
-                    <option value="Anh">Anh</option>
-                    <option value="Ly">Lý</option>
-                    <option value="Hoa">Hóa</option>
-                    <option value="Sinh">Sinh</option>
-                    <option value="Su">Sử</option>
-                    <option value="Dia">Địa</option>
+                    <option value="15phut">15 phút</option>
+                    <option value="Mieng">Miệng</option>
+                    <option value="HocKy">Học kỳ</option>
+                    <option value="1tiet">1 tiết</option>
                 </select>
             </div>
 
-            <button id="btnNhapDiemDS" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Nhập điểm</button>
+            <button id="btnNhapDiemDS"  style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Nhập điểm</button>
             <button id="btnPhieuDiemDS" style="background-color: white;color: black;"><i class="fa-solid fa-file-lines"></i>Phiếu điểm</button>
             <button id="btnXuatEDS" style="background-color: white;color: black;"><i class="fa-solid fa-download"></i>Xuất Excel</button>
         </div>
@@ -630,32 +441,50 @@
                     <th>Học Sinh</th>
                     <th>Loại điểm</th>
                     <th>Điểm số</th>
-                    <th>Nhận xét</th>
                     <th>Ngày</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr>
-                    <td>
-                        <span id="HSDS">Nguyễn Văn A</span><br>
-                    </td>
-                    <td>
-                        <span class="LoaiDiemDS2">15 phút</span>
-                    </td>
-                    <td>
-                        <span id="DiemDS" style="color: green;">8.5/10</span>
-                    </td>
-                    <td>
-                        <span id="NhanXetDS">Làm bài tốt</span>
-                    </td>
-                    <td>
-                        <span id="NgayDS">20/12/2024</span>
-                    </td>
-                    <td>
-                        <button class="btnSuaDS" ><i class="fa-solid fa-edit"></i></button>
-                    </td>
-                </tr>
+                <tr ng-repeat="ds in scoreList">
+            <td>
+                <span class="HSDS">
+                    {{ getTenHocSinh(ds.studentID) }}
+                </span>
+            </td>
+
+            <td>
+                <span ng-class="{
+                        'LoaiDiemDS': ds.term === 'Miệng',
+                        'LoaiDiemDS2': ds.term === '15 phút',
+                        'LoaiDiemDS3': ds.term === '1 tiết',
+                        'LoaiDiemDS4': ds.term === 'Học kỳ'}">
+                    {{ ds.term }}
+                </span>
+            </td>
+
+            <td>
+                <span ng-style="{
+                        color: ds.score >= 8.5 ? 'blue' :ds.score >= 5   ? 'green' :'red'}">
+                    {{ ds.score }}/10
+                </span>
+            </td>
+            <td>
+                <span class="NgayDS">
+                    {{ ds.date | date:'dd/MM/yyyy' }}
+                </span>
+            </td>
+
+            <td>
+                <button class="btnSuaDS">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+                <button id="btxoa" ng-click="xoaDiem(ds.scoreID)"><i class="fa-solid fa-trash"></i>Xóa</button>
+            </td>
+        </tr>
                 
             </table>
+            <button ng-disabled="currentPage == 0" ng-click="currentPage = currentPage-1">« Trước</button>
+<span>Trang {{currentPage+1}} / {{numberOfPages()}}</span>
+<button ng-disabled="currentPage >= numberOfPages()-1" ng-click="currentPage = currentPage+1">Sau »</button>
         </div>
 
         <div id="CuaSoNĐS">
@@ -663,10 +492,8 @@
             <h3 style="margin-bottom: 2px;">Nhập điểm mới</h3>
             <span style="color: gray;">Nhập điểm và nhận xét cho học sinh môn Toán</span>
             <div style="justify-content: space-between;"> <span>Học sinh</span> 
-                <select id="chonHocSinhGhiChuDS">
-                    <option value="Nguyễn Văn A">Nguyễn Văn A</option>
-                    <option value="Nguyễn Văn B">Nguyễn Văn B </option>
-                    <option value="Nguyễn Văn C">Nguyễn Văn C</option>
+                <select id="chonHocSinhGhiChuDS" ng-model="hocSinhDangChon" ng-options="hs.studentID as hs.fullName for hs in dsHocSinh">
+                    <option value="0">chọn học sinh</option>
                 </select> 
             </div>
             
@@ -674,20 +501,18 @@
                 <span style="width: 100px;">Loại điểm</span>
     
                 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                    <div><input type="radio" checked name="LD" value="Miệng" id="rdbtnMieng"><span>Miệng</span></div>
-                    <div><input type="radio" name="LD"  value="15 phút" id="rdbtn15"><span>15 phút</span></div>  
+                    <div><input ng-model="loaiDiemDangChon" type="radio" checked name="LD" value="Miệng" id="rdbtnMieng"><span>Miệng</span></div>
+                    <div><input ng-model="loaiDiemDangChon" type="radio" name="LD"  value="15 phút" id="rdbtn15"><span>15 phút</span></div>  
                 </div>
                 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                    
-                    <div><input type="radio" name="LD" value="1 tiết" id="rdbtn1tiet"><span>1 tiết</span></div>
-                    <div><input type="radio" name="LD" value="Học kỳ" id="rdbtnHocKy"><span>Học kỳ</span></div>
+                    <div><input ng-model="loaiDiemDangChon" type="radio" name="LD" value="1 tiết" id="rdbtn1tiet"><span>1 tiết</span></div>
+                    <div><input ng-model="loaiDiemDangChon" type="radio" name="LD" value="Học kỳ" id="rdbtnHocKy"><span>Học kỳ</span></div>
                 </div>
             </div>
 
-             <div><span>Điểm số</span><input type="number" min="0" max="10" step="0.1" id="txtDiemSODS" placeholder="Nhập điểm (0-10)"></div>
-
-              <div><span>Nhận xét</span><textarea style="resize: none;  " id="NhanxetblDS" placeholder="Nhận xét về bài làm..."></textarea></div>
-             <button id="btncuasoTGCDS"><i class="fa-solid fa-floppy-disk"></i>Lưu điểm</button>
+             <div><span>Điểm số</span><input ng-model="diemNhap" type="number" min="0" max="10" step="0.1" id="txtDiemSODS" placeholder="Nhập điểm (0-10)"></div>
+             <button id="btncuasoTGCDS" ng-click="addScores()"><i class="fa-solid fa-floppy-disk"></i>Lưu điểm</button>
         </div>
 
         <div id="CuaSoNĐSSUA">
@@ -720,7 +545,7 @@
 
               <div><span>Nhận xét</span><textarea style="resize: none;  " id="NhanxetblDSSUA" placeholder="Nhận xét về bài làm..."></textarea></div>
              <button id="btncuasoTGCDSSUA"><i class="fa-solid fa-floppy-disk"></i>Cập nhật điểm</button>
-             <button id="btxoa"><i class="fa-solid fa-trash"></i>Xóa</button>
+             
         </div>
     </div>
 <!-----------------Liên lạc------------------->
@@ -929,7 +754,7 @@
         </div>
     </div>
      <!------------------------Lịch dạy----------------------->
-    <div id="LichDay" style="display: none;">
+    <div id="LichDay" style="display: none;" ng-controller="LichHocCtrl">
         <h3 id="anhLD" style="margin-bottom: 2px;"><img  src="../img/schedule.png" alt=""><span></span>Theo dõi lịch giảng dạy</h3>
         <span style="color: gray;">Ghi chú về lịch giảng dạy của giáo viên</span>
         <div id="ChonTGLich">
@@ -951,7 +776,7 @@
         </div>
 
         <div id="DanhsachLich">
-            <table id="DanhSachLich">
+            <table id="DanhSachLich" >
                 <tr>
                     <th>Tên môn</th>
                     <th>Mã lớp</th>
@@ -961,77 +786,20 @@
                     <th>Lịch(tuần)</th>
                     <th>Thứ</th>
                 </tr>
-                <tr>
-                    <td>
-                        <span id="TenMon">Toán</span><br>
-                    </td>
-                    <td>
-                        <span class="MaLop" >6A</span>
-                    </td>
-                    <td>
-                        <span id="PhongHoc">306</span>
-                    </td>
-                    <td>
-                        <span class="KyHoc" >2</span>
-                    </td>
-                    <td>
-                        <span id="TietLichHoc">123--------</span>
-                    </td>
-                    <td>
-                        <span id="LichHoc">12345-789---------</span>
-                    <td>
-                        <span class="Ngay">3</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span id="TenMon">Toán</span><br>
-                    </td>
-                    <td>
-                        <span class="MaLop" >7A</span>
-                    </td>
-                    <td>
-                        <span id="PhongHoc">307</span>
-                    </td>
-                    <td>
-                        <span class="KyHoc" >1</span>
-                    </td>
-                    <td>
-                        <span id="TietLichHoc">--345------</span>
-                    </td>
-                    <td>
-                        <span id="LichHoc">-----67890123-----</span>
-                    <td>
-                        <span class="Ngay">5</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span id="TenMon">Toán</span><br>
-                    </td>
-                    <td>
-                        <span class="MaLop" >7A</span>
-                    </td>
-                    <td>
-                        <span id="PhongHoc">307</span>
-                    </td>
-                    <td>
-                        <span class="KyHoc" >1</span>
-                    </td>
-                    <td>
-                        <span id="TietLichHoc">--345------</span>
-                    </td>
-                    <td>
-                        <span id="LichHoc">-----67890123-----</span>
-                    <td>
-                        <span class="Ngay">5</span>
-                    </td>
-                </tr>
+               <tr ng-repeat="item in scheduleList track by $index">
+            <td><span>{{item.subjectID}}</span></td>
+            <td><span class="MaLop">{{item.classID}}</span></td>
+            <td><span>{{item.room}}</span></td>
+            <td><span class="KyHoc">{{item.period}}</span></td>
+            <td><span>{{item.period}}</span></td>
+            <td><span>---{{item.weekSchedule}}---</span></td>
+            <td><span class="Ngay">{{item.dayOfWeek}}</span></td>
+        </tr>
             </table>
         </div> 
     </div>
    <!--========================================TTCANHaN========================================-->
-   <div id="ThongTinCaNhan"   ng-controller="ThongTinGV_Ctrl">
+   <div id="ThongTinCaNhan">
     <div id="TTCNGV">
     <h3 id="anhTTCN">
         <img src="../img/user (1).png"  alt="">
@@ -1040,30 +808,30 @@
 
     <span class="sub-title">Quản lý thông tin cá nhân của giáo viên</span>
 
-    <div id="ThongTinGV">
+    <div id="ThongTinGV" ng-controller="ThongTinGV_Ctrl">
     <div class="TTGV">
         <span class="label">Họ và tên:</span>
-        <input class="value" ng-model="teacher.FullName">
+        <input class="value" ng-model="teacher.fullName">
     </div>
 
     <div class="TTGV">
         <span class="label">Mã giáo viên:</span>
-       <input class="value" ng-model="teacher.TeacherID" readonly>
+       <input class="value" ng-model="teacher.teacherID" readonly>
     </div>
 
     <div class="TTGV">
         <span class="label">Chuyên môn:</span>
-        <input class="value" ng-model="teacher.Specialization">
+        <input class="value" ng-model="teacher.specialization">
     </div>
 
     <div class="TTGV">
         <span class="label">Số điện thoại:</span>
-        <input class="value" ng-model="teacher.Phone">
+        <input class="value" ng-model="teacher.phone">
     </div>
 
     <div class="TTGV">
         <span class="label">Email:</span>
-        <input class="value" ng-model="teacher.Email">
+        <input class="value" ng-model="teacher.email">
     </div>
 </div>
     <div id="ChucNangTTCN">

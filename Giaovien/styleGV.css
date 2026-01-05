@@ -662,11 +662,8 @@
     margin-left: 30px;
 }
 #btncuasoTGCDS,#btncuasoTGCDSSUA,#btxoa{
-    margin-top: 20px;
-    height:40px;
-    width:30%;
     border-radius: 10px;
-    background-color: black;
+    background-color: gray;
     color: white;
     cursor: pointer;
     float: right;

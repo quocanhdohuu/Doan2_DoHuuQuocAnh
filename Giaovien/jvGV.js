@@ -1,22 +1,308 @@
-// var current_url = "https://localhost:44319";
-// var app = angular.module('GiaoVien', []);
+var current_url = "https://localhost:7010/api-doan2";
+var app = angular.module('GiaoVien', []);
 
-// app.controller("ThongTinGV_Ctrl", function ($scope, $http) {
+app.controller("ThongTinGV_Ctrl", function ($scope, $http) {
 
-//     $scope.teacher = {};
-//     const teacherId = 1;
+    $scope.teacher = {};
+    const teacherId = 1;
 
-//     $scope.LoadTeacher = function () {
-//       $http.get("https://localhost:44319/api/GiaoVien/Tea_GetByID?id=1")
-//             .then(function (res) {
-//                 $scope.teacher = res.data;
-//             }, function () {
-//                 alert("Không lấy được thông tin giáo viên");
-//             });
-//     };
+    $scope.LoadTeacher = function () {
+        $http.get(current_url + "/GiaoVien_TC/Tea_GetByID?id=" + teacherId)
+            .then(function (res) {
+                console.log("DATA:", res.data); 
+                $scope.teacher = res.data;
+            }, function (err) {
+                console.error("ERROR:", err);
+                alert("Không lấy được thông tin giáo viên");
+            });
+    };
 
-//     $scope.LoadTeacher();
-// });
+    $scope.LoadTeacher();
+});
+
+app.controller("DiemDanhCtrl", function ($scope, $http) {
+
+    $scope.dsDiemDanh = [];
+
+    $scope.loadDiemDanh = function () {
+        $http.get(current_url + "/GiaoVien_Attendance/AT_GetAll")
+            .then(function (res) {
+                console.log(res.data); 
+                $scope.dsDiemDanh = res.data;
+            }, function (err) {
+                console.error(err);
+                alert("Không tải được danh sách điểm danh");
+            });
+    };
+
+    $scope.loadDiemDanh();
+});
+app.controller("DiemDanhCtrl", function ($scope, $http) {
+
+    $scope.dsHocSinh = [];
+
+    $scope.loadHocSinh = function () {
+        $http.get("https://localhost:7010/api-doan2/GiaoVien_Stu/Stu_GetAll")
+            .then(function (res) {
+
+                // Gán trạng thái mặc định = có mặt
+                $scope.dsHocSinh = res.data.map(hs => {
+                    hs.trangthai = 'comat';   // 👈 MẶC ĐỊNH
+                    return hs;
+                });
+
+            }, function () {
+                alert("Không lấy được danh sách học sinh");
+            });
+    };
+    $scope.setTrangThai = function (hs, trangthai) {
+    hs.trangthai = trangthai;
+    };
+    $scope.setcolor = function (hs) {
+        if (hs.trangthai === 'comat') {
+            return 'green';
+        } else if (hs.trangthai === 'vang') {
+            return 'red';
+        } else if (hs.trangthai === 'dimuon') {
+            return 'orange';
+        }
+    };
+    $scope.getBtnStyle = function (hs, type) {
+    if (hs.trangthai === type) {
+        if (type === 'comat') return { background: 'green', color: 'white' };
+        if (type === 'vang') return { background: 'red', color: 'white' };
+        if (type === 'dimuon') return { background: 'orange', color: 'white' };
+    }
+    return { background: 'transparent', color: 'black' };
+};
+    $scope.getClassTrangThai = function (hs) {
+        return {
+            'tt-comat': hs.trangthai === 'comat',
+            'tt-vang': hs.trangthai === 'vang',
+            'tt-dimuon': hs.trangthai === 'dimuon'
+        };
+    };
+    $scope.getTextTrangThai = function (hs) {
+        switch (hs.trangthai) {
+            case 'comat': return 'Có mặt';
+            case 'vang': return 'Vắng';
+            case 'dimuon': return 'Đi muộn';
+            default: return '';
+        }
+    };
+
+    $scope.luuDiemDanh = function() {
+    // Lấy dữ liệu hiện tại của trang đang xem
+    const hocSinhAll = $scope.dsHocSinh.map(hs => ({
+    studentID: hs.studentID,
+    trangthai: hs.trangthai
+}));
+
+    // Tạo payload gửi lên API
+    const data = {
+        ngay: new Date($scope.ngayDiemDanh).toISOString(), // ngày điểm danh
+        lop: parseInt($scope.lopDangChon),
+        dsHocSinh: hocSinhTrangHienTai.map(hs => ({
+            studentID: hs.studentID,
+            trangthai: hs.trangthai
+        }))
+    };
+    $http.post(current_url + "/GiaoVien_Attendance/AT_Create", data)
+        .then(function(res) {
+            alert("Lưu điểm danh thành công!");
+        }, function(err) {
+            console.error(err);
+            alert("Lưu điểm danh thất bại!");
+        });
+};
+    $scope.loadHocSinh();
+
+    $scope.currentPage = 1;      
+$scope.pageSize = 5;         
+
+$scope.numberOfPages = function() {
+    return Math.ceil($scope.dsHocSinh.length / $scope.pageSize);
+};
+});
+
+
+app.controller("SucKhoeCtrl", function ($scope, $http) {
+    $scope.currentPage = 1;   
+    $scope.pageSize = 5; 
+    $scope.healthList = [];
+
+    $scope.loadHealthDaily = function () {
+        $http.get("https://localhost:7010/api-doan2/GiaoVien_HD/HT_GetAll")
+            .then(function (res) {
+                $scope.healthList = res.data;
+                console.log(res.data);
+            }, function (err) {
+                console.error(err);
+                alert("Không lấy được dữ liệu sức khỏe");
+            });
+    };
+    $scope.loadHocSinh = function () {
+        $http.get(current_url + "/GiaoVien_Stu/Stu_GetAll")
+            .then(function (res) {
+                $scope.dsHocSinh = res.data;
+                console.log("DS HỌC SINH:", res.data);
+            }, function (err) {
+                console.error(err);
+            });
+    };
+
+    // Lấy tên học sinh theo ID
+    $scope.getTenHocSinh = function (studentID) {
+        let hs = $scope.dsHocSinh.find(x => x.studentID === studentID);
+        return hs ? hs.fullName : "Không rõ";
+    };
+
+    $scope.editScore = function (item) {
+        console.log("Sửa điểm:", item);
+    };
+$scope.numberOfPages = function() {
+    return Math.ceil($scope.healthList.length / $scope.pageSize);
+};
+    $scope.loadHocSinh();
+    $scope.loadHealthDaily();
+});
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if (!input || !input.length) return [];
+        start = +start; // chuyển sang số
+        return input.slice(start);
+    }
+});
+app.controller("ScoreCtrl", function ($scope, $http) {
+
+    $scope.scoreList = [];
+
+    $scope.loadScores = function () {
+        $http.get(current_url + "/GiaoVien_Sco/Score_GetAll")
+            .then(function (res) {
+                $scope.scoreList = res.data;
+                console.log(res.data);
+            }, function (err) {
+                console.error(err);
+                alert("Không tải được danh sách điểm");
+            });
+    };
+    $scope.loadHocSinh = function () {
+        $http.get(current_url + "/GiaoVien_Stu/Stu_GetAll")
+            .then(function (res) {
+                $scope.dsHocSinh = res.data;
+                console.log("DS HỌC SINH:", res.data);
+            }, function (err) {
+                console.error(err);
+            });
+    };
+
+    // Lấy tên học sinh theo ID
+    $scope.getTenHocSinh = function (studentID) {
+        let hs = $scope.dsHocSinh.find(x => x.studentID === studentID);
+        return hs ? hs.fullName : "Không rõ";
+    };
+
+    $scope.editScore = function (item) {
+        console.log("Sửa điểm:", item);
+    };
+
+    $scope.loadHocSinh();
+
+    $scope.loadScores();
+    $scope.xoaDiem = function(scoreID) {
+    if (!scoreID) {
+        alert("Lỗi: không có ID điểm!");
+        return;
+    }
+
+    if (!confirm("Bạn có chắc muốn xóa điểm này?")) return;
+
+    $http.delete(current_url + "/GiaoVien_Sco/Score_Delete?id=" + scoreID)
+        .then(function(res) {
+            alert("Xóa thành công!");
+            // Xóa khỏi mảng hiển thị
+            const index = $scope.scoreList.findIndex(x => x.scoreID === scoreID);
+            if (index !== -1) $scope.scoreList.splice(index, 1);
+        })
+        .catch(function(err) {
+            console.error(err);
+            alert("Xóa thất bại!");
+        });
+};
+    $scope.addScores = function() {
+    // Lấy dữ liệu từ giao diện
+    const studentID = parseInt($scope.hocSinhDangChon);
+    const loaiDiem = $scope.loaiDiemDangChon;
+    const diem = parseFloat($scope.diemNhap);
+    const nhanXet = $scope.nhanXetNhap || "";
+
+    if (isNaN(studentID) || isNaN(diem) || !loaiDiem) {
+        alert("Vui lòng điền đầy đủ thông tin điểm!");
+        return;
+    }
+
+    const data = {
+        StudentID: studentID,     
+        Term: loaiDiem,           
+        Score: diem,             
+        date: new Date().toISOString(),         
+        TeacherID: 1,             
+        Subject: "Toan"           
+    };
+
+    $http.post(current_url + "/GiaoVien_Sco/Score_Create", data)
+        .then(function(res) {
+            alert("Thêm điểm thành công!");
+             $scope.loadScores();
+        })
+        .catch(function(err) {
+            console.error(err);
+            alert("Thêm điểm thất bại!");
+        });
+};
+$scope.currentPage = 0;
+$scope.pageSize = 5;
+$scope.numberOfPages = function() {
+    return Math.ceil($scope.scoreList.length / $scope.pageSize);
+};
+});
+app.controller("LichHocCtrl", function ($scope, $http) {
+
+    $scope.scheduleList = []; // danh sách gốc
+    $scope.groupedSchedule = []; // danh sách gộp theo tuần
+
+    $scope.loadSchedule = function () {
+        $http.get(current_url + "/GiaoVien_SD/SD_GetAll")
+            .then(function (res) {
+                $scope.scheduleList = res.data;
+                
+                // gộp theo weekSchedule
+                let grouped = {};
+                $scope.scheduleList.forEach(item => {
+                    if (!grouped[item.weekSchedule]) {
+                        grouped[item.weekSchedule] = [];
+                    }
+                    grouped[item.weekSchedule].push(item);
+                });
+
+                // chuyển sang mảng để hiển thị
+                $scope.groupedSchedule = Object.keys(grouped).map(week => {
+                    return {
+                        weekSchedule: week,
+                        items: grouped[week]
+                    };
+                });
+
+            }, function (err) {
+                console.error(err);
+                alert("Không tải được lịch học");
+            });
+    };
+
+    $scope.loadSchedule();
+
+});
 //------------------Tong Quan--------------------
 const btnTONGQUAN = document.querySelector('#btnTongQuan');
 const btnDiemDanh=document.querySelector('#btnDieDanh');
@@ -144,18 +430,18 @@ function luutt(){
     localStorage.setItem("TTGiaoVien", JSON.stringify(dsTin));
     
 }
-function loadTTGV() {
-    let dsTin = JSON.parse(localStorage.getItem("TTGiaoVien") || "[]");
-    let lastTT = dsTin[dsTin.length - 1];
-    if (!lastTT) return;
-    document.getElementById('emailGV').value = lastTT.email;
-    document.getElementById('sdtGV').value = lastTT.sdt;
-    document.getElementById('chuyenMonGV').value = lastTT.chuyenmon;
-    document.getElementById('ngaySinhGV').value = lastTT.ngaysinh;
-    document.getElementById('maGV').value = lastTT.magv;
-    document.getElementById('tenGV').value = lastTT.tengv;
-    document.getElementById('TenGiaoVien').innerText ='Giáo Viên - ' + lastTT.tengv;
-}
+// function loadTTGV() {
+//     let dsTin = JSON.parse(localStorage.getItem("TTGiaoVien") || "[]");
+//     let lastTT = dsTin[dsTin.length - 1];
+//     if (!lastTT) return;
+//     document.getElementById('emailGV').value = lastTT.email;
+//     document.getElementById('sdtGV').value = lastTT.sdt;
+//     document.getElementById('chuyenMonGV').value = lastTT.chuyenmon;
+//     document.getElementById('ngaySinhGV').value = lastTT.ngaysinh;
+//     document.getElementById('maGV').value = lastTT.magv;
+//     document.getElementById('tenGV').value = lastTT.tengv;
+//     document.getElementById('TenGiaoVien').innerText ='Giáo Viên - ' + lastTT.tengv;
+// }
  
 document.getElementById('btnbochan').addEventListener('click', function() {
     document.querySelectorAll('#doimk input').forEach(input => {
@@ -718,39 +1004,39 @@ let Khads=parseFloat(KhaTSDS.innerText)
 let Yeuds=parseFloat(YeuTSDS.innerText)
 let Trungbinhds=parseFloat(TrungBinhTSDS.innerText)
 
-btnsuadiemDS.addEventListener('click',function(){
-    const row = document.querySelector('#DanhSachDS tr.selected');
-    if (!row) return;
+// btnsuadiemDS.addEventListener('click',function(){
+//     const row = document.querySelector('#DanhSachDS tr.selected');
+//     if (!row) return;
 
     
-    row.cells[0].querySelector('span').innerText =
-        document.getElementById('chonHocSinhGhiChuDSSUA').value;
+//     row.cells[0].querySelector('span').innerText =
+//         document.getElementById('chonHocSinhGhiChuDSSUA').value;
 
    
-    const loaidiemRadios = document.getElementsByName('LDSUA');
-    for (let i = 0; i < loaidiemRadios.length; i++) {
-        if (loaidiemRadios[i].checked) {
-            const ld = loaidiemRadios[i].value;
+//     const loaidiemRadios = document.getElementsByName('LDSUA');
+//     for (let i = 0; i < loaidiemRadios.length; i++) {
+//         if (loaidiemRadios[i].checked) {
+//             const ld = loaidiemRadios[i].value;
 
-            let className = "LoaiDiemDS"; 
-            if (ld === "15 phút") className = "LoaiDiemDS2";
-            else if (ld === "1 tiết") className = "LoaiDiemDS3";
-            else if (ld === "Học kỳ") className = "LoaiDiemDS4";
+//             let className = "LoaiDiemDS"; 
+//             if (ld === "15 phút") className = "LoaiDiemDS2";
+//             else if (ld === "1 tiết") className = "LoaiDiemDS3";
+//             else if (ld === "Học kỳ") className = "LoaiDiemDS4";
 
-            row.cells[1].innerHTML = `<span class="${className}">${ld}</span>`;
-        }
-    }
-
-   
-    row.cells[2].querySelector('span').innerText =
-        document.getElementById('txtDiemSODSSUA').value + "/10";
+//             row.cells[1].innerHTML = `<span class="${className}">${ld}</span>`;
+//         }
+//     }
 
    
-    row.cells[3].querySelector('span').innerText =
-        document.getElementById('NhanxetblDSSUA').value;
+//     row.cells[2].querySelector('span').innerText =
+//         document.getElementById('txtDiemSODSSUA').value + "/10";
 
-    document.querySelector('#CuaSoNĐSSUA').style.display = 'none';
-});
+   
+//     row.cells[3].querySelector('span').innerText =
+//         document.getElementById('NhanxetblDSSUA').value;
+
+//     document.querySelector('#CuaSoNĐSSUA').style.display = 'none';
+// });
 function suaghichuDS(button) {
     document.querySelector('#CuaSoNĐSSUA').style.display = 'block';
     const row = button.closest('tr');
@@ -900,52 +1186,51 @@ btnLUUDIEMDANHDD.addEventListener('click', function () {
     alert("Đã lưu điểm danh");
     hdgan(btnLUUDIEMDANHDD);
 });
-btncomatDsDD.forEach(btn => {
-  btn.addEventListener('click', function() {
-    let row = this.closest('tr'); 
-    let span = row.cells[4].querySelector('span');
-    span.innerHTML = '<i class="fa-solid fa-circle-check"></i>Có mặt';
-    span.style.color='green';
-    span.style.backgroundColor='#D8F6E0';
-    span.style.padding='2px 6px';
-    span.style.borderRadius='10px';    
+// btncomatDsDD.forEach(btn => {
+//   btn.addEventListener('click', function() {
+//     let row = this.closest('tr'); 
+//     let span = row.cells[4].querySelector('span');
+//     span.innerHTML = '<i class="fa-solid fa-circle-check"></i>Có mặt';
+//     span.style.color='green';
+//     span.style.backgroundColor='#D8F6E0';
+//     span.style.padding='2px 6px';
+//     span.style.borderRadius='10px';    
 
-    let btnVangmatDsDD = row.querySelector('.btnDDVangMat');
-    let btnDiMuonDsDD = row.querySelector('.btnDDDiMuon');
-    let btncomatDsDD = row.querySelector('.btnDDComat');
+//     let btnVangmatDsDD = row.querySelector('.btnDDVangMat');
+//     let btnDiMuonDsDD = row.querySelector('.btnDDDiMuon');
+//     let btncomatDsDD = row.querySelector('.btnDDComat');
 
-    btnVangmatDsDD.style.backgroundColor='transparent';
-    btnVangmatDsDD.style.color='black';
-    btnDiMuonDsDD.style.backgroundColor='transparent';
-    btnDiMuonDsDD.style.color='black';
-    btncomatDsDD.style.backgroundColor='green';
-    btncomatDsDD.style.color='white';
+//     btnVangmatDsDD.style.backgroundColor='transparent';
+//     btnVangmatDsDD.style.color='black';
+//     btnDiMuonDsDD.style.backgroundColor='transparent';
+//     btnDiMuonDsDD.style.color='black';
+//     btncomatDsDD.style.backgroundColor='green';
+//     btncomatDsDD.style.color='white';
 
      
    
-     let trangthaiCu = row.getAttribute('data-trangthai'); 
+//      let trangthaiCu = row.getAttribute('data-trangthai'); 
 
    
-    if (trangthaiCu !== 'comat') {
-      if (trangthaiCu === 'vang' && soVangmat > 0) {
-        soVangmat -= 1;
-      }
-      if (trangthaiCu === 'dimuon' && soDimuon > 0) {
-        soDimuon -= 1;
-      }
-      soComat += 1;
-    }
+//     if (trangthaiCu !== 'comat') {
+//       if (trangthaiCu === 'vang' && soVangmat > 0) {
+//         soVangmat -= 1;
+//       }
+//       if (trangthaiCu === 'dimuon' && soDimuon > 0) {
+//         soDimuon -= 1;
+//       }
+//       soComat += 1;
+//     }
 
     
-    row.setAttribute('data-trangthai', 'comat');
+//     row.setAttribute('data-trangthai', 'comat');
 
    
-    TScomatDD.innerText = soComat;
-    TSvangDD.innerText = soVangmat;
-    TSdimuonDD.innerText = soDimuon;
+//     TScomatDD.innerText = soComat;
+//     TSvangDD.innerText = soVangmat;
+//     TSdimuonDD.innerText = soDimuon;
 
-})});
-
+// })});
 btnDiMuonDsDD.forEach(btn => {
   btn.addEventListener('click', function() {
     let row = this.closest('tr'); 
@@ -1154,6 +1439,8 @@ function loadTinDen() {
         i+=1;
     });
 }
+
+
 window.onload = function() {
     loadTinDaGui();
     loadTinDen();

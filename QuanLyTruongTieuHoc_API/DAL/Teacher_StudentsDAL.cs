@@ -38,7 +38,7 @@ namespace DAL
                     Address = row["Address"].ToString(),
                     ParentID = (int)row["ParentID"],
                     HealthNote = row["HealthNote"].ToString(),
-                    Status = (int)row["HealthNote"],
+                   
                 });
             }
 
@@ -63,7 +63,7 @@ namespace DAL
                 Address = row["Address"].ToString(),
                 ParentID = (int)row["ParentID"],
                 HealthNote = row["HealthNote"].ToString(),
-                Status= (int)row["HealthNote"],
+                Status= (int)row["Status"],
             };
         }
         public bool UpdateStu(Students student, out string error)
