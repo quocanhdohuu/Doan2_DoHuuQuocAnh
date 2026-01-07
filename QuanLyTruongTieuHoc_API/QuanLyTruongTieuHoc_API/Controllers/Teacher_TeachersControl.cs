@@ -40,9 +40,9 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
         [Route("Tea_Update")]
         [HttpPut]
-        public IActionResult Update(int id, [FromBody] Teachers tea)
+        public IActionResult Update([FromBody] Teachers tea)
         {
-            bool ok = _bll.UpdateStu(id, tea, out string error);
+            bool ok = _bll.UpdateStu(tea, out string error);
 
             if (!ok)
                 return BadRequest(error);

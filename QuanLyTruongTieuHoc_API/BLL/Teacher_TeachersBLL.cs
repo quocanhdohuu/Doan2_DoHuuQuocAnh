@@ -24,21 +24,8 @@ namespace BLL
         {
             return _dal.GetTeaById(id, out error);
         }
-        public bool UpdateStu(int id, Teachers tea, out string error)
+        public bool UpdateStu(Teachers tea, out string error)
         {
-            if (id <= 0)
-            {
-                error = "Invalid Teacher id";
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(tea.FullName))
-            {
-                error = "Teacher is required";
-                return false;
-            }
-
-            tea.TeacherID = id;
 
             return _dal.UpdateTea(tea, out error);
         }

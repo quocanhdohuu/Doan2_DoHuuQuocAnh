@@ -52,7 +52,7 @@ namespace DAL
                     $"{AT.SenderID}, " +
                     $"{AT.ReceiverID}, " +
                     $"'{AT.SentTime:yyyy-MM-dd}', " +
-                    $"'{AT.Content.Replace("'", "''")}', " +
+                    $"N'{AT.Content.Replace("'", "''")}', " +
                     $"'{AT.IsRead}')";
 
             error = _db.ExecuteNoneQuery(sql);

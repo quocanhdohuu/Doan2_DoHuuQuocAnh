@@ -133,69 +133,69 @@
         <div id="ChonLop">
             <div id="Lop">
                 <span>Lớp học:</span>
-                <select id="chonLopHoc" ng-model="lopDangChon" ng-change="loadHocSinh()">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
+            <select id="chonLopHoc"
+                ng-model="lopDangChon"
+                ng-change="loadHocSinh()"
+                ng-options="lop.classID as lop.className for lop in dsLop">
+            </select>
             </div>
 
             <div id="Ngay" >
                 <span>Ngày điểm danh:</span>
-                <input ng-model="ngayDiemDanh" ng-change="loadHocSinh()" type="date" id="chonNgay">
+                <input  max="{{today}}" ng-model="ngayDiemDanh" ng-change="loadHocSinh()" type="date" id="chonNgay">
             </div>
         </div>
 
         <div id="TSDiemDanh">
             <div id="CoMatDD" style="background-color:#D8F6E0;">
-                <span id="slgcomatDD" style="font-weight: bold;font-size: 60pt;color: green;">0</span><br>
+                <span id="slgcomatDD" style="font-weight: bold;font-size: 60pt;color: green;">{{slgcomatDD}}</span><br>
                 <span style="color: green;">Có mặt</span>
             </div>
             <div id="Vang" style="background-color:#FFE5E5;">
-                <span id="slgvangDD" style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+                <span id="slgvangDD" style="font-weight: bold;font-size: 60pt;color: red;">{{slgvangDD}}</span><br>
                 <span style="color: red;">Vắng mặt</span>
             </div>
             <div id="DiMuonDD" style="background-color:#FFEBD2;color: orange;">
-                <span id="slgdimuonDD" style="font-weight: bold;font-size: 60pt;">0</span><br>
+                <span id="slgdimuonDD" style="font-weight: bold;font-size: 60pt;">{{slgdimuonDD}}</span><br>
                 <span style="color: orange;">Đi muộn</span>
             </div>
         </div>
 
         <div id="DanhsachDD">
             <table id="DanhSachDD">
-                <tr>
+            <tr>
                     <th>STT</th>
                     <th>Mã HS</th>
                     <th>Họ tên</th>
                     <th>Trạng thái</th>
+                    <th>Trạng thái xác nhận</th>
                     <th>Ghi chú</th>
-                    <th>Thao tác</th>
                 </tr>
                 <tr ng-repeat="hs in dsHocSinh | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by hs.studentID">
-    <td>{{$index + 1}}</td>
-    <td>{{hs.studentID}}</td>
-    <td>{{hs.fullName}}</td>
-    <td>
-        <button class="btnDDComat" ng-click="setTrangThai(hs, 'comat')" ng-style="getBtnStyle(hs, 'comat')">✔</button>
-        <button class="btnDDVangMat" ng-click="setTrangThai(hs, 'vang')" ng-style="getBtnStyle(hs, 'vang')">✖</button>
-        <button class="btnDDDiMuon" ng-click="setTrangThai(hs, 'dimuon')" ng-style="getBtnStyle(hs, 'dimuon')">⏰</button>
-    </td>
-    <td ng-class="getClassTrangThai(hs)">{{ getTextTrangThai(hs) }}</td>
-    <td>
-        <button  class="btnGHICHUDD">Ghi chú</button>
-    </td>
-</tr>
+                <td>{{$index + 1}}</td>
+                <td>{{hs.studentID}}</td>
+                <td>{{hs.fullName}}</td>
+                <td>
+                    <button class="btnDDComat" ng-click="setTrangThai(hs, 'comat')" ng-style="getBtnStyle(hs, 'comat')">✔</button>
+                    <button class="btnDDVangMat" ng-click="setTrangThai(hs, 'vang')" ng-style="getBtnStyle(hs, 'vang')">✖</button>
+                    <button class="btnDDDiMuon" ng-click="setTrangThai(hs, 'dimuon')" ng-style="getBtnStyle(hs, 'dimuon')">⏰</button>
+                </td>
+                <td ng-class="getClassTrangThai(hs)">{{ getTextTrangThai(hs) }}</td>
+                <td>
+                    <textarea style="resize: none;" ng-model="hs.note"></textarea>
+                </td>
+            </tr>
                 
             </table>
         </div>
         <div id="pagination" style="margin-top:10px;text-align:center;">
-    <button ng-disabled="currentPage == 1" ng-click="currentPage = currentPage-1">« Trước</button>
-    <span>Trang {{currentPage}} / {{numberOfPages()}}</span>
-    <button ng-disabled="currentPage == numberOfPages()" ng-click="currentPage = currentPage+1">Sau »</button>
-</div>
+        <button ng-disabled="currentPage == 1" ng-click="currentPage = currentPage-1">« Trước</button>
+        <span>Trang {{currentPage}} / {{numberOfPages()}}</span>
+        <button ng-disabled="currentPage == numberOfPages()" ng-click="currentPage = currentPage+1">Sau »</button>
+    </div>
         <button id="btnLuuDiemDanh" ng-click="luuDiemDanh()"> <i class="fa-solid fa-floppy-disk"></i><span>Lưu điểm danh</span></button>
 
-        <div id="CuaSoGCDD" >
+        <div id="CuaSoGCDD" ng-show="ghiChuDDVisible">
             <button id="btbThoatcsoGCDD" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
             <h3 style="margin-bottom: 2px;">Ghi chú cho học sinh</h3>
             <span style="color: gray;">Thêm ghi chú về lý do vắng mặt hoặc đi muộn</span>
@@ -254,6 +254,7 @@
                     <th>Ghi chú dinh dưỡng</th>
                     <th>Bữa ăn</th>
                     <th>Thao tác</th>
+                </tr>
                 <tr ng-repeat="sk in healthList| startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by sk.healthID">
         <td>
                 <span class="HSSK">
@@ -444,7 +445,7 @@
                     <th>Ngày</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr ng-repeat="ds in scoreList">
+                <tr ng-repeat="ds in scoreList | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by ds.scoreID">
             <td>
                 <span class="HSDS">
                     {{ getTenHocSinh(ds.studentID) }}
@@ -483,8 +484,8 @@
                 
             </table>
             <button ng-disabled="currentPage == 0" ng-click="currentPage = currentPage-1">« Trước</button>
-<span>Trang {{currentPage+1}} / {{numberOfPages()}}</span>
-<button ng-disabled="currentPage >= numberOfPages()-1" ng-click="currentPage = currentPage+1">Sau »</button>
+            <span>Trang {{currentPage+1}} / {{numberOfPages()}}</span>
+            <button ng-disabled="currentPage >= numberOfPages()-1" ng-click="currentPage = currentPage+1">Sau »</button>
         </div>
 
         <div id="CuaSoNĐS">
@@ -799,7 +800,7 @@
         </div> 
     </div>
    <!--========================================TTCANHaN========================================-->
-   <div id="ThongTinCaNhan">
+   <div id="ThongTinCaNhan" ng-controller="ThongTinGV_Ctrl">
     <div id="TTCNGV">
     <h3 id="anhTTCN">
         <img src="../img/user (1).png"  alt="">
@@ -808,7 +809,7 @@
 
     <span class="sub-title">Quản lý thông tin cá nhân của giáo viên</span>
 
-    <div id="ThongTinGV" ng-controller="ThongTinGV_Ctrl">
+    <div id="ThongTinGV" >
     <div class="TTGV">
         <span class="label">Họ và tên:</span>
         <input class="value" ng-model="teacher.fullName">
@@ -821,7 +822,7 @@
 
     <div class="TTGV">
         <span class="label">Chuyên môn:</span>
-        <input class="value" ng-model="teacher.specialization">
+        <input class="value" ng-model="teacher.specialization" readonly>
     </div>
 
     <div class="TTGV">
@@ -833,21 +834,33 @@
         <span class="label">Email:</span>
         <input class="value" ng-model="teacher.email">
     </div>
+     <div class="TTGV">
+        <span class="label">Chủ nhiệm:</span>
+        <input class="value" ng-model="teacher.isCN" readonly>
+    </div>
+     <div class="TTGV">
+        <span class="label">Trạng thái:</span>
+        <input class="value" ng-model="teacher.status" readonly>
+    </div>
+    <div class="TTGV">
+        <span  class="label">Tài khoản:</span>
+        <input class="value" ng-model="teacher.userID" readonly>
+    </div>
 </div>
     <div id="ChucNangTTCN">
         <button id="btnDoiMatKhau"><i class="fa-solid fa-key"></i>Đổi mật khẩu</button>
-        <button id="btnSuaTT"><i class="fa-solid fa-edit"></i>Sửa thông tin</button>
+        <button id="btnSuaTT" ng-click="editTeacher()"><i class="fa-solid fa-edit"></i>Sửa thông tin</button>
     </div>
     </div>
-    <div id="doimk">
+    <div id="doimk" >
         <div id="ThongTinGV">
         <div class="TTGV">
             <span class="label">Mật khẩu cũ:</span>
-            <input class="value" type="password" id="mkcu">
+            <input class="value" type="password" id="mkcu" ng-model="oldPassword">
         </div>
         <div class="TTGV">
             <span class="label">Mật khẩu mới:</span>
-            <input class="value" type="password" id="makmoi">
+            <input class="value" type="password" id="makmoi" ng-model="newPassword">
         </div>
         <div class="TTGV">
             <span class="label">Nhập lại mật khẩu mới:</span>
@@ -855,7 +868,7 @@
         </div>
     </div>
     <div id="ChucNangTTCN">
-        <button id="btnXacNhanDoiMatKhau"><i class="fa-solid fa-key"></i>Xác nhận đổi mật khẩu</button>
+        <button id="btnXacNhanDoiMatKhau" ng-click="ChangePassword()"><i class="fa-solid fa-key"></i>Xác nhận đổi mật khẩu</button>
         <button id="btnHuyDoiMK"><i class="fa-solid fa-xmark"></i>Hủy</button>
         <button id="btnbochan"><i class="fa-solid fa-eye"></i></button>
     </div>

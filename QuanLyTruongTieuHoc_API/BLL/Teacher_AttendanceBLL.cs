@@ -52,5 +52,9 @@ namespace BLL
         {
             return _dal.InsertATen(AT, out error);
         }
+        public bool saveAT(Attendance AT,out string error)
+        {
+            return _dal.SaveAttendance(AT, out error);
+        }
     }
 }

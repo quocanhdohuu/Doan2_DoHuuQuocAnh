@@ -17,10 +17,15 @@ namespace DAL
         {
             _db = db;
         }
-        public List<Students> GetAllStu(out string error)
+        public List<Students> GetAllStu(int idClass,out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Students", out error);
+            string sql = $@"
+            SELECT s.*
+            FROM Students s
+            JOIN StudentClass sc ON s.StudentID = sc.StudentID
+            WHERE sc.ClassID = {idClass}";
+            var dt = _db.ExecuteQueryToDataTable(sql, out error);
 
             var list = new List<Students>();
 
@@ -76,12 +81,12 @@ namespace DAL
 
             string sql =
                  $"UPDATE Students SET " +
-                $"FullName = '{student.FullName.Replace("'", "''")}', " +
+                $"FullName = N'{student.FullName.Replace("'", "''")}', " +
                 $"BirthDate = '{student.BirthDate:yyyy-MM-dd}', " +
-                $"Gender = '{student.Gender.Replace("'", "''")}', " +
-                $"Address = '{student.Address.Replace("'", "''")}', " +
+                $"Gender = N'{student.Gender.Replace("'", "''")}', " +
+                $"Address = N'{student.Address.Replace("'", "''")}', " +
                 $"ParentID = {student.ParentID}, " +
-                $"HealthNote = '{student.HealthNote.Replace("'", "''")}' " +
+                $"HealthNote = N'{student.HealthNote.Replace("'", "''")}' " +
                 $"Status = {student.Status} " +
                 $"WHERE StudentID = {student.StudentID}";
 

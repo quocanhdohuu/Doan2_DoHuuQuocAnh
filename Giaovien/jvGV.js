@@ -1,6 +1,6 @@
 var current_url = "https://localhost:7010/api-doan2";
 var app = angular.module('GiaoVien', []);
-
+var teacherId = 1;
 app.controller("ThongTinGV_Ctrl", function ($scope, $http) {
 
     $scope.teacher = {};
@@ -16,48 +16,58 @@ app.controller("ThongTinGV_Ctrl", function ($scope, $http) {
                 alert("Không lấy được thông tin giáo viên");
             });
     };
+    
+     $scope.editTeacher = function () {
 
+        $http.put(current_url + "/GiaoVien_TC/Tea_Update", $scope.teacher)
+            .then(function () {
+                alert("Cập nhật thông tin thành công!");
+            }, function (err) {
+                console.error(err);
+                alert("Cập nhật thông tin thất bại!");
+            });
+    };
+    $scope.ChangePassword = function () {
+    $http.put(current_url + "/QLUser/User_ChangePassword?id=" + $scope.teacher.userID, {
+        oldPassword: $scope.oldPassword,
+        newPassword: $scope.newPassword
+    }).then(function () {
+        alert("Đổi mật khẩu thành công");
+    }, function (err) {
+        alert("Đổi mật khẩu thất bại");
+    });
+    };
     $scope.LoadTeacher();
 });
 
 app.controller("DiemDanhCtrl", function ($scope, $http) {
 
-    $scope.dsDiemDanh = [];
-
-    $scope.loadDiemDanh = function () {
-        $http.get(current_url + "/GiaoVien_Attendance/AT_GetAll")
-            .then(function (res) {
-                console.log(res.data); 
-                $scope.dsDiemDanh = res.data;
-            }, function (err) {
-                console.error(err);
-                alert("Không tải được danh sách điểm danh");
-            });
-    };
-
-    $scope.loadDiemDanh();
-});
-app.controller("DiemDanhCtrl", function ($scope, $http) {
-
     $scope.dsHocSinh = [];
+    $scope.today = new Date().toISOString().split('T')[0];
 
     $scope.loadHocSinh = function () {
-        $http.get("https://localhost:7010/api-doan2/GiaoVien_Stu/Stu_GetAll")
-            .then(function (res) {
+    if (!$scope.lopDangChon) return;
 
-                // Gán trạng thái mặc định = có mặt
-                $scope.dsHocSinh = res.data.map(hs => {
-                    hs.trangthai = 'comat';   // 👈 MẶC ĐỊNH
-                    return hs;
-                });
+    $http.get(
+        "https://localhost:7010/api-doan2/GiaoVien_Stu/Stu_GetAll?id=" + $scope.lopDangChon
+    )
+    .then(function (res) {
 
-            }, function () {
-                alert("Không lấy được danh sách học sinh");
-            });
-    };
-    $scope.setTrangThai = function (hs, trangthai) {
-    hs.trangthai = trangthai;
-    };
+        // Gán trạng thái mặc định = có mặt
+        $scope.dsHocSinh = res.data.map(hs => {
+            hs.trangthai = 'comat';
+            return hs;
+        });
+
+        // reset phân trang
+        $scope.currentPage = 1;
+
+    }, function () {
+        alert("Không lấy được danh sách học sinh theo lớp");
+    });
+     };
+
+    
     $scope.setcolor = function (hs) {
         if (hs.trangthai === 'comat') {
             return 'green';
@@ -90,38 +100,59 @@ app.controller("DiemDanhCtrl", function ($scope, $http) {
             default: return '';
         }
     };
-
-    $scope.luuDiemDanh = function() {
-    // Lấy dữ liệu hiện tại của trang đang xem
-    const hocSinhAll = $scope.dsHocSinh.map(hs => ({
-    studentID: hs.studentID,
-    trangthai: hs.trangthai
-}));
-
-    // Tạo payload gửi lên API
-    const data = {
-        ngay: new Date($scope.ngayDiemDanh).toISOString(), // ngày điểm danh
-        lop: parseInt($scope.lopDangChon),
-        dsHocSinh: hocSinhTrangHienTai.map(hs => ({
-            studentID: hs.studentID,
-            trangthai: hs.trangthai
-        }))
+    $scope.updateCount = function() {
+    $scope.slgcomatDD = $scope.dsHocSinh.filter(hs => hs.trangthai === 'comat').length;
+    $scope.slgvangDD = $scope.dsHocSinh.filter(hs => hs.trangthai === 'vang').length;
+    $scope.slgdimuonDD = $scope.dsHocSinh.filter(hs => hs.trangthai === 'dimuon').length;
     };
-    $http.post(current_url + "/GiaoVien_Attendance/AT_Create", data)
-        .then(function(res) {
-            alert("Lưu điểm danh thành công!");
-        }, function(err) {
+    $scope.setTrangThai = function (hs, trangthai) {
+    hs.trangthai = trangthai;
+    $scope.updateCount();
+    };
+
+    
+    $scope.luuDiemDanh = function () {
+        if (!$scope.lopDangChon) {
+        alert("Vui lòng chọn lớp trước khi lưu điểm danh!");
+        return;
+    }
+    if (!$scope.ngayDiemDanh) {
+        alert("Vui lòng chọn ngày điểm danh!");
+        return;
+    }
+    $scope.dsHocSinh.forEach(hs => {
+        const data = {
+            studentID: hs.studentID,
+            classID: parseInt($scope.lopDangChon),
+            date: $scope.ngayDiemDanh,
+            status: hs.trangthai,
+            note: hs.note || ""
+        };
+
+        $http.post(current_url + "/GiaoVien_Attendance/AT_SaveAten", data);
+    });
+
+    alert("Lưu điểm danh xong");
+    };
+    $scope.loadclass=function(){
+    $http.get(current_url + "/GiaoVien_TCLass/TC_GetClass?teacherId=" + teacherId)
+        .then(function (res) {
+            $scope.dsLop=res.data;
+        }, function (err) {
             console.error(err);
-            alert("Lưu điểm danh thất bại!");
+            alert("Không lấy được danh sách lớp");
         });
-};
+    };    
+    $scope.ghiChuDDVisible = false;
+    $scope.loadclass();
     $scope.loadHocSinh();
 
     $scope.currentPage = 1;      
-$scope.pageSize = 5;         
+    $scope.pageSize = 5;         
 
-$scope.numberOfPages = function() {
+    $scope.numberOfPages = function() {
     return Math.ceil($scope.dsHocSinh.length / $scope.pageSize);
+    
 };
 });
 
@@ -157,9 +188,7 @@ app.controller("SucKhoeCtrl", function ($scope, $http) {
         return hs ? hs.fullName : "Không rõ";
     };
 
-    $scope.editScore = function (item) {
-        console.log("Sửa điểm:", item);
-    };
+   
 $scope.numberOfPages = function() {
     return Math.ceil($scope.healthList.length / $scope.pageSize);
 };
@@ -477,7 +506,6 @@ document.getElementById('btnXacNhanDoiMatKhau').addEventListener('click', functi
         return;
     }
 
-    alert("Đổi mật khẩu thành công!");
     document.querySelector('#doimk').style.display = 'none';
     document.querySelector('#TTCNGV').style.display = 'block';
 });  
@@ -1182,10 +1210,16 @@ let currentRow = null;
 document.getElementById('btbThoatcsoGCDD').addEventListener('click', function (e) {
     document.querySelector('#CuaSoGCDD').style.display = 'none';
 });
-btnLUUDIEMDANHDD.addEventListener('click', function () {
-    alert("Đã lưu điểm danh");
-    hdgan(btnLUUDIEMDANHDD);
-});
+// btnLUUDIEMDANHDD.addEventListener('click', function () {
+//     if(document.getElementById('chonNgay').value===""){
+//         alert("Vui lòng chọn ngày điểm danh!");
+//         return;
+//     }
+// });
+// btnLUUDIEMDANHDD.addEventListener('click', function () {
+//     alert("Đã lưu điểm danh");
+//     hdgan(btnLUUDIEMDANHDD);
+// });
 // btncomatDsDD.forEach(btn => {
 //   btn.addEventListener('click', function() {
 //     let row = this.closest('tr'); 

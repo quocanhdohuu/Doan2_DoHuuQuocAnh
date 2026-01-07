@@ -49,10 +49,10 @@ namespace DAL
             string sql =
                  $"INSERT INTO HealthDaily (StudentID, MealStatus, Date, HealthStatus, TeacherNote) VALUES (" +
                     $"{HT.StudentID}, " +
-                    $"'{HT.MealStatus.Replace("'", "''")}', " +
+                    $"N'{HT.MealStatus.Replace("'", "''")}', " +
                     $"'{HT.Date:yyyy-MM-dd}', " +
-                    $"'{HT.HealthStatus.Replace("'", "''")}', " +
-                    $"'{HT.TeacherNote.Replace("'", "''")}')";
+                    $"N'{HT.HealthStatus.Replace("'", "''")}', " +
+                    $"N'{HT.TeacherNote.Replace("'", "''")}')";
 
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);
@@ -68,10 +68,10 @@ namespace DAL
             string sql =
                     $"UPDATE HealthDaily SET " +
                     $"StudentID = {HT.StudentID}, " +
-                    $"MealStatus = '{HT.MealStatus.Replace("'", "''")}', " +
+                    $"MealStatus = N'{HT.MealStatus.Replace("'", "''")}', " +
                     $"Date = '{HT.Date:yyyy-MM-dd}', " +
-                    $"HealthStatus = '{HT.HealthStatus.Replace("'", "''")}', " +
-                    $"TeacherNote = '{HT.TeacherNote.Replace("'", "''")}' " +
+                    $"HealthStatus = N'{HT.HealthStatus.Replace("'", "''")}', " +
+                    $"TeacherNote = N'{HT.TeacherNote.Replace("'", "''")}' " +
                 $"WHERE HealthID = {HT.HealthID}";
 
             error = _db.ExecuteNoneQuery(sql);

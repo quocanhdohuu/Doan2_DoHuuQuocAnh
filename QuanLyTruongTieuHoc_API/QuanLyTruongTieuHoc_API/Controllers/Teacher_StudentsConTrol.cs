@@ -17,9 +17,9 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
         [Route("Stu_GetAll")]
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int id)
         {
-            var list = _bll.GetAll(out string error);
+            var list = _bll.GetAll(id,out string error);
 
             if (!string.IsNullOrEmpty(error))
                 return StatusCode(500, error);

@@ -111,5 +111,39 @@ namespace DAL
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);
         }
+        public bool SaveAttendance(Attendance AT, out string error)
+        {
+            string sql = $@"
+            IF EXISTS (
+            SELECT 1 FROM Attendance
+            WHERE StudentID = {AT.StudentID}
+              AND ClassID = {AT.ClassID}
+              AND Date = '{AT.Date:yyyy-MM-dd}'
+                )
+                BEGIN
+                UPDATE Attendance
+                SET
+                Status = '{AT.Status.Replace("'", "''")}',
+                Note = '{AT.Note.Replace("'", "''")}'
+                WHERE StudentID = {AT.StudentID}
+                AND ClassID = {AT.ClassID}
+                AND Date = '{AT.Date:yyyy-MM-dd}'
+                END
+                ELSE
+                BEGIN
+                INSERT INTO Attendance (StudentID, ClassID, Date, Status, Note)
+                VALUES (
+                {AT.StudentID},
+                {AT.ClassID},
+                '{AT.Date:yyyy-MM-dd}',
+                '{AT.Status.Replace("'", "''")}',
+                '{AT.Note.Replace("'", "''")}'
+                )
+                END
+                ";
+
+            error = _db.ExecuteNoneQuery(sql);
+            return string.IsNullOrEmpty(error);
+        }
     }
 }

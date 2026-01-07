@@ -4,7 +4,9 @@ using System.Data;
 using Models;
 using DAL;
 namespace QuanLyTruongTieuHoc_API.Controllers
-{   
+{
+    [Route("api/GiaoVien_TCLass")]
+    [ApiController]
     public class Teacher_TeachersClassControl:ControllerBase
     {
         private readonly Teacher_TeachersClassBLL _bll;
@@ -23,19 +25,19 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(list);
         }
-        [Route("TC_GetByID")]
+        [Route("TC_GetClass")]
         [HttpGet]
-        public IActionResult GetById(int id)
+        public IActionResult GetClass(int teacherId)
         {
-            var user = _bll.GetById(id, out string error);
+            var classes = _bll.GetClass(teacherId, out string error);
 
             if (!string.IsNullOrEmpty(error))
                 return StatusCode(500, error);
 
-            if (user == null)
-                return NotFound();
+            if (classes == null || classes.Count == 0)
+                return NotFound("Giáo viên chưa được phân lớp");
 
-            return Ok(user);
+            return Ok(classes);
         }
     }
 }

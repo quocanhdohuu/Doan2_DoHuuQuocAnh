@@ -73,5 +73,16 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Delete successfully" });
         }
+        [Route("AT_SaveAten")]
+        [HttpPost]
+        public IActionResult SaveAT([FromBody] Attendance AT)
+        {
+            bool ok = _bll.saveAT(AT, out string error);
+
+            if (!ok)
+                return BadRequest(error);
+
+            return Ok(new { message = "Save successfully" });
+        }
     }
 }

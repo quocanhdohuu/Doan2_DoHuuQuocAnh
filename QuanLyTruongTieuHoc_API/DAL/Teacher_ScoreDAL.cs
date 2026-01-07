@@ -89,9 +89,9 @@ namespace DAL
             string sql =
                 $"UPDATE Scores SET " +
                 $"StudentID = {score.StudentID}, " +
-                $"Subject = '{score.Subject.Replace("'", "''")}', " +
+                $"Subject = N'{score.Subject.Replace("'", "''")}', " +
                 $"Score = {score.Score}, " +
-                $"Term = '{score.Term.Replace("'", "''")}', " +
+                $"Term = N'{score.Term.Replace("'", "''")}', " +
                 $"Date = '{score.Date:yyyy-MM-dd}', " +
                 $"TeacherID = {score.TeacherID} " +
                 $"WHERE ScoreID = {score.ScoreID}";

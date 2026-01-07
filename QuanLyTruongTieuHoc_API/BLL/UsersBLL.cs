@@ -14,43 +14,24 @@ namespace BLL
             _dal = dal;
         }
 
-        public List<Users> GetAll(out string error)
+        public bool ChangePassword(int userId, string oldPass, string newPass, out string error)
         {
-            return _dal.GetAllUsers(out error);
-        }
+            error = "";
 
-        public Users GetById(int id, out string error)
-        {
-            return _dal.GetUserById(id, out error);
-        }
-
-        public bool CreateUser(Users user, out string error)
-        {
-            if (string.IsNullOrWhiteSpace(user.Username))
+            var user = _dal.GetUserById(userId,out error); // Lấy user thật
+            if (user == null)
             {
-                error = "Username is required";
+                error = "Tài khoản không tồn tại";
                 return false;
             }
 
-            return _dal.InsertUser(user, out error);
-        }
-        public bool UpdateUser(int id, Users user, out string error)
-        {
-            if (id <= 0)
+            if (user.Password != oldPass) // So sánh mật khẩu cũ
             {
-                error = "Invalid user id";
+                error = "Mật khẩu cũ không đúng";
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(user.Username))
-            {
-                error = "Username is required";
-                return false;
-            }
-
-            user.UserID = id;
-
-            return _dal.UpdateUser(user, out error);
+            return _dal.UpdatePassword(userId, newPass, out error); // Cập nhật mật khẩu mới
         }
     }
 }

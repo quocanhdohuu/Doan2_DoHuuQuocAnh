@@ -21,9 +21,9 @@ namespace BLL
         {
             return _dal.GetAllTC(out error);
         }
-        public TeacherClass GetById(int id, out string error)
+        public List<Classes>GetClass(int id, out string error)
         {
-            return _dal.GetTCById(id, out error);
+            return _dal.GetClassNameByTeacherAndClass(id, out error);
         }
     }
 }

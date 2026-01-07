@@ -17,9 +17,9 @@ namespace BLL
             _dal = dal;
         }
 
-        public List<Students> GetAll(out string error)
+        public List<Students> GetAll(int id,out string error)
         {
-            return _dal.GetAllStu(out error);
+            return _dal.GetAllStu(id,out error);
         }
         public Students GetById(int id, out string error)
         {

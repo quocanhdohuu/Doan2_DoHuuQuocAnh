@@ -69,21 +69,13 @@ namespace DAL
 
             return string.IsNullOrEmpty(error);
         }
-        public bool UpdateUser(Users user, out string error)
+        public bool UpdatePassword(int userId, string newPassword, out string error)
         {
-            if (user.UserID <= 0)
-            {
-                error = "Invalid UserID";
-                return false;
-            }
-
-            string sql =
-                $"UPDATE Users SET " +
-                $"Username = '{user.Username.Replace("'", "''")}', " +
-                $"Password = '{user.Password.Replace("'", "''")}', " +
-                $"Role = '{user.Role.Replace("'", "''")}', " +
-                $"Status = {(user.Status ? 1 : 0)} " +
-                $"WHERE UserID = {user.UserID}";
+            string sql = $@"
+        UPDATE Users
+        SET Password = '{newPassword.Replace("'", "''")}'
+        WHERE UserID = {userId}
+        ";
 
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);

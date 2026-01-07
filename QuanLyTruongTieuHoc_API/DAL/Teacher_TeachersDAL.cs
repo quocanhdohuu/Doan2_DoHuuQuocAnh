@@ -78,15 +78,15 @@ namespace DAL
             }
 
             string sql =
-                $"UPDATE Teachers SET " +
-                $"FullName = '{teacher.FullName.Replace("'", "''")}', " +
-                $"Phone = '{teacher.Phone.Replace("'", "''")}', " +
-                $"Email = '{teacher.Email.Replace("'", "''")}', " +
-                $"Specialization = '{teacher.Specialization.Replace("'", "''")}', " +
-                $"UserID = {teacher.UserID} " +
-                $"IsCN = '{teacher.IsCN.Replace("'", "''")}', " +
-                $"Status = '{teacher.Status.Replace("'", "''")}' " +
-                $"WHERE TeacherID = {teacher.TeacherID}";
+            $"UPDATE Teachers SET " +
+            $"FullName = N'{teacher.FullName.Replace("'", "''")}', " +
+            $"Phone = '{teacher.Phone.Replace("'", "''")}', " +
+            $"Email = '{teacher.Email.Replace("'", "''")}', " +
+            $"Specialization = N'{teacher.Specialization.Replace("'", "''")}', " +
+             $"UserID = {teacher.UserID}, " +                  
+            $"[IsCN] = N'{teacher.IsCN.Replace("'", "''")}', " + 
+            $"Status = N'{teacher.Status.Replace("'", "''")}' " +
+            $"WHERE TeacherID = {teacher.TeacherID}";
 
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);
