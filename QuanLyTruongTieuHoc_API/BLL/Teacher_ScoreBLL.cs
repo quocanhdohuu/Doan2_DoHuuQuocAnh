@@ -22,9 +22,9 @@ namespace BLL
         {
             return _dal.GetAllScore(out error);
         }
-        public Scores GetById(int id, out string error)
+        public Scores GetById(int stuid, int id,string term, out string error)
         {
-            return _dal.GetScoreById(id, out error);
+            return _dal.GetScoreById(stuid,id,term, out error);
         }
         public bool UpdateScore(int id, Scores score, out string error)
         {

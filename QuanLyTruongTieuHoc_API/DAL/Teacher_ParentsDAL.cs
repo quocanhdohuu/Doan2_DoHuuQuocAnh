@@ -30,7 +30,9 @@ namespace DAL
                 p.FullName,
                 p.Phone,
                 p.Email,
-                p.Address
+                p.Address,
+                p.UserID ,
+                p.StudentID
             FROM Parents p
             JOIN StudentClass sc ON p.StudentID = sc.StudentID
             WHERE sc.ClassID = " + classId;
@@ -51,6 +53,8 @@ namespace DAL
                     Phone = row["Phone"].ToString(),
                     Email = row["Email"].ToString(),
                     Address = row["Address"].ToString(),
+                    UserID = (int)row["UserID"],
+                    StudentID = (int)row["StudentID"]
                 });
             }
 
@@ -73,7 +77,8 @@ namespace DAL
                 Phone = row["Phone"].ToString(),
                 Email = row["Email"].ToString(),
                 Address = row["Address"].ToString(),
-                UserID = (int)row["UserID"]
+                UserID = (int)row["UserID"],
+                StudentID = (int)row["StudentID"]
             };
         }
     }

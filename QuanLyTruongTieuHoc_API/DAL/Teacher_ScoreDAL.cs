@@ -43,10 +43,10 @@ namespace DAL
 
             return list;
         }
-        public Scores GetScoreById(int id, out string error)
+        public Scores GetScoreById(int stuid,int id,string term, out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Scores WHERE ScoreID={id}", out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Scores WHERE StudentID={stuid} and ClassID={id} and Term='{term}'", out error);
 
             if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
                 return null;
@@ -62,6 +62,7 @@ namespace DAL
                 Term = row["Term"].ToString(),
                 Date = (DateTime)row["Date"],
                 TeacherID = (int)row["TeacherID"]
+
             };
         }
         public bool InsertScore(Scores score, out string error)

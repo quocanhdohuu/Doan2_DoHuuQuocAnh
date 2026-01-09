@@ -78,7 +78,7 @@ namespace DAL
                 $"INSERT INTO Messages (SenderID, ReceiverID, SentTime, Content,IsRead) VALUES (" +
                     $"{AT.SenderID}, " +
                     $"{AT.ReceiverID}, " +
-                    $"'{AT.SentTime:yyyy-MM-dd}', " +
+                    $"'{AT.SentTime:yyyy-MM-dd HH:mm:ss}', "+
                     $"N'{AT.Content.Replace("'", "''")}', " +
                     $"'{AT.IsRead}')";
 

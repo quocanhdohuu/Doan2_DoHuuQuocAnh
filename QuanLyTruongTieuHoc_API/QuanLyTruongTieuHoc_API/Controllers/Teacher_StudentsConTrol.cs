@@ -40,16 +40,6 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(user);
         }
-        [Route("Stu_Update")]
-        [HttpPut]
-        public IActionResult Update(int id, [FromBody] Students Stu)
-        {
-            bool ok = _bll.UpdateStu(id, Stu, out string error);
-
-            if (!ok)
-                return BadRequest(error);
-
-            return Ok(new { message = "Updated successfully" });
-        }
+        
     }
 }

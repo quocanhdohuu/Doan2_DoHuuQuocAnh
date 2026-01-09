@@ -28,9 +28,9 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
         [Route("Score_GetByID")]
         [HttpGet]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int stuid,int id,string term)
         {
-            var user = _bll.GetById(id, out string error);
+            var user = _bll.GetById(stuid,id,term, out string error);
 
             if (!string.IsNullOrEmpty(error))
                 return StatusCode(500, error);
@@ -63,16 +63,6 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Updated successfully" });
         }
-        [Route("Score_Delete")]
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            bool ok = _bll.DeleteScore(id, out string error);
-
-            if (!ok)
-                return BadRequest(error);
-
-            return Ok(new { message = "Delete successfully" });
-        }
+        
     }
 }

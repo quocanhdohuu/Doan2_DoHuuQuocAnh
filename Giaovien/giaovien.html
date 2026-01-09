@@ -170,6 +170,7 @@
                     <th>Trạng thái</th>
                     <th>Trạng thái xác nhận</th>
                     <th>Ghi chú</th>
+                    <th>Lưu</th>
                 </tr>
                 <tr ng-repeat="hs in dsHocSinh | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by hs.studentID">
                 <td>{{$index + 1}}</td>
@@ -255,6 +256,7 @@
                     <th>Tình trạng sức khỏe</th>
                     <th>Ghi chú giáo viên</th>
                     <th>Bữa ăn</th>
+                    <th>Lưu</th>
                 </tr>
                  <tr ng-repeat="sk in healthList | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by sk.studentID">
                 <td>{{ sk.studentID }}</td>
@@ -368,16 +370,15 @@
                 <span>Loại điểm:</span>
                 <select id="chonMonHocDS"
                 ng-model="loaiDiemDangChon"
-                ng-change="loadScores()">
-                    <option value="15phut">15 phút</option>
-                    <option value="Mieng">Miệng</option>
-                    <option value="HocKy">Học kỳ</option>
-                    <option value="1tiet">1 tiết</option>
+                ng-change="loadHocSinh()">
+                    <option value="15 phút">15 phút</option>
+                    <option value="Miệng">Miệng</option>
+                    <option value="Học kỳ">Học kỳ</option>
+                    <option value="1 tiết">1 tiết</option>
                 </select>
             </div>
 
             <button id="btnNhapDiemDS" ng-click="SaveDiem()" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Lưu toàn bộ</button>
-            <button id="btnPhieuDiemDS" style="background-color: white;color: black;"><i class="fa-solid fa-file-lines"></i>Phiếu điểm</button>
             <button id="btnXuatEDS" ng-click="exportExcel()" style="background-color: white;color: black;"><i class="fa-solid fa-download"></i>Xuất Excel</button>
         </div>
 
@@ -414,6 +415,7 @@
                     <th>Mã học sinh</th>
                     <th>Học Sinh</th>
                     <th>Điểm số</th>
+                    <th>Điểm hiện tại</th>
                     <th>Thao tác</th>
                 </tr>
                 <tr ng-repeat="ds in dsHocSinh | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by ds.studentID">
@@ -429,6 +431,11 @@
             </td>
             <td>
                 <input type="number" min="0" max="10" step="0.1" ng-model="ds.scoreValue" class="DiemSODS"/>
+            </td>
+            <td>
+                <span class="HSDS">
+                    {{ ds.Diemht}}
+                </span>
             </td>
             <td >
                 <button id="btxoa" ng-click="saveScorele(ds)" style=" background-color: green;"><i class="fa-solid fa-save"></i>Lưu</button>
@@ -505,22 +512,18 @@
     </div>
 <!-----------------Liên lạc------------------->
     <div id="LienLac" style="display: none;" ng-controller="LienLacCtrl">
-         <div id="CuaSoSoanTinLL">
-            <button id="btbThoatCSSTLL" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
+         <div id="CuaSoSoanTinLL" ng-show="hienSoanTin">
+            <button id="btbThoatCSSTLL" ng-click="dongSoanTin()" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
             <h3 style="margin-bottom: 2px;">Soạn tin nhắn</h3>
             <span style="color: gray;">Gửi tin nhắn hoặc thông báo tới phụ huynh</span>
             <div style="justify-content: space-between;"> <span>Phụ huynh</span> 
-                <select id="chonPHSTLL">
-                    <option value="Nguyễn Thị B-Nguyễn Văn A">Nguyễn Thị B-Nguyễn Văn A</option>
-                    <option value="Nguyễn Văn B-Nguyễn Thị D">Nguyễn Văn B-Nguyễn Thị D </option>
-                    <option value="Nguyễn Văn C-Nguyễn Văn F">Nguyễn Văn C-Nguyễn Văn F</option>
+                <select id="chonPHSTLL"
+                ng-model="Phunhuynh"
+                ng-options="ph.parentID as ph.fullName for ph in danhba">
                 </select> 
             </div>
-
-             <div><span>Tiêu đề</span><input type="text" id="txttieudeSTLL" placeholder="Nhập tiêu đề tin nhắn"></div>
-
-              <div><span>Nội dung</span><textarea style="resize: none;  " id="TXTNDSTLL" placeholder="Nhập nội dung tin nhắn"></textarea></div>
-             <button id="btnCSSTLL"><i class="fa-solid fa-paper-plane"></i>Gửi tin nhắn</button>
+              <div><span>Nội dung</span><textarea  ng-model="NDgui"style="resize: none;  " id="TXTNDSTLL" placeholder="Nhập nội dung tin nhắn"></textarea></div>
+             <button ng-click="SenMess(); dongSoanTin()" id="btnCSSTLL"><i class="fa-solid fa-paper-plane"></i>Gửi tin nhắn</button>
         </div>
         <h3 id="anhLL" style="margin-bottom: 2px;"><img  src="../img/message.png" alt=""><span></span>Liên lạc phụ huynh</h3>
         <span style="color: gray;">Gửi tin nhắn và thông báo tới phụ huynh học sinh</span>
@@ -538,7 +541,6 @@
                 <select id="chonLopHocLL"
                ng-model="lopDangChon"
                 ng-change="loadDanhBa()"
-                ng-change="loadDTinden()"S
                 ng-options="lop.classID as lop.className for lop in dsLop">
                 </select>
             </div>
@@ -546,34 +548,34 @@
             <div id="TimKiemLL">
                 <span>Tìm kiếm:</span>
                 <div id="nhapTimKiemLL" style="border: 1px solid; border-radius: 10px;display: flex;align-items: center;padding: 0;">
-                    <button id="timLL" style="background-color: transparent;border: none;"><i class="fa fa-search"></i></button>
-                    <input type="text" id="tentimkiem"  placeholder="Nhập tên học sinh hoặc phụ huynh" style="margin: 0; width: 100%;width: 100%;;border: none;">
+                    <button  ng-click="timKiemLL()" id="timLL" style="background-color: transparent;border: none;"><i class="fa fa-search"></i></button>
+                    <input ng-change="timKiemLL()" ng-model="tuKhoaTim" type="text" id="tentimkiem"  placeholder="Nhập tên học sinh hoặc phụ huynh" style="margin: 0; width: 100%;width: 100%;;border: none;">
                 </div>
                 
             </div>
 
-            <button id="btnSoanTinLL" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Soạn tin</button>
+            <button id="btnSoanTinLL" ng-click="moSoanTin()" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Soạn tin</button>
         </div>
 
          <!-----------------Hộp thư đến------------------->
-         <div id="HopThuDenLL">
+         <div id="HopThuDenLL" ng-controller="LienLacCtrl">
             <span>Tin nhắn đến</span>
         <div ng-repeat="ds in Tinden" class="TinGuiLL">
-            <span class="ngNhanll">
-             Gửi đến: {{ds.receiverID}}</span>
-            <p class="ndguiLL"> {{ds.content}}</p>
-            <span class="tgguiLL">{{ds.sentTime | date:'dd/MM/yyyy HH:mm'}}</span>
+            <span class="ngNhanll">Phụ huynh: {{ds.ParenName}}</span>
+            <span class="ngNhanll">Học sinh: {{ds.studentName}}</span>
+            <p class="ndguiLL">Nội dung: {{ds.content}}</p>
+            <span class="tgguiLL">Thời gian{{ds.sentTime | date:'dd/MM/yyyy HH:mm'}}</span>
         </div>
         </div>
 
           <!-----------------Hộp thư gửi------------------->
         <div id="DaGuiLL" >
             <span >Tin nhắn đã gửi</span>
-            <div ng-repeat="ds in Tinden" class="TinGuiLL" id="TNGuiLL0" >
-                <span class="ngNhanll" >{{ds.senderID}}</span>
-                <p class="ndguiLL" >{{ds.content}}</p>
-                <span class="tgguiLL" ></span>
-                
+            <div ng-repeat="ds in TinGui" class="TinGuiLL" id="TNGuiLL0" >
+                <span class="ngNhanll" >Phụ huynh: {{ds.ParenName}}</span>
+                <span class="ngNhanll">Học sinh: {{ds.studentName}}</span>
+                <p class="ndguiLL" >Nội dung: {{ds.content}}</p>
+                <span class="tgguiLL">Thời gian{{ds.sentTime | date:'dd/MM/yyyy HH:mm'}}</span>
             </div>
          </div>
 
@@ -585,9 +587,10 @@
         <div>
             <span class="ten">
                 {{ph.fullName}}
-                <span class="loai">Phụ huynh</span>
             </span>
-
+             <p class="hocSinh">
+                Mã học sinh: {{ph.studentID}}
+            </p>
             <p class="hocSinh">
                 Học sinh: {{ph.studentName}}
             </p>
@@ -599,9 +602,7 @@
         </div>
 
         <div>
-            <button class="btnCCLL">Chuyên cần</button>
-            <button class="btnDSLL">Điểm số</button>
-            <button class="btnSTLL" ng-click="soanTin(ph)">
+            <button class="btnSTLL" ng-click="moSoanTin2(ph)">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
@@ -618,18 +619,39 @@
         <span style="color: gray;">Ghi chú về lịch giảng dạy của giáo viên</span>
         <div id="ChonTGLich">
             <div id="KyLich">
-                <span>Kỳ học:</span>
+                <span>Năm học:</span>
                 <select id="chonKyHocLich">
-                    <option value="0">Tất cả</option>
-                    <option value="1">Kỳ 1</option>
-                    <option value="2">Kỳ 2</option>
+                <option value="">--- Chọn kỳ học ---</option>
+                <option value="2020-2021">2020--2021</option>
+                <option value="2021-2022">2021--2022</option>
+                <option value="2022-2023">2022--2023</option>
+                <option value="2023-2024">2023--2024</option>
+                <option value="2024-2025">2024--2025</option>
+                <option value="2025-2026">2025--2026</option>
                 </select>
             </div>
 
-            <div id="NamLich">
+            <!-- <div id="NamLich">
                 <span>Năm học:</span>
                 <input type="number"  min="2010" max="2100" id="chonNgayLD">
-            </div>
+            </div> -->
+            <div id="NamLich">
+    <span>Tuần:</span>
+    <select ng-model="tuanDangChon" id="chonNgayLD">
+        <option value="">--- Chọn tuần ---</option>
+        <option value="1">Tuần 1 [Từ 18/08/2025 -- Đến 24/08/2025]</option>
+        <option value="2">Tuần 2 [Từ 25/08/2025 -- Đến 31/08/2025]</option>
+        <option value="3">Tuần 3 [Từ 01/09/2025 -- Đến 07/09/2025]</option>
+        <option value="4">Tuần 4 [Từ 08/09/2025 -- Đến 14/09/2025]</option>
+        <option value="5">Tuần 5 [Từ 15/09/2025 -- Đến 21/09/2025]</option>
+        <option value="6">Tuần 6 [Từ 22/09/2025 -- Đến 28/09/2025]</option>
+        <option value="7">Tuần 7 [Từ 29/09/2025 -- Đến 05/10/2025]</option>
+        <option value="8">Tuần 8 [Từ 06/10/2025 -- Đến 12/10/2025]</option>
+        <option value="9">Tuần 9 [Từ 13/10/2025 -- Đến 19/10/2025]</option>
+        <option value="10">Tuần 10 [Từ 20/10/2025 -- Đến 26/10/2025]</option>
+        <!-- thêm tiếp nếu cần -->
+    </select>
+</div>
             <button id="btnLocLichDay"><i class="fa solid fa-search"></i>Lọc danh sách</button>
             <button id="btnXuatLichDay"><i class="fa solid fa-download"></i>Xuất file</button>
         </div>
@@ -637,21 +659,17 @@
         <div id="DanhsachLich">
             <table id="DanhSachLich" >
                 <tr>
-                    <th>Tên môn</th>
-                    <th>Mã lớp</th>
+                    <th>Lớp</th>
                     <th>Phòng học</th>
-                    <th>Kỳ</th>
+                    <th>Tuần</th>
                     <th>Tiet</th>
-                    <th>Lịch(tuần)</th>
                     <th>Thứ</th>
                 </tr>
                <tr ng-repeat="item in scheduleList track by $index">
-            <td><span>{{item.subjectID}}</span></td>
-            <td><span class="MaLop">{{item.classID}}</span></td>
+            <td><span class="MaLop">{{item.ClassName}}</span></td>
             <td><span>{{item.room}}</span></td>
             <td><span class="KyHoc">{{item.period}}</span></td>
             <td><span>{{item.period}}</span></td>
-            <td><span>---{{item.weekSchedule}}---</span></td>
             <td><span class="Ngay">{{item.dayOfWeek}}</span></td>
         </tr>
             </table>

@@ -21,7 +21,7 @@ namespace BLL
         {
             return _dal.GetAllSD(out error);
         }
-        public Schedule GetById(int id, out string error)
+        public Classes GetById(int id, out string error)
         {
             return _dal.GetSDById(id, out error);
         }

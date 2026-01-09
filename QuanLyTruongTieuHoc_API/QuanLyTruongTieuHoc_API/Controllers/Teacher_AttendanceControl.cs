@@ -39,40 +39,7 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(user);
         }
-        [Route("AT_Create")]
-        [HttpPost]
-        public IActionResult Create([FromBody] Attendance AT)
-        {
-            bool ok = _bll.CreateAT(AT, out string error);
-
-            if (!ok)
-                return BadRequest(error);
-
-            return Ok(new { message = "Created" });
-        }
-
-        [Route("AT_Update")]
-        [HttpPut]
-        public IActionResult Update(int id, [FromBody] Attendance AT)
-        {
-            bool ok = _bll.UpdateAten(id, AT, out string error);
-
-            if (!ok)
-                return BadRequest(error);
-
-            return Ok(new { message = "Updated successfully" });
-        }
-        [Route("AT_Delete")]
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            bool ok = _bll.DeleteAT(id, out string error);
-
-            if (!ok)
-                return BadRequest(error);
-
-            return Ok(new { message = "Delete successfully" });
-        }
+      
         [Route("AT_SaveAten")]
         [HttpPost]
         public IActionResult SaveAT([FromBody] Attendance AT)

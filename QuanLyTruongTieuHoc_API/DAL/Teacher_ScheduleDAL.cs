@@ -45,25 +45,20 @@ namespace DAL
 
             return list;
         }
-        public Schedule GetSDById(int id, out string error)
+        public Classes GetSDById(int id, out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Schedule WHERE ScheduleID={id}", out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Classes WHERE ClassID={id}", out error);
 
             if (!string.IsNullOrEmpty(error) || dt == null || dt.Rows.Count == 0)
                 return null;
 
             var row = dt.Rows[0];
 
-            return new Schedule
+            return new Classes
             {
-                ScheduleID = (int)row["ScheduleID"],
-                ClassID = (int)row["ClassID"],
-                SubjectID = (int)row["SubjectID"],
-                TeacherID = (int)row["TeacherID"],
-                DayOfWeek = (int)row["DayOfWeek"],
-                Period = (int)row["Period"],
-                Room = row["Room"].ToString()
+                ClassName = row["ClassName"].ToString()
+                
             };
         }
     }

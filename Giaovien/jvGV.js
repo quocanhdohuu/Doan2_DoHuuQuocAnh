@@ -39,7 +39,7 @@ app.controller("ThongTinGV_Ctrl", function ($scope, $http) {
     };
     $scope.LoadTeacher();
 });
-
+//----------------------------Điểm danh-------------------------------
 app.controller("DiemDanhCtrl", function ($scope, $http) {
 
     $scope.dsHocSinh = [];
@@ -177,13 +177,13 @@ app.controller("DiemDanhCtrl", function ($scope, $http) {
 };
 });
 
-
+//------------------SỨc khỏe--------------------------------------
 app.controller("SucKhoeCtrl", function ($scope, $http) {
     $scope.currentPage = 1;   
     $scope.pageSize = 5; 
-    $scope.healthList = [];
+  
     $scope.today = new Date().toISOString().split('T')[0];
-   $scope.healthList = [];
+    $scope.healthList = [];
     $scope.dsHocSinh = [];
 
     // Load danh sách lớp
@@ -303,13 +303,22 @@ app.filter('startFrom', function() {
         return input.slice(start);
     }
 });
+
+
+// -------------------------Điểm số------------------------- 
 app.controller("ScoreCtrl", function ($scope, $http) {
     $scope.dsHocSinh = [];
     $scope.loadHocSinh = function () {
         $http.get(current_url + "/GiaoVien_Stu/Stu_GetAll?id=" + $scope.lopDangChon)
             .then(function (res) {
                 $scope.dsHocSinh = res.data;
-                console.log("DS HỌC SINH:", res.data);
+                $scope.dsHocSinh.forEach(ph => {
+                    $http.get(current_url+"/GiaoVien_Sco/Score_GetByID?stuid="+ph.studentID+"&id="+$scope.lopDangChon+"&term="+$scope.loaiDiemDangChon)
+                    .then(res => {
+                            ph.Diemht = res.data.score; 
+                        })
+                        .catch(err => console.error("Không lấy được điểm:", err));
+                 })
             }, function (err) {
                 console.error(err);
             });
@@ -337,7 +346,7 @@ $scope.SaveDiem = function () {
 
     let promises = [];
 
-$scope.dsHocSinh.forEach(hs => {
+    $scope.dsHocSinh.forEach(hs => {
         if (hs.scoreValue !== undefined && hs.scoreValue !== null && hs.scoreValue !== '' && hs.scoreValue !== 0&& !isNaN(hs.scoreValue) && hs.scoreValue >= 0 && hs.scoreValue <= 10) {
             const hsData = {
             studentID: hs.studentID,
@@ -412,7 +421,7 @@ $scope.exportExcel = function () {
     const data = $scope.dsHocSinh.map(hs => ({
         "Học sinh": hs.fullName,
         "Loại điểm": $scope.loaiDiemDangChon,
-        "Điểm": hs.scoreValue ?? ""
+        "Điểm": hs.Diemht ?? ""
     }));
 
     const ws = XLSX.utils.json_to_sheet(data);
@@ -421,10 +430,11 @@ $scope.exportExcel = function () {
     XLSX.utils.book_append_sheet(wb, ws, "DanhSachDS");
     XLSX.writeFile(wb, "DanhSachDS.xlsx");
 };
+
     $scope.loadclass();
     $scope.loadHocSinh();
     
-    $scope.currentPage = 0;
+    $scope.currentPage = 1;
     $scope.pageSize = 5;
     $scope.numberOfPages = function() {
     return Math.ceil($scope.dsHocSinh.length / $scope.pageSize);
@@ -433,29 +443,18 @@ $scope.exportExcel = function () {
 app.controller("LichHocCtrl", function ($scope, $http) {
 
     $scope.scheduleList = []; // danh sách gốc
-    $scope.groupedSchedule = []; // danh sách gộp theo tuần
 
     $scope.loadSchedule = function () {
         $http.get(current_url + "/GiaoVien_SD/SD_GetAll")
             .then(function (res) {
                 $scope.scheduleList = res.data;
-                
-                // gộp theo weekSchedule
-                let grouped = {};
-                $scope.scheduleList.forEach(item => {
-                    if (!grouped[item.weekSchedule]) {
-                        grouped[item.weekSchedule] = [];
-                    }
-                    grouped[item.weekSchedule].push(item);
-                });
-
-                // chuyển sang mảng để hiển thị
-                $scope.groupedSchedule = Object.keys(grouped).map(week => {
-                    return {
-                        weekSchedule: week,
-                        items: grouped[week]
-                    };
-                });
+                 $scope.scheduleList.forEach(ph => {
+                    $http.get(current_url+"/GiaoVien_SD/SD_GetByID?id="+ph.classID)
+                    .then(res => {
+                            ph.ClassName = res.data.className; 
+                        })
+                        .catch(err => console.error("Không lấy được tên lớp:", err));
+                 })
 
             }, function (err) {
                 console.error(err);
@@ -481,10 +480,51 @@ app.controller("LienLacCtrl", function ($scope, $http) {
     };
 
     $scope.loadDTinden = function () {
-    $http.get(current_url + "/GiaoVien_Mess/Mse_GetRe?id=" + teacherId)
+    $http.get(current_url + "/GiaoVien_Mess/Mse_GetRe?id="+teacherId)
         .then(res => {
             console.log(res.data); // kiểm tra dữ liệu
             $scope.Tinden = res.data;
+            $scope.Tinden.forEach(ph => {
+                $http.get(current_url + "/GiaoVien_pa/pr_GetByID?id=" + ph.senderID)
+                    .then(res => {
+                        ph.ParenName = res.data.fullName; 
+                        ph.studentID= res.data.studentID; 
+                        $scope.Tinden.forEach(ph => {
+                        $http.get(current_url + "/GiaoVien_Stu/Stu_GetByID?id=" + ph.studentID)
+                            .then(res => {
+                                ph.studentName = res.data.fullName; 
+                            })
+                            .catch(err => console.error("Không lấy được tên học sinh:", err));
+                        });
+                    })
+                    .catch(err => console.error("Không lấy được tên học sinh:", err));
+            });
+            
+        }, err => {
+            console.error(err);
+            alert("Không tải được tin nhắn");
+        });
+};
+    $scope.loadDTinGui = function () {
+    $http.get(current_url + "/GiaoVien_Mess/Mse_GetSen?id="+teacherId)
+        .then(res => {
+            console.log(res.data); // kiểm tra dữ liệu
+            $scope.TinGui= res.data;
+            $scope.TinGui.forEach(ph => {
+                $http.get(current_url + "/GiaoVien_pa/pr_GetByID?id=" + ph.receiverID)
+                    .then(res => {
+                        ph.ParenName = res.data.fullName; 
+                        ph.studentID= res.data.studentID; 
+                        $scope.TinGui.forEach(ph => {
+                        $http.get(current_url + "/GiaoVien_Stu/Stu_GetByID?id=" + ph.studentID)
+                            .then(res => {
+                                ph.studentName = res.data.fullName; 
+                            })
+                            .catch(err => console.error("Không lấy được tên học sinh:", err));
+                        });
+                    })
+                    .catch(err => console.error("Không lấy được tên học sinh:", err));
+            });
         }, err => {
             console.error(err);
             alert("Không tải được tin nhắn");
@@ -496,15 +536,121 @@ app.controller("LienLacCtrl", function ($scope, $http) {
     $http.get(current_url + "/GiaoVien_pa/pr_GetAll?classid=" + $scope.lopDangChon)
         .then(res => {
             $scope.danhba = res.data;
+            $scope.danhba.forEach(ph => {
+                $http.get(current_url + "/GiaoVien_Stu/Stu_GetByID?id=" + ph.studentID)
+                    .then(res => {
+                        ph.studentName = res.data.fullName; 
+                    })
+                    .catch(err => console.error("Không lấy được tên học sinh:", err));
+            });
         })
         .catch(err => {
             console.error(err);
             alert("Không tải được danh bạ");
         });
 };
-    $scope.loadDanhBa();
+    $scope.hienSoanTin = false;
+
+    $scope.moSoanTin = function () {
+    $scope.hienSoanTin = true;
+};
+    $scope.moSoanTin2 = function (hs) {
+        $scope.Phunhuynh=hs.parentID;
+    $scope.hienSoanTin = true;
+};
+
+    $scope.dongSoanTin = function () {
+    $scope.hienSoanTin = false;
+};
+    $scope.SenMess = function () {
+        if (!$scope.Phunhuynh) {
+        alert("Vui lòng chọn phụ huynh");
+        return;
+    }
+
+    if (!$scope.NDgui || $scope.NDgui.trim() === "") {
+        alert("Vui lòng nhập nội dung tin nhắn");
+        return;
+    }
+
+    const data = {
+        senderID: teacherId,
+        receiverID: $scope.Phunhuynh,
+        sentTime: new Date(),
+        content: $scope.NDgui,
+        isRead: false
+    };
+
+    $http.post(current_url + "/GiaoVien_Mess/Mse_Create", data)
+        .then(res => {
+            alert("Gửi tin nhắn thành công");
+            $scope.NDgui = "";
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Gửi tin nhắn thất bại");
+        });
+};
     $scope.loadclass();
     $scope.loadDTinden();
+    $scope.loadDTinGui();
+    $scope.loadDanhBa();
+
+
+    $scope.timKiemLL = function () {
+    const tukhoa = ($scope.tuKhoaTim || "").toLowerCase().trim();
+
+    if (!tukhoa) {
+        $scope.loadDTinGui();
+        $scope.loadDanhBa();
+        return;
+    }
+
+    let coKetQua = false;
+
+    // Tin đã gửi
+    document.querySelectorAll('#DaGuiLL .ngNhanll').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const divCha = item.closest('div');
+
+        if (text.includes(tukhoa)) {
+            divCha.style.display = 'block';
+            coKetQua = true;
+        } else {
+            divCha.style.display = 'none';
+        }
+    });
+
+    // Danh bạ
+    document.querySelectorAll('#DabaLL .ten').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const divCha = item.closest('.DBaLL');
+        const hs = divCha.querySelector('.hocSinh')?.innerText.toLowerCase() || '';
+
+        if (text.includes(tukhoa) || hs.includes(tukhoa)) {
+            divCha.style.display = 'flex';
+            coKetQua = true;
+        } else {
+            divCha.style.display = 'none';
+        }
+    });
+
+    // Hộp thư đến
+    document.querySelectorAll('#HopThuDenLL .nhanNguoiGui').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        const divCha = item.closest('.TinDenLL');
+        const ph = divCha.querySelector('.PHGui')?.innerText.toLowerCase() || '';
+
+        if (!divCha) return;
+
+        if (text.includes(tukhoa) || ph.includes(tukhoa)) {
+            divCha.style.display = 'block';
+            coKetQua = true;
+        } else {
+            divCha.style.display = 'none';
+        }
+    });
+};
 });
 //------------------Tong Quan--------------------
 const btnTONGQUAN = document.querySelector('#btnTongQuan');
@@ -570,20 +716,24 @@ function loadhdgan(){
         index++;
     });
 }
-document.getElementById('chonNgayLD').addEventListener('change', function () {
-    if(this.value<2010 || this.value===""||this.value>2100){
-        alert("Năm học phải lớn hơn hoặc bằng 2010 và bé hơn hoặc bằng 2100!");
-        this.value = "";
-    }
-});
+// document.getElementById('chonNgayLD').addEventListener('change', function () {
+//     if(this.value<2010 || this.value===""||this.value>2100){
+//         alert("Năm học phải lớn hơn hoặc bằng 2010 và bé hơn hoặc bằng 2100!");
+//         this.value = "";
+//     }
+// });
 document.getElementById('btnLocLichDay').addEventListener('click', function () {
     
 
      if(document.getElementById('chonNgayLD').value===""){
+        alert("Vui lòng chọn tuần học để lọc!");
+        return;
+        }
+        if(document.getElementById('chonKyHocLich').value===""){
         alert("Vui lòng chọn năm học để lọc!");
         return;
         }
-    const kydangchon = document.getElementById('chonKyHocLich').value;
+    const kydangchon = document.getElementById('chonNgayLD').value;
     document.querySelectorAll('#DanhSachLich tr').forEach(tr => {
         const kyTrongBang = tr.querySelector('.KyHoc');
        
@@ -951,62 +1101,62 @@ let khoemanh=1;
 let chuy=0;
 let andu=1;
 
-document.getElementById('timLL').addEventListener('click', function () {
-    const tukhoa = document.getElementById('tentimkiem').value.toLowerCase().trim();
+// document.getElementById('timLL').addEventListener('click', function () {
+//     const tukhoa = document.getElementById('tentimkiem').value.toLowerCase().trim();
 
-    if (tukhoa === "") {
-        alert("Vui lòng nhập từ khóa để tìm kiếm!");
-        return;
-    }
+//     if (tukhoa === "") {
+//         alert("Vui lòng nhập từ khóa để tìm kiếm!");
+//         return;
+//     }
 
-    let coKetQua = false;
+//     let coKetQua = false;
 
-    // Tin đã gửi
-    document.querySelectorAll('#DaGuiLL .ngNhanll').forEach(item => {
-        const text = item.innerText.toLowerCase();
-        const divCha = item.closest('div');
+//     // Tin đã gửi
+//     document.querySelectorAll('#DaGuiLL .ngNhanll').forEach(item => {
+//         const text = item.innerText.toLowerCase();
+//         const divCha = item.closest('div');
 
-        if (text.includes(tukhoa)) {
-            divCha.style.display = 'block';
-            coKetQua = true;
-        } else {
-            divCha.style.display = 'none';
-        }
-    });
+//         if (text.includes(tukhoa)) {
+//             divCha.style.display = 'block';
+//             coKetQua = true;
+//         } else {
+//             divCha.style.display = 'none';
+//         }
+//     });
 
-    // Danh bạ
-    document.querySelectorAll('#DabaLL .ten').forEach(item => {
-        const text = item.innerText.toLowerCase();
-        const divCha = item.closest('.DBaLL');
-         const hs = divCha.querySelector('.hocSinh')?.innerText.toLowerCase().trim() || '';
+//     // Danh bạ
+//     document.querySelectorAll('#DabaLL .ten').forEach(item => {
+//         const text = item.innerText.toLowerCase();
+//         const divCha = item.closest('.DBaLL');
+//          const hs = divCha.querySelector('.hocSinh')?.innerText.toLowerCase().trim() || '';
 
-        if (text.includes(tukhoa)|| hs.includes(tukhoa)) {
-            divCha.style.display = 'flex';
-            coKetQua = true;
-        } else {
-            divCha.style.display = 'none';
-        }
-    });
+//         if (text.includes(tukhoa)|| hs.includes(tukhoa)) {
+//             divCha.style.display = 'flex';
+//             coKetQua = true;
+//         } else {
+//             divCha.style.display = 'none';
+//         }
+//     });
 
-    // Hộp thư đến
-    document.querySelectorAll('#HopThuDenLL .nhanNguoiGui').forEach(item => {
-    const text = item.innerText.toLowerCase().trim();
-    const divCha = item.closest('.TinDenLL');
-     const ph = divCha.querySelector('.PHGui')?.innerText.toLowerCase().trim() || '';
+//     // Hộp thư đến
+//     document.querySelectorAll('#HopThuDenLL .nhanNguoiGui').forEach(item => {
+//     const text = item.innerText.toLowerCase().trim();
+//     const divCha = item.closest('.TinDenLL');
+//      const ph = divCha.querySelector('.PHGui')?.innerText.toLowerCase().trim() || '';
 
-    if (!divCha) return;
+//     if (!divCha) return;
 
-    if (text.includes(tukhoa) || ph.includes(tukhoa)) {
-        divCha.style.display = 'block';
-        coKetQua = true;
-    } else {
-        divCha.style.display = 'none';
-    }
-});
-    if (!coKetQua) {
-        alert("Không tìm thấy kết quả phù hợp!");
-    }
-});
+//     if (text.includes(tukhoa) || ph.includes(tukhoa)) {
+//         divCha.style.display = 'block';
+//         coKetQua = true;
+//     } else {
+//         divCha.style.display = 'none';
+//     }
+// });
+//     // if (!coKetQua) {
+//     //     alert("Không tìm thấy kết quả phù hợp!");
+//     // }
+// });
 document.getElementById('tentimkiem').addEventListener('input', function () {
     if (this.value.trim() === "") {
         loadTinDaGui();
@@ -1581,9 +1731,9 @@ btnST.forEach(function(btn) {
         document.querySelector('#CuaSoSoanTinLL').style.display='block';
     });
 });
-btnSTLL.addEventListener('click',function(){
-    document.querySelector('#CuaSoSoanTinLL').style.display='block';
-})
+// btnSTLL.addEventListener('click',function(){
+//     document.querySelector('#CuaSoSoanTinLL').style.display='block';
+// })
 btnThoatCSSTLL.addEventListener('click',function(){
     document.querySelector('#CuaSoSoanTinLL').style.display='none';
 });

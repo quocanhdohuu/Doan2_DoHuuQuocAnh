@@ -817,7 +817,6 @@
     margin-top: 40px;
 }
 .TinGuiLL{
-    display: none;
     border: 1px solid black;
 }
 .TinDenLL,.DBaLL{
@@ -947,6 +946,7 @@
     z-index: 1000;
     width: 30%;
     font-size: 12pt;
+    display: block;
 }
 #CuaSoSoanTinLL > div {
     margin-top: 15px;

@@ -48,16 +48,6 @@ namespace QuanLyTruongTieuHoc_API.Controllers
 
             return Ok(new { message = "Updated successfully" });
         }
-        [Route("HD_Delete")]
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            bool ok = _bll.DeleteHD(id, out string error);
-
-            if (!ok)
-                return BadRequest(error);
-
-            return Ok(new { message = "Delete successfully" });
-        }
+     
     }
 }
