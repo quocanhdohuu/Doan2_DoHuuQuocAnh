@@ -421,3 +421,142 @@ document.addEventListener("DOMContentLoaded", () => {
     loadStudents(parentId);
 });
 
+    // Base API URL - chỉnh lại theo server của bạn
+    const baseApiUrl = window.BASE_API_URL || '/api';
+
+    // Utility to fetch JSON and handle errors
+    async function getJson(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+    }
+
+    // Render parent + students list
+    async function loadParent(parentId = 1) {
+        try {
+            const data = await getJson(`${baseApiUrl}/parents/${parentId}`);
+
+            // Expected shape (example):
+            // { parentName, students: [{id,name,clazz}], selectedStudentId, contact: {...}, summary: {...}, schedule: [...], messages: [...] }
+
+            document.getElementById('parentName').textContent = `Phụ huynh: ${data.parentName || '—'}`;
+
+            const dropdown = document.getElementById('studentDropdown');
+            dropdown.innerHTML = '';
+            (data.students || []).forEach(s => {
+                const li = document.createElement('li');
+                li.textContent = `${s.name} - Lớp ${s.clazz || ''}`.trim();
+                li.onclick = () => selectStudent(s.id);
+                dropdown.appendChild(li);
+            });
+
+            const sel = (data.students || []).find(x => x.id === data.selectedStudentId) || (data.students || [])[0];
+            if (sel) setActiveStudent(sel);
+
+            // Render contact info
+            if (data.contact) {
+                for (const key of ['address','parent','phone','email','emergency']) {
+                    const el = document.querySelector(`[data-field="${key}"]`);
+                    if (el && data.contact[key] !== undefined) el.textContent = data.contact[key];
+                }
+            }
+
+            // Render schedule
+            renderSchedule(data.schedule || []);
+
+            // Render attendance/summary boxes if provided
+            // (example: update elements by id or class here)
+
+            // Render chat/messages
+            renderChats(data.messages || []);
+
+        } catch (err) {
+            console.error('loadParent error', err);
+        }
+    }
+
+    function setActiveStudent(student) {
+        document.getElementById('studentName').textContent = `${student.name} - Lớp ${student.clazz || ''}`;
+    }
+
+    function selectStudent(id) {
+        // Toggle dropdown hide
+        const dd = document.getElementById('studentDropdown');
+        dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+        // Load data for student if needed (call parent endpoint again or student-specific)
+        // Example: getJson(`${baseApiUrl}/students/${id}`).then(...)
+    }
+
+    function toggleStudentList(e) {
+        const dd = document.getElementById('studentDropdown');
+        dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function renderSchedule(rows) {
+        const tbody = document.getElementById('scheduleData');
+        tbody.innerHTML = '';
+        rows.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${r.day || ''}</td>
+                <td>${r.subject || ''}</td>
+                <td>${r.period || ''}</td>
+                <td>${r.time || ''}</td>
+                <td>${r.teacher || ''}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderChats(messages) {
+        const list = document.getElementById('chatList');
+        const msgs = document.getElementById('messages');
+        list.innerHTML = '';
+        msgs.innerHTML = '';
+
+        const grouped = {};
+        (messages || []).forEach(m => {
+            grouped[m.conversationId] = grouped[m.conversationId] || [];
+            grouped[m.conversationId].push(m);
+        });
+
+        Object.keys(grouped).forEach((convId, idx) => {
+            const item = document.createElement('div');
+            item.className = 'chat-item';
+            item.onclick = () => showConversation(convId);
+            item.innerHTML = `<span class="name">${grouped[convId][0].fromName || 'Chat ' + (idx+1)}</span>`;
+            list.appendChild(item);
+        });
+
+        function showConversation(convId) {
+            msgs.innerHTML = '';
+            (grouped[convId] || []).forEach(m => {
+                const d = document.createElement('div');
+                d.className = 'message';
+                d.innerHTML = `<strong>${m.fromName}:</strong> ${m.text}`;
+                msgs.appendChild(d);
+            });
+        }
+    }
+
+    function openChat() {
+        document.getElementById('chatOverlay').style.display = 'block';
+    }
+
+    function closeChat() {
+        document.getElementById('chatOverlay').style.display = 'none';
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('messageInput');
+        const text = input.value.trim();
+        if (!text) return;
+        // Example POST to API
+        fetch(`${baseApiUrl}/messages`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({text}) })
+            .then(r => r.ok && r.json())
+            .then(() => { input.value = ''; loadParent(); })
+            .catch(console.error);
+    }
+
+    // Start loading on page ready
+    document.addEventListener('DOMContentLoaded', () => loadParent(1));
