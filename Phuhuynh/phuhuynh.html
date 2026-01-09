@@ -1,21 +1,24 @@
-    <!DOCTYPE html>
-    <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bảng điều khiển phụ huynh</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng điều khiển phụ huynh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
         <!-- HEADER -->
         <header class="header">
             <div class="user-info">
                 <span class="icon"><i class="fa-solid fa-circle-user"></i>
-</span>
-                <div>
-                    <h3>Phụ huynh - Lê Văn Cần</h3>
-                    <p>Học sinh: Nguyễn Văn An • Lớp 5A</p>
+                </span>
+                <div class="student-switch" onclick="toggleStudentList(event)">
+                    <div class="student-info">
+                        <div class="parent-name" id="parentName">Phụ huynh: —</div>
+                        <div class="student-name" id="studentName">—</div>
+                    </div>
+                    <ul class="student-dropdown" id="studentDropdown" style="display:none"></ul>
                 </div>
             </div>
             <a href="../index.html"><button class="logout">Đăng xuất</button></a>
@@ -26,6 +29,7 @@
             <button class="active" data-target="tongquan">Tổng quan</button>
             <button data-target="hoso">Hồ sơ</button>
             <button data-target="diemdanh">Điểm danh</button>
+            <button data-target="schedule">Lịch học</button>
             <button data-target="suckhoe">Sức khỏe</button>
             <button data-target="hoctap">Học tập</button>
         </nav>
@@ -61,16 +65,7 @@
                 <div class="chat-overlay" id="chatOverlay">
                 <div class="chat-container">
                     <!-- Danh sách chat -->
-                    <div class="chat-list" id="chatList">
-                    <div class="chat-item active" onclick="selectChat(0)">
-                        <span class="name">Nguyễn Văn Anh</span>
-                        <span class="badge">1</span>
-                    </div>
-                    <div class="chat-item" onclick="selectChat(1)">
-                        <span class="name">Trần Thị Bình</span>
-                        <span class="badge">1</span>
-                    </div>
-                    </div>
+                    <div class="chat-list" id="chatList"></div>
 
                     <!-- Nội dung chat -->
                     <div class="chat-content">
@@ -371,7 +366,23 @@
                 </div>
             </div>
         </section>
-
+        <section id="schedule" class="tab-content">
+                <h2>Lịch học</h2>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Thứ</th>
+                            <th>Môn</th>
+                            <th>Tiết</th>
+                            <th>Giờ</th>
+                            <th>Giáo viên</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleData">
+                        <!-- JS render -->
+                    </tbody>
+                </table>
+            </section>
         <section id="suckhoe" class="tab-content">
             <div class="khung-chinh">
                 <!-- Cột trái -->
@@ -950,7 +961,149 @@
             </div>
         </section>
 
-    <script src="main.js"></script>
-    <script src="details.js"></script>
+    <script>
+    // Base API URL - chỉnh lại theo server của bạn
+    const baseApiUrl = window.BASE_API_URL || '/api';
+
+    // Utility to fetch JSON and handle errors
+    async function getJson(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+    }
+
+    // Render parent + students list
+    async function loadParent(parentId = 1) {
+        try {
+            const data = await getJson(`${baseApiUrl}/parents/${parentId}`);
+
+            // Expected shape (example):
+            // { parentName, students: [{id,name,clazz}], selectedStudentId, contact: {...}, summary: {...}, schedule: [...], messages: [...] }
+
+            document.getElementById('parentName').textContent = `Phụ huynh: ${data.parentName || '—'}`;
+
+            const dropdown = document.getElementById('studentDropdown');
+            dropdown.innerHTML = '';
+            (data.students || []).forEach(s => {
+                const li = document.createElement('li');
+                li.textContent = `${s.name} - Lớp ${s.clazz || ''}`.trim();
+                li.onclick = () => selectStudent(s.id);
+                dropdown.appendChild(li);
+            });
+
+            const sel = (data.students || []).find(x => x.id === data.selectedStudentId) || (data.students || [])[0];
+            if (sel) setActiveStudent(sel);
+
+            // Render contact info
+            if (data.contact) {
+                for (const key of ['address','parent','phone','email','emergency']) {
+                    const el = document.querySelector(`[data-field="${key}"]`);
+                    if (el && data.contact[key] !== undefined) el.textContent = data.contact[key];
+                }
+            }
+
+            // Render schedule
+            renderSchedule(data.schedule || []);
+
+            // Render attendance/summary boxes if provided
+            // (example: update elements by id or class here)
+
+            // Render chat/messages
+            renderChats(data.messages || []);
+
+        } catch (err) {
+            console.error('loadParent error', err);
+        }
+    }
+
+    function setActiveStudent(student) {
+        document.getElementById('studentName').textContent = `${student.name} - Lớp ${student.clazz || ''}`;
+    }
+
+    function selectStudent(id) {
+        // Toggle dropdown hide
+        const dd = document.getElementById('studentDropdown');
+        dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+        // Load data for student if needed (call parent endpoint again or student-specific)
+        // Example: getJson(`${baseApiUrl}/students/${id}`).then(...)
+    }
+
+    function toggleStudentList(e) {
+        const dd = document.getElementById('studentDropdown');
+        dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function renderSchedule(rows) {
+        const tbody = document.getElementById('scheduleData');
+        tbody.innerHTML = '';
+        rows.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${r.day || ''}</td>
+                <td>${r.subject || ''}</td>
+                <td>${r.period || ''}</td>
+                <td>${r.time || ''}</td>
+                <td>${r.teacher || ''}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderChats(messages) {
+        const list = document.getElementById('chatList');
+        const msgs = document.getElementById('messages');
+        list.innerHTML = '';
+        msgs.innerHTML = '';
+
+        const grouped = {};
+        (messages || []).forEach(m => {
+            grouped[m.conversationId] = grouped[m.conversationId] || [];
+            grouped[m.conversationId].push(m);
+        });
+
+        Object.keys(grouped).forEach((convId, idx) => {
+            const item = document.createElement('div');
+            item.className = 'chat-item';
+            item.onclick = () => showConversation(convId);
+            item.innerHTML = `<span class="name">${grouped[convId][0].fromName || 'Chat ' + (idx+1)}</span>`;
+            list.appendChild(item);
+        });
+
+        function showConversation(convId) {
+            msgs.innerHTML = '';
+            (grouped[convId] || []).forEach(m => {
+                const d = document.createElement('div');
+                d.className = 'message';
+                d.innerHTML = `<strong>${m.fromName}:</strong> ${m.text}`;
+                msgs.appendChild(d);
+            });
+        }
+    }
+
+    function openChat() {
+        document.getElementById('chatOverlay').style.display = 'block';
+    }
+
+    function closeChat() {
+        document.getElementById('chatOverlay').style.display = 'none';
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('messageInput');
+        const text = input.value.trim();
+        if (!text) return;
+        // Example POST to API
+        fetch(`${baseApiUrl}/messages`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({text}) })
+            .then(r => r.ok && r.json())
+            .then(() => { input.value = ''; loadParent(); })
+            .catch(console.error);
+    }
+
+    // Start loading on page ready
+    document.addEventListener('DOMContentLoaded', () => loadParent(1));
+    </script>
+
+</body>
+</html>
     </body>
     </html>

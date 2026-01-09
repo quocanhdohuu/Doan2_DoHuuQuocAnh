@@ -2097,3 +2097,50 @@ body {
     .gia-tri:focus {
         outline: 2px solid #007bff;
     }
+    .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+.student-switch {
+    position: relative;
+    cursor: pointer;
+}
+
+.student-info {
+    line-height: 1.4;
+}
+
+.student-name {
+    font-weight: 600;
+}
+
+.student-dropdown {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 260px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    z-index: 1000;
+}
+
+.student-dropdown li {
+    padding: 10px 14px;
+}
+
+.student-dropdown li:hover {
+    background: #f2f4f8;
+}

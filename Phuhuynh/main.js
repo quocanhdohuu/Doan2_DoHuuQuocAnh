@@ -252,3 +252,172 @@ function makeEditable(btn) {
             }
         });
     });
+const students = {
+    1: {
+        schedule: [
+            ["Thứ 2", "Toán", "1-2", "7:30 - 9:00", "Cô Lan"],
+            ["Thứ 3", "Tiếng Việt", "3-4", "9:10 - 10:40", "Thầy Minh"]
+        ]
+    },
+    2: {
+        schedule: [
+            ["Thứ 2", "Toán", "1", "7:30 - 8:15", "Cô Hoa"],
+            ["Thứ 4", "Tự nhiên", "2", "8:20 - 9:00", "Thầy Long"]
+        ]
+    }
+};
+
+function toggleStudentList() {
+    const list = document.getElementById("studentList");
+    list.style.display = list.style.display === "block" ? "none" : "block";
+}
+
+function switchStudent(id) {
+    currentStudentId = id;
+    document.getElementById("studentName").innerText = students[id].name;
+    document.getElementById("studentList").style.display = "none";
+    renderAttendance();
+    renderSchedule();
+}
+
+function showTab(tabId) {
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+
+    document.getElementById(tabId).classList.add("active");
+    event.target.classList.add("active");
+}
+
+function renderAttendance() {
+    const ul = document.getElementById("attendanceData");
+    ul.innerHTML = "";
+    students[currentStudentId].attendance.forEach(a => {
+        const li = document.createElement("li");
+        li.innerText = a;
+        ul.appendChild(li);
+    });
+}
+
+function renderSchedule() {
+    const tbody = document.getElementById("scheduleData");
+    tbody.innerHTML = "";
+    students[currentStudentId].schedule.forEach(row => {
+        const tr = document.createElement("tr");
+        row.forEach(col => {
+            const td = document.createElement("td");
+            td.innerText = col;
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+}
+
+// Load mặc định
+renderAttendance();
+renderSchedule();
+function toggleStudentList(event) {
+    event.stopPropagation();
+    const dropdown = document.getElementById("studentDropdown");
+    dropdown.style.display =
+        dropdown.style.display === "block" ? "none" : "block";
+}
+function changeStudent(studentId) {
+    currentStudentId = studentId;
+
+    document.getElementById("studentName").innerText =
+        studentData[studentId].name;
+
+    document.getElementById("studentDropdown").style.display = "none";
+
+    loadAttendance();
+    loadSchedule();
+}
+document.addEventListener("click", function () {
+    document.getElementById("studentDropdown").style.display = "none";
+});
+const API_BASE = "https://localhost:7010/api/phuhuynh";
+let currentStudentId = null;
+
+/* ================= LOAD DANH SÁCH HỌC SINH ================= */
+async function loadStudents(parentId) {
+    const res = await fetch(`${API_BASE}/student/parent/${parentId}`);
+    const students = await res.json();
+
+    const dropdown = document.getElementById("studentDropdown");
+    dropdown.innerHTML = "";
+
+    students.forEach(s => {
+        const li = document.createElement("li");
+        li.innerText = `${s.fullName} - Lớp ${s.className}`;
+        li.onclick = () => changeStudent(s.studentID);
+        dropdown.appendChild(li);
+    });
+
+    if (students.length > 0) {
+        changeStudent(students[0].studentID);
+    }
+}
+
+/* ================= ĐỔI HỌC SINH ================= */
+function changeStudent(studentId) {
+    currentStudentId = studentId;
+    loadDashboard(studentId);
+    loadProfile(studentId);
+    loadSchedule(studentId);
+}
+
+/* ================= TỔNG QUAN ================= */
+async function loadDashboard(studentId) {
+    const res = await fetch(`${API_BASE}/dashboard/${studentId}`);
+    const data = await res.json();
+
+    document.getElementById("attendanceStatus").innerText = data.attendance;
+    document.getElementById("healthStatus").innerText = data.health;
+    document.getElementById("newMessageCount").innerText = data.newMessages;
+}
+
+/* ================= HỒ SƠ ================= */
+async function loadProfile(studentId) {
+    const res = await fetch(`${API_BASE}/student/${studentId}`);
+    const s = await res.json();
+
+    document.querySelector('[data-profile="fullName"]').innerText = s.fullName;
+    document.querySelector('[data-profile="className"]').innerText = s.className;
+    document.querySelector('[data-profile="teacher"]').innerText = s.teacher;
+    document.querySelector('[data-profile="teacherPhone"]').innerText = s.teacherPhone;
+    document.querySelector('[data-profile="address"]').innerText = s.address;
+    document.querySelector('[data-profile="parent"]').innerText = s.parent;
+    document.querySelector('[data-profile="phone"]').innerText = s.phone;
+    document.querySelector('[data-profile="email"]').innerText = s.email;
+
+    document.getElementById("studentName").innerText =
+        `${s.fullName} - Lớp ${s.className}`;
+}
+
+/* ================= LỊCH HỌC ================= */
+async function loadSchedule(studentId) {
+    const res = await fetch(`${API_BASE}/schedule/${studentId}`);
+    const data = await res.json();
+
+    const tbody = document.getElementById("scheduleData");
+    tbody.innerHTML = "";
+
+    data.forEach(item => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.day}</td>
+                <td>${item.subject}</td>
+                <td>${item.period}</td>
+                <td>${item.time}</td>
+                <td>${item.teacher}</td>
+            </tr>
+        `;
+    });
+}
+
+/* ================= KHỞI TẠO ================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const parentId = 1; // lấy từ login
+    loadStudents(parentId);
+});
+

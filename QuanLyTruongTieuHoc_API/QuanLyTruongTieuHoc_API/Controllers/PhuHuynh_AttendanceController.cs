@@ -3,77 +3,40 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace QuanLyTruongTieuHoc_API.Controllers
 {
-    [ApiController]
-    [Route("api/PhuHuynh_Attendance")]
-    public class PhuHuynh_AttendanceController : ControllerBase
-    {
-        private readonly PhuHuynh_Attendance_BLL _bll;
+   [Route("api/PhuHuynh_Attendance")]
+   [ApiController]
+   public class PhuHuynh_AttendanceController : ControllerBase
+   {
+       private readonly PhuHuynh_Attendance_BLL _bll;
 
-        public PhuHuynh_AttendanceController(PhuHuynh_Attendance_BLL bll)
-        {
-            _bll = bll;
-        }
+       public PhuHuynh_AttendanceController(PhuHuynh_Attendance_BLL bll)
+       {
+           _bll = bll;
+       }
+       [Route("PhuHuynh_Attendance_GetAll")]
+       [HttpGet]
+       public IActionResult GetAll()
+       {
+           var list = _bll.GetAll(out string error);
 
-        [HttpGet("PhuHuynh_Attendance_GetAll")]
-        public IActionResult GetAll()
-        {
-            var list = _bll.GetAll(out string error);
+           if (!string.IsNullOrEmpty(error))
+               return StatusCode(500, error);
 
-            if (!string.IsNullOrEmpty(error))
-                return StatusCode(500, error);
+           return Ok(list);
+       }
+       [Route("PhuHuynh_Attendance_GetByID")]
+       [HttpGet]
+       public IActionResult GetById(int id)
+       {
+           var chitiet = _bll.GetById(id, out string error);
 
-            return Ok(list);
-        }
+           if (!string.IsNullOrEmpty(error))
+               return StatusCode(500, error);
 
-        [HttpGet("PhuHuynh_Attendance_GetByID/{id}")]
-        public IActionResult GetById(int id)
-        {
-            var chitiet = _bll.GetById(id, out string error);
+           if (chitiet == null)
+               return NotFound();
 
-            if (!string.IsNullOrEmpty(error))
-                return StatusCode(500, error);
-
-            if (chitiet == null)
-                return NotFound();
-
-            return Ok(chitiet);
-        }
-    }
-
-    //[Route("api/PhuHuynh_Attendance")]
-    //[ApiController]
-    //public class PhuHuynh_AttendanceController : ControllerBase
-    //{
-    //    private readonly PhuHuynh_Attendance_BLL _bll;
-
-    //    public PhuHuynh_AttendanceController(PhuHuynh_Attendance_BLL bll)
-    //    {
-    //        _bll = bll;
-    //    }
-    //    [Route("PhuHuynh_Attendance_GetAll")]
-    //    [HttpGet]
-    //    public IActionResult GetAll()
-    //    {
-    //        var list = _bll.GetAll(out string error);
-
-    //        if (!string.IsNullOrEmpty(error))
-    //            return StatusCode(500, error);
-
-    //        return Ok(list);
-    //    }
-    //    [Route("PhuHuynh_Attendance_GetByID")]
-    //    [HttpGet]
-    //    public IActionResult GetById(int id)
-    //    {
-    //        var chitiet = _bll.GetById(id, out string error);
-
-    //        if (!string.IsNullOrEmpty(error))
-    //            return StatusCode(500, error);
-
-    //        if (chitiet == null)
-    //            return NotFound();
-
-    //        return Ok(chitiet);
-    //    }
-    //}
+           return Ok(chitiet);
+       }
+   }
 }
