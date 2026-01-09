@@ -124,7 +124,7 @@ namespace DAL
                 UPDATE Attendance
                 SET
                 Status = '{AT.Status.Replace("'", "''")}',
-                Note = '{AT.Note.Replace("'", "''")}'
+                Note = N'{AT.Note.Replace("'", "''")}'
                 WHERE StudentID = {AT.StudentID}
                 AND ClassID = {AT.ClassID}
                 AND Date = '{AT.Date:yyyy-MM-dd}'
@@ -137,7 +137,7 @@ namespace DAL
                 {AT.ClassID},
                 '{AT.Date:yyyy-MM-dd}',
                 '{AT.Status.Replace("'", "''")}',
-                '{AT.Note.Replace("'", "''")}'
+                N'{AT.Note.Replace("'", "''")}'
                 )
                 END
                 ";

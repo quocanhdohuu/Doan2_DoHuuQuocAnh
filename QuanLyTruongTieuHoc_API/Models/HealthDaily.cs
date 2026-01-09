@@ -9,6 +9,7 @@ namespace Models
     public class HealthDaily
     {
         public int HealthID { get; set; }
+        public int ClassID { get; set; }
         public int StudentID { get; set; }
         public DateTime Date { get; set; }
         public string MealStatus { get; set; }

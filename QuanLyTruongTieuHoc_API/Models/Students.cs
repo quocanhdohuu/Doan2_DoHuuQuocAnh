@@ -17,6 +17,7 @@ namespace Models
 
         public int ParentID { get; set; }
         public int Status { get; set; }
+        public int ClassID { get; set; }
     }
 
 }

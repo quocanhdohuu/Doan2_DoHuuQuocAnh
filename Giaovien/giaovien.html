@@ -184,6 +184,9 @@
                 <td>
                     <textarea style="resize: none;" ng-model="hs.note"></textarea>
                 </td>
+                <td>
+                    <button class="btnThemGhiChuDD" ng-click="luuDiemDanhle(hs)"><i class="fa-solid fa-plus"></i>Lưu</button>
+                </td>
             </tr>
                 
             </table>
@@ -211,35 +214,35 @@
         <div id="ChonLopSK">
             <div id="LopSK">
                 <span>Lớp học:</span>
-                <select id="chonLopHocSK">
-                    <option value="6A">6A</option>
-                    <option value="6B">6B </option>
-                    <option value="7A">7A</option>
-                </select>
+                <select id="chonLopHocSK"
+                ng-model="lopDangChon"
+                ng-change="loadHealthDaily()"
+                ng-options="lop.classID as lop.className for lop in dsLop">
+            </select>
             </div>
 
             <div id="NgaySK">
                 <span>Ngày điểm danh:</span>
-                <input type="date" id="chonNgaySK">
+                <input max="{{today}}" ng-model="ngaySucKhoe" ng-change="loadHealthDaily()" type="date" id="chonNgaySK">
             </div>
-            <button id="ThemGhichuSK"><i class="fa-solid fa-plus"></i>Thêm ghi chú</button>
+            <button id="ThemGhichuSK" ng-click="luuGhiChuSK()"><i class="fa-solid fa-plus"></i>Lưu ghi chú</button>
         </div>
 
         <div id="TSSucKhoe">
             <div id="TQSucKhoe" style="background-color: #F5F9FF;">
-                <span id="slgTBYQSK" style="font-weight: bold;font-size: 60pt;color: blue;">1</span><br>
+                <span ng-model="slgTBYQSK" id="slgTBYQSK" style="font-weight: bold;font-size: 60pt;color: blue;">{{ slgTBYQSK }}</span><br>
                 <span style="color: blue;">Tổng Ghi chú</span>
             </div>
             <div id="KhoeManhSK" style="background-color:#D8F6E0;">
-                <span id="slgKMTQSK" style="font-weight: bold;font-size: 60pt;color: green;">1</span><br>
+                <span ng-model="slgKMTQSK" id="slgKMTQSK" style="font-weight: bold;font-size: 60pt;color: green;">{{ slgKMTQSK }}</span><br>
                 <span style="color: green;">Khỏe Mạnh</span>
             </div>
             <div id="ChuYSK" style="background-color:#FFE5E5;">
-                <span id="slgCYTQSK" style="font-weight: bold;font-size: 60pt;color: red;">0</span><br>
+                <span ng-model="slgCYTQSK" id="slgCYTQSK" style="font-weight: bold;font-size: 60pt;color: red;">{{ slgCYTQSK }}</span><br>
                 <span style="color: red;">Cần chú ý</span>
             </div>
             <div id="AnDuSK" style="background-color:#FFEBD2;color: orange;">
-                <span id="slgADTQSK" style="font-weight: bold;font-size: 60pt;">1</span><br>
+                <span ng-model="slgADTQSK" id="slgADTQSK" style="font-weight: bold;font-size: 60pt;">{{ slgADTQSK }}</span><br>
                 <span style="color: orange;">Ăn đầy đủ</span>
             </div>
         </div>
@@ -247,73 +250,40 @@
         <div id="DanhsachSK">
             <table id="DanhSachSK">
                 <tr>
+                    <th>Mã học Sinh</th>
                     <th>Học Sinh</th>
                     <th>Tình trạng sức khỏe</th>
-                    <th>Ghi chú sức khỏe</th>
-                    <th>Chế độ ăn</th>
-                    <th>Ghi chú dinh dưỡng</th>
+                    <th>Ghi chú giáo viên</th>
                     <th>Bữa ăn</th>
-                    <th>Thao tác</th>
                 </tr>
-                <tr ng-repeat="sk in healthList| startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by sk.healthID">
-        <td>
-                <span class="HSSK">
-                    {{ getTenHocSinh(sk.studentID) }}
-                </span>
-        </td>
-
-        <td>
-            <span ng-class="{
-                'TinhtrangSK': sk.healthStatus === 'Khỏe mạnh',
-                'TinhtrangSK2': sk.healthStatus === 'Ốm',
-                'TinhtrangSK3': sk.healthStatus === 'Đang dùng thuốc',
-                'TinhtrangSK4': sk.healthStatus === 'Chấn Thương',
-            }">
-                {{ sk.healthStatus }}
-            </span>
-        </td>
-
-        <td>
-            <span class="GhichuSK">
-                {{ sk.teacherNote }}
-            </span>
-        </td>
-
-        <td>
-            <span class="CheDoAnSK">
-                {{ sk.mealStatus }}
-            </span>
-        </td>
-
-        <td>
-            <span class="DinhDuongSK">
-                {{ sk.nutritionNote }}
-            </span>
-        </td>
-
-        <td>
-            <span 
-                ng-class="{
-                    'BuaAnSKXong': sk.mealStatus === 'Ăn đầy đủ',
-                    'BuaAnSKCXong': sk.mealStatus !== 'Ăn đầy đủ'
-                }">
-                {{ sk.mealStatus }}
-            </span>
-        </td>
-
-        <td>
-            <button class="btnGHICHUSK"
-                    ng-click="editHealth(sk)">
-                <i class="fa-solid fa-edit"></i>
-            </button>
-        </td>
-    </tr>
+                 <tr ng-repeat="sk in healthList | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by sk.studentID">
+                <td>{{ sk.studentID }}</td>
+                <td>{{ sk.fullName }}</td>
+                <td>
+                    <select ng-change="updateThongKe()" ng-model="sk.healthStatus">
+                    <option value="Ốm">Ốm</option>
+                    <option value="Khỏe mạnh">Khỏe mạnh</option>
+                </select>
+                </td>
+                <td><input type="text" ng-model="sk.teacherNote" /></td>
+                <td>
+                    <select ng-change="updateThongKe()" ng-model="sk.mealStatus">
+                    <option value="Ăn đầy đủ">Ăn đầy đủ</option>
+                    <option value="Ăn ít">Ăn ít</option>
+                    <option value="Không ăn">Không ăn</option>
+                </select>
+                </td>
+                <td>
+                    <button class="btnSuaGhiChuSK" ng-click="luuGhiChule(sk)"><i class="fa-solid fa-pen-to-square"></i>Lưu</button>
+                </td>
+            </tr>
             </table>
-            <div id="pagination" style="margin-top:10px;text-align:center;">
+            
+</div>
+    <div id="pagination" style="margin-top:10px;text-align:center;">
     <button ng-disabled="currentPage == 1" ng-click="currentPage = currentPage-1">« Trước</button>
     <span>Trang {{currentPage}} / {{numberOfPages()}}</span>
     <button ng-disabled="currentPage == numberOfPages()" ng-click="currentPage = currentPage+1">Sau »</button>
-</div>
         </div>
 
         <div id="CuaSoThemGhiChuSK">
@@ -387,16 +357,18 @@
         <div id="ChonLopDS">
             <div id="LopDS">
                 <span>Lớp học:</span>
-                <select id="chonLopHocDS">
-                    <option value="1">6A </option>
-                    <option value="2">6B </option>
-                    <option value="3">7A </option>
-                </select>
+                <select id="chonLopHocSK"
+                ng-model="lopDangChon"
+                ng-change="loadHocSinh()"
+                ng-options="lop.classID as lop.className for lop in dsLop">
+            </select>
             </div>
 
             <div id="MonhocDS">
                 <span>Loại điểm:</span>
-                <select id="chonMonHocDS">
+                <select id="chonMonHocDS"
+                ng-model="loaiDiemDangChon"
+                ng-change="loadScores()">
                     <option value="15phut">15 phút</option>
                     <option value="Mieng">Miệng</option>
                     <option value="HocKy">Học kỳ</option>
@@ -404,90 +376,72 @@
                 </select>
             </div>
 
-            <button id="btnNhapDiemDS"  style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Nhập điểm</button>
+            <button id="btnNhapDiemDS" ng-click="SaveDiem()" style="background-color: black;color: white;"><i class="fa-solid fa-plus"></i>Lưu toàn bộ</button>
             <button id="btnPhieuDiemDS" style="background-color: white;color: black;"><i class="fa-solid fa-file-lines"></i>Phiếu điểm</button>
-            <button id="btnXuatEDS" style="background-color: white;color: black;"><i class="fa-solid fa-download"></i>Xuất Excel</button>
+            <button id="btnXuatEDS" ng-click="exportExcel()" style="background-color: white;color: black;"><i class="fa-solid fa-download"></i>Xuất Excel</button>
         </div>
 
-         <div id="TSDiemSo">
+         <!-- <div id="TSDiemSo">
             <div id="TQDS" style="background-color: #F5F9FF;">
-                <span id="TongdiemTSDS" style="color: blue;">1</span><br>
+                <span id="TongdiemTSDS"  style="color: blue;">{{totalScore}}</span><br>
                 <span style="color: blue;">Tổng điểm</span>
             </div>
             <div id="DTBDS" style="background-color:#D8F6E0;">
-                <span id="DiemTBTSDS" style="color: green;">8.5</span><br>
+                <span id="DiemTBTSDS" style="color: green;">{{averageScore}}</span><br>
                 <span style="color: green;">ĐTB</span>
             </div>
             <div id="GioiDS" style="background-color:#D8F6E0;">
-                <span id="GioiTSDS" style="color: green;">1</span><br>
+                <span id="GioiTSDS" style="color: green;">{{excellentCount}}</span><br>
                 <span style="color: green;">Giỏi (≥8)</span>
             </div>
             <div id="KhaDS" style="background-color: #F5F9FF;">
-                <span id="KhaTSDS" style="color: blue;">0</span><br>
+                <span id="KhaTSDS" style="color: blue;">{{goodCount}}</span><br>
                 <span style="color: blue;">Khá (6.5-8)</span>
             </div>
             <div id="TBDS" style="background-color:#FFEBD2;">
-                <span id="TrungBinhTSDS" style="color: orange;">0</span><br>
+                <span id="TrungBinhTSDS" style="color: orange;">{{averageCount}}</span><br>
                 <span style="color: orange;">TB (5-6.5)</span>
             </div>
             <div id="YeuDS" style="background-color:#FFEBD2;">
-               <span id="YeuTSDS" style="color: red;">0</span><br>
+               <span id="YeuTSDS" style="color: red;">{{poorCount}}</span><br>
                 <span style="color: red;">Yếu (0-4.9)</span>
             </div>
-        </div>
+        </div> -->
 
         <div id="DanhsachDS">
             <table id="DanhSachDS">
                 <tr>
+                    <th>Mã học sinh</th>
                     <th>Học Sinh</th>
-                    <th>Loại điểm</th>
                     <th>Điểm số</th>
-                    <th>Ngày</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr ng-repeat="ds in scoreList | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by ds.scoreID">
+                <tr ng-repeat="ds in dsHocSinh | startFrom:(currentPage-1)*pageSize | limitTo:pageSize track by ds.studentID">
+                    <td>
+                <span class="HSDS">
+                    {{ ds.studentID }}
+                </span>
+            </td>
             <td>
                 <span class="HSDS">
-                    {{ getTenHocSinh(ds.studentID) }}
-                </span>
-            </td>
-
-            <td>
-                <span ng-class="{
-                        'LoaiDiemDS': ds.term === 'Miệng',
-                        'LoaiDiemDS2': ds.term === '15 phút',
-                        'LoaiDiemDS3': ds.term === '1 tiết',
-                        'LoaiDiemDS4': ds.term === 'Học kỳ'}">
-                    {{ ds.term }}
-                </span>
-            </td>
-
-            <td>
-                <span ng-style="{
-                        color: ds.score >= 8.5 ? 'blue' :ds.score >= 5   ? 'green' :'red'}">
-                    {{ ds.score }}/10
+                    {{ ds.fullName }}
                 </span>
             </td>
             <td>
-                <span class="NgayDS">
-                    {{ ds.date | date:'dd/MM/yyyy' }}
-                </span>
+                <input type="number" min="0" max="10" step="0.1" ng-model="ds.scoreValue" class="DiemSODS"/>
             </td>
-
-            <td>
-                <button class="btnSuaDS">
-                    <i class="fa-solid fa-edit"></i>
-                </button>
-                <button id="btxoa" ng-click="xoaDiem(ds.scoreID)"><i class="fa-solid fa-trash"></i>Xóa</button>
+            <td >
+                <button id="btxoa" ng-click="saveScorele(ds)" style=" background-color: green;"><i class="fa-solid fa-save"></i>Lưu</button>
+                <button id="btxoa" style="background-color: orange;" ng-click="cancelEdit(ds)"><i class="fa-solid fa-trash"></i>Hủy</button>
             </td>
         </tr>
-                
             </table>
-            <button ng-disabled="currentPage == 0" ng-click="currentPage = currentPage-1">« Trước</button>
-            <span>Trang {{currentPage+1}} / {{numberOfPages()}}</span>
-            <button ng-disabled="currentPage >= numberOfPages()-1" ng-click="currentPage = currentPage+1">Sau »</button>
+           </div> 
+           <div id="pagination" style="margin-top:10px;text-align:center;">
+            <button ng-disabled="currentPage == 1" ng-click="currentPage = currentPage-1">« Trước</button>
+            <span>Trang {{currentPage}} / {{numberOfPages()}}</span>
+            <button ng-disabled="currentPage == numberOfPages()" ng-click="currentPage = currentPage+1">Sau »</button>
         </div>
-
         <div id="CuaSoNĐS">
             <button id="btbThoatcsoGCDS" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
             <h3 style="margin-bottom: 2px;">Nhập điểm mới</h3>
@@ -550,7 +504,7 @@
         </div>
     </div>
 <!-----------------Liên lạc------------------->
-    <div id="LienLac" style="display: none;">
+    <div id="LienLac" style="display: none;" ng-controller="LienLacCtrl">
          <div id="CuaSoSoanTinLL">
             <button id="btbThoatCSSTLL" style="float: right;border: none;background-color:transparent;cursor: pointer;" ><i class="fa-solid fa-xmark"></i></button>
             <h3 style="margin-bottom: 2px;">Soạn tin nhắn</h3>
@@ -581,10 +535,11 @@
         <div id="ChonLopLL">
             <div id="LopLL">
                 <span>Lớp học:</span>
-                <select id="chonLopHocLL">
-                    <option value="6A">6A </option>
-                    <option value="6B">6B </option>
-                    <option value="7A">7A </option>
+                <select id="chonLopHocLL"
+               ng-model="lopDangChon"
+                ng-change="loadDanhBa()"
+                ng-change="loadDTinden()"S
+                ng-options="lop.classID as lop.className for lop in dsLop">
                 </select>
             </div>
 
@@ -603,101 +558,20 @@
          <!-----------------Hộp thư đến------------------->
          <div id="HopThuDenLL">
             <span>Tin nhắn đến</span>
+        <div ng-repeat="ds in Tinden" class="TinGuiLL">
+            <span class="ngNhanll">
+             Gửi đến: {{ds.receiverID}}</span>
+            <p class="ndguiLL"> {{ds.content}}</p>
+            <span class="tgguiLL">{{ds.sentTime | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div>
         </div>
 
           <!-----------------Hộp thư gửi------------------->
         <div id="DaGuiLL" >
             <span >Tin nhắn đã gửi</span>
-            <div class="TinGuiLL" id="TNGuiLL0" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-            <div class="TinGuiLL" id="TNGuiLL1"  >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-            <div class="TinGuiLL" id="TNGuiLL2" >
-                <span class="ngNhanll">
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-            <div class="TinGuiLL" id="TNGuiLL3">
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-            <div class="TinGuiLL" id="TNGuiLL4" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-            <div class="TinGuiLL" id="TNGuiLL5" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL"></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-
-            <div class="TinGuiLL" id="TNGuiLL6"  >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-
-            <div class="TinGuiLL" id="TNGuiLL7" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-
-            <div class="TinGuiLL" id="TNGuiLL8" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
-                <span class="tgguiLL"></span>
-                
-            </div>
-
-            <div class="TinGuiLL" id="TNGuiLL9" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL"></p>
-                <p class="ndguiLL"></p>
-                <span class="tgguiLL" ></span>
-                
-            </div>
-
-            <div class="TinGuiLL" id="TNGuiLL10" >
-                <span class="ngNhanll" >
-                </span>
-                <p class="tieudeLL" ></p>
-                <p class="ndguiLL" ></p>
+            <div ng-repeat="ds in Tinden" class="TinGuiLL" id="TNGuiLL0" >
+                <span class="ngNhanll" >{{ds.senderID}}</span>
+                <p class="ndguiLL" >{{ds.content}}</p>
                 <span class="tgguiLL" ></span>
                 
             </div>
@@ -707,51 +581,35 @@
          <div id="DanhBaLL">
         <div id="DabaLL">
         <span class="title">Danh bạ</span>
+            <div class="DBaLL" ng-repeat="ph in danhba">
+        <div>
+            <span class="ten">
+                {{ph.fullName}}
+                <span class="loai">Phụ huynh</span>
+            </span>
 
-        <div class="DBaLL" id="DanhBaLL.1">
-            <div>
-                <span class="ten">
-                    <div> Nguyễn Thị C
-                        <span class="loai">Mẹ</span>
-                    </div>
-                </span>
-                <p class="hocSinh">Học sinh: Nguyễn Văn A</p>
-                <span class="lienHe">
-                    <i class="fa-solid fa-phone"></i>0123456789
-                    <i class="fa-solid fa-envelope"></i> nguyenthib@email.com
-                </span>
-            </div>
+            <p class="hocSinh">
+                Học sinh: {{ph.studentName}}
+            </p>
 
-            <div>
-                <button class="btnCCLL">Chuyên cần</button>
-                <button class="btnDSLL">Điểm số</button>
-                <button class="btnSTLL"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
+            <span class="lienHe">
+                <i class="fa-solid fa-phone"></i> {{ph.phone}}
+                <i class="fa-solid fa-envelope"></i> {{ph.email}}
+            </span>
         </div>
 
-        <div class="DBaLL" id="DanhBaLL.2">
-            <div>
-                <span class="ten">
-                    <div> Nguyễn Thị B
-                        <span class="loai">Mẹ</span>
-                    </div>
-                </span>
-                <p class="hocSinh">Học sinh: Nguyễn Văn A</p>
-                <span class="lienHe">
-                    <i class="fa-solid fa-phone"></i>0123456789
-                    <i class="fa-solid fa-envelope"></i> nguyenthib@email.com
-                </span>
-            </div>
-
-            <div>
-                <button class="btnCCLL">Chuyên cần</button>
-                <button class="btnDSLL">Điểm số</button>
-                <button class="btnSTLL"><i class="fa-solid fa-paper-plane"></i></button>
-            </div>
-            </div>
-            </div>
-                </div>
-            </div>
+        <div>
+            <button class="btnCCLL">Chuyên cần</button>
+            <button class="btnDSLL">Điểm số</button>
+            <button class="btnSTLL" ng-click="soanTin(ph)">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+        
+        </div>
+        </div>
+        </div>
         </div>
     </div>
      <!------------------------Lịch dạy----------------------->

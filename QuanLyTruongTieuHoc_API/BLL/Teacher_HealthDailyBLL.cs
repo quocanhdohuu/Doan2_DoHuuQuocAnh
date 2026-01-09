@@ -17,9 +17,9 @@ namespace BLL
         {
             _dal = dal;
         }
-        public List<HealthDaily> GetAll(out string error)
+        public List<HealthDaily> GetAll(string date,int classid,out string error)
         {
-            return _dal.GetAllHD(out error);
+            return _dal.GetAllHD(date,classid,out error);
         }
         public bool UpdateHD(int id, HealthDaily HD, out string error)
         {

@@ -18,10 +18,10 @@ namespace DAL
             _db = db;
         }
 
-        public List<HealthDaily> GetAllHD(out string error)
+        public List<HealthDaily> GetAllHD(string date,int classid, out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable("SELECT * FROM HealthDaily", out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM HealthDaily WHERE Date = '{date}' and ClassID={classid}",out error);
 
             var list = new List<HealthDaily>();
 
@@ -37,7 +37,8 @@ namespace DAL
                     MealStatus = row["MealStatus"].ToString(),
                     Date = (DateTime)row["Date"],
                     HealthStatus = row["HealthStatus"].ToString(),
-                    TeacherNote = row["TeacherNote"].ToString()
+                    TeacherNote = row["TeacherNote"].ToString(),
+                    ClassID= (int)row["ClassID"]
 
                 });
             }
@@ -46,14 +47,34 @@ namespace DAL
         }
         public bool InsertHD(HealthDaily HT, out string error)
         {
-            string sql =
-                 $"INSERT INTO HealthDaily (StudentID, MealStatus, Date, HealthStatus, TeacherNote) VALUES (" +
-                    $"{HT.StudentID}, " +
-                    $"N'{HT.MealStatus.Replace("'", "''")}', " +
-                    $"'{HT.Date:yyyy-MM-dd}', " +
-                    $"N'{HT.HealthStatus.Replace("'", "''")}', " +
-                    $"N'{HT.TeacherNote.Replace("'", "''")}')";
-
+            string sql = $@"
+            IF EXISTS (
+            SELECT 1 
+            FROM HealthDaily
+            WHERE StudentID = {HT.StudentID}
+            AND ClassID = {HT.ClassID}
+             AND Date = '{HT.Date:yyyy-MM-dd}')
+            BEGIN
+            UPDATE HealthDaily
+            SET
+            MealStatus   = N'{HT.MealStatus.Replace("'", "''")}',
+            HealthStatus = N'{HT.HealthStatus.Replace("'", "''")}',
+            TeacherNote  = N'{HT.TeacherNote.Replace("'", "''")}'
+            WHERE StudentID = {HT.StudentID}
+             AND ClassID = {HT.ClassID}
+            AND Date = '{HT.Date:yyyy-MM-dd}'END
+            ELSE
+            BEGIN
+            INSERT INTO HealthDaily
+            (StudentID, MealStatus, Date, HealthStatus, TeacherNote, ClassID)
+            VALUES
+            ({HT.StudentID},
+            N'{HT.MealStatus.Replace("'", "''")}',
+             '{HT.Date:yyyy-MM-dd}',
+             N'{HT.HealthStatus.Replace("'", "''")}',
+            N'{HT.TeacherNote.Replace("'", "''")}',
+            {HT.ClassID})
+            END";
             error = _db.ExecuteNoneQuery(sql);
             return string.IsNullOrEmpty(error);
         }
@@ -72,6 +93,7 @@ namespace DAL
                     $"Date = '{HT.Date:yyyy-MM-dd}', " +
                     $"HealthStatus = N'{HT.HealthStatus.Replace("'", "''")}', " +
                     $"TeacherNote = N'{HT.TeacherNote.Replace("'", "''")}' " +
+                    $"ClassID = {HT.ClassID}, " +
                 $"WHERE HealthID = {HT.HealthID}";
 
             error = _db.ExecuteNoneQuery(sql);

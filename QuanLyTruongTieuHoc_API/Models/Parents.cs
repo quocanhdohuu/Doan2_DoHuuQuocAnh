@@ -9,6 +9,7 @@ namespace Models
     public class Parents
     {
         public int ParentID { get; set; }
+        public int StudentID { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

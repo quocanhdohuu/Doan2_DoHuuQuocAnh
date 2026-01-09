@@ -17,15 +17,10 @@ namespace DAL
         {
             _db = db;
         }
-        public List<Students> GetAllStu(int idClass,out string error)
+        public List<Students> GetAllStu(int id,out string error)
         {
             error = "";
-            string sql = $@"
-            SELECT s.*
-            FROM Students s
-            JOIN StudentClass sc ON s.StudentID = sc.StudentID
-            WHERE sc.ClassID = {idClass}";
-            var dt = _db.ExecuteQueryToDataTable(sql, out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Students where ClassID={id}", out error);
 
             var list = new List<Students>();
 
@@ -43,7 +38,7 @@ namespace DAL
                     Address = row["Address"].ToString(),
                     ParentID = (int)row["ParentID"],
                     HealthNote = row["HealthNote"].ToString(),
-                   
+                    ClassID= (int)row["ClassID"],
                 });
             }
 
@@ -69,6 +64,7 @@ namespace DAL
                 ParentID = (int)row["ParentID"],
                 HealthNote = row["HealthNote"].ToString(),
                 Status= (int)row["Status"],
+                ClassID = (int)row["ClassID"],
             };
         }
         public bool UpdateStu(Students student, out string error)

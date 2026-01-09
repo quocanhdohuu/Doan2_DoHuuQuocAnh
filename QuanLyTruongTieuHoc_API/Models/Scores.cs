@@ -15,6 +15,7 @@ namespace Models
         public string Term { get; set; }
         public DateTime Date { get; set; }
         public int TeacherID { get; set; }
+        public int ClassID { get; set; }
     }
 
 }

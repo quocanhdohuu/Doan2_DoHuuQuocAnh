@@ -18,15 +18,17 @@ namespace DAL
         {
             _db = db;
         }
-        public List<Messages> GetAllMse(out string error)
+        public List<Messages> GetbyRevi(int id,out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Messages", out error);
+
+            var dt = _db.ExecuteQueryToDataTable(
+                $"SELECT * FROM Messages WHERE ReceiverID = {id} ORDER BY SentTime DESC",
+                out error
+            );
 
             var list = new List<Messages>();
-
-            if (!string.IsNullOrEmpty(error) || dt == null)
-                return list;
+            if (!string.IsNullOrEmpty(error) || dt == null) return list;
 
             foreach (DataRow row in dt.Rows)
             {
@@ -38,14 +40,39 @@ namespace DAL
                     SentTime = (DateTime)row["SentTime"],
                     Content = row["Content"].ToString(),
                     IsRead = (bool)row["IsRead"]
-
                 });
             }
 
             return list;
         }
-   
-        public bool InsertMse(Messages AT, out string error)
+        public List<Messages> GetprBysen(int id, out string error)
+        {
+            error = "";
+
+            var dt = _db.ExecuteQueryToDataTable(
+                $"SELECT * FROM Messages WHERE SenderID = {id} ORDER BY SentTime DESC",
+                out error
+            );
+
+            var list = new List<Messages>();
+            if (!string.IsNullOrEmpty(error) || dt == null) return list;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                list.Add(new Messages
+                {
+                    MessageID = (int)row["MessageID"],
+                    SenderID = (int)row["SenderID"],
+                    ReceiverID = (int)row["ReceiverID"],
+                    SentTime = (DateTime)row["SentTime"],
+                    Content = row["Content"].ToString(),
+                    IsRead = (bool)row["IsRead"]
+                });
+            }
+
+            return list;
+        }
+            public bool InsertMse(Messages AT, out string error)
         {
             string sql =
                 $"INSERT INTO Messages (SenderID, ReceiverID, SentTime, Content,IsRead) VALUES (" +

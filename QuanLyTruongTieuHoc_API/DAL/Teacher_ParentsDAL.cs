@@ -20,10 +20,22 @@ namespace DAL
         {
             _db = db;
         }
-        public List<Parents> GetAllpr(out string error)
+        public List<Parents> GetParentsByClass(int classId, out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Parents", out error);
+
+            string sql = @"
+            SELECT DISTINCT
+                p.ParentID,
+                p.FullName,
+                p.Phone,
+                p.Email,
+                p.Address
+            FROM Parents p
+            JOIN StudentClass sc ON p.StudentID = sc.StudentID
+            WHERE sc.ClassID = " + classId;
+
+            var dt = _db.ExecuteQueryToDataTable(sql, out error);
 
             var list = new List<Parents>();
 
@@ -39,8 +51,6 @@ namespace DAL
                     Phone = row["Phone"].ToString(),
                     Email = row["Email"].ToString(),
                     Address = row["Address"].ToString(),
-                    UserID = (int)row["UserID"]
-
                 });
             }
 

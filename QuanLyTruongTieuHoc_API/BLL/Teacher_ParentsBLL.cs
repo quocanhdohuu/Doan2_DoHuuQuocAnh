@@ -17,9 +17,9 @@ namespace BLL
         {
             _dal = dal;
         }
-        public List<Parents> GetAll(out string error)
+        public List<Parents> GetAll(int classid,out string error)
         {
-            return _dal.GetAllpr(out error);
+            return _dal.GetParentsByClass(classid,out error);
         }
         public Parents GetById(int id, out string error)
         {

@@ -5,7 +5,7 @@ using Models;
 using DAL;
 namespace QuanLyTruongTieuHoc_API.Controllers
 {
-    [Route("api/GiaoVien")]
+    [Route("api/GiaoVien_pa")]
     [ApiController]
     public class Teacher_ParentsControl:ControllerBase
     {
@@ -16,9 +16,9 @@ namespace QuanLyTruongTieuHoc_API.Controllers
         }
         [Route("pr_GetAll")]
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(int classid)
         {
-            var list = _bll.GetAll(out string error);
+            var list = _bll.GetAll(classid,out string error);
 
             if (!string.IsNullOrEmpty(error))
                 return StatusCode(500, error);

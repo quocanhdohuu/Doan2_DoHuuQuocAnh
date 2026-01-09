@@ -3,7 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
+    background-color: red;
 }
 /* ------------thanh thông tin---------------- */
 #Thanhthongtin{
@@ -670,9 +671,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;  
-
 }
 #txtDiemSODS,#txtDiemSODSSUA{
     margin-left: 35px;

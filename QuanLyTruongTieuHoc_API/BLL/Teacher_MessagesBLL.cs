@@ -17,9 +17,13 @@ namespace BLL
         {
             _dal = dal;
         }
-        public List<Messages> GetAll(out string error)
+        public List<Messages> GetRe(int id,out string error)
         {
-            return _dal.GetAllMse(out error);
+            return _dal.GetbyRevi(id,out error);
+        }
+        public List<Messages> GetSen(int id, out string error)
+        {
+            return _dal.GetprBysen(id, out error);
         }
         public bool CreateMse(Messages AT, out string error)
         {

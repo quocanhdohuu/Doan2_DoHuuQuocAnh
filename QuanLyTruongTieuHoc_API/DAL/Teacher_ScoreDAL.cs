@@ -20,7 +20,7 @@ namespace DAL
         public List<Scores> GetAllScore(out string error)
         {
             error = "";
-            var dt = _db.ExecuteQueryToDataTable("SELECT * FROM Scores", out error);
+            var dt = _db.ExecuteQueryToDataTable($"SELECT * FROM Scores ", out error);
 
             var list = new List<Scores>();
 
@@ -66,16 +66,33 @@ namespace DAL
         }
         public bool InsertScore(Scores score, out string error)
         {
-            string sql =
-            $"INSERT INTO Scores (StudentID, Subject, Score, Term, Date, TeacherID) " +
-            $"VALUES ({score.StudentID}, " +
-            $"N'{score.Subject.Replace("'", "''")}', " +
-            $"{score.Score}, " +
-            $"N'{score.Term.Replace("'", "''")}', " +
-            $"'{score.Date:yyyy-MM-dd}', " +
-            $"{score.TeacherID})";
+            string checkSql =
+                $"SELECT COUNT(*) FROM Scores WHERE " +
+                $"StudentID = {score.StudentID} AND " +
+                $"Subject = N'{score.Subject.Replace("'", "''")}' AND " +
+                $"Term = N'{score.Term.Replace("'", "''")}' AND " +
+                $"ClassID = {score.ClassID}";
 
-            error = _db.ExecuteNoneQuery(sql);
+            int count = Convert.ToInt32(_db.ExecuteScalar(checkSql,out error));
+
+            if (count > 0)
+            {
+                error = "Điểm đã được nhập, không thể nhập lại!";
+                return false;
+            }
+
+          
+            string insertSql =
+                $"INSERT INTO Scores (StudentID, Subject, Score, Term, Date, TeacherID, ClassID) VALUES (" +
+                $"{score.StudentID}, " +
+                $"N'{score.Subject.Replace("'", "''")}', " +
+                $"{score.Score}, " +
+                $"N'{score.Term.Replace("'", "''")}', " +
+                $"'{score.Date:yyyy-MM-dd}', " +
+                $"{score.TeacherID}, " +
+                $"{score.ClassID})";
+
+            error = _db.ExecuteNoneQuery(insertSql);
             return string.IsNullOrEmpty(error);
         }
         public bool UpdateScore(Scores score, out string error)
