@@ -12,20 +12,6 @@ namespace BLL
         {
             _dal = dal;
         }
-        public Manage_Attendence GetTodayAttendanceSummary(out string error)
-        {
-            return _dal.GetTodayAttendanceSummary(out error);
-        }
-        public Manage_AttendanceByClass GetAttendanceByClassName(string className, out string error)
-        {
-            if (string.IsNullOrWhiteSpace(className))
-            {
-                error = "Tên lớp không hợp lệ";
-                return null;
-            }
-
-            return _dal.GetAttendanceByClassName(className, out error);
-        }
         private bool ValidateRange(DateTime fromDate, DateTime toDate, out string error)
         {
             error = "";
